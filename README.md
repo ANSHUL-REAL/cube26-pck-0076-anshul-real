@@ -1,182 +1,143 @@
-# Cube Buildathon · 03 · Pack Manager
+# Pack Manager
 
-**Commerce Context stream · Round 2 · Individual Build**
+**Check an open box against its order before it is sealed, from a phone photo, and keep the proof.**
 
-> Five agents, one unit, one record that follows it.
-> A physical product arrives, gets prepped, gets shipped, comes back. At every step a person makes a fast judgment that nobody records. **You build the agent that makes one of those judgments, and leaves proof.**
+CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiyal ([@ANSHUL-REAL](https://github.com/ANSHUL-REAL))
 
-**New here? Read these first:**
-
-1. [`GITHUB-GUIDE.md`](GITHUB-GUIDE.md) explains how to fork the repository, set it up, build and push your work.
-2. [`RULES.md`](RULES.md) covers the repository and engineering rules.
+| | |
+|---|---|
+| Live demo | _added on deployment_ |
+| Demo video | _added after recording_ |
+| Eval report | [EVAL.md](EVAL.md) _(held-out run pending)_ |
+| How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| Record format for other tracks | [contract/](contract/README.md) |
+| Problems found in the brief and data | [FINDINGS.md](FINDINGS.md) |
+| Organisers' original brief | [docs/ORIGINAL-BRIEF.md](docs/ORIGINAL-BRIEF.md) |
 
 ---
 
-## Your problem statement: Pack Manager
+## The problem
 
-|                              |                                                                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **Position in the chain**    | Step 3 of 5. Outbound to buyer.                                                                                 |
-| **Customer**                 | Seller or 3PL packing outbound orders                                                                           |
-| **What gets recorded**       | Contents at seal                                                                                                |
-| **Who consumes your output** | Returns Manager (what was actually sent) and Recovery Manager (buyer disputes, empty-box and wrong-item claims) |
+A picker puts an order into a box and tapes it. If the wrong item, the wrong quantity or an extra item goes in, the result is a mis-ship: a refund, a return, a reshipment, customer-service time and often a bad review. Nobody checks, because checking every box by hand costs more than the mis-ships do.
 
-A picker assembles an order and closes the box. If the wrong item or quantity goes in, the customer gets a mis-ship: a refund, a return, a replacement shipment and often the review. Nobody checks, because checking every box by hand costs more than the mis-ships do.
+**Who this is for:** sellers and 3PLs who pack their own orders (Amazon merchant-fulfilled, Shopify, Walmart, 3PL clients). Fully-FBA sellers don't need it, because Amazon packs those boxes. Three funded companies already sell pack verification into large distribution centres, with fixed camera stations. This is for the small seller or 3PL they don't sell to: **no station, no hardware, just a phone and a browser.**
 
-**What the agent returns, from a photograph of the open box before it is sealed:**
+**Two jobs, and the second matters more:**
+1. **Catch the mistake** before the tape goes on.
+2. **Prove what was sent.** A timestamped photo record of "contents at seal" answers the buyer's "item not received / empty box / wrong item" claim with more than the seller's word. The Returns and Recovery tracks read this record.
 
-* Every item present, matched against the order lines
-* Quantities correct per line
-* Nothing extra in the box
-* A verdict: seal it, or stop and fix
+**The reframing that makes it feasible:** this isn't open-ended product recognition. We know what *should* be in the box, so it's **checking against a known order** (closed set), plus **spotting anything that doesn't belong** (open set). No per-product model training is needed: the model gets reference photos of the ordered products and their look-alikes, and compares.
 
-> **Know your customer's limits.** This only exists for merchant-fulfilled and 3PL orders. If a seller is fully FBA, Amazon packs the box and there is nothing to verify. That narrows your customer more than the other statements.
+## What it does
 
-> **Be honest about competition.** Three funded companies already sell pack verification into large distribution centers. You will not out-feature them in two weeks. Your question is whether it can work for a seller with no fixed station and no hardware budget, which is a customer they do not call on.
+1. The operator signs in, picks the order and takes 1–3 photos of the open box.
+2. A local photo check rejects blurry, dark or glare-heavy photos immediately ("Retake: photo looks blurry"), before any model call.
+3. **One** vision-model call lists every object in the box, with a bounding box. The model is not told the order or the quantities.
+4. Deterministic rules compare that list with the order, check by check, and decide:
 
-### The chain you are part of
+| Outcome | Meaning | Shown as |
+|---|---|---|
+| **SEAL** | Every line present, right quantities, nothing wrong or extra | Green "Seal the box" |
+| **STOP_AND_FIX** | Something is missing, wrong or extra | Red "Stop and fix", plus exact fixes: "Replace Red Cap (#3) with Blue Cap", "Add 1 × Blue Towel", "Remove USB-C Cable (#4)" |
+| **UNCERTAIN** | The photos can't support a reliable answer (stacked items, a look-alike whose label isn't visible, part of the box cut off) | Amber "Check by hand", plus exactly what to check |
+| PENDING | The model didn't answer (timeout, quota) | Grey "Needs your decision"; photos and record are kept |
 
-```text
- Supplier delivery      Inbound to Amazon     Outbound to buyer     Customer return        Money back
- ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
- │ 01 Receiving │ ───▶ │ 02 Prep      │ ───▶ │ 03 Pack      │ ───▶ │ 04 Returns   │      │ 05 Recovery  │
- │ condition on │      │ compliance   │      │ contents at  │      │ condition &  │      │ reads all    │
- │ arrival      │      │ proof        │      │ seal         │      │ disposition  │      │ four → claim │
- └──────┬───────┘      └──────┬───────┘      └──────┬───────┘      └──────┬───────┘      └──────▲───────┘
-        └─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+5. Every box gets an **evidence record**: the order, photos (with hashes), what was found, every check with its verdict and confidence, the decision and why, and a content hash. The operator can disagree; the override is appended with a reason code, and the agent's original answer is kept.
+6. Returns and Recovery can read records through a JSON API, limited to their own organisation.
+
+**Sample-data check.** Replaying the organisers' `pack_sample.csv` with its `observed_in_box` column as perfect perception: 4 of the 29 boxes have wrong contents. **The rules stop all 4. The human operator in the data sealed 2 of them.** No correct box is stopped. This tests the rules alone, not the vision.
+
+```bash
+python -m pack_manager replay-sample
 ```
 
-The first four are the same machine: a camera, a model, and a decision bound to a record. What changes is the ruleset, the buyer and the moment. The fifth has no camera. It turns the other four's records into a claim.
+## Results
 
-Your output has to be usable by another pod. That's deliberate, and it's scored.
+Measured on a held-out set of real boxes the agent never saw during tuning: two independent human labellers plus the physical packing list as ground truth. Per-check false positives and false negatives are reported separately, with false-SEAL (a mis-ship let through) as the headline error. See [EVAL.md](EVAL.md). _Numbers are added after the held-out run._
 
----
+**Kill condition:** if the held-out false-SEAL rate is above 5% while UNCERTAIN is 25% or lower, the agent isn't fit to gate sealing. It should then run only as an evidence recorder (photo + record, no verdict).
 
-## Reference data
+## Run it locally
 
-`data/` holds a **dummy** CSV for reference while you design and build. Its columns and meanings are listed in [`data/README.md`](data/README.md).
+Needs Python 3.12+ and Postgres 16 (Docker or any hosted Postgres).
 
-**The data is synthetic.** The SKUs, ASINs, FNSKUs, orders, suppliers, operators and amounts are all invented. The requirement flags and fee amounts are **not** Amazon's real rules or fees. Engineering rule 5 applies: look the authoritative rule up. The `photo_refs` paths are placeholders, and no images ship with this repo. Your fixtures and eval set are yours to capture.
-
-All five buildathon repos share the same `unit_id` values (`UNIT-0001` … `UNIT-0100`). You can follow one unit from receiving through recovery, the same way the real records will be joined. In the sample, each unit takes one route: **FBA** (prep, then Amazon ships it and charges fees) or **merchant-fulfilled / 3PL** (the seller packs it). So a unit has a Prep record or a Pack record, never both.
-
----
-
-## How this works
-
-You have a defined problem statement and a repository to build from. Real products are built backwards from the customer and forwards through the evidence. You should understand the customer and the operational workflow before you write code, then build and measure whether the solution works.
-
-Your goal is to turn the Pack Manager problem into a working, measurable agent.
-
-### What you're given
-
-* This problem statement
-* A domain brief covering the real economics, fee structures and what a working day in a warehouse looks like *(shared by the organisers)*
-* The engineering rules in [`RULES.md`](RULES.md)
-* Repository sample data and supporting resources
-* Any additional build resources shared by the organisers
-
-### What you produce
-
-Build your solution in **your own GitHub fork**.
-
-Your final Round 2 submission should include:
-
-* A working Pack Manager
-* An `README.md` explaining your solution, setup, assumptions and limitations
-* An `ARCHITECTURE.md`
-* An eval report/results with numbers and named failure modes
-* A demo video
-* A deployment URL, where applicable
-* Your mandatory LinkedIn post URL
-
-## Build and submission flow
-
-```text
-Understand
-    ↓
-Build
-    ↓
-Test
-    ↓
-Evaluate
-    ↓
-Document
-    ↓
-Demo / Deploy
-    ↓
-Submit
+```bash
+python -m venv .venv
 ```
 
-Round 2 is an **individual build**.
+```bash
+.venv\Scripts\activate
+```
+(on macOS/Linux: `source .venv/bin/activate`)
 
-The official build phase begins on **25 September 2026 at 9:00 AM IST**.
-
-Submissions open from **27 September 2026**.
-
-The final submission deadline is **1 October 2026 at 6:00 PM IST**.
-
-The submission form closes permanently at the deadline. **There is no resubmission.**
-
-All code commits forming your Round 2 submission must be made during the authorised build phase. Do not continue making Round 2 code changes after the build phase ends.
-
-## What we're being straight with you about
-
-* **The core assumption is untested.** Nobody knows yet whether vision models can identify products and verify box contents reliably across long-tail catalogues without per-SKU training. Finding out that it doesn't hold, and documenting that clearly, counts as a useful outcome.
-* **Nobody has spoken to a customer yet.** If you can get a real prep center or seller on a call, ask them to rank the five problems by urgency. Don't ask whether they'd buy what you're building.
-* **The background documents disagree in places.** A contradiction is a finding. Raise it as an Issue labelled `finding`.
-
----
-
-## Evaluation
-
-Your Round 2 submission is evaluated out of **100 points**:
-
-| Criterion                                    |  Points |
-| -------------------------------------------- | ------: |
-| Problem Understanding & Solution Relevance   |  **15** |
-| Agent Functionality & Decision Quality       |  **25** |
-| Evaluation, Accuracy & Uncertainty Handling  |  **25** |
-| Evidence, Traceability & Engineering Quality |  **20** |
-| UX, Demo & Documentation                     |  **15** |
-| **TOTAL**                                    | **100** |
-
-For the vision-based portions of the Pack Manager, use an appropriate unseen/held-out evaluation set and report your methodology, results, false positives, false negatives, `UNCERTAIN` cases and failure modes.
-
----
-
-## Evidence and decision traceability
-
-Your Pack Manager should leave evidence behind for its decisions.
-
-At minimum, the workflow should make it possible to understand:
-
-```text
-What should be in the box?
-        ↓
-What was actually found?
-        ↓
-What checks were performed?
-        ↓
-What verdict was produced?
-        ↓
-Why?
+```bash
+pip install -r requirements.txt
 ```
 
-Use the official evidence contract provided by the organisers as the baseline for interoperability with the other Managers.
+Copy `.env.example` to `.env` and fill in `GEMINI_API_KEY` (from Google AI Studio). Without a key the app still runs, and every box comes back PENDING (fail-open).
 
----
+```bash
+docker compose up -d db
+```
+(or point `DATABASE_URL` / `DATABASE_ADMIN_URL` in `.env` at a hosted Postgres)
 
-## PASS · FAIL · UNCERTAIN
+```bash
+python -m app.migrate
+```
+This creates the tables, row-level security policies, the restricted `pack_app` role, two demo organisations and the sample orders.
 
-For individual checks:
+```bash
+uvicorn app.main:app --reload
+```
 
-* **PASS** — the evidence supports the condition.
-* **FAIL** — the evidence shows the condition is not met.
-* **UNCERTAIN** — the evidence is insufficient for a reliable judgment.
+Open http://localhost:8000 and sign in with **`alpha-demo`** (Alpha Outfitters) or **`bravo-demo`** (Bravo Supplies). These demo codes are public on purpose.
 
-`UNCERTAIN` is not simply a low-confidence PASS.
+**Command line (no database needed):**
 
----
+```bash
+python -m pack_manager verify --catalogue catalogue/sample --order order.json --photo box.jpg
+```
 
-*CUBE Buildathon · Commerce Context*
+```bash
+python -m pack_manager models
+```
+
+**Tests:**
+
+```bash
+python -m pytest
+```
+The tenant-isolation tests run against real Postgres and are skipped when `DATABASE_URL` and `DATABASE_ADMIN_URL` aren't set.
+
+## Repository
+
+| Path | What |
+|---|---|
+| `pack_manager/` | The agent: photo quality gate, catalogue, the vision call, decision rules, evidence record |
+| `app/` | Web app (FastAPI, server-rendered pages) and JSON API |
+| `db/migrations/` | Postgres schema with forced row-level security |
+| `catalogue/` | Product descriptions and reference photos per organisation |
+| `contract/` | JSON Schema and example records for Returns and Recovery |
+| `eval/` | Eval runner, metrics, label sheet, manifest of real packed boxes |
+| `tests/` | Decision scenarios, pipeline, contract, web pages, tenant isolation |
+| `docs/` | Photo guide, organisers' original brief |
+| `data/` | Organisers' synthetic sample (unchanged) |
+
+## Assumptions
+
+- **An order line's `qty` counts sellable units**, not physical objects. `SKU-MUG-11:2` (a set of 2 mugs) means 2 boxed sets. The catalogue says what one unit looks like.
+- **The order is the authority** for what should be in the box (engineering rule 5). It is imported, never inferred by the model or taken from the sample CSV's observations.
+- In Pack, **`unit_id` means a box/order**, because the sample has multi-SKU, multi-quantity rows under one `unit_id`. Records are also keyed by `order_id`.
+- **UNCERTAIN is a third box outcome** (don't seal until a human confirms), although the brief names two decisions. It is asked of the organisers and listed as a finding.
+- Packing slips, invoices, inserts and dunnage are never "extra items". The list is configurable per organisation.
+- Products are keyed by SKU, not ASIN, because the sample data gives one ASIN to two products.
+
+## Limitations
+
+- **Can't see inside sealed retail packaging.** A missing scoop inside a sealed protein tub can't be detected, and a Pack record can't disprove that claim.
+- **Stacked identical items** are often UNCERTAIN rather than counted. This is by design, and it costs a hand check.
+- **Look-alike variants** (colour, size) are only as good as what the photo shows. When the deciding detail isn't visible, the answer is UNCERTAIN.
+- **Evaluated on household products** staged by the author, not in a real warehouse. Results show whether the approach works, not production accuracy.
+- **Gemini free tier:** rate limits apply, and Google may use free-tier prompts to improve its products, so only the author's own product photos were used. Production would use a paid tier.
+- The content hash makes an edit detectable; it is **not** tamper-proof, append-only or externally anchored.
+- No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts.

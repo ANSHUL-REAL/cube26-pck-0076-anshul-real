@@ -1,0 +1,83 @@
+{
+  "record_id": "PCK-310631162C78",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_demo_alpha",
+  "client_id": "client_seller_01",
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": "UNIT-0021",
+    "order_id": "ORD-DUMMY-50021",
+    "channel": "shopify",
+    "expected_lines": [
+      {
+        "sku": "SKU-PUZZLE-500",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-28T10:30:00Z",
+  "operator_label": "op_alpha",
+  "images": [
+    {
+      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "role": "top_down",
+      "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
+      "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
+      "mime": "image/jpeg",
+      "width": 1600,
+      "height": 1200,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1600,
+        "height": 1200,
+        "blur_var": 571.3,
+        "mean_luma": 152.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "error": "timed out after 25 s"
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": null,
+      "detail": "Local photo checks ran.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "vision",
+      "verdict": "NOT_CHECKED",
+      "confidence": null,
+      "detail": "Vision model unavailable: timed out after 25 s",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": null,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "PENDING",
+    "decided_by": null,
+    "decided_at": null,
+    "reasons": [
+      "The vision model did not answer. The photos are saved."
+    ],
+    "fix_instructions": [
+      "Check the box by hand against the order, then record your decision."
+    ]
+  },
+  "overrides": [],
+  "status": "pending",
+  "content_hash": "sha256:55cf89fcbec539ef1ea90680db12327f3efceafd7f2290895c27e2ed587ef70b"
+}

@@ -1,0 +1,37 @@
+{
+  "organization_id": "org_demo_alpha",
+  "_note": "Copy this folder to catalogue/<organization_id>/ and replace the items. Reference image paths are relative to that folder.",
+  "allowed_inserts": [
+    "packing slip", "invoice", "return form", "thank-you card", "promotional flyer or insert",
+    "air pillows", "bubble wrap", "crumpled or shredded paper", "tissue paper",
+    "foam or cardboard divider", "desiccant sachet"
+  ],
+  "items": [
+    {
+      "sku": "CAP-BLUE",
+      "title": "Baseball Cap",
+      "attributes": {"colour": "blue"},
+      "sellable_unit": "one blue cotton baseball cap",
+      "distinguishing_features": "blue fabric; the red cap is the same shape",
+      "confusable_with": ["CAP-RED"],
+      "reference_images": ["images/CAP-BLUE/1.jpg", "images/CAP-BLUE/2.jpg", "images/CAP-BLUE/3.jpg"]
+    },
+    {
+      "sku": "CAP-RED",
+      "title": "Baseball Cap",
+      "attributes": {"colour": "red"},
+      "sellable_unit": "one red cotton baseball cap",
+      "distinguishing_features": "red fabric",
+      "confusable_with": ["CAP-BLUE"],
+      "reference_images": ["images/CAP-RED/1.jpg", "images/CAP-RED/2.jpg", "images/CAP-RED/3.jpg"]
+    },
+    {
+      "sku": "MUG-SET2",
+      "title": "Ceramic Mug, set of 2",
+      "attributes": {"colour": "white"},
+      "sellable_unit": "one printed box holding 2 white mugs; the box counts as ONE unit",
+      "components": ["mug x2", "box"],
+      "reference_images": ["images/MUG-SET2/1.jpg", "images/MUG-SET2/2.jpg"]
+    }
+  ]
+}

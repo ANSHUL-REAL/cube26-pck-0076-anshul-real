@@ -1,0 +1,263 @@
+{
+  "record_id": "PCK-15D0D51A853D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_demo_alpha",
+  "client_id": "client_seller_01",
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v1",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": "UNIT-0012",
+    "order_id": "ORD-DUMMY-50012",
+    "channel": "shopify",
+    "expected_lines": [
+      {
+        "sku": "SKU-MUG-11",
+        "qty": 1
+      },
+      {
+        "sku": "SKU-LEASH-6FT",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-28T10:30:00Z",
+  "operator_label": "op_alpha",
+  "images": [
+    {
+      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "role": "top_down",
+      "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
+      "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
+      "mime": "image/jpeg",
+      "width": 1600,
+      "height": 1200,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1600,
+        "height": 1200,
+        "blur_var": 571.3,
+        "mean_luma": 152.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "expected_vs_observed": [
+      {
+        "sku": "SKU-MUG-11",
+        "title": "Ceramic Mug 11oz, set of 2",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "SKU-LEASH-6FT",
+        "title": "Nylon Dog Leash",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          120,
+          90,
+          610,
+          480
+        ],
+        "description": "white box printed with two mugs",
+        "classification": "CANDIDATE",
+        "sku": "SKU-MUG-11",
+        "confidence": 0.94,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Ceramic Mug 11oz, set of 2"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          300,
+          520,
+          760,
+          900
+        ],
+        "description": "coiled red nylon leash",
+        "classification": "CANDIDATE",
+        "sku": "SKU-LEASH-6FT",
+        "confidence": 0.91,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Nylon Dog Leash"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          650,
+          80,
+          940,
+          430
+        ],
+        "description": "printed packing slip",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.97,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "printed packing slip"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SKU-MUG-11",
+      "SKU-CANDLE-3",
+      "SKU-LEASH-6FT",
+      "SKU-PUZZLE-500"
+    ],
+    "usage": {
+      "input_tokens": 5210,
+      "output_tokens": 412,
+      "thinking_tokens": 0,
+      "total_tokens": 5622
+    },
+    "cost_usd": 0.002593,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SKU-MUG-11",
+      "verdict": "PASS",
+      "confidence": 0.94,
+      "detail": "Ceramic Mug 11oz, set of 2: found (#1).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SKU-MUG-11",
+      "verdict": "PASS",
+      "confidence": 0.94,
+      "detail": "Ceramic Mug 11oz, set of 2: 1 of 1.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:SKU-LEASH-6FT",
+      "verdict": "PASS",
+      "confidence": 0.91,
+      "detail": "Nylon Dog Leash: found (#2).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SKU-LEASH-6FT",
+      "verdict": "PASS",
+      "confidence": 0.91,
+      "detail": "Nylon Dog Leash: 1 of 1.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.91,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.91,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-28T17:35:33Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:df2c5a53c119e41fa1b86c981f68b5857750db9dabf080ebdb1430b47bc8c506"
+}

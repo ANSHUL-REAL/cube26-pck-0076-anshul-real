@@ -1,0 +1,215 @@
+{
+  "record_id": "PCK-1C6507869267",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_demo_alpha",
+  "client_id": "client_seller_01",
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v1",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": "UNIT-0016",
+    "order_id": "ORD-DUMMY-50016",
+    "channel": "shopify",
+    "expected_lines": [
+      {
+        "sku": "SKU-TOWEL-BLU",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-28T10:30:00Z",
+  "operator_label": "op_alpha",
+  "images": [
+    {
+      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "role": "top_down",
+      "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
+      "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
+      "mime": "image/jpeg",
+      "width": 1600,
+      "height": 1200,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1600,
+        "height": 1200,
+        "blur_var": 571.3,
+        "mean_luma": 152.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "expected_vs_observed": [
+      {
+        "sku": "SKU-TOWEL-BLU",
+        "title": "Cotton Bath Towel",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          200,
+          150,
+          780,
+          850
+        ],
+        "description": "folded blue towel on top",
+        "classification": "CANDIDATE",
+        "sku": "SKU-TOWEL-BLU",
+        "confidence": 0.92,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Cotton Bath Towel"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          720,
+          160,
+          800,
+          840
+        ],
+        "description": "edge of blue fabric under it",
+        "classification": "CANDIDATE",
+        "sku": "SKU-TOWEL-BLU",
+        "confidence": 0.55,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": true,
+        "title": "Cotton Bath Towel"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o2",
+        "guess_sku": "SKU-TOWEL-BLU",
+        "confidence": 0.55,
+        "description": "edge of blue fabric under it"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.6,
+      "notes": "Towels are stacked"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SKU-SERUM-30",
+      "SKU-TOWEL-BLU",
+      "SKU-LAMP-LED"
+    ],
+    "usage": {
+      "input_tokens": 5210,
+      "output_tokens": 412,
+      "thinking_tokens": 0,
+      "total_tokens": 5622
+    },
+    "cost_usd": 0.002593,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SKU-TOWEL-BLU",
+      "verdict": "PASS",
+      "confidence": 0.92,
+      "detail": "Cotton Bath Towel: found (#1).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SKU-TOWEL-BLU",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.92,
+      "detail": "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 3180,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-28T17:35:33Z",
+    "reasons": [
+      "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
+      "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked"
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Cotton Bath Towel by hand: there should be 2.",
+      "Check #2 by hand: it looks like Cotton Bath Towel."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:9523ee0bada3de8bb58628b9dc8deae3810e7e5d7f5fb3b360a5705bfc2f698b"
+}

@@ -1,0 +1,399 @@
+{
+  "$defs": {
+    "Check": {
+      "properties": {
+        "check_key": {
+          "title": "Check Key",
+          "type": "string"
+        },
+        "verdict": {
+          "$ref": "#/$defs/Verdict"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Version"
+        },
+        "latency_ms": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latency Ms"
+        },
+        "evidence": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Evidence",
+          "type": "object"
+        }
+      },
+      "required": [
+        "check_key",
+        "verdict",
+        "detail"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Decision": {
+      "enum": [
+        "SEAL",
+        "STOP_AND_FIX",
+        "UNCERTAIN",
+        "PENDING"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "ImageRef": {
+      "properties": {
+        "image_id": {
+          "title": "Image Id",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "original_sha256": {
+          "title": "Original Sha256",
+          "type": "string"
+        },
+        "mime": {
+          "title": "Mime",
+          "type": "string"
+        },
+        "width": {
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "title": "Height",
+          "type": "integer"
+        },
+        "quality": {
+          "$ref": "#/$defs/QualityReport"
+        }
+      },
+      "required": [
+        "image_id",
+        "role",
+        "sha256",
+        "original_sha256",
+        "mime",
+        "width",
+        "height",
+        "quality"
+      ],
+      "title": "ImageRef",
+      "type": "object"
+    },
+    "Outcome": {
+      "properties": {
+        "decision": {
+          "$ref": "#/$defs/Decision"
+        },
+        "decided_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decided By"
+        },
+        "decided_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decided At"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "fix_instructions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Fix Instructions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "decision",
+        "decided_by",
+        "decided_at"
+      ],
+      "title": "Outcome",
+      "type": "object"
+    },
+    "Override": {
+      "properties": {
+        "original_decision": {
+          "$ref": "#/$defs/Decision"
+        },
+        "new_decision": {
+          "$ref": "#/$defs/Decision"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "operator_label": {
+          "title": "Operator Label",
+          "type": "string"
+        },
+        "at": {
+          "format": "date-time",
+          "title": "At",
+          "type": "string"
+        },
+        "prior_content_hash": {
+          "title": "Prior Content Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_decision",
+        "new_decision",
+        "reason_code",
+        "operator_label",
+        "at",
+        "prior_content_hash"
+      ],
+      "title": "Override",
+      "type": "object"
+    },
+    "QualityReport": {
+      "properties": {
+        "gate": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ],
+          "title": "Gate",
+          "type": "string"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "width": {
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "title": "Height",
+          "type": "integer"
+        },
+        "blur_var": {
+          "title": "Blur Var",
+          "type": "number"
+        },
+        "mean_luma": {
+          "title": "Mean Luma",
+          "type": "number"
+        },
+        "clipped_pct": {
+          "title": "Clipped Pct",
+          "type": "number"
+        },
+        "dark_pct": {
+          "title": "Dark Pct",
+          "type": "number"
+        }
+      },
+      "required": [
+        "gate",
+        "width",
+        "height",
+        "blur_var",
+        "mean_luma",
+        "clipped_pct",
+        "dark_pct"
+      ],
+      "title": "QualityReport",
+      "type": "object"
+    },
+    "RecordStatus": {
+      "enum": [
+        "final",
+        "pending_review",
+        "pending",
+        "overridden"
+      ],
+      "title": "RecordStatus",
+      "type": "string"
+    },
+    "Verdict": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "UNCERTAIN",
+        "NOT_CHECKED"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": "cube.evidence.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "organization_id": {
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "client_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Client Id"
+    },
+    "agent": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Agent",
+      "type": "object"
+    },
+    "subject": {
+      "additionalProperties": true,
+      "title": "Subject",
+      "type": "object"
+    },
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "operator_label": {
+      "title": "Operator Label",
+      "type": "string"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/ImageRef"
+      },
+      "title": "Images",
+      "type": "array"
+    },
+    "observations": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Observations",
+      "type": "object"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "outcome": {
+      "$ref": "#/$defs/Outcome"
+    },
+    "overrides": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Override"
+      },
+      "title": "Overrides",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/RecordStatus"
+    },
+    "content_hash": {
+      "default": "",
+      "title": "Content Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "organization_id",
+    "agent",
+    "subject",
+    "captured_at",
+    "operator_label",
+    "images",
+    "checks",
+    "outcome",
+    "status"
+  ],
+  "title": "EvidenceRecord",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cube.evidence.v1/pack-evidence-record",
+  "description": "Pack Manager evidence record. Field names follow the handbook's evidence contract (section 9). One record per outbound box. See contract/README.md."
+}

@@ -1,0 +1,4 @@
+[
+  {"order_id": "ORD-A-1001", "unit_id": "BOX-1001", "channel": "shopify", "client_id": null,
+   "lines": [{"sku": "CAP-BLUE", "qty": 1}, {"sku": "MUG-SET2", "qty": 1}]}
+]
