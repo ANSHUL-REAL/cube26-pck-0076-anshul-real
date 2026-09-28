@@ -7,3 +7,6 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+.pytest_cache/
+.cache/
+eval/results/**/raw/
