@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}{{ DECISION_UI[r.outcome.decision.value][0] }} · {{ r.subject.order_id }}{% endblock %}
+{% block content %}
+{% set label, tone = DECISION_UI[r.outcome.decision.value] %}
+{% set order_id = r.subject.order_id %}
+<a class="back" href="/orders/{{ order_id }}">← {{ order_id }}</a>
+
+<section class="verdict {{ tone }}">
+  <h1>{{ label }}</h1>
+  {% if r.outcome.decision.value == "SEAL" and not r.overrides %}
+    <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
+  {% elif r.outcome.decision.value == "PENDING" %}
+    <p>The AI check didn't finish. The photos are saved, so check the box by hand and record your decision below.</p>
+  {% elif r.outcome.reasons and not r.overrides %}
+    <p>{{ r.outcome.reasons[0] }}</p>
+  {% endif %}
+  {% if r.overrides %}
+    {% set last = r.overrides[-1] %}
+    <p class="by">Decided by {{ last.operator_label }} ({{ reasons.get(last.reason_code, last.reason_code) }}{% if last.note %}: "{{ last.note }}"{% endif %}). The agent's result was <strong>{{ DECISION_UI[agent_decision.value][0] }}</strong>.</p>
+  {% else %}
+    <p class="by">{{ r.subject.order_id }} · checked {{ r.captured_at | when }} by {{ r.operator_label }}</p>
+  {% endif %}
+</section>
+
+{% if r.outcome.fix_instructions and not r.overrides %}
+<section class="card" style="margin-bottom:16px">
+  <h2>What to do</h2>
+  <ol class="todo">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
+</section>
+{% endif %}
+
+<div class="grid-2">
+  <section class="card">
+    <h2>What the agent saw</h2>
+    {% for img in r.images %}
+      <figure class="photo">
+        <img src="/images/{{ img.image_id }}" alt="Photo {{ loop.index }} of the open box">
+        {% for o in obs.get("detected_items", []) if o.photo == loop.index and o.box_2d %}
+          {% set b = o.box_2d %}
+          <div class="box {{ states.get(o.object_id, 'ok') }}"
+               style="top:{{ b[0] / 10 }}%;left:{{ b[1] / 10 }}%;height:{{ (b[2] - b[0]) / 10 }}%;width:{{ (b[3] - b[1]) / 10 }}%"
+               title="{{ o.title or o.description }}"><span>{{ o.object_id[1:] }}</span></div>
+        {% endfor %}
+      </figure>
+    {% endfor %}
+    {% if obs.get("detected_items") %}
+      <div class="legend">
+        <span><i style="background:var(--seal)"></i>Matches the order</span>
+        <span><i style="background:var(--stop)"></i>Wrong or extra</span>
+        <span><i style="background:#c28a00"></i>Unclear</span>
+        <span><i style="background:#9aa0a6"></i>Packaging or insert</span>
+      </div>
+    {% endif %}
+  </section>
+
+  <section class="card">
+    <h2>Order vs box</h2>
+    {% if obs.get("expected_vs_observed") %}
+      <table>
+        <tr><th>Item</th><th class="num">Ordered</th><th class="num">Found</th><th>Result</th></tr>
+        {% for row in obs.expected_vs_observed %}
+          {% set v = "FAIL" if "FAIL" in (row.present, row.quantity) else ("UNCERTAIN" if "UNCERTAIN" in (row.present, row.quantity) else "PASS") %}
+          <tr>
+            <td>{{ row.title }}<div class="muted small">{{ row.sku }}</div></td>
+            <td class="num">{{ row.ordered }}</td>
+            <td class="num">{{ row.found }}{% if row.unclear %} <span class="muted">(+{{ row.unclear }}?)</span>{% endif %}</td>
+            <td><span class="chip {{ v }}">{{ {"PASS": "OK", "FAIL": "Problem", "UNCERTAIN": "Unclear"}[v] }}</span></td>
+          </tr>
+        {% endfor %}
+      </table>
+      <ul class="findings">
+        {% for w in obs.get("wrong", []) %}<li><span class="chip FAIL">Wrong item</span> Expected {{ w.expected_title }}, found {{ w.found_title }} (#{{ w.object_id[1:] }})</li>{% endfor %}
+        {% for e in obs.get("extra", []) %}<li><span class="chip FAIL">Extra</span> {{ e.title }} (#{{ e.object_id[1:] }})</li>{% endfor %}
+        {% for u in obs.get("unclear", []) %}<li><span class="chip UNCERTAIN">Unclear</span> #{{ u.object_id[1:] }}: {{ u.description }}</li>{% endfor %}
+        {% for n in obs.get("non_product_items", []) %}<li><span class="chip plain">Ignored</span> #{{ n.object_id[1:] }}: {{ n.description }}</li>{% endfor %}
+      </ul>
+    {% else %}
+      <table>
+        <tr><th>Item</th><th class="num">Ordered</th></tr>
+        {% for line in r.subject.expected_lines %}
+          <tr><td>{{ catalogue.title(line.sku) }}<div class="muted small">{{ line.sku }}</div></td><td class="num">{{ line.qty }}</td></tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </section>
+</div>
+
+{% set needs_human = r.status.value in ("pending", "pending_review") %}
+<section class="{{ 'card' if needs_human else '' }}" style="margin-top:16px">
+  {% if needs_human %}
+    <h2>Record your decision</h2>
+    <p class="muted small">Check the box by hand, then choose. Your decision is saved next to the agent's result, which stays on the record.</p>
+  {% else %}
+  <details class="more">
+    <summary>Disagree with this result?</summary>
+  {% endif %}
+    <form method="post" action="/records/{{ r.record_id }}/decision" data-busy>
+      <input type="hidden" name="decision" value="">
+      <div class="grid-2">
+        <div>
+          <label class="field" for="reason_code">Reason</label>
+          <select id="reason_code" name="reason_code" required>
+            <option value="" disabled selected>Choose a reason</option>
+            {% for code, text in reasons.items() %}<option value="{{ code }}">{{ text }}</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label class="field" for="note">Note (optional)</label>
+          <input type="text" id="note" name="note" maxlength="500" placeholder="What did you see?">
+        </div>
+      </div>
+      <div class="decide">
+        <button class="btn seal" type="submit" data-decision="SEAL">Seal the box</button>
+        <button class="btn stop" type="submit" data-decision="STOP_AND_FIX">Stop and fix</button>
+      </div>
+      <p class="busy">Saving…</p>
+    </form>
+  {% if not needs_human %}</details>{% endif %}
+</section>
+
+<details class="more" style="margin-top:16px">
+  <summary>Evidence details</summary>
+  <table>
+    <tr><th>Check</th><th>Result</th><th>Confidence</th><th>Detail</th></tr>
+    {% for c in r.checks %}
+    <tr>
+      <td>{{ c.check_key }}</td>
+      <td><span class="chip {{ c.verdict.value }}">{{ c.verdict.value }}</span></td>
+      <td>{{ "%.2f" | format(c.confidence) if c.confidence is not none else "–" }}</td>
+      <td>{{ c.detail }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <dl class="meta" style="margin-top:16px">
+    <dt>Record</dt><dd>{{ r.record_id }} · {{ r.schema_version }} · status {{ r.status.value }}</dd>
+    <dt>Company</dt><dd>{{ r.organization_id }}{% if r.client_id %} · client {{ r.client_id }}{% endif %}</dd>
+    <dt>Captured</dt><dd>{{ r.captured_at | when }} by {{ r.operator_label }}</dd>
+    <dt>Agent</dt><dd>{{ r.agent.name }} {{ r.agent.version }} · prompt {{ r.agent.prompt_version }}{% if r.agent.model_version %} · {{ r.agent.model_version }}{% endif %}</dd>
+    {% if obs.get("usage") %}
+      <dt>Model call</dt><dd>{{ r.checks[-1].latency_ms }} ms · {{ obs.usage.get("total_tokens", 0) }} tokens{% if obs.get("cost_usd") is not none %} · ${{ "%.4f" | format(obs.cost_usd) }}{% endif %}{% if obs.get("cached_response") %} · cached{% endif %}</dd>
+    {% endif %}
+    {% for img in r.images %}
+      <dt>Photo {{ loop.index }}</dt><dd>sha256 {{ img.sha256 }} ({{ img.width }}×{{ img.height }}, blur {{ img.quality.blur_var }}, quality {{ img.quality.gate }})</dd>
+    {% endfor %}
+    <dt>Content hash</dt><dd>{{ r.content_hash }} {% if hash_ok %}<span class="chip PASS">matches record</span>{% else %}<span class="chip FAIL">does not match</span>{% endif %}</dd>
+    <dt>Raw record</dt><dd><a href="/api/records/{{ r.record_id }}">JSON</a></dd>
+  </dl>
+  {% if r.overrides %}
+    <h2 style="margin-top:16px">Decision history</h2>
+    <table>
+      <tr><th>When</th><th>Who</th><th>From</th><th>To</th><th>Reason</th></tr>
+      {% for o in r.overrides %}
+      <tr>
+        <td>{{ o.at | when }}</td><td>{{ o.operator_label }}</td>
+        <td>{{ DECISION_UI[o.original_decision.value][0] }}</td><td>{{ DECISION_UI[o.new_decision.value][0] }}</td>
+        <td>{{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+</details>
+{% endblock %}

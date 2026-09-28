@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}{{ order.order_id }} · Pack Manager{% endblock %}
+{% block content %}
+<a class="back" href="/">← Orders</a>
+<div class="page-head">
+  <div>
+    <h1>{{ order.order_id }}</h1>
+    <div class="muted small">
+      {% if order.channel %}{{ order.channel }}{% endif %}{% if order.unit_id %} · {{ order.unit_id }}{% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <section class="card">
+    <h2>Should be in the box</h2>
+    <ul class="lines">
+      {% for line in lines %}
+      <li>
+        {% if line.thumb %}
+          <img class="thumb" src="/catalogue/{{ line.sku }}/thumb" alt="">
+        {% else %}
+          <div class="thumb" aria-hidden="true">{{ line.title[:1] }}</div>
+        {% endif %}
+        <div class="name">
+          <div>{{ line.title }}</div>
+          <div class="muted small">{{ line.sku }}{% for k, v in line.attributes.items() %} · {{ v }}{% endfor %}</div>
+        </div>
+        <div class="qty">× {{ line.qty }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Photo of the open box</h2>
+
+    {% if error %}<div class="alert error">{{ error }}</div>{% endif %}
+
+    {% if rejected %}
+      <div class="alert warn">
+        <strong>The photo could be clearer.</strong>
+        <ul style="margin:6px 0 0; padding-left:18px">
+          {% for r in rejected if not r.ok %}{% for reason in r.reasons %}<li>Photo {{ r.n }}: {{ reason }}</li>{% endfor %}{% endfor %}
+        </ul>
+      </div>
+      <div class="previews">{% for r in rejected %}<img src="{{ r.src }}" alt="Photo {{ r.n }}">{% endfor %}</div>
+      <form method="post" action="/orders/{{ order.order_id }}/verify" data-busy style="margin-bottom:16px">
+        <input type="hidden" name="stash" value="{{ stash }}">
+        <button class="btn secondary full" type="submit">Use these photos anyway</button>
+        <p class="muted small" style="margin-top:6px">The result can't be "Seal" from a photo that failed these checks. It will ask you to check by hand.</p>
+        <p class="busy">Checking the box…</p>
+      </form>
+      <p class="small"><strong>Or take a better photo:</strong></p>
+    {% endif %}
+
+    <form method="post" action="/orders/{{ order.order_id }}/verify" enctype="multipart/form-data" data-busy>
+      <label class="dropzone">
+        <strong data-count>Take or choose a photo</strong>
+        <span class="muted small">Up to {{ max_photos }} photos of the same box</span>
+        <input type="file" name="photos" accept="image/*" multiple
+               data-previews="previews" data-max="{{ max_photos }}">
+      </label>
+      <div class="previews" id="previews"></div>
+      <button class="btn full" type="submit">Check this box</button>
+      <p class="busy">Checking the box. This usually takes a few seconds.</p>
+      <ul class="tips">
+        <li>Hold the phone above the box so the whole inside is in the frame.</li>
+        <li>Good light, and tilt slightly if shiny wrapping reflects.</li>
+        <li>If items are stacked, spread them out or add a second photo.</li>
+      </ul>
+    </form>
+  </section>
+</div>
+
+{% if history %}
+<section class="card" style="margin-top:16px">
+  <h2>Earlier checks of this order</h2>
+  <table>
+    <tr><th>When</th><th>Result</th><th>By</th><th></th></tr>
+    {% for h in history %}
+    <tr>
+      <td>{{ h.captured_at | when }}</td>
+      <td><span class="chip {{ DECISION_UI[h.decision][1] }}">{{ DECISION_UI[h.decision][0] }}</span></td>
+      <td>{{ h.operator_label }}</td>
+      <td><a href="/records/{{ h.record_id }}">Open</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+{% endif %}
+{% endblock %}

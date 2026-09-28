@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Pack Manager{% endblock %}</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+{% if user %}
+  {% set path = request.url.path %}
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">Pack Manager</a>
+      <nav>
+        <a href="/" class="{{ 'on' if path == '/' or path.startswith('/orders') }}">Orders</a>
+        <a href="/records" class="{{ 'on' if path.startswith('/records') }}">Records</a>
+      </nav>
+      <div class="who">
+        <span>{{ user.org_name }}</span>
+        <span class="muted">{{ user.operator }}</span>
+        <a href="/logout">Sign out</a>
+      </div>
+    </div>
+  </header>
+{% endif %}
+<main class="wrap">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

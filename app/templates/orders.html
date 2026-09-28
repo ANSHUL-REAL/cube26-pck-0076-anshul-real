@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Orders · Pack Manager{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Orders to pack</h1>
+    <div class="summary small">
+      {% for key in ["SEAL", "STOP_AND_FIX", "UNCERTAIN", "PENDING"] if counts.get(key) %}
+        <span class="chip {{ DECISION_UI[key][1] }}">{{ counts[key] }} · {{ DECISION_UI[key][0] }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <form class="search" method="get" action="/">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search order, unit or SKU" aria-label="Search orders">
+    <button class="btn secondary" type="submit">Search</button>
+  </form>
+</div>
+
+{% if rows %}
+<div class="rows">
+  {% for row in rows %}
+    {% set o = row.order %}
+    <div class="row">
+      <div class="main">
+        <div class="title">{{ o.order_id }} {% if o.channel %}<span class="chip plain">{{ o.channel }}</span>{% endif %}</div>
+        <div class="items">
+          {% for line in o.lines %}{{ line.qty }} × {{ catalogue.title(line.sku) }}{% if not loop.last %}, {% endif %}{% endfor %}
+        </div>
+      </div>
+      <div class="side">
+        {% if row.decision %}
+          <a class="chip {{ DECISION_UI[row.decision][1] }}" href="/records/{{ row.record_id }}">{{ DECISION_UI[row.decision][0] }}</a>
+        {% else %}
+          <span class="chip plain">Not checked</span>
+        {% endif %}
+        <a class="btn secondary" href="/orders/{{ o.order_id }}">{{ "Check again" if row.decision else "Check box" }}</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+  <div class="card empty">No orders{% if q %} match "{{ q }}"{% endif %}.</div>
+{% endif %}
+{% endblock %}

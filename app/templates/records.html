@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Records · Pack Manager{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Records</h1>
+    <p class="muted small">Every checked box, with its photos and the reasons behind the result.</p>
+  </div>
+</div>
+<nav class="tabs">
+  <a href="/records" class="{{ 'on' if not decision }}">All</a>
+  {% for key in ["SEAL", "STOP_AND_FIX", "UNCERTAIN", "PENDING"] %}
+    <a href="/records?decision={{ key }}" class="{{ 'on' if decision == key }}">{{ DECISION_UI[key][0] }} ({{ counts.get(key, 0) }})</a>
+  {% endfor %}
+</nav>
+{% if rows %}
+<div class="card" style="padding:8px 14px">
+  <table>
+    <tr><th>When</th><th>Order</th><th>Result</th><th>By</th><th></th></tr>
+    {% for row in rows %}
+    <tr>
+      <td>{{ row.captured_at | when }}</td>
+      <td>{{ row.order_id }}</td>
+      <td>
+        <span class="chip {{ DECISION_UI[row.decision][1] }}">{{ DECISION_UI[row.decision][0] }}</span>
+        {% if row.overrides %}<span class="muted small">decided by hand</span>{% endif %}
+      </td>
+      <td>{{ row.operator_label }}</td>
+      <td><a href="/records/{{ row.record_id }}">Open</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% else %}
+  <div class="card empty">No records yet. Check a box from the Orders page.</div>
+{% endif %}
+{% endblock %}
