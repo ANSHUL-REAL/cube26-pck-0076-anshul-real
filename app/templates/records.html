@@ -1,37 +1,43 @@
 {% extends "base.html" %}
 {% block title %}Records · Pack Manager{% endblock %}
 {% block content %}
+{% import "_macros.html" as m %}
 <div class="page-head">
   <div>
+    <div class="eyebrow">{{ user.org_name }}</div>
     <h1>Records</h1>
-    <p class="muted small">Every checked box, with its photos and the reasons behind the result.</p>
+    <p>Every checked box, with its photos and the reasons behind the result.</p>
   </div>
 </div>
-<nav class="tabs">
-  <a href="/records" class="{{ 'on' if not decision }}">All</a>
+
+<nav class="tabs" aria-label="Filter by result">
+  <a href="/records" class="{{ 'on' if not decision }}">All <span class="count">{{ counts.values() | sum }}</span></a>
   {% for key in ["SEAL", "STOP_AND_FIX", "UNCERTAIN", "PENDING"] %}
-    <a href="/records?decision={{ key }}" class="{{ 'on' if decision == key }}">{{ DECISION_UI[key][0] }} ({{ counts.get(key, 0) }})</a>
+    <a href="/records?decision={{ key }}" class="{{ 'on' if decision == key }}">{{ icon(DECISION_ICON[key], 15) }}{{ DECISION_UI[key][0] }} <span class="count">{{ counts.get(key, 0) }}</span></a>
   {% endfor %}
 </nav>
+
 {% if rows %}
-<div class="card" style="padding:8px 14px">
-  <table>
-    <tr><th>When</th><th>Order</th><th>Result</th><th>By</th><th></th></tr>
-    {% for row in rows %}
-    <tr>
-      <td>{{ row.captured_at | when }}</td>
-      <td>{{ row.order_id }}</td>
-      <td>
-        <span class="chip {{ DECISION_UI[row.decision][1] }}">{{ DECISION_UI[row.decision][0] }}</span>
-        {% if row.overrides %}<span class="muted small">decided by hand</span>{% endif %}
-      </td>
-      <td>{{ row.operator_label }}</td>
-      <td><a href="/records/{{ row.record_id }}">Open</a></td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="list">
+  {% for row in rows %}
+    {% set label, tone = DECISION_UI[row.decision] %}
+    <div class="card item">
+      <span class="status-dot {{ tone }}">{{ icon(DECISION_ICON[row.decision], 20) }}</span>
+      <div class="grow">
+        <div class="title"><a class="stretch" style="color:inherit" href="/records/{{ row.record_id }}">{{ row.order_id }}</a>
+          {% if row.overrides %}<span class="badge plain sm hide-sm">{{ icon("user", 12) }}decided by hand</span>{% endif %}</div>
+        <div class="sub"><span class="show-sm" style="font-weight:650;color:var(--{{ tone }})">{{ label }} · </span>{{ row.captured_at | when }} · {{ row.operator_label }}<span class="hide-sm"> · <span class="mono">{{ row.record_id }}</span></span></div>
+      </div>
+      <div class="end">{{ m.badge(row.decision) }}</div>
+      <span class="go">{{ icon("chevron-right", 20) }}</span>
+    </div>
+  {% endfor %}
 </div>
 {% else %}
-  <div class="card empty">No records yet. Check a box from the Orders page.</div>
+  <div class="card empty">
+    <div class="ico">{{ icon("file-text", 24) }}</div>
+    <h2>No records {{ "with this result " if decision }}yet</h2>
+    <p>Check a box from the <a href="/">Orders</a> page and its record appears here.</p>
+  </div>
 {% endif %}
 {% endblock %}

@@ -1,8 +1,6 @@
 // Small progressive enhancements. Every page works without this file.
 
-document.addEventListener("change", (e) => {
-  const input = e.target.closest("input[type=file][data-previews]");
-  if (!input) return;
+function showPreviews(input) {
   const form = input.closest("form");
   const box = document.getElementById(input.dataset.previews);
   const max = Number(input.dataset.max || 3);
@@ -20,21 +18,55 @@ document.addEventListener("change", (e) => {
       ? `${files.length} photo${files.length > 1 ? "s" : ""} ready`
       : "Take or choose a photo";
   }
-  const submit = form.querySelector("button[type=submit]");
-  if (submit) submit.disabled = files.length === 0;
   if (input.files.length > max) alert(`Only the first ${max} photos will be used.`);
+}
+
+document.addEventListener("change", (e) => {
+  const input = e.target.closest("input[type=file][data-previews]");
+  if (input) showPreviews(input);
 });
+
+// Drag photos onto the drop zone (desktop).
+["dragenter", "dragover"].forEach((type) =>
+  document.addEventListener(type, (e) => {
+    const zone = e.target.closest && e.target.closest("[data-drop]");
+    if (!zone) return;
+    e.preventDefault();
+    zone.classList.add("over");
+  })
+);
+["dragleave", "drop"].forEach((type) =>
+  document.addEventListener(type, (e) => {
+    const zone = e.target.closest && e.target.closest("[data-drop]");
+    if (!zone) return;
+    e.preventDefault();
+    zone.classList.remove("over");
+    if (type === "drop" && e.dataTransfer.files.length) {
+      const input = zone.querySelector("input[type=file]");
+      input.files = e.dataTransfer.files;
+      showPreviews(input);
+    }
+  })
+);
 
 document.addEventListener("submit", (e) => {
   const form = e.target;
   if (!form.matches("[data-busy]")) return;
   form.classList.add("working");
-  form.querySelectorAll("button").forEach((b) => (b.disabled = true));
+  // Disable after the submit has captured the clicked button's value.
+  setTimeout(() => form.querySelectorAll("button").forEach((b) => (b.disabled = true)), 0);
 });
 
-// Decision buttons fill in the hidden "decision" field of their form.
 document.addEventListener("click", (e) => {
+  // Decision buttons fill in the hidden "decision" field of their form.
   const btn = e.target.closest("button[data-decision]");
-  if (!btn) return;
-  btn.form.querySelector("input[name=decision]").value = btn.dataset.decision;
+  if (btn) btn.form.querySelector("input[name=decision]").value = btn.dataset.decision;
+
+  // Demo access codes on the sign-in page.
+  const demo = e.target.closest("button[data-code]");
+  if (demo) {
+    const input = document.getElementById("code");
+    input.value = demo.dataset.code;
+    input.form.requestSubmit();
+  }
 });

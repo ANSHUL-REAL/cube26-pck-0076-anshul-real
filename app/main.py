@@ -28,6 +28,7 @@ from pack_manager.vision.base import PerceptionError
 
 from . import store
 from .db import Database
+from .icons import icon
 
 log = logging.getLogger("pack_manager.app")
 BASE = Path(__file__).resolve().parent
@@ -45,8 +46,31 @@ DECISION_UI = {
     "UNCERTAIN": ("Check by hand", "unsure"),
     "PENDING": ("Needs your decision", "pending"),
 }
-templates.env.globals["DECISION_UI"] = DECISION_UI
+DECISION_ICON = {"SEAL": "circle-check", "STOP_AND_FIX": "octagon-x", "UNCERTAIN": "circle-help", "PENDING": "clock"}
+DECISION_BLURB = {
+    "SEAL": "Everything in the order is in the box, and nothing else.",
+    "STOP_AND_FIX": "Something is missing, wrong or extra. Fix it before sealing.",
+    "UNCERTAIN": "The photos can't settle it. Check the box by hand before sealing.",
+    "PENDING": "The AI check didn't finish. The photos are saved; check by hand.",
+}
+VERDICT_ICON = {"PASS": "check", "FAIL": "x", "UNCERTAIN": "circle-help", "NOT_CHECKED": "minus"}
+
+
+def _initials(text: str | None) -> str:
+    words = [w for w in (text or "").replace("-", " ").split() if w[:1].isalnum()]
+    return "".join(w[0] for w in words[:2]).upper() or "?"
+
+
+def _hue(text: str | None) -> int:
+    """A stable colour per SKU or name, for the letter tiles."""
+    return sum((i + 1) * ord(c) for i, c in enumerate(text or "")) * 47 % 360
+
+
+templates.env.globals.update(DECISION_UI=DECISION_UI, DECISION_ICON=DECISION_ICON,
+                             DECISION_BLURB=DECISION_BLURB, VERDICT_ICON=VERDICT_ICON, icon=icon)
 templates.env.filters["when"] = lambda dt: dt.strftime("%d %b, %H:%M UTC") if dt else ""
+templates.env.filters["initials"] = _initials
+templates.env.filters["hue"] = _hue
 
 
 # ------------------------------------------------------------------ dependencies
@@ -160,7 +184,13 @@ def orders(request: Request, q: str | None = None):
         rows = store.list_orders(cur, q)
         counts = store.counts_by_decision(cur)
     catalogue, _ = org_catalogue(user["org"])
-    return page(request, "orders.html", rows=rows, counts=counts, q=q or "", catalogue=catalogue)
+    return page(request, "orders.html", rows=rows, counts=counts, q=q or "", catalogue=catalogue,
+                thumbs=_thumbs(catalogue))
+
+
+def _thumbs(catalogue: Catalogue) -> set[str]:
+    """SKUs that have a reference photo to show as a thumbnail."""
+    return {i.sku for i in catalogue.items if i.reference_images}
 
 
 def _verify_page(request, user, order, **extra):
@@ -282,10 +312,14 @@ def record_page(request: Request, record_id: str):
         return not_found(request, "That record")
     catalogue, _ = org_catalogue(user["org"])
     agent_decision = record.overrides[0].original_decision if record.overrides else record.outcome.decision
+    tally = {"PASS": 0, "FAIL": 0, "UNCERTAIN": 0}
+    for c in record.checks:
+        if c.verdict.value in tally:
+            tally[c.verdict.value] += 1
     return page(
         request, "record.html", r=record, hash_ok=verify(record), states=_object_states(record),
         agent_decision=agent_decision, reasons=OVERRIDE_REASONS, catalogue=catalogue,
-        obs=record.observations or {},
+        obs=record.observations or {}, tally=tally, thumbs=_thumbs(catalogue),
     )
 
 
