@@ -40,6 +40,7 @@ from pack_manager.models import (  # noqa: E402
 )
 from pack_manager.pipeline import Photo, prepare_photos, verify_box  # noqa: E402
 from pack_manager.vision.base import PerceptionError  # noqa: E402
+from pack_manager.vision.prompt import PROMPT_VERSION  # noqa: E402
 
 SCHEMA_PATH = HERE / "pack-evidence-record.schema.json"
 MODEL = "gemini-2.5-flash"
@@ -66,7 +67,7 @@ class Scripted:
             raise PerceptionError("timed out after 25 s")
         return Perception(
             objects=self.objects, counts=self.counts, scene=self.scene,
-            candidates=[c.sku for c in candidates], model_version=MODEL, prompt_version="pack-v1",
+            candidates=[c.sku for c in candidates], model_version=MODEL, prompt_version=PROMPT_VERSION,
             latency_ms=3180, usage={"input_tokens": 5210, "output_tokens": 412, "thinking_tokens": 0,
                                     "total_tokens": 5622},
         )

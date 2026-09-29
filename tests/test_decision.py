@@ -226,3 +226,14 @@ def test_photo_used_for_another_order_cannot_seal(catalogue, settings):
 def test_reuse_not_checked_adds_no_check(catalogue, settings):
     r = run(make_order(("CAP-BLU", 1)), perception([obj(1, "CAP-BLU")]), catalogue, settings)
     assert "photo_reuse" not in verdicts(r)
+
+
+def test_model_descriptions_read_well_mid_sentence():
+    from pack_manager.decision import _short
+
+    assert _short("A white rectangular box.") == "a white rectangular box"
+    assert _short("  An   open  bag ") == "an open bag"
+    assert _short("Apple charger") == "Apple charger"
+    long = "A white rectangular box or carton with 'CERAMIC MUG x2' printed on its visible surface."
+    out = _short(long)
+    assert out.startswith("a white rectangular box") and out.endswith("…") and len(out) <= 61

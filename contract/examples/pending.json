@@ -1,12 +1,12 @@
 {
-  "record_id": "PCK-1D3E107C1547",
+  "record_id": "PCK-8A833431FD56",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
   "agent": {
     "name": "pack-manager",
     "version": "0.1.0",
-    "prompt_version": "pack-v1"
+    "prompt_version": "pack-v2"
   },
   "subject": {
     "type": "outbound_box",
@@ -24,7 +24,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "039e1894-d41b-4e2d-a1df-69ac1f7af1a2",
+      "image_id": "8cf4688e-c89b-45d9-b3b7-b2e38179dab9",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -80,5 +80,5 @@
   },
   "overrides": [],
   "status": "pending",
-  "content_hash": "sha256:819229704c3045f92fa67d9c0e6c31e28106048ba0fda48170f21efd9d1f4c0a"
+  "content_hash": "sha256:d3be6421ab1b566b5bd2f5a6c514a57cf9f79a0c2f9f659e8f1f49322e472a92"
 }

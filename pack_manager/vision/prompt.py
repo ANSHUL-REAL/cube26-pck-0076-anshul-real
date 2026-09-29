@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 
 from ..models import CatalogueItem, DetectedObject, Scene, SkuCount
 
-PROMPT_VERSION = "pack-v1"
+PROMPT_VERSION = "pack-v2"
 
 SYSTEM_INSTRUCTION = """You are the vision component of a pack-verification system at an e-commerce packing bench.
 A packer has put products into an open shipping box. Report exactly what is physically visible in the box photos.
@@ -49,7 +49,7 @@ class VObject(BaseModel):
     object_id: str = Field(description="o1, o2, ...")
     photo: int = Field(description="1-based number of the photo where the object is clearest")
     box_2d: list[int] = Field(description="[ymin, xmin, ymax, xmax] normalised to 0-1000")
-    description: str
+    description: str = Field(description="short noun phrase, at most 8 words, e.g. 'blue cotton cap with white logo'")
     classification: Classification
     sku: str = Field(description="candidate sku, or empty string")
     confidence: float

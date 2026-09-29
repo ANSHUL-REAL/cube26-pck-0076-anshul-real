@@ -54,7 +54,18 @@ def _ref(o: DetectedObject) -> str:
 def _name(o: DetectedObject, catalogue: Catalogue) -> str:
     if o.sku:
         return catalogue.title(o.sku)
-    return o.description or "an unidentified product"
+    return _short(o.description) or "an unidentified product"
+
+
+def _short(text: str, limit: int = 60) -> str:
+    """A model description made to read well mid-sentence: 'A white box.' -> 'a white box'."""
+    text = " ".join(text.split()).rstrip(".")
+    first, _, rest = text.partition(" ")
+    if first in ("A", "An", "The"):
+        text = f"{first.lower()} {rest}"
+    if len(text) > limit:
+        text = text[:limit].rsplit(" ", 1)[0].rstrip(",;:") + "…"
+    return text
 
 
 def _pick_short_line(o: DetectedObject, short: dict[str, int], catalogue: Catalogue) -> str | None:

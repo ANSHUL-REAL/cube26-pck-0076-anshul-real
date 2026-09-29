@@ -95,6 +95,8 @@ def client(monkeypatch, catalogue):
         monkeypatch.setattr(main.store, name, getattr(fake, name))
     monkeypatch.setattr(main, "db", lambda: FakeDb())
     monkeypatch.setattr(main, "org_catalogue", lambda org: (catalogue, None))
+    # Never call the real model from tests, even when .env holds a key: no key means PENDING.
+    monkeypatch.setattr(main.settings, "gemini_api_key", None)
     c = TestClient(main.app)
     c.fake = fake
     return c
