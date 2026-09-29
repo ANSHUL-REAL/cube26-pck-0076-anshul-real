@@ -4,6 +4,15 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Tue 29 Sep
 
+- **Gap check against the field.** Looked at what the other public forks of this track had built, to find missing features. Ideas only; no code was copied. Added from that review, each written from scratch:
+  - an **uncertainty summary** on every unclear result: known / can't tell / what would settle it / next action;
+  - **photo-reuse detection**: the same photo already used for another order can't seal a box;
+  - a **daily AI-check cap** per organisation, so a public demo can't use up the API key;
+  - a **download** of the exact hashed record;
+  - **CI** that runs the isolation tests against a real Postgres;
+  - a check that **both labellers finished before the agent ran**;
+  - the template documents in this folder.
+- The review also confirmed a few design choices. Several builds let the model decide, give it the order quantities, or treat "unsure" as "stop". This build does none of those.
 - **UI redesign.** The first version worked but looked plain, and the phone layout was cramped. The new layout has stat cards, product tiles, a verdict banner with numbered fixes, and numbered boxes on the photo that match a found-items list. On phones there's a bottom tab bar, tappable rows, and a list instead of tables.
 - **Photo-day tooling.** `eval/import_photos.py` groups phone photos into manifest boxes by capture time and writes a contact sheet to check the grouping. `catalogue/build_catalogue.py` turns a spreadsheet plus one folder per SKU into `catalogue.json`.
 - **Privacy catch:** phone photos carry GPS location in EXIF, and the eval photos go into a public repository. Both tools save upright, resized copies with all EXIF removed.
@@ -13,7 +22,7 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Mon 28 Sep
 
-- Read the handbook, all five track repositories and the Verity background documents. Wrote down 16 contradictions and gaps: [FINDINGS.md](../FINDINGS.md). The ones that change the build:
+- Read the handbook, all five track repositories and the Verity background documents. Wrote down 16 contradictions and gaps: [FINDINGS.md](../../FINDINGS.md). The ones that change the build:
   - `unit_id` means a whole box in Pack;
   - multipack quantities;
   - a lamp's cable collides with the cable sold on its own;

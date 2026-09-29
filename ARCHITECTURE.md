@@ -105,7 +105,7 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 
 | # | Decision | Why | Cost |
 |---|---|---|---|
-| D1 | The model perceives, code decides | Verdicts are deterministic, unit-tested (18 scenario tests) and explainable check by check | Rules have to be written for each case |
+| D1 | The model perceives, code decides | Verdicts are deterministic, unit-tested (24 decision tests) and explainable check by check | Rules have to be written for each case |
 | D2 | One model call per box | Engineering rule 2; cost and latency scale per box | A bad call affects every check in the box |
 | D3 | The model isn't told the order or the quantities | Prevents "the order says 2, so I see 2". Measured with the `--reveal-order` ablation in the eval | The model can't use the order as a hint |
 | D4 | Look-alikes and decoys in the candidate set | Forces a real comparison (Blue Cap vs Red Cap) instead of confirmation | Longer prompt |
