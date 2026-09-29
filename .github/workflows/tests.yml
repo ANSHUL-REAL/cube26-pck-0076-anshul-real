@@ -1,0 +1,38 @@
+name: tests
+
+# Runs every test, including tenant isolation against a real Postgres 16.
+# REQUIRE_DB makes the isolation tests fail instead of skip if the database is missing.
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: pack_manager
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      DATABASE_ADMIN_URL: postgresql://postgres:postgres@localhost:5432/pack_manager
+      DATABASE_URL: postgresql://pack_app:ci-only-password@localhost:5432/pack_manager
+      PACK_APP_DB_PASSWORD: ci-only-password
+      SESSION_SECRET: ci-only
+      REQUIRE_DB: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q -rs

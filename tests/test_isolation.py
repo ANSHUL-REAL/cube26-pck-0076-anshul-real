@@ -4,6 +4,7 @@ Needs DATABASE_URL (the pack_app role) and DATABASE_ADMIN_URL in the environment
 e.g. `docker compose up -d db && python -m app.migrate`. Skipped otherwise.
 """
 
+import os
 import uuid
 
 import psycopg2
@@ -15,8 +16,11 @@ from pack_manager.pipeline import Photo, prepare_photos, verify_box
 from pack_manager.vision.oracle import OraclePerceiver
 
 S = Settings()
+# In CI (REQUIRE_DB=1) a missing or unreachable database is a failure, not a skip.
+REQUIRE_DB = bool(os.environ.get("REQUIRE_DB"))
 pytestmark = pytest.mark.skipif(
-    not (S.database_url and S.database_admin_url), reason="DATABASE_URL / DATABASE_ADMIN_URL not set"
+    not REQUIRE_DB and not (S.database_url and S.database_admin_url),
+    reason="DATABASE_URL / DATABASE_ADMIN_URL not set",
 )
 
 ALPHA, BRAVO = "org_demo_alpha", "org_demo_bravo"
@@ -33,6 +37,8 @@ def database():
         seed(S.database_admin_url)
         d = Database(S.database_url)
     except psycopg2.OperationalError as exc:
+        if REQUIRE_DB:
+            raise
         pytest.skip(f"database not reachable: {exc}")
     yield d
     d.close()

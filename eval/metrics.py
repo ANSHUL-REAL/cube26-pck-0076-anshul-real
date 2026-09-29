@@ -16,6 +16,7 @@ import csv
 import json
 import statistics
 from collections import Counter, defaultdict
+from datetime import datetime
 
 from common import EVAL_DIR, load_manifest
 
@@ -37,15 +38,33 @@ def pct(num: int, den: int) -> str:
     return f"{num}/{den} ({num / den:.0%})" if den else "n/a"
 
 
+LABEL_TIMES: dict[str, str] = {}  # labeller -> time of their last label (ISO, UTC)
+
+
 def load_labels() -> dict[str, dict[str, str]]:
-    """{labeller: {box_id: decision}} from eval/labels/*.csv."""
+    """{labeller: {box_id: decision}} from eval/labels/*.csv. Also records each labeller's
+    last labelled_at in LABEL_TIMES, to check the labels came before the agent ran."""
     out: dict[str, dict[str, str]] = {}
     for path in sorted((EVAL_DIR / "labels").glob("*.csv")):
         with open(path, newline="", encoding="utf-8") as f:
             for r in csv.DictReader(f):
                 who = (r.get("labeller") or path.stem).strip()
                 out.setdefault(who, {})[r["box_id"].strip()] = r["decision"].strip().upper()
+                t = (r.get("labelled_at") or "").strip()
+                if t:
+                    LABEL_TIMES[who] = max(LABEL_TIMES.get(who, ""), t)
     return out
+
+
+def labelled_before(names: list[str], started_at: str | None) -> str:
+    if not started_at:
+        return "unknown (run has no start time)"
+    missing = [n for n in names if n not in LABEL_TIMES]
+    if missing:
+        return f"unknown ({', '.join(missing)}: no timestamps in the label file)"
+    start = datetime.fromisoformat(started_at)
+    late = [n for n in names if datetime.fromisoformat(LABEL_TIMES[n].replace("Z", "+00:00")) >= start]
+    return f"NO: {', '.join(late)} labelled after the agent ran" if late else "yes"
 
 
 def check_table(rows: list[tuple[str, str]]) -> dict:
@@ -124,6 +143,7 @@ def main() -> None:
         a_lab, b_lab = labels[names[0]], labels[names[1]]
         both = [b for b in ids if b in a_lab and b in b_lab]
         human["labellers"] = names
+        human["all_labels_made_before_the_agent_ran"] = labelled_before(names, run_info.get("started_at"))
         human["boxes_labelled_by_both"] = len(both)
         human["kappa_human_vs_human"] = cohen_kappa([a_lab[b] for b in both], [b_lab[b] for b in both], DECISIONS)
         agree = [b for b in both if a_lab[b] == b_lab[b]]
@@ -208,6 +228,7 @@ def main() -> None:
     lines += ["", "## Human labellers (from photos only, before the agent ran)", ""]
     if human:
         lines += [f"- Labellers: {', '.join(human['labellers'])}; boxes labelled by both: {human['boxes_labelled_by_both']}",
+                  f"- All labels made before the agent ran: **{human['all_labels_made_before_the_agent_ran']}**",
                   f"- Cohen's kappa, human vs human: **{human['kappa_human_vs_human']}**",
                   f"- Humans agreed on {human['humans_agree_on']} boxes; agent vs that consensus: kappa **{human['kappa_agent_vs_human_consensus']}**"]
         lines += [f"- {k.replace('_', ' ')}: {v}" for k, v in human.items() if k.endswith(("_vs_physical_truth", "_uncertain"))]

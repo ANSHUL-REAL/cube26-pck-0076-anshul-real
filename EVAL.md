@@ -33,7 +33,7 @@ Lighting (window / lamp), angle (top-down / ~45°) and distance vary across boxe
 ## Three sources of truth
 
 1. **Physical truth.** `eval/manifest.csv` records what was physically put in each box, written while packing it, including anything hidden. This is the ground truth for accuracy.
-2. **Two human labellers, from the photos only.** They get a label sheet (`eval/make_label_sheet.py`) showing each order and its photos, never the answer, and choose Seal / Stop and fix / Can't tell. They label independently, **before** the agent runs. This measures how hard the task is from the same photos the agent sees.
+2. **Two human labellers, from the photos only.** They get a label sheet (`eval/make_label_sheet.py`) showing each order and its photos, never the answer, and choose Seal / Stop and fix / Can't tell. They label independently, **before** the agent runs. This measures how hard the task is from the same photos the agent sees. The label sheet timestamps every choice, and the report checks that every label is older than the agent's first run.
 3. **The agent**, run once: `python eval/run_eval.py --split test --run test-v1`.
 
 ## Metrics (never blended into one number)

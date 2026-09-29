@@ -73,7 +73,7 @@ function progress(){ const done = BOXES.filter(id => state[id] && state[id].d).l
 document.addEventListener("change", e => {
   if (e.target.id === "who") state._who = e.target.value.trim();
   const m = e.target.name && e.target.name.match(/^d_(.+)$/);
-  if (m) state[m[1]] = {...(state[m[1]]||{}), d: e.target.value};
+  if (m) state[m[1]] = {...(state[m[1]]||{}), d: e.target.value, t: new Date().toISOString()};
   const n = e.target.id && e.target.id.match(/^n_(.+)$/);
   if (n) state[n[1]] = {...(state[n[1]]||{}), n: e.target.value};
   save(state); progress();
@@ -82,8 +82,8 @@ document.getElementById("dl").onclick = () => {
   const who = (state._who || "").trim();
   if (!who) { alert("Please type your name at the top first."); return; }
   const q = s => '"' + String(s || "").replace(/"/g, '""') + '"';
-  let csv = "labeller,box_id,decision,note\\n";
-  for (const id of BOXES) if (state[id] && state[id].d) csv += [q(who), q(id), q(state[id].d), q(state[id].n)].join(",") + "\\n";
+  let csv = "labeller,box_id,decision,note,labelled_at\\n";
+  for (const id of BOXES) if (state[id] && state[id].d) csv += [q(who), q(id), q(state[id].d), q(state[id].n), q(state[id].t)].join(",") + "\\n";
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([csv], {type: "text/csv"}));
   a.download = `labels_${who.replace(/[^a-z0-9]+/gi, "_")}.csv`; a.click();

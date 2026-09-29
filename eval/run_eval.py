@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import time
+from datetime import datetime, timezone
 
 from common import EVAL_DIR, ORG, ROOT, load_manifest
 
@@ -39,9 +40,14 @@ def main() -> None:
     perceiver = GeminiPerceiver(settings)
     out = EVAL_DIR / "results" / args.run / "records"
     out.mkdir(parents=True, exist_ok=True)
-    (out.parent / "run.json").write_text(json.dumps({
+    run_file = out.parent / "run.json"
+    # Keep the time of the FIRST run: re-running to retry pending boxes mustn't move it later,
+    # because the report checks that every human label was made before the agent ran.
+    first = json.loads(run_file.read_text(encoding="utf-8")).get("started_at") if run_file.exists() else None
+    run_file.write_text(json.dumps({
         "split": args.split, "reveal_order": args.reveal_order, "model": settings.gemini_model,
         "match_threshold": settings.match_threshold, "visibility_threshold": settings.visibility_threshold,
+        "started_at": first or datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }, indent=2), encoding="utf-8")
 
     boxes = load_manifest(args.split)
