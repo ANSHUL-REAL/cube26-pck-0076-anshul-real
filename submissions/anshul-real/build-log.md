@@ -28,6 +28,27 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 - **Render blueprint** added. The web service gets only the restricted `pack_app` database role.
 - Open: hosted Postgres and the Gemini key aren't set up yet, so the isolation tests against real Postgres and the first real model call haven't run. The dev and held-out photo sets are being shot today.
 
+- **Backend connected** (evening). Neon Postgres (Singapore) and a Gemini key. The 7 isolation tests ran against real Postgres for the first time and passed. The first real model call worked end to end: about $0.002 and 1,900 tokens for one box.
+  - It showed a UX flaw: long model descriptions were pasted mid-sentence into fix steps. The prompt now asks for a short phrase (prompt `pack-v2`).
+  - It also showed that the web tests could reach the real model once a key was in `.env`. They now never do.
+- **Full review, then fixes.** Two reviews read every module and confirmed each finding with a script. More than 40 confirmed bugs were fixed, each with a test (139 tests pass). The ones that mattered most:
+  - **False-SEAL paths:** "packaging" the model wasn't sure of was ignored, even when it could have been a product under wrap. An object the model called packaging while naming a SKU lost that SKU. An unclear object whose alternative was the look-alike didn't raise `wrong_item`. All three now lead to a hand check.
+  - **False STOPs:** an ordered SKU missing from the catalogue, or a model count with no object listed, read as "missing". Both are now UNCERTAIN.
+  - **Evidence:** an override could re-hash an edited record and hide the edit. Overrides are now refused on a record that fails its hash. Each override keeps what it replaced, so every earlier version can be rebuilt and checked.
+  - **Robustness:**
+    - a tiny file claiming 20000×20000 pixels could exhaust server memory;
+    - Enter in the note field recorded SEAL;
+    - two operators deciding at once lost one decision;
+    - a 2 MB+ CSV was silently cut;
+    - an idle Neon connection would fail the first request.
+  - **Our own tests** seeded dummy orders and left test rows in the live database. They now clean up after themselves.
+- **Eval made harder to fool, ourselves included:**
+  - a freeze file hashes photos, manifest, labels, catalogue, code and settings before the held-out run, and the run refuses to start if anything changed;
+  - every headline rate carries a 95% interval, so "0 of 25" reads as "up to 13%";
+  - the one-pager's kill conditions are checked automatically.
+- **Output for other pods:** a CSV export whose first columns are exactly the organisers' `pack_sample.csv`, and `?since=` paging on the records API.
+- **Sign-in page** redesigned: what the product does and what each result means, beside the form.
+
 ## Mon 28 Sep
 
 - Read the handbook, all five track repositories and the Verity background documents. Wrote down 16 contradictions and gaps: [FINDINGS.md](../../FINDINGS.md). The ones that change the build:
