@@ -15,7 +15,7 @@
       {{ icon("search", 18) }}
       <input type="search" name="q" value="{{ q }}" placeholder="Search order, unit or SKU" aria-label="Search orders">
     </form>
-    <a class="btn secondary" href="/orders/import" title="Import orders">{{ icon("upload", 17) }}<span class="hide-sm">Import</span></a>
+    <a class="btn secondary" href="/orders/import" title="Import orders">Import</a>
   </div>
 </div>
 
@@ -45,7 +45,7 @@
         {{ m.badge(row.decision) }}
         <a class="btn secondary sm above" href="/orders/{{ o.order_id }}">Check again</a>
       {% else %}
-        <span class="btn secondary sm cta">{{ icon("camera", 16) }}Check box</span>
+        <span class="btn secondary sm cta">Check box</span>
       {% endif %}
     </div>
     <span class="go">{{ icon("chevron-right", 20) }}</span>
@@ -67,7 +67,6 @@
   {% endif %}
 {% else %}
   <div class="card empty">
-    <div class="ico">{{ icon("inbox", 24) }}</div>
     <h2>No orders{% if q %} match "{{ q }}"{% endif %}</h2>
     {% if q %}<p><a href="/">Show all orders</a></p>{% else %}<p>Orders appear here once they're imported.</p>{% endif %}
   </div>

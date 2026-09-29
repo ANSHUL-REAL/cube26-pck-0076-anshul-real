@@ -13,7 +13,7 @@
 <section class="verdict {{ tone }}">
   <div class="grow">
     {% if r.overrides %}<div class="kicker">Decided by hand</div>{% endif %}
-    <h1>{{ icon(DECISION_ICON[decision], 28) }}{{ label }}</h1>
+    <h1>{{ label }}</h1>
     {% if r.overrides %}
       {% set last = r.overrides[-1] %}
       <p>Decided by {{ last.operator_label }} ({{ reasons.get(last.reason_code, last.reason_code) }}{% if last.note %}: "{{ last.note }}"{% endif %}). The agent's result was <strong>{{ DECISION_UI[agent_decision.value][0] }}</strong>.</p>
@@ -156,7 +156,7 @@
 <details class="fold" style="margin-top:12px">
   <summary>
     Evidence details
-    {% if hash_ok %}<span class="badge PASS sm">{{ icon("check", 13) }}hash matches record</span>{% else %}<span class="badge FAIL sm">{{ icon("x", 13) }}hash does not match</span>{% endif %}
+    {% if hash_ok %}<span class="badge PASS sm"><span class="dot"></span>hash matches record</span>{% else %}<span class="badge FAIL sm"><span class="dot"></span>hash does not match</span>{% endif %}
     {{ icon("chevron-down", 18, "chev") }}
   </summary>
   <div class="inner">
@@ -164,9 +164,8 @@
     <ul class="checks">
       {% for c in r.checks %}
       <li>
-        <span class="v {{ c.verdict.value }}">{{ icon(VERDICT_ICON[c.verdict.value], 15) }}</span>
         <div><div class="key">{{ c.check_key }}</div><div class="detail">{{ c.detail }}</div></div>
-        <span class="conf">{{ c.verdict.value }}{% if c.confidence is not none %} · {{ "%.2f" | format(c.confidence) }}{% endif %}</span>
+        <span class="v {{ c.verdict.value }}"><span class="dot"></span>{{ {"PASS": "Pass", "FAIL": "Fail", "UNCERTAIN": "Unclear", "NOT_CHECKED": "Not checked"}.get(c.verdict.value, c.verdict.value) }}{% if c.confidence is not none %}<span class="conf"> · {{ "%.2f" | format(c.confidence) }}</span>{% endif %}</span>
       </li>
       {% endfor %}
     </ul>

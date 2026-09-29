@@ -12,7 +12,7 @@
     {% endif %}
   </div>
   <div class="steps" aria-label="Progress">
-    <span class="step done"><span class="num">{{ icon("check", 13) }}</span>Order</span><span class="sep"></span>
+    <span class="step done"><span class="num">1</span>Order</span><span class="sep"></span>
     <span class="step now"><span class="num">2</span>Photo</span><span class="sep"></span>
     <span class="step"><span class="num">3</span>Result</span>
   </div>
@@ -36,17 +36,16 @@
       </li>
       {% endfor %}
     </ul>
-    <div class="card-foot">{{ icon("eye-off", 16) }}<span>The AI isn't shown this list. It counts what it sees on its own, then the two are compared.</span></div>
+    <div class="card-foot"><span>The AI isn't shown this list. It counts what it sees on its own, then the two are compared.</span></div>
   </section>
 
   <section class="card card-pad">
     <h2 style="margin-bottom:16px">Photo of the open box</h2>
 
-    {% if error %}<div class="callout error" style="margin-bottom:16px">{{ icon("triangle-alert") }}<div>{{ error }}</div></div>{% endif %}
+    {% if error %}<div class="callout error" style="margin-bottom:16px"><div>{{ error }}</div></div>{% endif %}
 
     {% if rejected %}
       <div class="callout warn">
-        {{ icon("triangle-alert") }}
         <div>
           <strong>The photo could be clearer.</strong>
           <ul>{% for r in rejected if not r.ok %}{% for reason in r.reasons %}<li>Photo {{ r.n }}: {{ reason }}</li>{% endfor %}{% endfor %}</ul>
@@ -64,19 +63,19 @@
 
     <form method="post" action="/orders/{{ order.order_id }}/verify" enctype="multipart/form-data" data-busy>
       <label class="dropzone" data-drop>
-        <span class="big">{{ icon("camera", 28) }}</span>
         <strong data-count>Take or choose a photo</strong>
         <span class="muted small">Up to {{ max_photos }} photos of the same box</span>
+        <span class="btn secondary sm pick">Choose photo</span>
         <input type="file" name="photos" accept="image/*" multiple
                data-previews="previews" data-max="{{ max_photos }}">
       </label>
       <div class="previews" id="previews"></div>
-      <button class="btn full lg" type="submit" style="margin-top:16px">{{ icon("scan", 18) }}Check this box</button>
+      <button class="btn full lg" type="submit" style="margin-top:16px">Check this box</button>
       <div class="busy"><span class="spinner"></span>Checking the box. This usually takes a few seconds.</div>
       <ul class="tips">
-        <li>{{ icon("scan", 17) }}Hold the phone above the box so the whole inside is in the frame.</li>
-        <li>{{ icon("sun", 17) }}Use good light. Tilt a little if shiny wrapping reflects.</li>
-        <li>{{ icon("layers", 17) }}Spread out stacked items, or add a second photo from an angle.</li>
+        <li>Hold the phone above the box so the whole inside is in the frame.</li>
+        <li>Use good light. Tilt a little if shiny wrapping reflects.</li>
+        <li>Spread out stacked items, or add a second photo from an angle.</li>
       </ul>
     </form>
   </section>

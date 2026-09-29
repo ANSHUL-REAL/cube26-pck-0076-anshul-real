@@ -8,9 +8,9 @@ Small sellers ship the wrong item more often than they think: the red cap instea
 
 For the CUBE Buildathon (Track 03) I built **Pack Manager**. The packer photographs the open box with any phone before sealing it, and gets one of three answers:
 
-✅ **Seal the box**: everything ordered is there, nothing else is.
-🛑 **Stop and fix**: exactly what to swap, add or remove, with numbered boxes on the photo.
-✋ **Check by hand**: when the photo can't settle it (stacked items, a look-alike with its label hidden), it says what it can't see instead of guessing.
+• **Seal the box**: everything ordered is there, nothing else is.
+• **Stop and fix**: exactly what to swap, add or remove, with numbered boxes on the photo.
+• **Check by hand**: when the photo can't settle it (stacked items, a look-alike with its label hidden), it says what it can't see instead of guessing.
 
 A few choices I'd make again:
 • **The vision model only lists what it sees. Plain rules decide.** The model is never told the order, so it can't "see" 2 because the order says 2.

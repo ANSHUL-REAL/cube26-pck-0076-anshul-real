@@ -6,7 +6,7 @@
     <div class="brand"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></div>
     <h1>Check every box before it's sealed.</h1>
     <p class="lead">Photograph the open box. You'll know whether to seal it, fix it, or check it by hand, and the photo is kept as proof of what was sent.</p>
-    {% if error %}<div class="callout error" style="margin-top:24px">{{ icon("triangle-alert") }}<div>{{ error }}</div></div>{% endif %}
+    {% if error %}<div class="callout error" style="margin-top:24px"><div>{{ error }}</div></div>{% endif %}
     <form method="post" action="/login" class="stack" style="margin-top:28px" data-busy>
       <div>
         <label class="field" for="code">Access code</label>

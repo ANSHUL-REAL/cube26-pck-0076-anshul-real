@@ -24,12 +24,12 @@ The code lives at the **repository root**, not in this folder, because the fork 
 
 | Face | Deliverable | Status |
 |---|---|---|
-| 1 | Customer letter, PR/FAQ, one-pager | ☑ written (customer voice is a hypothesis, not an interview) |
-| 2 | CLAUDE.md | ☑ |
-| 3 | Headless agent on fixtures | ☑ CLI + organiser-sample replay (rules stop 4/4 wrong boxes; the operator stopped 2/4) |
-| 4 | Eval report | ◐ method committed before data collection; held-out run pending |
-| 5 | Evidence record page | ☑ web app record page, JSON API, content hash |
-| 6 | Cross-pod contract | ☑ JSON Schema + example records |
+| 1 | Customer letter, PR/FAQ, one-pager | Done: written (customer voice is a hypothesis, not an interview) |
+| 2 | CLAUDE.md | Done |
+| 3 | Headless agent on fixtures | Done: CLI + organiser-sample replay (rules stop 4/4 wrong boxes; the operator stopped 2/4) |
+| 4 | Eval report | In progress: method committed before data collection; held-out run pending |
+| 5 | Evidence record page | Done: web app record page, JSON API, content hash |
+| 6 | Cross-pod contract | Done: JSON Schema + example records |
 
 ## Kill condition
 

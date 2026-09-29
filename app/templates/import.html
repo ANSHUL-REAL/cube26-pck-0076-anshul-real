@@ -11,28 +11,28 @@
 
 <div class="grid side">
   <section class="card card-pad">
-    {% if error %}<div class="callout error" style="margin-bottom:16px">{{ icon("triangle-alert") }}<div>{{ error }}</div></div>{% endif %}
+    {% if error %}<div class="callout error" style="margin-bottom:16px"><div>{{ error }}</div></div>{% endif %}
     {% if result %}
       {% if result.orders %}
-        <div class="callout info" style="margin-bottom:16px">{{ icon("check") }}<div>
+        <div class="callout info" style="margin-bottom:16px"><div>
           <strong>{{ result.orders | length }} order{{ "s" if result.orders | length != 1 }} imported</strong>{% if updated %} ({{ updated }} already existed and {{ "was" if updated == 1 else "were" }} updated){% endif %}.
           <a href="/">Go to orders</a></div></div>
       {% endif %}
       {% if result.unknown_skus %}
-        <div class="callout warn" style="margin-bottom:16px">{{ icon("triangle-alert") }}<div>
+        <div class="callout warn" style="margin-bottom:16px"><div>
           These SKUs aren't in your catalogue, so they'll be checked without a reference photo:
           <strong>{{ result.unknown_skus | sort | join(", ") }}</strong></div></div>
       {% endif %}
       {% if result.problems %}
-        <div class="callout error" style="margin-bottom:16px">{{ icon("triangle-alert") }}<div>
+        <div class="callout error" style="margin-bottom:16px"><div>
           <strong>Skipped:</strong><ul>{% for p in result.problems %}<li>{{ p }}</li>{% endfor %}</ul></div></div>
       {% endif %}
     {% endif %}
     <form method="post" action="/orders/import" enctype="multipart/form-data" data-busy>
       <label class="dropzone" data-drop>
-        <span class="big">{{ icon("upload", 26) }}</span>
         <strong data-count>Choose a CSV file</strong>
         <span class="muted small">Exported from your store, or made in Excel / Google Sheets</span>
+        <span class="btn secondary sm pick">Choose file</span>
         <input type="file" name="file" accept=".csv,text/csv" required>
       </label>
       <button class="btn full lg" type="submit" style="margin-top:16px">Import orders</button>

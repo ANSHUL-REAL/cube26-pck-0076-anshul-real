@@ -6,9 +6,9 @@
   <title>{% block title %}Pack Manager{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Instrument+Serif&display=swap">
   <link rel="stylesheet" href="/static/app.css?v={{ ASSET_VERSION }}">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b1a17'/%3E%3Cpath d='M16 7l8 4.5v9L16 25l-8-4.5v-9z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M8 11.5l8 4.5 8-4.5M16 16v9' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f4f8f'/%3E%3Cpath d='M16 7l8 4.5v9L16 25l-8-4.5v-9z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M8 11.5l8 4.5 8-4.5M16 16v9' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
   <script src="/static/app.js?v={{ ASSET_VERSION }}" defer></script>
 </head>
 <body>
@@ -24,7 +24,7 @@
       </nav>
       <div class="who">
         <div class="org"><b>{{ user.org_name }}</b><span>{{ user.operator }}</span></div>
-        <a class="icon-btn" href="/logout" title="Sign out" aria-label="Sign out">{{ icon("log-out", 17) }}</a>
+        <a class="signout" href="/logout">Sign out</a>
       </div>
     </div>
   </header>
@@ -34,8 +34,8 @@
 </main>
 {% if user %}
   <nav class="tabbar" aria-label="Main">
-    <a href="/" class="{{ 'on' if path == '/' or path.startswith('/orders') }}">{{ icon("clipboard-list", 20) }}Orders</a>
-    <a href="/records" class="{{ 'on' if path.startswith('/records') }}">{{ icon("file-text", 20) }}Records</a>
+    <a href="/" class="{{ 'on' if path == '/' or path.startswith('/orders') }}">Orders</a>
+    <a href="/records" class="{{ 'on' if path.startswith('/records') }}">Records</a>
   </nav>
 {% endif %}
 {% endblock %}
