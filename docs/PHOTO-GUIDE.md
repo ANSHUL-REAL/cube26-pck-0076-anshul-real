@@ -74,7 +74,7 @@ T12,test,extra,BOTTLE-STEEL-750:1,BOTTLE-STEEL-750:1;CABLE-USBC-1M:1,window;angl
 
 - `order_lines`: what the order says should be in the box.
 - `actual_contents`: what you **physically put in**, including anything hidden. For a product that isn't in the catalogue, write `OTHER:1`. Don't list packing slips or bubble wrap.
-- `conditions`: short words like `window;top`, `lamp;angle;blur`.
+- `conditions`: short words like `window;top`, `lamp;angle;blur`. Add **`hidden`** whenever any item is partly or fully under another item or filler in the photo. The report counts these boxes separately.
 
 This physical record is the ground truth. It's what the agent is scored against.
 

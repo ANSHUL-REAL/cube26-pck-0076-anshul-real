@@ -10,6 +10,7 @@ The code lives at the **repository root**, not in this folder, because the fork 
 | PR/FAQ, including the questions we'd rather not answer | [02-prfaq.md](02-prfaq.md) |
 | One-pager: metrics and kill condition | [03-one-pager.md](03-one-pager.md) |
 | LinkedIn post draft (numbers filled in after the eval) | [04-linkedin-post.md](04-linkedin-post.md) |
+| Reply to the design review (UNCERTAIN, fail-open, occlusion, decoys) | [05-design-review-reply.md](05-design-review-reply.md) |
 | Durable constraints and forbidden language | [CLAUDE.md](CLAUDE.md) |
 | Build brief | [build-brief.md](build-brief.md) |
 | Build log | [build-log.md](build-log.md) |

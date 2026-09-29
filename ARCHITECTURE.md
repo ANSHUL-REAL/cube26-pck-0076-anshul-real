@@ -69,6 +69,8 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 
 **Box outcome:** any FAIL → STOP_AND_FIX; otherwise any UNCERTAIN → UNCERTAIN; otherwise SEAL.
 
+**What the rules read.** Which SKU each object matched and how confidently, how many there are, the model's own count, and the scene flags (whole box visible, items may be hidden). No rule reads bounding-box coordinates. The boxes are drawn on the record so a person can check what each claim refers to; they are explanation, not input to the decision.
+
 **Substitution pairing.** When a line is short and a non-ordered SKU is present, the two are reported together ("Expected Blue Cap, found Red Cap (#3)" → fix "Replace Red Cap (#3) with Blue Cap"). Look-alikes are paired first. Reasons are ordered so the most useful one leads the page.
 
 **Over-quantity wins over uncertainty.** If 3 are confidently counted and 2 were ordered, the box stops even if more could be hidden: at least one must come out.
@@ -100,6 +102,8 @@ Handbook section 9 field names; full reference in [`contract/README.md`](contrac
 
 If the model errors, times out or runs out of quota, `verify_box` still saves the photos and a record: decision `PENDING`, status `pending`, a `vision` check marked `NOT_CHECKED`, and the error text. The operator sees "Needs your decision" with the photos and the order, checks by hand, and records SEAL or STOP_AND_FIX with reason `agent_unavailable`. Nothing blocks the bench (engineering rule 3).
 
+**Retry AI check.** A record whose AI check didn't run shows a "Retry AI check" button. It runs the check again on the exact stored photos (their hashes are verified first) against the order as it was when the photos were taken, and saves the result as a **new record** with `observations.retry_of` pointing at the old one. The old record is never changed. If a person already decided the box by hand and the AI now disagrees, the new record carries `observations.disagreement` and says so on the page. What this buys, honestly: if the box has already shipped, a disagreement found later can't stop that mis-ship. Its value is (1) a real catch where dispatch is slower than the retry, and (2) a measure of how often hand decisions and the agent disagree. There is no background job; the retry is a button.
+
 If a photo fails the quality gate, the operator is told why ("too dark", "blurry") and can retake it. They can also press "Use these photos anyway", in which case `image_quality` is UNCERTAIN, so the box can't be SEALed by the agent alone.
 
 ## Design decisions
@@ -120,6 +124,9 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 | D12 | Content hash only | The honesty rule: claim what is built | No tamper-evidence against a database admin |
 | D13 | Keyed by SKU, not ASIN | The sample data gives one ASIN to two products | — |
 | D14 | Server-rendered HTML, no JS build | Works on any phone browser; small; fast to change | Less interactive |
+| D15 | Decoys in production, not only in the eval | The eval measures the same task that ships; the model must discriminate, not confirm | A slightly longer prompt |
+| D16 | One shot per box (up to 3 photos), occlusion reported separately | Per-layer capture costs throughput; hidden items become "Check by hand", and the eval splits occlusion failures from recognition failures | Items under other items can't be seen |
+| D17 | Retry creates a new linked record | Records are never edited; the disagreement with a hand decision is kept as data | Two records for one box |
 
 ## Threat model
 

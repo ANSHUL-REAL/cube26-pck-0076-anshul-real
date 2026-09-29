@@ -264,3 +264,64 @@ def test_order_tabs_and_record_search(client, sharp_photo, catalogue, settings):
 
     assert record.record_id in client.get("/records?q=ord-77").text
     assert 'No records match "nope"' in client.get("/records?q=nope").text
+
+
+def _pending_box(client, sharp_photo, order_id="ORD-1"):
+    """No API key in tests, so an upload fails open to a pending record."""
+    add_order(client.fake, ("CAP-BLU", 1), order_id=order_id)
+    client.post("/login", data={"code": "alpha-demo"})
+    url = client.post(f"/orders/{order_id}/verify", files={"photos": ("box.jpg", sharp_photo, "image/jpeg")},
+                      follow_redirects=False).headers["location"]
+    return url.rsplit("/", 1)[1]
+
+
+def test_retry_ai_check_makes_a_linked_record(client, sharp_photo, monkeypatch):
+    import app.main as main
+
+    rid = _pending_box(client, sharp_photo)
+    assert "Retry AI check" in client.get(f"/records/{rid}").text
+    before = client.fake.records[rid]
+
+    monkeypatch.setattr(main, "perceiver_for", lambda org: OraclePerceiver({"CAP-RED": 1}))
+    url = client.post(f"/records/{rid}/retry", follow_redirects=False).headers["location"]
+    new = client.fake.records[url.rsplit("/", 1)[1]]
+    assert new.record_id != rid and new.outcome.decision == Decision.STOP_AND_FIX
+    assert new.observations["retry_of"] == rid and "disagreement" not in new.observations
+    assert [i.sha256 for i in new.images] == [i.sha256 for i in before.images]  # the same photos
+    assert client.fake.records[rid] == before  # the original record is untouched
+    assert "second AI check" in client.get(url).text
+    assert "Checked again" in client.get(f"/records/{rid}").text
+
+
+def test_retry_flags_disagreement_with_the_hand_decision(client, sharp_photo, monkeypatch):
+    import app.main as main
+
+    rid = _pending_box(client, sharp_photo)
+    client.post(f"/records/{rid}/decision", data={"decision": "SEAL", "reason_code": "agent_unavailable"})
+    monkeypatch.setattr(main, "perceiver_for", lambda org: OraclePerceiver({"CAP-RED": 1}))
+    url = client.post(f"/records/{rid}/retry", follow_redirects=False).headers["location"]
+    new = client.fake.records[url.rsplit("/", 1)[1]]
+    assert new.observations["disagreement"]["human_decision"] == "SEAL"
+    assert "The AI disagrees with the decision made by hand" in client.get(url).text
+
+
+def test_retry_only_for_boxes_the_ai_did_not_answer(client, sharp_photo, catalogue, settings):
+    order = add_order(client.fake, ("CAP-BLU", 1))
+    prepared = prepare_photos([Photo(sharp_photo)], settings)
+    record = verify_box(order, prepared, catalogue, OraclePerceiver({"CAP-BLU": 1}), settings, operator_label="op_alpha")
+    client.fake.save_record(None, record, prepared)
+    client.post("/login", data={"code": "alpha-demo"})
+    assert "Retry AI check" not in client.get(f"/records/{record.record_id}").text
+    count = len(client.fake.records)
+    client.post(f"/records/{record.record_id}/retry")
+    assert len(client.fake.records) == count
+
+
+def test_rerun_refuses_photos_that_do_not_match_the_record(sharp_photo, catalogue, settings):
+    from pack_manager.pipeline import rerun_box
+
+    order = make_order(("CAP-BLU", 1))
+    prepared = prepare_photos([Photo(sharp_photo)], settings)
+    record = verify_box(order, prepared, catalogue, OraclePerceiver({"CAP-BLU": 1}), settings, operator_label="op")
+    with pytest.raises(ValueError, match="doesn't match its hash"):
+        rerun_box(record, [prepared[0].jpeg + b"x"], catalogue, OraclePerceiver({}), settings, retried_by="op")

@@ -21,7 +21,9 @@
 |---|---|
 | The model describes and code decides | Deterministic, testable, explainable verdicts |
 | Don't tell the model the order | Prevents "the order says 2, so I see 2" (ablated in the eval) |
-| Look-alikes and decoys in every prompt | Forces a comparison instead of confirmation |
+| Look-alikes and decoys in every prompt, in production as well as the eval | Forces a comparison instead of confirmation; the eval measures the task that ships |
+| One shot per box (up to 3 photos); occlusion reported as its own failure group | Per-layer photos cost throughput; hidden items go to a hand check |
+| Bounding boxes are for the record, not the decision | The rules use only SKU, count and visibility; the boxes let a person check each claim |
 | Gemini (free tier), one call per box, cached | Cost; bounding boxes; eval re-runs are free |
 | FastAPI + server-rendered HTML | Works on any phone browser, with no build step |
 | Postgres with forced RLS, photos in the database | Isolation holds even for guessed photo IDs |

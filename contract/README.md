@@ -27,7 +27,7 @@ The examples come from the real pipeline (quality gate → decision rules → ha
 | `captured_at` | UTC time the photos were taken (server time) |
 | `operator_label` | Who packed / checked the box |
 | `images[]` | `image_id` (UUIDv4), `role`, `sha256` of the stored image, `original_sha256` of the upload, size, and the local `quality` gate result |
-| `observations` | What was found: `uncertainty` (below), `expected_vs_observed[]`, `detected_items[]` (with `box_2d` on the photo), `missing[]`, `wrong[]`, `extra[]`, `over_quantity[]`, `unclear[]`, `non_product_items[]`, `scene`, token `usage`, `cost_usd` |
+| `observations` | What was found: `uncertainty` (below), `expected_vs_observed[]`, `detected_items[]` (with `box_2d` on the photo), `missing[]`, `wrong[]`, `extra[]`, `over_quantity[]`, `unclear[]`, `non_product_items[]`, `scene`, token `usage`, `cost_usd`. On a retried check: `retry_of` (the record whose AI check didn't run), `retried_by`, `photos_taken_at`, and `disagreement` when the AI's new decision differs from a hand decision on the old record |
 | `checks[]` | `check_key`, `verdict` (PASS / FAIL / UNCERTAIN / NOT_CHECKED), `confidence`, `detail`, `model_version`, `latency_ms`, `evidence`. All model-based checks share one `model_version` and `latency_ms` because they come from **one** model call |
 | `outcome` | `decision` (SEAL / STOP_AND_FIX / UNCERTAIN / PENDING), `decided_by` (`agent` or `operator:<label>`), `decided_at`, `reasons[]`, `fix_instructions[]` |
 | `overrides[]` | Each human decision: `original_decision`, `new_decision`, `reason_code`, `note`, `operator_label`, `at`, `prior_content_hash`. Appended, never replaced |
@@ -87,3 +87,5 @@ Results are limited to the caller's organisation by Postgres row-level security.
 | check result | `verdict` | — | `result` |
 | hash | `content_hash` | — | `content_sha256` |
 | decision | `outcome.decision` = `SEAL` / `STOP_AND_FIX` / `UNCERTAIN` / `PENDING` | `operator_verdict` = `seal` / `stop_and_fix` | — |
+| all items present | one `line_present:<SKU>` check per order line | — | `all_items_present` |
+| quantities correct | one `line_quantity:<SKU>` check per order line | — | `quantities_correct` |

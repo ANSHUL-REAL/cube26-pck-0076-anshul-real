@@ -27,7 +27,10 @@ It says **Check by hand** and lists what would settle it, for example "a count o
 Your orders (CSV or JSON for now) and 2–3 reference photos per product, plus a phone.
 
 **What if the AI is down?**
-The photos and a record are still saved, marked "Needs your decision". Your packer checks by hand and carries on. Nothing waits on the AI.
+The photos and a record are still saved, marked "Needs your decision". Your packer checks by hand and carries on, exactly as they would with no agent at all. Nothing waits on the AI. Later, anyone can press "Retry AI check": it checks the same photos again and saves a new record. If the packer's decision and the AI now disagree, the new record says so. Be clear about what that buys: if the box has already shipped, a disagreement found later can't stop that mis-ship. It helps where boxes wait before dispatch, and it shows how often hand decisions and the agent disagree. We aim for fewer than 2% of boxes to need a decision this way.
+
+**Isn't "Check by hand" just "Stop" with a different name?**
+Both stop the box from being sealed. They are kept apart because they mean different things: "Stop and fix" is a known problem with a fix, "Check by hand" is a photo that can't settle it. If they were merged, a high stop rate couldn't tell us whether the checks are wrong or the photos are bad, and those need different fixes.
 
 **Can my clients see each other's boxes?**
 No. Each organisation's data is separated by the database itself (row-level security, enforced and tested), including the photos.

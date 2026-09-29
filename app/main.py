@@ -24,7 +24,7 @@ from pack_manager.config import get_settings
 from pack_manager.evidence import apply_override, verify
 from pack_manager.models import OVERRIDE_REASONS, Catalogue, Decision, EvidenceRecord
 from pack_manager.orders import parse_orders_csv
-from pack_manager.pipeline import Photo, QualityRejected, prepare_photos, verify_box
+from pack_manager.pipeline import Photo, QualityRejected, prepare_photos, rerun_box, verify_box
 from pack_manager.quality import ImageDecodeError, PreparedImage
 from pack_manager.vision.base import PerceptionError
 
@@ -63,7 +63,13 @@ ASSET_VERSION = str(max(int((BASE / "static" / name).stat().st_mtime) for name i
 templates.env.globals.update(DECISION_UI=DECISION_UI, DECISION_ICON=DECISION_ICON,
                              DECISION_BLURB=DECISION_BLURB, VERDICT_ICON=VERDICT_ICON, icon=icon,
                              ASSET_VERSION=ASSET_VERSION)
-templates.env.filters["when"] = lambda dt: dt.strftime("%d %b, %H:%M UTC") if dt else ""
+def _when(dt) -> str:
+    if isinstance(dt, str):
+        dt = datetime.fromisoformat(dt)
+    return dt.strftime("%d %b, %H:%M UTC") if dt else ""
+
+
+templates.env.filters["when"] = _when
 
 
 # ------------------------------------------------------------------ dependencies
@@ -360,11 +366,39 @@ def record_page(request: Request, record_id: str):
     for c in record.checks:
         if c.verdict.value in tally:
             tally[c.verdict.value] += 1
+    with db().org(user["org"]) as cur:
+        later = [row for row in store.list_records(cur, order_id=record.subject.get("order_id"), limit=20)
+                 if row["captured_at"] >= record.captured_at and row["record_id"] != record.record_id]
     return page(
         request, "record.html", r=record, hash_ok=verify(record), states=_object_states(record),
         agent_decision=agent_decision, reasons=OVERRIDE_REASONS, catalogue=catalogue,
-        obs=record.observations or {}, tally=tally, thumbs=_thumbs(catalogue),
+        obs=record.observations or {}, tally=tally, thumbs=_thumbs(catalogue), later=later,
+        can_retry=agent_decision == Decision.PENDING,
     )
+
+
+@app.post("/records/{record_id}/retry")
+async def record_retry(request: Request, record_id: str):
+    """Run the AI check again on a box the model didn't answer for. Creates a new, linked record."""
+    user = current_user(request)
+    with db().org(user["org"]) as cur:
+        record = store.get_record(cur, record_id)
+        if not record:
+            return not_found(request, "That record")
+        stored = [store.get_image(cur, ref.image_id) for ref in record.images]
+        earlier = store.find_image_uses(cur, [ref.sha256 for ref in record.images])
+    first = record.overrides[0].original_decision if record.overrides else record.outcome.decision
+    if first != Decision.PENDING or any(s is None for s in stored):
+        return RedirectResponse(f"/records/{record_id}", status_code=303)
+    catalogue, root = org_catalogue(user["org"])
+    new, prepared = await run_in_threadpool(
+        rerun_box, record, [data for _, data in stored], catalogue, perceiver_for(user["org"]), settings,
+        retried_by=user["operator"], catalogue_root=root,
+        earlier_uses=[u for u in earlier if u["record_id"] != record.record_id],
+    )
+    with db().org(user["org"]) as cur:
+        store.save_record(cur, new, prepared)
+    return RedirectResponse(f"/records/{new.record_id}", status_code=303)
 
 
 @app.post("/records/{record_id}/decision")

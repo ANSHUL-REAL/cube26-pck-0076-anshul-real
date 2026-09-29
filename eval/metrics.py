@@ -99,6 +99,7 @@ def main() -> None:
     # ---------------- box decision vs physical truth
     confusion = Counter()
     per_scenario = defaultdict(Counter)
+    by_cause = defaultdict(Counter)
     failures = []
     for bid in ids:
         box, rec = boxes[bid], records[bid]
@@ -112,6 +113,14 @@ def main() -> None:
         s["false_stop"] += truth == "SEAL" and agent == "STOP_AND_FIX"
         if agent != truth:
             failures.append((bid, box, rec))
+        # Occlusion vs everything else. "hidden" in the manifest's conditions means an item was
+        # (partly) under another item or filler when photographed, noted while packing.
+        g = by_cause["occlusion" if box.hidden else "other"]
+        g["n"] += 1
+        g["correct"] += agent == truth
+        g["uncertain"] += agent == "UNCERTAIN"
+        g["false_seal"] += truth == "STOP_AND_FIX" and agent == "SEAL"
+        g["false_stop"] += truth == "SEAL" and agent == "STOP_AND_FIX"
 
     bad = sum(v for (t, _), v in confusion.items() if t == "STOP_AND_FIX")
     good = sum(v for (t, _), v in confusion.items() if t == "SEAL")
@@ -123,14 +132,19 @@ def main() -> None:
                if records[b].outcome.decision.value in ("SEAL", "STOP_AND_FIX")]
 
     # ---------------- per check vs physical truth
-    line_rows, unexpected_rows = [], []
+    # Identity and count are scored separately: finding a SKU is much easier than counting
+    # three of them when they overlap, and one blended number would hide which one fails.
+    present_rows, count_rows, unexpected_rows = [], [], []
     for bid in ids:
         box, rec = boxes[bid], records[bid]
         checks = {c.check_key: c.verdict.value for c in rec.checks}
         if rec.outcome.decision.value == "PENDING":
             continue
         for sku in box.expected:
-            line_rows.append((box.line_truth(sku), checks.get(f"line_quantity:{sku}", "UNCERTAIN")))
+            in_box = box.actual.get(sku, 0) >= 1
+            present_rows.append(("PASS" if in_box else "FAIL", checks.get(f"line_present:{sku}", "UNCERTAIN")))
+            if in_box:  # a count only means something once the item is really there
+                count_rows.append((box.line_truth(sku), checks.get(f"line_quantity:{sku}", "UNCERTAIN")))
         w, e = checks.get("wrong_item", "UNCERTAIN"), checks.get("extra_item", "UNCERTAIN")
         agent_unexpected = "FAIL" if "FAIL" in (w, e) else ("UNCERTAIN" if "UNCERTAIN" in (w, e) else "PASS")
         unexpected_rows.append((box.unexpected_truth, agent_unexpected))
@@ -176,11 +190,14 @@ def main() -> None:
             "uncertain_on_good_boxes": pct(confusion[("SEAL", "UNCERTAIN")], good),
             "accuracy_when_decided": pct(sum(t == a for t, a in decided), len(decided)),
             "pending_model_failures": pending,
+            "pending_rate": pct(pending, len(ids)),
             "confusion": {f"{t} -> {a}": v for (t, a), v in sorted(confusion.items())},
         },
-        "checks": {"line_quantity (per order line)": check_table(line_rows),
-                   "unexpected_product (wrong or extra, per box)": check_table(unexpected_rows)},
+        "checks": {"all_items_present: line_present (per order line)": check_table(present_rows),
+                   "quantities_correct: line_quantity (per order line whose item is in the box)": check_table(count_rows),
+                   "unexpected_product: wrong_item or extra_item (per box)": check_table(unexpected_rows)},
         "per_scenario": {k: dict(v) for k, v in sorted(per_scenario.items())},
+        "occlusion_vs_other": {k: dict(v) for k, v in sorted(by_cause.items())},
         "humans": human,
         "latency_ms": {"p50": lat[len(lat) // 2] if lat else None,
                        "p95": lat[min(len(lat) - 1, int(len(lat) * 0.95))] if lat else None,
@@ -209,7 +226,7 @@ def main() -> None:
         f"| UNCERTAIN (sent to a human) | {bd['uncertain_rate']} of all boxes |",
         f"| … on bad boxes / on good boxes | {bd['uncertain_on_bad_boxes']} / {bd['uncertain_on_good_boxes']} |",
         f"| Accuracy when the agent decided | {bd['accuracy_when_decided']} |",
-        f"| Model failures (pending) | {bd['pending_model_failures']} |",
+        f"| Model failures (\"Needs your decision\") | {bd['pending_model_failures']} boxes, {bd['pending_rate']} (target: 2% or less) |",
         "",
         "| Truth \\ Agent | SEAL | STOP_AND_FIX | UNCERTAIN | PENDING |", "|---|---|---|---|---|",
     ]
@@ -225,6 +242,13 @@ def main() -> None:
     lines += ["", "## Per scenario", "", "| Scenario | n | Correct | Uncertain | False SEAL | False STOP |", "|---|---|---|---|---|---|"]
     for k, v in metrics["per_scenario"].items():
         lines.append(f"| {k} | {v['n']} | {v['correct']} | {v['uncertain']} | {v['false_seal']} | {v['false_stop']} |")
+    lines += ["", "## Occlusion vs everything else", "",
+              "Boxes marked `hidden` in the manifest had an item under another item or filler when photographed.",
+              "One photo can't see those, so failures there are about geometry, not recognition.", "",
+              "| Group | n | Correct | Uncertain | False SEAL | False STOP |", "|---|---|---|---|---|---|"]
+    for k, v in metrics["occlusion_vs_other"].items():
+        name = "Items hidden (occlusion)" if k == "occlusion" else "Nothing hidden (recognition, count, photo quality)"
+        lines.append(f"| {name} | {v['n']} | {v['correct']} | {v['uncertain']} | {v['false_seal']} | {v['false_stop']} |")
     lines += ["", "## Human labellers (from photos only, before the agent ran)", ""]
     if human:
         lines += [f"- Labellers: {', '.join(human['labellers'])}; boxes labelled by both: {human['boxes_labelled_by_both']}",

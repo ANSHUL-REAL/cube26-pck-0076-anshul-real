@@ -41,8 +41,15 @@ Lighting (window / lamp), angle (top-down / ~45°) and distance vary across boxe
 - **Box decision vs physical truth:** confusion matrix (truth SEAL / STOP × agent SEAL / STOP / UNCERTAIN / PENDING).
 - **False-SEAL rate** = bad boxes the agent sealed ÷ bad boxes. **The headline error**: a mis-ship let through.
 - **False-STOP rate** = good boxes the agent stopped ÷ good boxes. The throughput cost, and what makes operators stop trusting it.
-- **UNCERTAIN rate**, split by truth good / bad and by scenario. UNCERTAIN on a bad box still stops the box from being sealed.
-- **Per check** (`line_quantity` per order line, `unexpected_product` per box): problems caught, **false negatives** (a real problem passed) and **false positives** (false alarm) reported separately, plus UNCERTAIN.
+- **UNCERTAIN rate**, split by truth good / bad and by scenario. UNCERTAIN on a bad box still stops the box from being sealed. Target ≤ 25%.
+- **PENDING rate** (the model didn't answer). Target ≤ 2%.
+- **Per check, identity and count as separate rows:**
+  - *all_items_present*: `line_present:<SKU>` per order line, against "is at least one in the box";
+  - *quantities_correct*: `line_quantity:<SKU>` only for lines whose item is really in the box, against "is the count right";
+  - *unexpected_product*: `wrong_item` or `extra_item` per box.
+
+  Each row reports problems caught, **false negatives** (a real problem passed) and **false positives** (a false alarm) separately, plus UNCERTAIN. Counting is expected to be the weaker row.
+- **Occlusion vs everything else.** While packing, the manifest's `conditions` get the word `hidden` when any item is partly under another item or filler. Those boxes are reported as their own group, so failures caused by geometry (one photo can't see under things) aren't mistaken for recognition failures.
 - **Per scenario**: correct / uncertain / false SEAL / false STOP.
 - **Human agreement:** Cohen's kappa human A vs human B, and the agent vs the boxes where both humans agree.
 - **Latency** p50 / p95 per box, and **cost per box** from the API's token counts at Google's published prices.

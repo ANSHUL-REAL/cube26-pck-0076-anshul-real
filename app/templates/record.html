@@ -29,6 +29,20 @@
   </div>
 </div>
 
+{% if obs.get("retry_of") %}
+<div class="callout info" style="margin-bottom:14px">
+  This is a second AI check of the photos from <a href="/records/{{ obs.retry_of }}">{{ obs.retry_of }}</a>, taken {{ obs.photos_taken_at | when }}. {{ obs.retried_by }} ran it again because the AI didn't answer the first time.
+</div>
+{% endif %}
+{% set dis = obs.get("disagreement") %}
+{% if dis %}
+<div class="callout warn" style="margin-bottom:14px">
+  <strong>The AI disagrees with the decision made by hand.</strong>
+  {{ dis.human_operator }} chose <strong>{{ DECISION_UI[dis.human_decision][0] }}</strong> on {{ dis.human_decided_at | when }}; the AI now says <strong>{{ DECISION_UI[dis.agent_decision][0] }}</strong>.
+  If the box has already shipped, this can't stop it. Check the order again, or contact the customer.
+</div>
+{% endif %}
+
 <section class="verdict {{ tone }}">
   {% if r.overrides %}<div class="kicker">Decided by hand</div>{% endif %}
   <h2 class="verdict-title">{{ label }}</h2>
@@ -42,6 +56,14 @@
     {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
   {% elif r.outcome.reasons %}
     <p>{{ r.outcome.reasons[0] }}</p>
+  {% endif %}
+
+  {% if can_retry %}
+    <form class="retry" method="post" action="/records/{{ r.record_id }}/retry" data-busy>
+      <button class="btn secondary sm" type="submit">Retry AI check</button>
+      <span class="muted small">Uses the same photos and makes a new record. This one stays as it is.</span>
+      <div class="busy"><span class="spinner"></span>Checking the box again…</div>
+    </form>
   {% endif %}
 
   {% if r.outcome.fix_instructions and not r.overrides %}
@@ -204,10 +226,13 @@
       <div class="card-head"><h2>History</h2></div>
       <div class="card-body">
         <ol class="events">
-          <li><b>Photos taken</b> by {{ r.operator_label }}<span>{{ r.captured_at | when }}</span></li>
-          <li><b>AI check: {{ DECISION_UI[agent_decision.value][0] }}</b>{% if decision != "PENDING" or r.overrides %} · {{ tally.PASS }} of {{ r.checks | length }} checks passed{% endif %}<span>{{ r.captured_at | when }}</span></li>
+          <li><b>Photos taken</b> by {{ r.operator_label }}<span>{{ (obs.photos_taken_at or r.captured_at) | when }}</span></li>
+          <li><b>{{ "AI re-check" if obs.get("retry_of") else "AI check" }}: {{ DECISION_UI[agent_decision.value][0] }}</b>{% if decision != "PENDING" or r.overrides %} · {{ tally.PASS }} of {{ r.checks | length }} checks passed{% endif %}<span>{{ r.captured_at | when }}</span></li>
           {% for o in r.overrides %}
           <li><b>{{ o.operator_label }}: {{ DECISION_UI[o.new_decision.value][0] }}</b> · {{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}<span>{{ o.at | when }}</span></li>
+          {% endfor %}
+          {% for l in later | reverse %}
+          <li><b>Checked again: <a href="/records/{{ l.record_id }}">{{ DECISION_UI[l.decision][0] }}</a></b><span>{{ l.captured_at | when }} · {{ l.record_id }}</span></li>
           {% endfor %}
         </ol>
       </div>

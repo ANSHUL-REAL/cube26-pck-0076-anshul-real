@@ -6,7 +6,9 @@ produced, marked pending, so the operator can check by hand without losing the b
 
 from __future__ import annotations
 
+import hashlib
 import logging
+import uuid
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -24,6 +26,7 @@ from .models import (
     EvidenceRecord,
     ImageRef,
     Order,
+    OrderLine,
     Outcome,
     QualityReport,
     RecordStatus,
@@ -79,6 +82,7 @@ def verify_box(
     force_quality: bool = False,
     captured_at: datetime | None = None,
     earlier_uses: list[dict] | None = None,
+    extra_observations: dict | None = None,
 ) -> EvidenceRecord:
     reports = [p.quality for p in prepared]
     if any(r.gate == "FAIL" for r in reports) and not force_quality:
@@ -122,7 +126,7 @@ def verify_box(
             captured_at=captured_at,
             operator_label=operator_label,
             images=images,
-            observations={"error": str(exc)},
+            observations={"error": str(exc), **(extra_observations or {})},
             checks=checks,
             outcome=Outcome(
                 decision=Decision.PENDING, decided_by=None, decided_at=None,
@@ -141,6 +145,7 @@ def verify_box(
         "usage": perception.usage,
         "cost_usd": cost_usd(perception.usage, settings),
         "cached_response": perception.cached,
+        **(extra_observations or {}),
     }
     record = EvidenceRecord(
         record_id=new_record_id(),
@@ -163,3 +168,55 @@ def verify_box(
         status=RecordStatus.PENDING_REVIEW if result.decision == Decision.UNCERTAIN else RecordStatus.FINAL,
     )
     return seal(record)
+
+
+def rerun_box(
+    record: EvidenceRecord,
+    stored: list[bytes],
+    catalogue: Catalogue,
+    perceiver: Perceiver,
+    settings: Settings,
+    *,
+    retried_by: str,
+    catalogue_root: Path | None = None,
+    earlier_uses: list[dict] | None = None,
+) -> tuple[EvidenceRecord, list[PreparedImage]]:
+    """Run the AI check again on a saved box, as a new record linked to the old one.
+
+    Used when the model didn't answer the first time. The old record is never changed.
+    The check runs against the order as it was when the photos were taken, and the photos
+    are the exact stored bytes (their hashes are verified first).
+    """
+    if len(stored) != len(record.images):
+        raise ValueError("Some photos of this box are missing.")
+    prepared = []
+    for ref, data in zip(record.images, stored):
+        if hashlib.sha256(data).hexdigest() != ref.sha256:
+            raise ValueError(f"Photo {ref.image_id} doesn't match its hash in the record.")
+        prepared.append(PreparedImage(
+            image_id=str(uuid.uuid4()), role=ref.role, jpeg=data, sha256=ref.sha256,
+            original_sha256=ref.original_sha256, width=ref.width, height=ref.height, quality=ref.quality,
+        ))
+    subject = record.subject
+    order = Order(
+        order_id=subject["order_id"], organization_id=record.organization_id, client_id=record.client_id,
+        unit_id=subject.get("unit_id"), channel=subject.get("channel"),
+        lines=[OrderLine(**line) for line in subject["expected_lines"]],
+    )
+    link = {"retry_of": record.record_id, "retried_by": retried_by,
+            "photos_taken_at": record.captured_at.isoformat()}
+    new = verify_box(
+        order, prepared, catalogue, perceiver, settings,
+        operator_label=record.operator_label, catalogue_root=catalogue_root,
+        force_quality=any(ref.quality.gate == "FAIL" for ref in record.images),
+        earlier_uses=earlier_uses, extra_observations=link,
+    )
+    # If a person already decided the old box and the AI now disagrees, say so on the record.
+    if record.overrides and new.outcome.decision != Decision.PENDING:
+        human = record.overrides[-1]
+        if human.new_decision != new.outcome.decision:
+            new = seal(new.model_copy(update={"observations": {**new.observations, "disagreement": {
+                "human_decision": human.new_decision.value, "human_operator": human.operator_label,
+                "human_decided_at": human.at.isoformat(), "agent_decision": new.outcome.decision.value,
+            }}}))
+    return new, prepared

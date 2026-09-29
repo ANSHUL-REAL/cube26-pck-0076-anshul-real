@@ -4,6 +4,13 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Tue 29 Sep
 
+- **Design review of the UNCERTAIN and fail-open questions.** Both calls were confirmed. The review asked for four things, now answered in [05-design-review-reply.md](05-design-review-reply.md):
+  - a target for the UNCERTAIN rate (it was already in the one-pager: ≤ 25%, kill above 40%), now joined by a PENDING target of ≤ 2%;
+  - an occlusion stance: one shot per box, with boxes that had a hidden item marked while packing and reported as their own failure group;
+  - decoys in production: yes, same code path as the eval;
+  - identity and count as separate metric rows (`line_present` and `line_quantity`).
+- The review also caught an overclaim. The organiser question said the agent "re-runs async"; nothing did. There is now a "Retry AI check" button that re-checks the stored photos as a new linked record and flags disagreement with a hand decision, and the docs say plainly that it can't recall a box that has already shipped.
+
 - **Gap check against the field.** Looked at what the other public forks of this track had built, to find missing features. Ideas only; no code was copied. Added from that review, each written from scratch:
   - an **uncertainty summary** on every unclear result: known / can't tell / what would settle it / next action;
   - **photo-reuse detection**: the same photo already used for another order can't seal a box;

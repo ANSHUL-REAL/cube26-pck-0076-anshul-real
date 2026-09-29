@@ -428,6 +428,10 @@ dl.meta dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .verdict-steps .todo li { padding: 9px 18px; border-top: 0; }
 .verdict .score { margin-top: 16px; font-size: 13.5px; color: var(--text-2); }
 
+.retry { display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; margin-top: 14px; }
+.retry .busy { flex-basis: 100%; justify-content: flex-start; margin-top: 0; }
+.events li b a { color: var(--brand); }
+
 /* ------------------------------------------------------------ evidence and history cards */
 .hash { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; margin-bottom: 14px; }
 .hash.ok { color: var(--seal); }

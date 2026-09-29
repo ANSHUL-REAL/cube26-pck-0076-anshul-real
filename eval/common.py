@@ -56,6 +56,11 @@ class Box:
     def actual(self) -> dict[str, int]:
         return counts(self.actual_contents)
 
+    @property
+    def hidden(self) -> bool:
+        """An item was (partly) under another item or filler when photographed."""
+        return "hidden" in {w.strip().lower() for w in self.conditions.split(";")}
+
     def line_truth(self, sku: str) -> str:
         return "PASS" if self.actual.get(sku, 0) == self.expected[sku] else "FAIL"
 

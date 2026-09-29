@@ -41,7 +41,7 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 | **SEAL** | Every line present, right quantities, nothing wrong or extra | Green "Seal the box" |
 | **STOP_AND_FIX** | Something is missing, wrong or extra | Red "Stop and fix", plus exact fixes: "Replace Red Cap (#3) with Blue Cap", "Add 1 × Blue Towel", "Remove USB-C Cable (#4)" |
 | **UNCERTAIN** | The photos can't support a reliable answer (stacked items, a look-alike whose label isn't visible, part of the box cut off) | Amber "Check by hand", plus exactly what to check |
-| PENDING | The model didn't answer (timeout, quota) | Grey "Needs your decision"; photos and record are kept |
+| PENDING | The model didn't answer (timeout, quota) | Grey "Needs your decision"; photos and record are kept. "Retry AI check" runs it again later as a new, linked record |
 
 5. Every box gets an **evidence record**: the order, photos (with hashes), what was found, every check with its verdict and confidence, the decision and why, and a content hash. The operator can disagree; the override is appended with a reason code, and the agent's original answer is kept.
 6. Returns and Recovery can read records through a JSON API, limited to their own organisation.
