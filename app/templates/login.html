@@ -1,43 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Sign in · Pack Manager{% endblock %}
 {% block body %}
-<div class="login-page">
-  <aside class="login-art">
-    <a class="brand" href="/login"><span class="logo">{{ icon("package", 20) }}</span><span>Pack Manager</span></a>
-    <div>
-      <h1>Check every box before it's sealed.</h1>
-      <p class="lead">Take a photo of the open box. Get <b>Seal</b>, <b>Stop and fix</b> or <b>Check by hand</b> in seconds, with photo proof of what was sent.</p>
-    </div>
-    <ul class="points">
-      <li><span class="dot">{{ icon("scan", 18) }}</span>
-        <div><b>Catches the costly mistakes</b>Missing, wrong, look-alike and extra items, and wrong quantities.</div></li>
-      <li><span class="dot">{{ icon("circle-help", 18) }}</span>
-        <div><b>Says when it can't tell</b>Stacked or hidden items go to a hand check, not a guess.</div></li>
-      <li><span class="dot">{{ icon("shield-check", 18) }}</span>
-        <div><b>Keeps the proof</b>Every box gets a record with its photos, checks and a content hash.</div></li>
-    </ul>
-  </aside>
-
-  <div class="login-form">
-    <div class="login-card">
-      <h2>Sign in</h2>
-      <p class="muted" style="margin-top:6px">Use the access code for your packing station.</p>
-      {% if error %}<div class="callout error" style="margin-top:18px">{{ icon("triangle-alert") }}<div>{{ error }}</div></div>{% endif %}
-      <form method="post" action="/login" class="stack" style="margin-top:24px" data-busy>
-        <div>
-          <label class="field" for="code">Access code</label>
-          <input id="code" name="code" type="password" autocomplete="off" required autofocus>
-        </div>
-        <button class="btn full lg" type="submit">Sign in {{ icon("arrow-right", 18) }}</button>
-      </form>
-      {% if demo_codes %}
-      <div class="card" style="margin-top:28px;padding:18px">
-        <h3>Try the demo</h3>
-        <p class="muted small" style="margin-top:4px">Two demo companies. Neither can see the other's orders or photos.</p>
-        <div class="demo-codes">{% for c in demo_codes %}<button type="button" data-code="{{ c }}">{{ c }}</button>{% endfor %}</div>
+<main class="login">
+  <div class="login-card">
+    <div class="brand"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></div>
+    <h1>Check every box before it's sealed.</h1>
+    <p class="lead">Photograph the open box. You'll know whether to seal it, fix it, or check it by hand, and the photo is kept as proof of what was sent.</p>
+    {% if error %}<div class="callout error" style="margin-top:24px">{{ icon("triangle-alert") }}<div>{{ error }}</div></div>{% endif %}
+    <form method="post" action="/login" class="stack" style="margin-top:28px" data-busy>
+      <div>
+        <label class="field" for="code">Access code</label>
+        <input id="code" name="code" type="password" autocomplete="off" required autofocus>
       </div>
-      {% endif %}
+      <button class="btn full lg" type="submit">Sign in</button>
+    </form>
+    {% if demo_codes %}
+    <div class="demo">
+      <p><b>Trying the demo?</b> Pick a company. Neither can see the other's orders or photos.</p>
+      <div class="demo-codes">{% for c in demo_codes %}<button type="button" data-code="{{ c }}">{{ c }}</button>{% endfor %}</div>
     </div>
+    {% endif %}
   </div>
-</div>
+</main>
 {% endblock %}

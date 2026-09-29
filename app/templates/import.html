@@ -35,16 +35,16 @@
         <span class="muted small">Exported from your store, or made in Excel / Google Sheets</span>
         <input type="file" name="file" accept=".csv,text/csv" required>
       </label>
-      <button class="btn full lg" type="submit" style="margin-top:16px">{{ icon("upload", 18) }}Import</button>
+      <button class="btn full lg" type="submit" style="margin-top:16px">Import orders</button>
       <div class="busy"><span class="spinner"></span>Importing…</div>
     </form>
   </section>
 
   <section class="card">
-    <div class="card-head"><h2>{{ icon("file-text", 18) }}File format</h2></div>
+    <div class="card-head"><h2>File format</h2></div>
     <div class="card-body">
       <p class="small muted">One row per order. <b>order_id</b> and <b>order_lines</b> are required.</p>
-<pre class="mono" style="background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px;overflow-x:auto;margin:12px 0">order_id,order_lines,channel,unit_id
+<pre class="code">order_id,order_lines,channel,unit_id
 ORD-1001,CAP-BLUE:1;MUG-SET2:1,shopify,BOX-1001
 ORD-1002,CAP-RED:2,amazon_mfn,BOX-1002</pre>
       <p class="small muted"><b>order_lines</b> is <span class="mono">SKU:quantity</span>, separated by semicolons. A quantity counts sellable units: a boxed set of 2 mugs is 1.</p>

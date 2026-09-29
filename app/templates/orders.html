@@ -7,9 +7,8 @@
 
 <div class="page-head">
   <div>
-    <div class="eyebrow">{{ user.org_name }}</div>
-    <h1>Orders to pack</h1>
-    <p>Pick an order, take a photo of the open box, and get a verdict in seconds.</p>
+    <h1>Orders</h1>
+    <p>Pick an order, photograph the open box, and get a result before you seal it.</p>
   </div>
   <div class="head-actions">
     <form class="searchbox" method="get" action="/" role="search">
@@ -20,26 +19,21 @@
   </div>
 </div>
 
-<div class="stats">
-  <div class="card stat"><div class="ico">{{ icon("package", 20) }}</div>
-    <div><div class="n">{{ todo | length }}</div><div class="l">To check</div></div></div>
-  <a class="card stat seal" href="/records?decision=SEAL"><div class="ico">{{ icon("circle-check", 20) }}</div>
-    <div><div class="n">{{ counts.get("SEAL", 0) }}</div><div class="l">Sealed</div></div></a>
-  <a class="card stat stop" href="/records?decision=STOP_AND_FIX"><div class="ico">{{ icon("octagon-x", 20) }}</div>
-    <div><div class="n">{{ counts.get("STOP_AND_FIX", 0) }}</div><div class="l"><span class="hide-sm">Stopped to fix</span><span class="show-sm">Stopped</span></div></div></a>
-  <a class="card stat unsure" href="/records?decision=UNCERTAIN"><div class="ico">{{ icon("circle-help", 20) }}</div>
-    <div><div class="n">{{ counts.get("UNCERTAIN", 0) }}</div>
-      <div class="l"><span class="hide-sm">Check by hand{% if counts.get("PENDING") %} · {{ counts.PENDING }} pending{% endif %}</span><span class="show-sm">By hand</span></div></div></a>
+<div class="summary">
+  <div class="cell"><span class="n">{{ todo | length }}</span><span class="l">To check</span></div>
+  <a class="cell seal" href="/records?decision=SEAL"><span class="n">{{ counts.get("SEAL", 0) }}</span><span class="l"><span class="dot"></span>Sealed</span></a>
+  <a class="cell stop" href="/records?decision=STOP_AND_FIX"><span class="n">{{ counts.get("STOP_AND_FIX", 0) }}</span><span class="l"><span class="dot"></span><span class="hide-sm">Stopped to fix</span><span class="show-sm">Stopped</span></span></a>
+  <a class="cell unsure" href="/records?decision=UNCERTAIN"><span class="n">{{ counts.get("UNCERTAIN", 0) }}</span><span class="l"><span class="dot"></span><span class="hide-sm">Check by hand{% if counts.get("PENDING") %} · {{ counts.PENDING }} waiting{% endif %}</span><span class="show-sm">By hand</span></span></a>
 </div>
 
 {% macro order_row(row) %}
   {% set o = row.order %}
-  <div class="card item">
+  <div class="item">
     <div class="tiles">{% for line in o.lines[:3] %}{{ m.tile(line.sku, catalogue.title(line.sku), thumbs) }}{% endfor %}</div>
     <div class="grow">
       <div class="title">
         <a class="stretch" style="color:inherit" href="{{ '/records/' ~ row.record_id if row.decision else '/orders/' ~ o.order_id }}">{{ o.order_id }}</a>
-        {% if o.channel %}<span class="badge plain sm hide-sm">{{ o.channel }}</span>{% endif %}
+        {% if o.channel %}<span class="chan hide-sm">{{ o.channel }}</span>{% endif %}
       </div>
       <div class="sub">
         {%- for line in o.lines %}{{ line.qty }} × {{ catalogue.title(line.sku) }}{% if not loop.last %} · {% endif %}{% endfor -%}
@@ -49,9 +43,9 @@
     <div class="end">
       {% if row.decision %}
         {{ m.badge(row.decision) }}
-        <a class="btn secondary above" href="/orders/{{ o.order_id }}">{{ icon("refresh", 16) }}Check again</a>
+        <a class="btn secondary sm above" href="/orders/{{ o.order_id }}">Check again</a>
       {% else %}
-        <span class="btn soft">{{ icon("camera", 17) }}Check box</span>
+        <span class="btn secondary sm cta">{{ icon("camera", 16) }}Check box</span>
       {% endif %}
     </div>
     <span class="go">{{ icon("chevron-right", 20) }}</span>

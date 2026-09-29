@@ -11,10 +11,9 @@
 <a class="back" href="/orders/{{ order_id }}">{{ icon("arrow-left", 16) }}{{ order_id }}</a>
 
 <section class="verdict {{ tone }}">
-  <span class="big">{{ icon(DECISION_ICON[decision], 30) }}</span>
   <div class="grow">
-    <div class="kicker">{{ "Decided by hand" if r.overrides else ("Waiting for you" if decision == "PENDING" else "Result") }}</div>
-    <h1>{{ label }}</h1>
+    {% if r.overrides %}<div class="kicker">Decided by hand</div>{% endif %}
+    <h1>{{ icon(DECISION_ICON[decision], 28) }}{{ label }}</h1>
     {% if r.overrides %}
       {% set last = r.overrides[-1] %}
       <p>Decided by {{ last.operator_label }} ({{ reasons.get(last.reason_code, last.reason_code) }}{% if last.note %}: "{{ last.note }}"{% endif %}). The agent's result was <strong>{{ DECISION_UI[agent_decision.value][0] }}</strong>.</p>
@@ -27,23 +26,18 @@
       <p>{{ r.outcome.reasons[0] }}</p>
     {% endif %}
     <div class="meta">
-      <span class="hide-sm">{{ icon("package", 15) }}{{ order_id }}</span>
-      <span>{{ icon("clock", 15) }}{{ r.captured_at | when }}</span>
-      <span>{{ icon("user", 15) }}{{ r.operator_label }}</span>
+      <span>{{ r.captured_at | when }}</span>
+      <span>{{ r.operator_label }}</span>
+      {% if decision != "PENDING" and not r.overrides %}
+      <span class="score"><b class="PASS">{{ tally.PASS }}</b> checks passed{% if tally.FAIL %}, <b class="FAIL">{{ tally.FAIL }}</b> failed{% endif %}{% if tally.UNCERTAIN %}, <b class="UNCERTAIN">{{ tally.UNCERTAIN }}</b> unclear{% endif %}</span>
+      {% endif %}
     </div>
-    {% if decision != "PENDING" and not r.overrides %}
-    <div class="score">
-      <span class="badge PASS sm">{{ icon("check", 13) }}{{ tally.PASS }} checks passed</span>
-      {% if tally.FAIL %}<span class="badge FAIL sm">{{ icon("x", 13) }}{{ tally.FAIL }} failed</span>{% endif %}
-      {% if tally.UNCERTAIN %}<span class="badge UNCERTAIN sm">{{ icon("circle-help", 13) }}{{ tally.UNCERTAIN }} unclear</span>{% endif %}
-    </div>
-    {% endif %}
   </div>
 </section>
 
 {% if r.outcome.fix_instructions and not r.overrides %}
 <section class="card" style="margin-bottom:var(--gap)">
-  <div class="card-head"><h2>{{ icon("clipboard-list", 18) }}What to do</h2></div>
+  <div class="card-head"><h2>What to do</h2></div>
   <ol class="todo {{ tone }}">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
 </section>
 {% endif %}
@@ -51,19 +45,19 @@
 {% set u = obs.get("uncertainty") %}
 {% if u %}
 <section class="card" style="margin-bottom:var(--gap)">
-  <div class="card-head"><h2>{{ icon("circle-help", 18) }}Why it can't be sure</h2></div>
+  <div class="card-head"><h2>Why it can't be sure</h2></div>
   <div class="card-body">
     <div class="why" style="margin-top:0">
       <div>
-        <h3>{{ icon("circle-help", 16) }}Can't tell yet</h3>
+        <h3>Can't tell yet</h3>
         <ul>{% for x in u.unknown %}<li>{{ x }}</li>{% endfor %}</ul>
       </div>
       <div>
-        <h3>{{ icon("camera", 16) }}What would settle it</h3>
+        <h3>What would settle it</h3>
         <ul>{% for x in u.missing_evidence %}<li>{{ x }}</li>{% endfor %}</ul>
       </div>
       <div>
-        <h3>{{ icon("check", 16) }}Already known</h3>
+        <h3>Already known</h3>
         <ul class="muted">{% for x in u.known %}<li>{{ x }}</li>{% endfor %}</ul>
       </div>
     </div>
@@ -81,7 +75,7 @@
 
 <div class="grid two">
   <section class="card">
-    <div class="card-head"><h2>{{ icon("clipboard-list", 18) }}Order vs box</h2></div>
+    <div class="card-head"><h2>Order vs box</h2></div>
     {% if obs.get("expected_vs_observed") %}
       <ul class="checklist">
         {% for row in obs.expected_vs_observed %}
@@ -90,7 +84,7 @@
             {{ m.tile(row.sku, row.title, thumbs, "sm") }}
             <div class="grow"><div class="nm">{{ row.title }}</div><div class="muted small">{{ row.sku }}</div></div>
             <div class="tally"><b>{{ row.found }}</b>{% if row.unclear %}<span class="muted small"> +{{ row.unclear }}?</span>{% endif %}<span>of {{ row.ordered }} found</span></div>
-            <span class="badge {{ v }} sm">{{ icon(VERDICT_ICON[v], 13) }}{{ {"PASS": "OK", "FAIL": "Problem", "UNCERTAIN": "Unclear"}[v] }}</span>
+            <span class="badge {{ v }} sm"><span class="dot"></span>{{ {"PASS": "OK", "FAIL": "Problem", "UNCERTAIN": "Unclear"}[v] }}</span>
           </li>
         {% endfor %}
       </ul>
@@ -116,7 +110,7 @@
     {% endif %}
   </section>
   <section class="card">
-    <div class="card-head"><h2>{{ icon("image", 18) }}What the camera saw</h2></div>
+    <div class="card-head"><h2>What the camera saw</h2></div>
     <div class="card-body">
       {% for img in r.images %}
         {% set pic = loop.index %}
@@ -151,7 +145,7 @@
 
 {% if not needs_human %}
 <details class="fold" style="margin-top:var(--gap)">
-  <summary>{{ icon("refresh", 18) }}Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
+  <summary>Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
   <div class="inner">
     <p class="muted small">Record what you decided by hand. The agent's result stays on the record next to yours.</p>
     {% include "_decide_form.html" %}
@@ -161,7 +155,7 @@
 
 <details class="fold" style="margin-top:12px">
   <summary>
-    {{ icon("shield-check", 18) }}Evidence details
+    Evidence details
     {% if hash_ok %}<span class="badge PASS sm">{{ icon("check", 13) }}hash matches record</span>{% else %}<span class="badge FAIL sm">{{ icon("x", 13) }}hash does not match</span>{% endif %}
     {{ icon("chevron-down", 18, "chev") }}
   </summary>
@@ -191,8 +185,8 @@
       {% endfor %}
       <dt>Content hash</dt><dd><span class="mono">{{ r.content_hash }}</span></dd>
       <dt>Raw record</dt><dd style="display:flex;gap:8px;flex-wrap:wrap">
-        <a class="btn secondary" href="/api/records/{{ r.record_id }}" style="padding:6px 12px">{{ icon("braces", 15) }}View JSON</a>
-        <a class="btn secondary" href="/api/records/{{ r.record_id }}?download=1" download style="padding:6px 12px">{{ icon("upload", 15, "flip") }}Download record</a></dd>
+        <a class="btn secondary sm" href="/api/records/{{ r.record_id }}">View JSON</a>
+        <a class="btn secondary sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a></dd>
     </dl>
 
     {% if r.overrides %}

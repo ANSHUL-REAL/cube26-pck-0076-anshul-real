@@ -1,12 +1,11 @@
 {# Small shared pieces. Import with: {% import "_macros.html" as m %} #}
 
+{# A product photo, shown only when the catalogue has one. #}
 {% macro tile(sku, title, thumbs, size="") -%}
-<div class="tile {{ size }}" style="--h: {{ sku | hue }}" title="{{ title }}">
-  {%- if sku in thumbs %}<img src="/catalogue/{{ sku }}/thumb" alt="" loading="lazy">{% else %}{{ title | initials }}{% endif -%}
-</div>
+{%- if sku in thumbs %}<div class="tile {{ size }}" title="{{ title }}"><img src="/catalogue/{{ sku }}/thumb" alt="" loading="lazy"></div>{% endif -%}
 {%- endmacro %}
 
 {% macro badge(decision, sm=false) -%}
 {% set label, tone = DECISION_UI[decision] %}
-<span class="badge {{ tone }}{{ ' sm' if sm }}">{{ icon(DECISION_ICON[decision], 14) }}{{ label }}</span>
+<span class="badge {{ tone }}{{ ' sm' if sm }}"><span class="dot"></span>{{ label }}</span>
 {%- endmacro %}

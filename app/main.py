@@ -58,24 +58,12 @@ DECISION_BLURB = {
 VERDICT_ICON = {"PASS": "check", "FAIL": "x", "UNCERTAIN": "circle-help", "NOT_CHECKED": "minus"}
 
 
-def _initials(text: str | None) -> str:
-    words = [w for w in (text or "").replace("-", " ").split() if w[:1].isalnum()]
-    return "".join(w[0] for w in words[:2]).upper() or "?"
-
-
-def _hue(text: str | None) -> int:
-    """A stable colour per SKU or name, for the letter tiles."""
-    return sum((i + 1) * ord(c) for i, c in enumerate(text or "")) * 47 % 360
-
-
 # Changes whenever the CSS or JS changes, so phones don't keep an old copy after a deploy.
 ASSET_VERSION = str(max(int((BASE / "static" / name).stat().st_mtime) for name in ("app.css", "app.js")))
 templates.env.globals.update(DECISION_UI=DECISION_UI, DECISION_ICON=DECISION_ICON,
                              DECISION_BLURB=DECISION_BLURB, VERDICT_ICON=VERDICT_ICON, icon=icon,
                              ASSET_VERSION=ASSET_VERSION)
 templates.env.filters["when"] = lambda dt: dt.strftime("%d %b, %H:%M UTC") if dt else ""
-templates.env.filters["initials"] = _initials
-templates.env.filters["hue"] = _hue
 
 
 # ------------------------------------------------------------------ dependencies

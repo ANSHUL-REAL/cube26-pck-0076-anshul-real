@@ -6,11 +6,10 @@
 
 <div class="page-head">
   <div>
-    <h1>{{ order.order_id }}</h1>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-      {% if order.channel %}<span class="badge plain sm">{{ icon("tag", 13) }}{{ order.channel }}</span>{% endif %}
-      {% if order.unit_id %}<span class="badge plain sm">{{ icon("hash", 13) }}{{ order.unit_id }}</span>{% endif %}
-    </div>
+    <h1 class="id">{{ order.order_id }}</h1>
+    {% if order.channel or order.unit_id %}
+    <p class="facts">{% if order.channel %}<span>{{ order.channel }}</span>{% endif %}{% if order.unit_id %}<span>Box <span class="mono">{{ order.unit_id }}</span></span>{% endif %}</p>
+    {% endif %}
   </div>
   <div class="steps" aria-label="Progress">
     <span class="step done"><span class="num">{{ icon("check", 13) }}</span>Order</span><span class="sep"></span>
@@ -22,7 +21,7 @@
 <div class="grid side">
   <section class="card">
     <div class="card-head">
-      <h2>{{ icon("package", 18) }}Should be in the box</h2>
+      <h2>Should be in the box</h2>
       <span class="count">{{ lines | sum(attribute="qty") }} item{{ "s" if lines | sum(attribute="qty") != 1 }}</span>
     </div>
     <ul class="lines">
@@ -33,7 +32,7 @@
           <div>{{ line.title }}</div>
           <div class="muted small">{{ line.sku }}{% for k, v in line.attributes.items() %} · {{ v }}{% endfor %}</div>
         </div>
-        <div class="qty"><span class="muted" style="font-weight:600;font-size:13px">×</span>{{ line.qty }}</div>
+        <div class="qty"><span>×</span>{{ line.qty }}</div>
       </li>
       {% endfor %}
     </ul>
@@ -85,7 +84,7 @@
 
 {% if history %}
 <section class="card" style="margin-top:var(--gap)">
-  <div class="card-head"><h2>{{ icon("clock", 18) }}Earlier checks of this order</h2></div>
+  <div class="card-head"><h2>Earlier checks of this order</h2></div>
   <ul class="history">
     {% for h in history %}
     <li>
