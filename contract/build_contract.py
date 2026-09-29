@@ -1,16 +1,19 @@
 """Regenerate the published contract: the JSON Schema and the example records.
 
     python contract/build_contract.py
+    python contract/build_contract.py --from-run test-v1   # real records from an eval run
 
 The schema comes straight from the pydantic model the agent writes (pack_manager.models.
 EvidenceRecord), so it can't drift from the code; tests/test_contract.py checks that.
 The examples are produced by the real pipeline (quality gate, decision engine, hashing,
 override) with a scripted perception instead of the vision model, on a synthetic photo.
-They show the record's shape, not real model output.
+They show the record's shape, not real model output. After the held-out run, --from-run replaces
+each of them with a real record of the same outcome from that run (the hash is checked first).
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import datetime, timezone
@@ -24,7 +27,7 @@ sys.path.insert(0, str(ROOT))
 
 from pack_manager.catalogue import load_catalogue  # noqa: E402
 from pack_manager.config import Settings  # noqa: E402
-from pack_manager.evidence import apply_override  # noqa: E402
+from pack_manager.evidence import apply_override, verify  # noqa: E402
 from pack_manager.models import (  # noqa: E402
     Decision,
     DetectedObject,
@@ -158,6 +161,30 @@ def main() -> None:
     print(f"Wrote {SCHEMA_PATH.name} and {len(records)} examples.")
 
 
+def from_run(run: str) -> None:
+    """Swap the scripted examples for real records from an eval run, one per outcome."""
+    found: dict[str, EvidenceRecord] = {}
+    for path in sorted((ROOT / "eval" / "results" / run / "records").glob("*.json")):
+        record = EvidenceRecord.model_validate_json(path.read_text(encoding="utf-8"))
+        if not verify(record):
+            raise SystemExit(f"{path.name}: content hash doesn't match; not using it.")
+        found.setdefault(record.outcome.decision.value, record)
+    for decision, name in [("SEAL", "seal"), ("STOP_AND_FIX", "stop_and_fix"),
+                           ("UNCERTAIN", "uncertain"), ("PENDING", "pending")]:
+        record = found.get(decision)
+        if record is None:
+            print(f"{name:13} no {decision} record in run {run}; kept the scripted example")
+            continue
+        (HERE / "examples" / f"{name}.json").write_text(record.model_dump_json(indent=2) + "\n", encoding="utf-8")
+        print(f"{name:13} real record {record.record_id} ({record.subject.get('order_id')})")
+    print("overridden    kept the scripted example (eval runs have no hand decisions)")
+
+
 if __name__ == "__main__":
     (HERE / "examples").mkdir(exist_ok=True)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--from-run", help="use real records from eval/results/<run>/records")
+    args = ap.parse_args()
     main()
+    if args.from_run:
+        from_run(args.from_run)

@@ -12,7 +12,7 @@ One record per outbound box, written when the box is checked before sealing. Fie
 | [`examples/pending.json`](examples/pending.json) | The vision model timed out; photos and record are still saved |
 | [`build_contract.py`](build_contract.py) | Regenerates all of the above |
 
-The examples come from the real pipeline (quality gate → decision rules → hash → override) with a scripted perception step and a synthetic photo, so they show the shape, not real model output.
+The examples come from the real pipeline (quality gate → decision rules → hash → override) with a scripted perception step and a synthetic photo, so they show the shape, not real model output. After the held-out eval, `python contract/build_contract.py --from-run test-v1` replaces the seal, stop, uncertain and pending examples with real records from that run.
 
 ## Fields
 

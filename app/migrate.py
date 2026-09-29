@@ -2,6 +2,7 @@
 
     python -m app.migrate            # schema + role + seed
     python -m app.migrate --no-seed  # schema + role only
+    python -m app.migrate --no-sample-orders  # live demo: only real orders (orders.json or CSV import)
 """
 
 from __future__ import annotations
@@ -55,7 +56,7 @@ def _as_org(cur, org_id: str) -> None:
     cur.execute("select set_config('app.org_id', %s, true)", (org_id,))
 
 
-def seed(admin_url: str) -> dict[str, int]:
+def seed(admin_url: str, sample_orders: bool = True) -> dict[str, int]:
     """Organisations, demo access codes, the organisers' sample orders, and any orders in
     catalogue/<org>/orders.json. Rows are written with app.org_id set, so the same
     policies that guard the app also check the seed."""
@@ -77,7 +78,7 @@ def seed(admin_url: str) -> dict[str, int]:
             )
 
         with open(ROOT / "data" / "pack_sample.csv", newline="", encoding="utf-8") as f:
-            for r in csv.DictReader(f):
+            for r in csv.DictReader(f) if sample_orders else []:
                 _as_org(cur, r["org_id"])
                 upsert_order(cur, Order(
                     order_id=r["order_id"], organization_id=r["org_id"], unit_id=r["unit_id"],
@@ -99,6 +100,8 @@ def seed(admin_url: str) -> dict[str, int]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-seed", action="store_true")
+    parser.add_argument("--no-sample-orders", action="store_true",
+                        help="Don't load the organisers' dummy orders; use real orders only.")
     args = parser.parse_args()
     settings = get_settings()
     if not settings.database_admin_url:
@@ -106,7 +109,7 @@ def main() -> None:
     migrate(settings.database_admin_url, settings.pack_app_db_password)
     print("Schema, policies and pack_app role are in place.")
     if not args.no_seed:
-        print("Seeded orders per organisation:", seed(settings.database_admin_url))
+        print("Seeded orders per organisation:", seed(settings.database_admin_url, not args.no_sample_orders))
 
 
 if __name__ == "__main__":
