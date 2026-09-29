@@ -36,6 +36,7 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 | `pack_manager/vision/oracle.py` | A perceiver that reports known contents (tests and sample replay) |
 | `pack_manager/decision.py` | The rules. No I/O, no model: perception + order in, checks + decision out |
 | `pack_manager/evidence.py` | Canonical JSON, content hash, verify, operator override |
+| `pack_manager/orders.py` | Parses an orders CSV; the organisation always comes from the session, never the file |
 | `pack_manager/pipeline.py` | `verify_box()`: glues the above together, fail-open on model errors |
 | `app/` | FastAPI + Jinja2 web app, JSON API, Postgres access (`db.py`, `store.py`), migrations runner |
 | `db/migrations/001_init.sql` | Tables, row-level security, the access-code lookup function |
@@ -136,7 +137,7 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 
 ## Not built (on purpose)
 
-- Live channel integrations (Shopify, Amazon SP-API): orders are imported as JSON/CSV behind the `orders` table.
+- Live channel integrations (Shopify, Amazon SP-API): orders are imported as CSV (the Import page) or JSON behind the `orders` table.
 - Barcode reading, carton weight and dimensions, and checking inside sealed retail packaging (a protein tub's scoop).
 - A hash chain or external anchoring of records.
 - Real user accounts: each organisation has access codes, one per operator label.

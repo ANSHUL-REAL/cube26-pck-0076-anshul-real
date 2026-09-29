@@ -11,7 +11,8 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
   - a **download** of the exact hashed record;
   - **CI** that runs the isolation tests against a real Postgres;
   - a check that **both labellers finished before the agent ran**;
-  - the template documents in this folder.
+  - the template documents in this folder;
+  - an **orders CSV import** page. Any organisation column in the file is ignored; orders always go to the signed-in organisation.
 - The review also confirmed a few design choices. Several builds let the model decide, give it the order quantities, or treat "unsure" as "stop". This build does none of those.
 - **UI redesign.** The first version worked but looked plain, and the phone layout was cramped. The new layout has stat cards, product tiles, a verdict banner with numbered fixes, and numbered boxes on the photo that match a found-items list. On phones there's a bottom tab bar, tappable rows, and a list instead of tables.
 - **Photo-day tooling.** `eval/import_photos.py` groups phone photos into manifest boxes by capture time and writes a contact sheet to check the grouping. `catalogue/build_catalogue.py` turns a spreadsheet plus one folder per SKU into `catalogue.json`.

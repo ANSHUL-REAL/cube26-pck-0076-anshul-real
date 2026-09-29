@@ -90,6 +90,7 @@ main.wrap { padding-top: 28px; padding-bottom: 64px; }
 .card-body { padding: 18px 22px; }
 .stack > * + * { margin-top: var(--gap); }
 .grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; align-items: start; }
+.grid > * { min-width: 0; }
 @media (min-width: 900px) { .grid.side { grid-template-columns: 5fr 7fr; } }
 @media (min-width: 1040px) { .grid.two { grid-template-columns: 1fr 1fr; } }
 .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -201,7 +202,8 @@ form.working .busy { display: flex; }
 }
 
 /* ------------------------------------------------------------ orders */
-.searchbox { position: relative; width: 100%; max-width: 360px; }
+.head-actions { display: flex; gap: 10px; align-items: center; width: 100%; max-width: 460px; }
+.searchbox { position: relative; width: 100%; max-width: 360px; flex: 1; }
 .searchbox .i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #98a2b3; pointer-events: none; }
 .searchbox input { padding-left: 40px; }
 .stats { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); margin-bottom: 32px; }
@@ -429,7 +431,7 @@ dl.meta dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
   h1 { font-size: 24px; }
   .page-head { margin-bottom: 16px; gap: 12px; }
   .page-head p, .eyebrow { display: none; }
-  .searchbox { max-width: none; }
+  .searchbox, .head-actions { max-width: none; }
   .back { margin-bottom: 10px; }
   .card { border-radius: 14px; }
   .card-pad { padding: 16px; }

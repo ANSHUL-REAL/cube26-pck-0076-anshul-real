@@ -2,6 +2,12 @@
 
 function showPreviews(input) {
   const form = input.closest("form");
+  if (!input.dataset.previews) {
+    // A plain file (the orders CSV): just show its name.
+    const label = form.querySelector("[data-count]");
+    if (label && input.files.length) label.textContent = input.files[0].name;
+    return;
+  }
   const box = document.getElementById(input.dataset.previews);
   const max = Number(input.dataset.max || 3);
   const files = Array.from(input.files).slice(0, max);
@@ -22,7 +28,7 @@ function showPreviews(input) {
 }
 
 document.addEventListener("change", (e) => {
-  const input = e.target.closest("input[type=file][data-previews]");
+  const input = e.target.closest("input[type=file]");
   if (input) showPreviews(input);
 });
 

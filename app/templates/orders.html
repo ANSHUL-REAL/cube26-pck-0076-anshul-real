@@ -11,10 +11,13 @@
     <h1>Orders to pack</h1>
     <p>Pick an order, take a photo of the open box, and get a verdict in seconds.</p>
   </div>
-  <form class="searchbox" method="get" action="/" role="search">
-    {{ icon("search", 18) }}
-    <input type="search" name="q" value="{{ q }}" placeholder="Search order, unit or SKU" aria-label="Search orders">
-  </form>
+  <div class="head-actions">
+    <form class="searchbox" method="get" action="/" role="search">
+      {{ icon("search", 18) }}
+      <input type="search" name="q" value="{{ q }}" placeholder="Search order, unit or SKU" aria-label="Search orders">
+    </form>
+    <a class="btn secondary" href="/orders/import" title="Import orders">{{ icon("upload", 17) }}<span class="hide-sm">Import</span></a>
+  </div>
 </div>
 
 <div class="stats">

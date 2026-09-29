@@ -32,6 +32,9 @@ class FakeStore:
     def get_order(self, cur, order_id):
         return self.orders.get((cur, order_id))
 
+    def upsert_order(self, cur, order, source="demo"):
+        self.orders[(cur, order.order_id)] = order
+
     def list_records(self, cur, decision=None, order_id=None, unit_id=None, limit=200):
         return [
             {"record_id": r.record_id, "order_id": r.subject["order_id"], "decision": r.outcome.decision.value,
@@ -87,7 +90,7 @@ def client(monkeypatch, catalogue):
 
     fake = FakeStore()
     for name in ["resolve_code", "org_name", "list_orders", "get_order", "list_records", "counts_by_decision",
-                 "save_record", "update_record", "get_record", "get_image", "find_image_uses", "count_records_since"]:
+                 "save_record", "update_record", "get_record", "get_image", "find_image_uses", "count_records_since", "upsert_order"]:
         monkeypatch.setattr(main.store, name, getattr(fake, name))
     monkeypatch.setattr(main, "db", lambda: FakeDb())
     monkeypatch.setattr(main, "org_catalogue", lambda org: (catalogue, None))
@@ -208,3 +211,39 @@ def test_daily_limit_fails_open_to_pending(client, sharp_photo, monkeypatch):
     rec = client.fake.records[url.rsplit("/", 1)[1]]
     assert rec.outcome.decision == Decision.PENDING
     assert "1 AI checks. Check this box by hand." in client.get(url).text
+
+
+def upload_csv(client, rows):
+    data = "\n".join(rows).encode()
+    return client.post("/orders/import", files={"file": ("orders.csv", data, "text/csv")}).text
+
+
+def test_orders_csv_import(client):
+    client.post("/login", data={"code": "alpha-demo"})
+    assert "File format" in client.get("/orders/import").text
+    add_order(client.fake, ("CAP-BLU", 1), order_id="ORD-7")
+    html = upload_csv(client, [
+        "order_id,order_lines,channel,organization_id",
+        "ORD-7,CAP-RED:2,shopify,org_demo_bravo",  # updates ORD-7; the org column is ignored
+        "ORD-8,LAMP:1;CABLE:1,,",
+        "ORD-9,not a line,,",
+        ",CAP-RED:1,,",
+        "ORD-8,CAP-RED:1,,",
+        "ORD-10,MYSTERY-SKU:1,,",
+    ])
+    assert "3 orders imported" in html and "1 already existed" in html
+    assert "Row 4: order_lines must look like" in html and "Row 5: no order_id." in html
+    assert "ORD-8 appears twice" in html and "MYSTERY-SKU" in html
+    orders = client.fake.orders
+    assert ("org_demo_bravo", "ORD-7") not in orders
+    assert orders[("org_demo_alpha", "ORD-7")].lines[0].sku == "CAP-RED"
+    assert orders[("org_demo_alpha", "ORD-7")].organization_id == "org_demo_alpha"
+    assert ("org_demo_alpha", "ORD-9") not in orders
+
+
+def test_orders_csv_import_rejects_bad_files(client):
+    client.post("/login", data={"code": "alpha-demo"})
+    assert "needs the columns order_id and order_lines" in upload_csv(client, ["id,items", "1,2"])
+    bad = client.post("/orders/import", files={"file": ("x.csv", bytes([0xff, 0xfe, 0x00]), "text/csv")})
+    assert "Save the file as CSV (UTF-8)" in bad.text
+

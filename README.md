@@ -31,7 +31,7 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 
 ## What it does
 
-1. The operator signs in, picks the order and takes 1–3 photos of the open box.
+1. The day's orders are imported from a CSV (`order_id`, `order_lines` like `SKU-A:2;SKU-B:1`). The operator signs in, picks the order and takes 1–3 photos of the open box.
 2. A local photo check rejects blurry, dark or glare-heavy photos immediately ("Retake: photo looks blurry"), before any model call.
 3. **One** vision-model call lists every object in the box, with a bounding box. The model is not told the order or the quantities.
 4. Deterministic rules compare that list with the order, check by check, and decide:

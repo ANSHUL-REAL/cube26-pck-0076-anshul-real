@@ -23,6 +23,7 @@ from pack_manager.catalogue import load_org_catalogue, reference_images
 from pack_manager.config import get_settings
 from pack_manager.evidence import apply_override, verify
 from pack_manager.models import OVERRIDE_REASONS, Catalogue, Decision, EvidenceRecord
+from pack_manager.orders import parse_orders_csv
 from pack_manager.pipeline import Photo, QualityRejected, prepare_photos, verify_box
 from pack_manager.quality import ImageDecodeError, PreparedImage
 from pack_manager.vision.base import PerceptionError
@@ -67,8 +68,11 @@ def _hue(text: str | None) -> int:
     return sum((i + 1) * ord(c) for i, c in enumerate(text or "")) * 47 % 360
 
 
+# Changes whenever the CSS or JS changes, so phones don't keep an old copy after a deploy.
+ASSET_VERSION = str(max(int((BASE / "static" / name).stat().st_mtime) for name in ("app.css", "app.js")))
 templates.env.globals.update(DECISION_UI=DECISION_UI, DECISION_ICON=DECISION_ICON,
-                             DECISION_BLURB=DECISION_BLURB, VERDICT_ICON=VERDICT_ICON, icon=icon)
+                             DECISION_BLURB=DECISION_BLURB, VERDICT_ICON=VERDICT_ICON, icon=icon,
+                             ASSET_VERSION=ASSET_VERSION)
 templates.env.filters["when"] = lambda dt: dt.strftime("%d %b, %H:%M UTC") if dt else ""
 templates.env.filters["initials"] = _initials
 templates.env.filters["hue"] = _hue
@@ -205,6 +209,30 @@ def orders(request: Request, q: str | None = None):
     catalogue, _ = org_catalogue(user["org"])
     return page(request, "orders.html", rows=rows, counts=counts, q=q or "", catalogue=catalogue,
                 thumbs=_thumbs(catalogue))
+
+
+@app.get("/orders/import", response_class=HTMLResponse)
+def import_form(request: Request):
+    current_user(request)
+    return page(request, "import.html")
+
+
+@app.post("/orders/import", response_class=HTMLResponse)
+async def import_submit(request: Request, file: UploadFile = File(...)):
+    user = current_user(request)
+    data = await file.read(2_000_000)
+    try:
+        text = data.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        return page(request, "import.html", error="Save the file as CSV (UTF-8) and try again.")
+    catalogue, _ = org_catalogue(user["org"])
+    result = parse_orders_csv(text, user["org"], catalogue)
+    updated = 0
+    with db().org(user["org"]) as cur:
+        for order in result.orders:
+            updated += store.get_order(cur, order.order_id) is not None
+            store.upsert_order(cur, order, source="csv_import")
+    return page(request, "import.html", result=result, updated=updated)
 
 
 def _thumbs(catalogue: Catalogue) -> set[str]:
