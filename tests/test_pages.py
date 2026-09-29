@@ -26,8 +26,26 @@ class FakeStore:
     def org_name(self, cur, org):
         return org
 
-    def list_orders(self, cur, q=None, limit=200):
-        return [{"order": o, "record_id": None, "decision": None} for (org, _), o in self.orders.items() if org == cur]
+    VIEWS = {"todo": lambda d: d in (None, "PENDING", "UNCERTAIN"), "done": lambda d: d in ("SEAL", "STOP_AND_FIX"),
+             "all": lambda d: True}
+
+    def _orders_with_latest(self, cur, q):
+        rows = []
+        for (org, order_id), o in self.orders.items():
+            if org != cur or (q and q.lower() not in order_id.lower()):
+                continue
+            recs = [r for r in self.records.values() if r.organization_id == cur and r.subject["order_id"] == order_id]
+            last = max(recs, key=lambda r: r.captured_at, default=None)
+            rows.append({"order": o, "record_id": last and last.record_id,
+                         "decision": last and last.outcome.decision.value})
+        return rows
+
+    def list_orders(self, cur, q=None, view="all", limit=200):
+        return [r for r in self._orders_with_latest(cur, q) if self.VIEWS[view](r["decision"])][:limit]
+
+    def order_counts(self, cur, q=None):
+        rows = self._orders_with_latest(cur, q)
+        return {view: sum(1 for r in rows if keep(r["decision"])) for view, keep in self.VIEWS.items()}
 
     def get_order(self, cur, order_id):
         return self.orders.get((cur, order_id))
@@ -35,11 +53,15 @@ class FakeStore:
     def upsert_order(self, cur, order, source="demo"):
         self.orders[(cur, order.order_id)] = order
 
+    def _retried(self, r):
+        """A pending record that was checked again (store._RETRIED)."""
+        return r.outcome.decision.value == "PENDING" and self.find_retry(r.organization_id, r.record_id) is not None
+
     def list_records(self, cur, decision=None, order_id=None, unit_id=None, limit=200, query=None, since=None):
-        return [
+        rows = [
             {"record_id": r.record_id, "order_id": r.subject["order_id"], "decision": r.outcome.decision.value,
              "status": r.status.value, "captured_at": r.captured_at, "operator_label": r.operator_label,
-             "overrides": len(r.overrides)}
+             "overrides": len(r.overrides), "retried": self._retried(r)}
             for r in self.records.values()
             if r.organization_id == cur
             and (order_id is None or r.subject["order_id"] == order_id)
@@ -48,12 +70,31 @@ class FakeStore:
             and (query is None or query.lower() in (r.subject["order_id"] + r.record_id).lower())
             and (since is None or r.captured_at >= since)
         ]
+        if decision == "PENDING":
+            rows = [row for row in rows if not row["retried"]]
+        rows.sort(key=lambda row: (row["captured_at"], row["record_id"]), reverse=since is None)  # like the SQL
+        return rows[:limit]
+
+    def find_retry(self, cur, record_id, lock=False):
+        found = sorted((r.captured_at, r.record_id) for r in self.records.values()
+                       if r.organization_id == cur and (r.observations or {}).get("retry_of") == record_id)
+        return found[0][1] if found else None
 
     def counts_by_decision(self, cur):
-        return {}
+        counts = {}
+        for r in self.records.values():
+            if r.organization_id == cur:
+                key = "RETRIED" if self._retried(r) else r.outcome.decision.value
+                counts[key] = counts.get(key, 0) + 1
+        return counts
 
-    def count_records_since(self, cur, since):
-        return sum(1 for r in self.records.values() if r.organization_id == cur and r.captured_at >= since)
+    def count_ai_checks_since(self, cur, since):
+        """Boxes the model answered for (store.count_ai_checks_since)."""
+        def answered(r):
+            first = r.overrides[0].original_decision if r.overrides else r.outcome.decision
+            return first.value != "PENDING" and not (r.observations or {}).get("cached_response")
+        return sum(1 for r in self.records.values()
+                   if r.organization_id == cur and r.captured_at >= since and answered(r))
 
     def save_record(self, cur, record, photos):
         self.records[record.record_id] = record
@@ -64,8 +105,12 @@ class FakeStore:
         return [{"sha256": sha, "record_id": rid, "order_id": self.records[rid].subject["order_id"]}
                 for org, _, _, sha, rid in self.images.values() if org == cur and sha in sha256s]
 
-    def update_record(self, cur, record):
+    def update_record(self, cur, record, prior_hash):
+        current = self.records.get(record.record_id)
+        if not current or current.organization_id != cur or current.content_hash != prior_hash:
+            return False
         self.records[record.record_id] = record
+        return True
 
     def get_record(self, cur, record_id):
         r = self.records.get(record_id)
@@ -74,6 +119,12 @@ class FakeStore:
     def get_image(self, cur, image_id):
         found = self.images.get(image_id)
         return (found[1], found[2]) if found and found[0] == cur else None
+
+
+# Every app.store function the web app calls; the fixture swaps each for the FakeStore's.
+STORE_FUNCTIONS = ["resolve_code", "org_name", "list_orders", "order_counts", "get_order", "list_records",
+                   "counts_by_decision", "save_record", "update_record", "get_record", "get_image",
+                   "find_image_uses", "find_retry", "count_ai_checks_since", "upsert_order"]
 
 
 class FakeDb:
@@ -88,11 +139,15 @@ class FakeDb:
 
 @pytest.fixture
 def client(monkeypatch, catalogue):
+    return make_client(monkeypatch, catalogue)
+
+
+def make_client(monkeypatch, catalogue):
+    """The app on the in-memory store, signed out. Shared with test_web_hardening.py."""
     import app.main as main
 
     fake = FakeStore()
-    for name in ["resolve_code", "org_name", "list_orders", "get_order", "list_records", "counts_by_decision",
-                 "save_record", "update_record", "get_record", "get_image", "find_image_uses", "count_records_since", "upsert_order"]:
+    for name in STORE_FUNCTIONS:
         monkeypatch.setattr(main.store, name, getattr(fake, name))
     monkeypatch.setattr(main, "db", lambda: FakeDb())
     monkeypatch.setattr(main, "org_catalogue", lambda org: (catalogue, None))
@@ -207,10 +262,11 @@ def test_daily_limit_fails_open_to_pending(client, sharp_photo, monkeypatch):
     import app.main as main
 
     monkeypatch.setattr(main.settings, "daily_checks_per_org", 1)
+    monkeypatch.setattr(main, "perceiver", lambda: OraclePerceiver({"CAP-BLU": 1}))
     add_order(client.fake, ("CAP-BLU", 1))
     client.post("/login", data={"code": "alpha-demo"})
     upload = {"photos": ("box.jpg", sharp_photo, "image/jpeg")}
-    client.post("/orders/ORD-1/verify", files=upload)
+    client.post("/orders/ORD-1/verify", files=upload)  # the model answers: one AI check used
     url = client.post("/orders/ORD-1/verify", files=upload, follow_redirects=False).headers["location"]
     rec = client.fake.records[url.rsplit("/", 1)[1]]
     assert rec.outcome.decision == Decision.PENDING
@@ -261,8 +317,8 @@ def test_order_tabs_and_record_search(client, sharp_photo, catalogue, settings):
     fake.save_record(None, record, prepared)
     client.post("/login", data={"code": "alpha-demo"})
 
-    assert "ORD-77" in client.get("/?view=todo").text  # the in-memory store never marks orders checked
-    assert "ORD-77" not in client.get("/?view=done").text
+    assert "ORD-77" in client.get("/?view=done").text  # its latest record is a SEAL
+    assert "ORD-77" not in client.get("/?view=todo").text
     assert client.get("/?view=nonsense").status_code == 200
 
     assert record.record_id in client.get("/records?q=ord-77").text

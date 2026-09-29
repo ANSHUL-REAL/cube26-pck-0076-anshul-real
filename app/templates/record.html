@@ -9,7 +9,7 @@
 {% set state_word = {"ok": "matches the order", "problem": "wrong or extra", "unsure": "unclear", "insert": "packaging or insert"} %}
 {% set products = obs.get("detected_items", []) | rejectattr("classification", "equalto", "NON_PRODUCT") | list %}
 
-<a class="back" href="/orders/{{ order_id }}">{{ icon("arrow-left", 16) }}{{ order_id }}</a>
+<a class="back" href="/orders/{{ order_id | urlpart }}">{{ icon("arrow-left", 16) }}{{ order_id }}</a>
 
 <div class="page-head">
   <div>
@@ -24,11 +24,19 @@
     </p>
   </div>
   <div class="actions">
-    <button class="btn secondary" type="button" data-copy-link>Copy link</button>
+    <button class="btn secondary" type="button" data-copy-link="/records/{{ r.record_id | urlpart }}">Copy link</button>
     <a class="btn secondary hide-sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a>
   </div>
 </div>
 
+{% if error %}
+<div class="callout error" role="alert" style="margin-bottom:14px">{{ error }}{% if reload %} <a href="/records/{{ r.record_id | urlpart }}">Reload and check it again.</a>{% endif %}</div>
+{% endif %}
+{% if retry %}
+<div class="callout info" style="margin-bottom:14px">
+  The AI checked these photos again in <a href="/records/{{ retry | urlpart }}">{{ retry }}</a>. Record any decision on that newer record.
+</div>
+{% endif %}
 {% if obs.get("retry_of") %}
 <div class="callout info" style="margin-bottom:14px">
   This is a second AI check of the photos from <a href="/records/{{ obs.retry_of }}">{{ obs.retry_of }}</a>, taken {{ obs.photos_taken_at | when }}. {{ obs.retried_by }} ran it again because the AI didn't answer the first time.
@@ -52,7 +60,7 @@
   {% elif decision == "SEAL" %}
     <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
   {% elif decision == "PENDING" %}
-    <p>The AI check didn't finish. The photos are saved, so check the box by hand and record your decision below.</p>
+    <p>The AI check didn't finish.{% if retry %} The same photos were checked again in a newer record.{% else %} The photos are saved, so check the box by hand and record your decision below.{% endif %}</p>
     {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
   {% elif r.outcome.reasons %}
     <p>{{ r.outcome.reasons[0] }}</p>
@@ -66,7 +74,7 @@
     </form>
   {% endif %}
 
-  {% if r.outcome.fix_instructions and not r.overrides %}
+  {% if r.outcome.fix_instructions and not r.overrides and not retry %}
     <div class="verdict-steps">
       <div class="label">What to do</div>
       <ol class="todo {{ tone }}">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
@@ -78,7 +86,7 @@
   {% endif %}
 </section>
 
-{% if needs_human %}
+{% if needs_human and not retry %}
 <section class="card card-pad decide-card" style="margin-bottom:var(--gap)">
   <h2>Record your decision</h2>
   <p class="muted" style="margin-top:4px">Check the box by hand, then choose. Your decision is saved next to the agent's result, which stays on the record.</p>
@@ -134,8 +142,8 @@
       </div>
     </section>
 
-    {% if not needs_human %}
-    <details class="fold">
+    {% if not needs_human and not retry %}
+    <details class="fold"{% if error %} open{% endif %}>
       <summary>Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
       <div class="inner">
         <p class="muted small">Record what you decided by hand. The agent's result stays on the record next to yours.</p>
@@ -209,6 +217,7 @@
       <div class="card-head"><h2>Evidence</h2></div>
       <div class="card-body">
         <p class="hash {{ 'ok' if hash_ok else 'bad' }}"><span class="dot"></span>{% if hash_ok %}Content hash matches record{% else %}Content hash does not match: this record was changed after it was saved{% endif %}</p>
+        {% if history_check %}<p class="hash {{ history_check[0] }}"><span class="dot"></span>{{ history_check[1] }}</p>{% endif %}
         <dl class="kv">
           <dt>Record</dt><dd>{{ r.record_id }}</dd>
           <dt>Photos</dt><dd>{{ r.images | length }}</dd>

@@ -24,7 +24,7 @@
       </nav>
       <div class="who">
         <div class="org"><b>{{ user.org_name }}</b><span>{{ user.operator }}</span></div>
-        <a class="signout" href="/logout">Sign out</a>
+        <form method="post" action="/logout" class="signout-form"><button class="signout" type="submit">Sign out</button></form>
       </div>
     </div>
   </header>

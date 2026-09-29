@@ -37,7 +37,7 @@
         <ul>{% for r in rejected if not r.ok %}{% for reason in r.reasons %}<li>Photo {{ r.n }}: {{ reason }}</li>{% endfor %}{% endfor %}</ul>
       </div>
       <div class="previews">{% for r in rejected %}<img src="{{ r.src }}" alt="Photo {{ r.n }}">{% endfor %}</div>
-      <form method="post" action="/orders/{{ order.order_id }}/verify" data-busy style="margin:14px 0 22px">
+      <form method="post" action="/orders/{{ order.order_id | urlpart }}/verify" data-busy style="margin:14px 0 22px">
         <input type="hidden" name="stash" value="{{ stash }}">
         <button class="btn secondary full" type="submit">Use these photos anyway</button>
         <p class="muted small" style="margin-top:8px">A photo that failed these checks can't lead to "Seal". The result will ask you to check by hand.</p>
@@ -46,7 +46,7 @@
       <h3 style="margin-bottom:12px">Or take a better photo</h3>
     {% endif %}
 
-    <form method="post" action="/orders/{{ order.order_id }}/verify" enctype="multipart/form-data" data-busy>
+    <form method="post" action="/orders/{{ order.order_id | urlpart }}/verify" enctype="multipart/form-data" data-busy>
       <label class="dropzone" data-drop>
         <strong data-count>Take or choose a photo</strong>
         <span class="muted small">Up to {{ max_photos }} photos of the same box</span>
@@ -91,7 +91,7 @@
     <ul class="history">
       {% for h in history %}
       <li>
-        {{ m.badge(h.decision, sm=true) }}
+        {% if h.retried %}<span class="badge plain sm"><span class="dot"></span>Checked again</span>{% else %}{{ m.badge(h.decision, sm=true) }}{% endif %}
         <span class="muted">{{ h.captured_at | when }} · {{ h.operator_label }}</span>
         <a href="/records/{{ h.record_id }}">Open {{ icon("chevron-right", 15) }}</a>
       </li>

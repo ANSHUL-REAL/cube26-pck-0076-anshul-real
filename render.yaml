@@ -28,3 +28,5 @@ services:
         sync: false
       - key: SESSION_SECRET
         generateValue: true
+      - key: SECURE_COOKIES
+        value: "true"        # Render serves over HTTPS only

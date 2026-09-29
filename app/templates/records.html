@@ -37,7 +37,7 @@
           <a class="stretch strong" href="/records/{{ row.record_id }}">{{ row.order_id }}</a>
           <span class="sub show-sm">{{ row.captured_at | when }} · {{ row.operator_label }}</span>
         </span></span>
-        <span class="c-status">{{ m.badge(row.decision, sm=true) }}{% if row.overrides %}<span class="chan hide-sm"> by hand</span>{% endif %}</span>
+        <span class="c-status">{% if row.retried %}<span class="badge plain sm"><span class="dot"></span>Checked again</span>{% else %}{{ m.badge(row.decision, sm=true) }}{% endif %}{% if row.overrides %}<span class="chan hide-sm"> by hand</span>{% endif %}</span>
         <span class="hide-sm muted">{{ row.captured_at | when }}</span>
         <span class="hide-sm muted">{{ row.operator_label }}</span>
         <span class="hide-sm muted small">{{ row.record_id }}</span>

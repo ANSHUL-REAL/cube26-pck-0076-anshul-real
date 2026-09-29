@@ -39,7 +39,7 @@
     <div class="tr th" role="row"><span>Order</span><span>Items</span><span>Channel</span><span>Status</span><span></span></div>
     {% for row in rows %}
       {% set o = row.order %}
-      {% set href = '/records/' ~ row.record_id if row.decision else '/orders/' ~ o.order_id %}
+      {% set href = '/records/' ~ row.record_id if row.decision else '/orders/' ~ (o.order_id | urlpart) %}
       <div class="tr" role="row">
         <span class="c-main">
           <span class="tiles">{% for line in o.lines[:3] %}{{ m.tile(line.sku, catalogue.title(line.sku), thumbs) }}{% endfor %}</span>
@@ -52,13 +52,16 @@
         <span class="c-chan hide-sm">{{ o.channel or "—" }}</span>
         <span class="c-status">{% if row.decision %}{{ m.badge(row.decision, sm=true) }}{% else %}<span class="badge plain sm hide-sm"><span class="dot"></span>Not checked</span>{% endif %}</span>
         <span class="c-act hide-sm">
-          {% if row.decision %}<a class="btn secondary sm above" href="/orders/{{ o.order_id }}">Check again</a>
+          {% if row.decision %}<a class="btn secondary sm above" href="/orders/{{ o.order_id | urlpart }}">Check again</a>
           {% else %}<span class="btn secondary sm cta">Check box</span>{% endif %}
         </span>
         <span class="go show-sm">{{ icon("chevron-right", 18) }}</span>
       </div>
     {% endfor %}
   </div>
+  {% if view_counts[view] > rows | length %}
+  <p class="list-foot muted small">Showing the newest {{ rows | length }} of {{ view_counts[view] }}. Search to find any order.</p>
+  {% endif %}
   {% else %}
   <div class="empty">
     {% if q %}

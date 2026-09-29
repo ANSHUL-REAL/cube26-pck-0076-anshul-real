@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} · Pack Manager{% endblock %}
+{% block content %}
+<div class="card empty" style="max-width:520px;margin:40px auto">
+  <h2>{{ title }}</h2>
+  <p>{{ message }}</p>
+  <p style="margin-top:18px"><a class="btn secondary" href="/">Back to orders</a></p>
+</div>
+{% endblock %}

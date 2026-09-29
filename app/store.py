@@ -35,25 +35,52 @@ def _order(row) -> Order:
     )
 
 
-def list_orders(cur, query: str | None = None, limit: int = 200) -> list[dict]:
-    """Orders with their latest record, newest-unchecked first."""
+# Which orders each tab of the orders page shows, by the decision on the order's latest record.
+# A record that still needs a person (the AI didn't answer, or it couldn't be sure) keeps the
+# order in "To check"; only a settled result (sealed, or stopped to fix) counts as checked.
+ORDER_VIEWS = {
+    "todo": "(r.decision is null or r.decision in ('PENDING', 'UNCERTAIN'))",
+    "done": "r.decision in ('SEAL', 'STOP_AND_FIX')",
+    "all": "true",
+}
+
+_ORDERS_WITH_LATEST = """
+    from orders o
+    left join lateral (
+        select record_id, decision, status, captured_at from records
+        where records.order_id = o.order_id
+        order by captured_at desc limit 1
+    ) r on true
+    where (%(q)s::text is null or o.order_id ilike %(like)s or o.unit_id ilike %(like)s
+           or o.lines::text ilike %(like)s)
+"""
+
+
+def list_orders(cur, query: str | None = None, view: str = "all", limit: int = 200) -> list[dict]:
+    """Orders with their latest record, newest-unchecked first, for one tab of the orders page."""
     cur.execute(
-        """
+        f"""
         select o.*, r.record_id, r.decision, r.status, r.captured_at as checked_at
-        from orders o
-        left join lateral (
-            select record_id, decision, status, captured_at from records
-            where records.order_id = o.order_id
-            order by captured_at desc limit 1
-        ) r on true
-        where (%(q)s::text is null or o.order_id ilike %(like)s or o.unit_id ilike %(like)s
-               or o.lines::text ilike %(like)s)
+        {_ORDERS_WITH_LATEST}
+          and {ORDER_VIEWS[view]}
         order by (r.record_id is not null), o.created_at desc, o.order_id
         limit %(limit)s
         """,
         {"q": query or None, "like": f"%{query or ''}%", "limit": limit},
     )
     return [{**row, "order": _order(row)} for row in cur.fetchall()]
+
+
+def order_counts(cur, query: str | None = None) -> dict[str, int]:
+    """How many orders each tab holds (not capped by the list limit)."""
+    cur.execute(
+        f"""
+        select {", ".join(f'count(*) filter (where {cond}) as "{name}"' for name, cond in ORDER_VIEWS.items())}
+        {_ORDERS_WITH_LATEST}
+        """,
+        {"q": query or None, "like": f"%{query or ''}%"},
+    )
+    return dict(cur.fetchone())
 
 
 def get_order(cur, order_id: str) -> Order | None:
@@ -98,15 +125,18 @@ def save_record(cur, record: EvidenceRecord, photos: list[PreparedImage]) -> Non
         )
 
 
-def update_record(cur, record: EvidenceRecord) -> None:
+def update_record(cur, record: EvidenceRecord, prior_hash: str) -> bool:
+    """Save a changed record, but only if it still has the hash it had when it was read.
+    False means someone else changed it in the meantime, and nothing was written."""
     cur.execute(
         """
         update records set decision = %s, status = %s, content_hash = %s, record = %s, updated_at = now()
-        where record_id = %s
+        where record_id = %s and content_hash = %s
         """,
         (record.outcome.decision.value, record.status.value, record.content_hash,
-         record.model_dump_json(), record.record_id),
+         record.model_dump_json(), record.record_id, prior_hash),
     )
+    return cur.rowcount == 1
 
 
 def get_record(cur, record_id: str) -> EvidenceRecord | None:
@@ -115,18 +145,26 @@ def get_record(cur, record_id: str) -> EvidenceRecord | None:
     return EvidenceRecord.model_validate(row["record"]) if row else None
 
 
+# A pending record whose photos were sent to the AI again: the newer record is the one to act on.
+_RETRIED = """(records.decision = 'PENDING' and exists (
+    select 1 from records r2 where r2.record->'observations'->>'retry_of' = records.record_id))"""
+
+
 def list_records(cur, decision: str | None = None, order_id: str | None = None,
                  unit_id: str | None = None, limit: int = 200, query: str | None = None,
                  since: datetime | None = None) -> list[dict]:
     """Newest first. With `since` (for other pods syncing): oldest first from that time on,
-    inclusive, so a record sharing the boundary timestamp is never skipped (dedupe by record_id)."""
+    inclusive, so a record sharing the boundary timestamp is never skipped (dedupe by record_id).
+    Filtering on PENDING leaves out records that were already checked again."""
     order = "asc" if since else "desc"
     cur.execute(
         f"""
         select record_id, order_id, unit_id, decision, status, captured_at,
-               record->>'operator_label' as operator_label, jsonb_array_length(record->'overrides') as overrides
+               record->>'operator_label' as operator_label, jsonb_array_length(record->'overrides') as overrides,
+               {_RETRIED} as retried
         from records
         where (%(d)s::text is null or decision = %(d)s)
+          and (%(d)s::text is distinct from 'PENDING' or not {_RETRIED})
           and (%(o)s::text is null or order_id = %(o)s)
           and (%(u)s::text is null or unit_id = %(u)s)
           and (%(s)s::timestamptz is null or captured_at >= %(s)s)
@@ -138,6 +176,22 @@ def list_records(cur, decision: str | None = None, order_id: str | None = None,
          "like": f"%{query or ''}%"},
     )
     return cur.fetchall()
+
+
+def find_retry(cur, record_id: str, lock: bool = False) -> str | None:
+    """The record made by running the AI check again on this one's photos, if there is one.
+    With lock, the original record's row is locked first, so two retries can't both be saved."""
+    if lock:
+        cur.execute("select 1 from records where record_id = %s for update", (record_id,))
+    cur.execute(
+        """
+        select record_id from records where record->'observations'->>'retry_of' = %s
+        order by captured_at limit 1
+        """,
+        (record_id,),
+    )
+    row = cur.fetchone()
+    return row["record_id"] if row else None
 
 
 def find_image_uses(cur, sha256s: list[str]) -> list[dict]:
@@ -162,11 +216,30 @@ def get_image(cur, image_id: str) -> tuple[str, bytes] | None:
     return (row["mime"], bytes(row["content"])) if row else None
 
 
-def count_records_since(cur, since) -> int:
-    cur.execute("select count(*) as n from records where captured_at >= %s", (since,))
+def count_ai_checks_since(cur, since) -> int:
+    """Boxes the vision model actually answered for (for the daily limit). A box where the
+    model failed or wasn't called, or where the answer came from the local cache, isn't counted."""
+    cur.execute(
+        """
+        select count(*) as n from records
+        where captured_at >= %s
+          and coalesce(record->'overrides'->0->>'original_decision', decision) <> 'PENDING'
+          and coalesce((record->'observations'->>'cached_response')::boolean, false) = false
+        """,
+        (since,),
+    )
     return cur.fetchone()["n"]
 
 
 def counts_by_decision(cur) -> dict[str, int]:
-    cur.execute("select decision, count(*) as n from records group by decision")
+    """Records per decision. Pending records that were checked again are counted as RETRIED,
+    so they don't show as waiting for a decision."""
+    cur.execute(
+        f"""
+        select decision, count(*) as n from (
+            select case when {_RETRIED} then 'RETRIED' else records.decision end as decision from records
+        ) d
+        group by decision
+        """
+    )
     return {r["decision"]: r["n"] for r in cur.fetchall()}

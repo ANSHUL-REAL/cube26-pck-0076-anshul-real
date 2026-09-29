@@ -42,6 +42,8 @@ create table if not exists records (
 );
 create index if not exists records_org_order on records (organization_id, order_id);
 create index if not exists records_org_unit on records (organization_id, unit_id);
+-- Finding the AI re-check of a record, so a retried record leaves the "needs a decision" queue.
+create index if not exists records_retry_of on records ((record->'observations'->>'retry_of'));
 
 -- Photos live in the database under the same policy as records, and are addressed by a
 -- random UUID. There is no file path to guess, and a guessed UUID from another tenant
@@ -95,7 +97,7 @@ create or replace function resolve_access_code(p_code_hash text)
 returns table (organization_id text, operator_label text)
 language sql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
     select organization_id, operator_label from access_codes where code_hash = p_code_hash
 $$;

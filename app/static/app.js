@@ -63,11 +63,21 @@ document.addEventListener("submit", (e) => {
   setTimeout(() => form.querySelectorAll("button").forEach((b) => (b.disabled = true)), 0);
 });
 
-document.addEventListener("click", (e) => {
-  // Decision buttons fill in the hidden "decision" field of their form.
-  const btn = e.target.closest("button[data-decision]");
-  if (btn) btn.form.querySelector("input[name=decision]").value = btn.dataset.decision;
+// Going back to a page (Safari keeps it in memory): undo the "working" state of its forms.
+window.addEventListener("pageshow", (e) => {
+  if (!e.persisted) return;
+  document.querySelectorAll("form.working").forEach((form) => {
+    form.classList.remove("working");
+    form.querySelectorAll("button").forEach((b) => (b.disabled = false));
+  });
+});
 
+function copied(button) {
+  button.textContent = "Link copied";
+  setTimeout(() => (button.textContent = "Copy link"), 2000);
+}
+
+document.addEventListener("click", (e) => {
   // "Show" / "Hide" on the access code field.
   const reveal = e.target.closest("button[data-reveal]");
   if (reveal) {
@@ -79,12 +89,41 @@ document.addEventListener("click", (e) => {
     input.focus();
   }
 
-  // "Copy link" on a record: for sending to a teammate who can sign in.
+  // "Copy link" on a record: for sending to a teammate who can sign in. The clipboard needs
+  // HTTPS; on plain HTTP (a phone on the local network) the link is shown to copy by hand.
   const copy = e.target.closest("button[data-copy-link]");
-  if (copy && navigator.clipboard) {
-    navigator.clipboard.writeText(location.href).then(() => {
-      copy.textContent = "Link copied";
-      setTimeout(() => (copy.textContent = "Copy link"), 2000);
-    });
+  if (copy) {
+    const url = new URL(copy.dataset.copyLink || location.href, location.href).href;
+    const byHand = () => window.prompt("Copy this link:", url);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => copied(copy), byHand);
+    } else {
+      byHand();
+    }
   }
 });
+
+// Filter tabs that don't fit (phones) scroll sideways: fade the edge that has more tabs past it,
+// and bring the selected tab into view.
+function markTabs(tabs) {
+  const rest = tabs.scrollWidth - tabs.clientWidth - tabs.scrollLeft;
+  tabs.classList.toggle("fade-end", rest > 2);
+  tabs.classList.toggle("fade-start", tabs.scrollLeft > 2);
+}
+
+function showSelectedTab(tabs) {
+  const on = tabs.querySelector(".on");
+  if (on) {
+    const over = on.getBoundingClientRect().right - tabs.getBoundingClientRect().right;
+    if (over > 0) tabs.scrollLeft += over + 40;
+  }
+  markTabs(tabs);
+}
+
+document.querySelectorAll(".tabs").forEach((tabs) => {
+  showSelectedTab(tabs);
+  tabs.addEventListener("scroll", () => markTabs(tabs), { passive: true });
+});
+// The web font can arrive after this runs and make the tabs wider: measure again then.
+if (document.fonts) document.fonts.ready.then(() => document.querySelectorAll(".tabs").forEach(showSelectedTab));
+window.addEventListener("resize", () => document.querySelectorAll(".tabs").forEach(markTabs));

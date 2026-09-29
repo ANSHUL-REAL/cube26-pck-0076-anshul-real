@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     database_admin_url: str | None = None
     pack_app_db_password: str = "pack_app_dev"
     session_secret: str = "change-me"
+    # Send the session cookie only over HTTPS. Turn on wherever the app is served over HTTPS.
+    secure_cookies: bool = False
 
     cache_dir: str = ".cache/vlm"
     catalogue_dir: str = "catalogue"

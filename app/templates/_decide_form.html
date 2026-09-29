@@ -1,21 +1,23 @@
-<form method="post" action="/records/{{ r.record_id }}/decision" data-busy style="margin-top:16px">
-  <input type="hidden" name="decision" value="">
+<form method="post" action="/records/{{ r.record_id | urlpart }}/decision" data-busy style="margin-top:16px">
+  {# The record as the operator saw it: the save is refused if it changed in the meantime. #}
+  <input type="hidden" name="prior_hash" value="{{ r.content_hash }}">
   <div class="form-row">
     <div>
       <label class="field" for="reason_code">Reason</label>
       <select id="reason_code" name="reason_code" required>
-        <option value="" disabled selected>Choose a reason</option>
-        {% for code, text in reasons.items() %}<option value="{{ code }}">{{ text }}</option>{% endfor %}
+        <option value="" disabled{% if form_reason not in reasons %} selected{% endif %}>Choose a reason</option>
+        {% for code, text in reasons.items() %}<option value="{{ code }}"{% if form_reason == code %} selected{% endif %}>{{ text }}</option>{% endfor %}
       </select>
     </div>
     <div>
       <label class="field" for="note">Note (optional)</label>
-      <input type="text" id="note" name="note" maxlength="500" placeholder="What did you see?">
+      <textarea id="note" name="note" rows="2" maxlength="500" placeholder="What did you see?">{{ form_note or "" }}</textarea>
     </div>
   </div>
+  {# Each button sends its own decision, so this works without JavaScript. #}
   <div class="decide">
-    <button class="btn seal lg" type="submit" data-decision="SEAL">Seal the box</button>
-    <button class="btn stop lg" type="submit" data-decision="STOP_AND_FIX">Stop and fix</button>
+    <button class="btn seal lg" type="submit" name="decision" value="SEAL">Seal the box</button>
+    <button class="btn stop lg" type="submit" name="decision" value="STOP_AND_FIX">Stop and fix</button>
   </div>
   <div class="busy"><span class="spinner"></span>Saving…</div>
 </form>
