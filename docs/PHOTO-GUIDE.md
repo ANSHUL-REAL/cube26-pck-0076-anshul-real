@@ -13,22 +13,34 @@ This is the physical half of the project. Nothing here needs code; it needs prod
 - Normal packing stuff: a printed or handwritten **packing slip**, some **bubble wrap or crumpled paper**.
 - A table near a window, plus a lamp for "evening" light.
 
-## 1. Give every product a short code (SKU)
+## 1. Give every product a short code (SKU) and fill the product sheet
 
-Use capitals and dashes, e.g. `CAP-BLUE`, `CAP-RED`, `MUG-SET2`, `BOTTLE-STEEL-750`, `CABLE-USBC-1M`. Write them down with a one-line description and the detail that tells look-alikes apart, e.g.:
+Use capitals and dashes, e.g. `CAP-BLUE`, `CAP-RED`, `MUG-SET2`, `BOTTLE-STEEL-750`, `CABLE-USBC-1M`.
 
-| SKU | Name | Colour / size | How to tell it apart |
-|---|---|---|---|
-| CAP-BLUE | Baseball cap | blue | blue fabric, white logo |
-| CAP-RED | Baseball cap | red | red fabric, white logo |
+```bash
+python catalogue/build_catalogue.py --org org_demo_alpha
+```
 
-Send me this table and I'll write `catalogue/org_demo_alpha/catalogue.json`.
+The first run creates `catalogue/org_demo_alpha/products.csv`. Open it in Excel or Google Sheets and replace the example row with one row per product:
 
-## 2. Reference photos: 3 per product (about 30 minutes)
+| sku | title | attributes | sellable_unit | distinguishing_features | confusable_with |
+|---|---|---|---|---|---|
+| CAP-BLUE | Baseball Cap | colour=blue | one blue cotton cap | blue fabric, white logo | CAP-RED |
+| MUG-SET2 | Ceramic Mug, set of 2 | colour=white | one printed box holding 2 mugs; the box is ONE unit | | |
+
+`sellable_unit` is what **one** ordered unit looks like. `confusable_with` is the look-alike's SKU; you only need to write it on one of the two rows.
+
+## 2. Reference photos: 2–3 per product (about 30 minutes)
 
 - Plain background (a white sheet or a table), good daylight, product fills most of the frame.
 - Photo 1 front, photo 2 back or side, photo 3 top or with the label readable.
-- Save as `catalogue/org_demo_alpha/images/<SKU>/1.jpg`, `2.jpg`, `3.jpg`.
+- On the laptop, make one folder per product **named exactly like its SKU** (e.g. `D:/products/CAP-BLUE/`) and drop its photos in. File names don't matter.
+
+```bash
+python catalogue/build_catalogue.py --org org_demo_alpha --photos "D:/products"
+```
+
+This copies the photos upright, resized and **with GPS location removed**, writes `catalogue.json`, and lists anything still missing.
 
 ## 3. Practice boxes: the "dev" set (20 boxes, about 45 minutes)
 
@@ -69,8 +81,14 @@ This physical record is the ground truth. It's what the agent is scored against.
 ## 6. Photos of the box
 
 - Take 1 photo from above with the whole inside of the box in the frame. Optionally take a 2nd photo from an angle.
-- Save as `eval/boxes/<box_id>/1.jpg` (and `2.jpg`).
-- **Transferring from the phone:** use a USB cable, Google Drive or Google Photos (original quality). **Don't send through WhatsApp**, because it compresses photos.
+- **Shoot the boxes in manifest order** (T01, T02, …) and wait about 30 seconds between boxes, so the photos can be grouped by time. If you mess up a box, just note it and delete those photos on the phone.
+- Copy the phone's photos to the laptop with a USB cable, Google Drive or Google Photos (original quality). **Don't send them through WhatsApp**, because it compresses photos.
+
+```bash
+python eval/import_photos.py --from "D:/phone/Camera" --split test --after "2026-09-29 14:00"
+```
+
+This previews how the photos were grouped and writes `eval/import_check_test.html`. Open it and check each box's photos match its row. If they do, run the same command again with `--apply`. The copies are saved to `eval/boxes/<box_id>/` upright, resized to 1600 px and **with GPS location removed**. If the grouping is off, use `--gap 15` (tighter), `--per-box 1` (exactly one photo per box) or `--start T31` (continue from a box).
 
 ## 7. Labelling (the two humans)
 

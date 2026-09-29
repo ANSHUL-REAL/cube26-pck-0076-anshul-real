@@ -10,3 +10,6 @@ venv/
 .pytest_cache/
 .cache/
 eval/results/**/raw/
+# generated pages with embedded photos (large); rebuild them from the scripts
+eval/import_check_*.html
+eval/label_sheet_*.html

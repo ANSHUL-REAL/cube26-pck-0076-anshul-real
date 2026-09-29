@@ -1,0 +1,30 @@
+# Render blueprint for the web app (render.com → New → Blueprint → this repo).
+# The database is created and migrated separately (hosted Postgres + `python -m app.migrate`
+# from a laptop). The web service only gets DATABASE_URL for the restricted pack_app role,
+# never the admin connection.
+services:
+  - type: web
+    name: pack-manager
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips "*"
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_TIMEOUT_S
+        value: "25"
+      - key: GEMINI_API_KEY
+        sync: false          # set in the Render dashboard
+      - key: DATABASE_URL
+        sync: false          # pack_app role connection string
+      - key: COST_PER_1M_INPUT_USD
+        sync: false
+      - key: COST_PER_1M_OUTPUT_USD
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true

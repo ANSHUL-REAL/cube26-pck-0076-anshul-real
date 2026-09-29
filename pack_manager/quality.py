@@ -18,6 +18,13 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 from .config import Settings
 from .models import QualityReport
 
+try:  # iPhone photos (HEIC). Optional: without it, HEIC uploads get a clear error.
+    from pillow_heif import register_heif_opener
+
+    register_heif_opener()
+except ImportError:  # pragma: no cover
+    pass
+
 
 class ImageDecodeError(ValueError):
     pass

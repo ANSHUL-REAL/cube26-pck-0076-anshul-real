@@ -109,6 +109,12 @@ python -m pytest
 ```
 The tenant-isolation tests run against real Postgres and are skipped when `DATABASE_URL` and `DATABASE_ADMIN_URL` aren't set.
 
+## Deploy
+
+1. A hosted Postgres (e.g. Neon). Put its admin connection string in `DATABASE_ADMIN_URL` locally and run `python -m app.migrate` once. This creates the tables, policies and the restricted `pack_app` role.
+2. On Render: **New → Blueprint** and pick this repository ([`render.yaml`](render.yaml)). Set `DATABASE_URL` to the **`pack_app`** connection string (never the admin one) and `GEMINI_API_KEY`.
+3. Check `https://<your-app>.onrender.com/healthz`. The free plan sleeps when idle, so the first request can take ~30 s.
+
 ## Repository
 
 | Path | What |
@@ -116,9 +122,9 @@ The tenant-isolation tests run against real Postgres and are skipped when `DATAB
 | `pack_manager/` | The agent: photo quality gate, catalogue, the vision call, decision rules, evidence record |
 | `app/` | Web app (FastAPI, server-rendered pages) and JSON API |
 | `db/migrations/` | Postgres schema with forced row-level security |
-| `catalogue/` | Product descriptions and reference photos per organisation |
+| `catalogue/` | Product descriptions and reference photos per organisation, and a builder that turns a spreadsheet + photo folders into `catalogue.json` |
 | `contract/` | JSON Schema and example records for Returns and Recovery |
-| `eval/` | Eval runner, metrics, label sheet, manifest of real packed boxes |
+| `eval/` | Eval runner, metrics, label sheet, photo importer (strips GPS), manifest of real packed boxes |
 | `tests/` | Decision scenarios, pipeline, contract, web pages, tenant isolation |
 | `docs/` | Photo guide, organisers' original brief |
 | `data/` | Organisers' synthetic sample (unchanged) |
