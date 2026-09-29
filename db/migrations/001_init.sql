@@ -56,6 +56,9 @@ create table if not exists images (
     created_at      timestamptz not null default now()
 );
 
+-- Finding a reused photo (same bytes uploaded for another order).
+create index if not exists images_org_sha on images (organization_id, sha256);
+
 do $$
 declare t text;
 begin

@@ -59,6 +59,7 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 | Check | PASS | FAIL | UNCERTAIN |
 |---|---|---|---|
 | `image_quality` | all photos passed the gate | — | a photo failed and the operator used it anyway |
+| `photo_reuse` | photo not used for any other order | — | the exact photo was already used for a different order (web app; re-checking the same order is allowed) |
 | `scene_coverage` | box fully visible, nothing hidden, visibility ≥ 0.70 | — | otherwise |
 | `line_present:<SKU>` | ≥ 1 confident match | 0 found, nothing could be it, box fully visible | anything else |
 | `line_quantity:<SKU>` | confident count = ordered, count certain, nothing unclear | confident count > ordered (over), or short with no way the gap could be hidden or unclear | count can't be pinned down |
@@ -70,6 +71,8 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 **Substitution pairing.** When a line is short and a non-ordered SKU is present, the two are reported together ("Expected Blue Cap, found Red Cap (#3)" → fix "Replace Red Cap (#3) with Blue Cap"). Look-alikes are paired first. Reasons are ordered so the most useful one leads the page.
 
 **Over-quantity wins over uncertainty.** If 3 are confidently counted and 2 were ordered, the box stops even if more could be hidden: at least one must come out.
+
+**Every unclear result explains itself.** When any check is UNCERTAIN, the record carries `observations.uncertainty`. It lists what is known, what can't be told, what evidence would settle each unclear point ("a count of the towels with every unit visible"), and the next action. It is derived from the checks, not written by the model.
 
 **UNCERTAIN is its own outcome** (engineering rule 4), not a low-confidence SEAL. It has its own colour and its own queue ("Check by hand") in the UI. The record gets status `pending_review`, and the hand checks to do are listed.
 
@@ -125,7 +128,8 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 | **Another org reads my records or photos** | Forced RLS on every tenant table, per-transaction org setting, non-owner role, random image UUIDs, 404 (not 403) for other orgs' IDs. Tested against real Postgres | Access codes are simple shared secrets; demo codes are public on purpose |
 | **Editing a record after the fact** | Content hash shown and verified on the record page and in the API; overrides keep the prior hash | Not tamper-proof against someone with database write access (see above) |
 | **Model hallucination / confirmation bias** | D3, D4, D5, D6, unknown SKUs forced to `UNKNOWN_PRODUCT`, confidence thresholds, UNCERTAIN path | Measured in the eval as false-SEAL rate; see EVAL.md |
-| **Quota exhaustion or outage** | Fail-open `pending`, retry with backoff, response cache | Boxes need a hand decision during an outage |
+| **Quota exhaustion or outage** | Fail-open `pending`, retry with backoff, response cache, and a daily cap of AI checks per organisation (`DAILY_CHECKS_PER_ORG`, default 60) so one tenant or a public demo can't use up a shared key | Boxes need a hand decision during an outage or over the cap |
+| **Reusing an old photo** (a packer uploads a photo of an earlier, correct box) | The stored photo's SHA-256 is looked up among the organisation's records; the same photo for a *different* order makes `photo_reuse` UNCERTAIN, so the box can't be sealed on it. Lookups go through RLS, so they never reveal another organisation's photos | Only exact copies are caught; a re-taken photo of an old box isn't |
 | **Oversized or malicious uploads** | Images are decoded and re-encoded by Pillow; at most 3 photos per box | No per-org rate limit |
 | **Secrets** | `.env` is git-ignored; only `.env.example` is committed | — |
 | **Data sent to the model provider** | Only box photos and catalogue text are sent. The eval uses the author's own household products. The Gemini **free tier** may use prompts to improve Google's products, so production would use a paid tier | — |

@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-10F128797250",
+  "record_id": "PCK-C5B77EE8D2EC",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -25,7 +25,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "image_id": "039e1894-d41b-4e2d-a1df-69ac1f7af1a2",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -45,6 +45,7 @@
     }
   ],
   "observations": {
+    "uncertainty": null,
     "expected_vs_observed": [
       {
         "sku": "SKU-CANDLE-3",
@@ -181,7 +182,7 @@
   "outcome": {
     "decision": "STOP_AND_FIX",
     "decided_by": "agent",
-    "decided_at": "2026-09-28T17:35:33Z",
+    "decided_at": "2026-09-29T06:25:28Z",
     "reasons": [
       "Expected Soy Candle Trio, found Steel Water Bottle (#1).",
       "Soy Candle Trio: 0 in the box, 1 ordered.",
@@ -193,5 +194,5 @@
   },
   "overrides": [],
   "status": "final",
-  "content_hash": "sha256:0f9280e68fe511ef105397295c564d75840c2119a0a6a6b55eecea69ed4761a7"
+  "content_hash": "sha256:b3975a3a8259efc69c486e9b01533428bb45da83fe7db2723678a08dfa874290"
 }

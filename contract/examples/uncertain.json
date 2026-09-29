@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-1C6507869267",
+  "record_id": "PCK-74B28D701422",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -25,7 +25,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "image_id": "039e1894-d41b-4e2d-a1df-69ac1f7af1a2",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -45,6 +45,23 @@
     }
   ],
   "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Cotton Bath Towel: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
+        "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked"
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Cotton Bath Towel with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
     "expected_vs_observed": [
       {
         "sku": "SKU-TOWEL-BLU",
@@ -198,7 +215,7 @@
   "outcome": {
     "decision": "UNCERTAIN",
     "decided_by": "agent",
-    "decided_at": "2026-09-28T17:35:33Z",
+    "decided_at": "2026-09-29T06:25:28Z",
     "reasons": [
       "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
       "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked"
@@ -211,5 +228,5 @@
   },
   "overrides": [],
   "status": "pending_review",
-  "content_hash": "sha256:9523ee0bada3de8bb58628b9dc8deae3810e7e5d7f5fb3b360a5705bfc2f698b"
+  "content_hash": "sha256:df91400a49d9d1594d8453879b5f3c9f3a66244da4b1127b0a41e42031ee322a"
 }

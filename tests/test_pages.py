@@ -47,10 +47,17 @@ class FakeStore:
     def counts_by_decision(self, cur):
         return {}
 
+    def count_records_since(self, cur, since):
+        return sum(1 for r in self.records.values() if r.organization_id == cur and r.captured_at >= since)
+
     def save_record(self, cur, record, photos):
         self.records[record.record_id] = record
         for p in photos:
-            self.images[p.image_id] = (record.organization_id, p.mime, p.jpeg)
+            self.images[p.image_id] = (record.organization_id, p.mime, p.jpeg, p.sha256, record.record_id)
+
+    def find_image_uses(self, cur, sha256s):
+        return [{"sha256": sha, "record_id": rid, "order_id": self.records[rid].subject["order_id"]}
+                for org, _, _, sha, rid in self.images.values() if org == cur and sha in sha256s]
 
     def update_record(self, cur, record):
         self.records[record.record_id] = record
@@ -80,7 +87,7 @@ def client(monkeypatch, catalogue):
 
     fake = FakeStore()
     for name in ["resolve_code", "org_name", "list_orders", "get_order", "list_records", "counts_by_decision",
-                 "save_record", "update_record", "get_record", "get_image"]:
+                 "save_record", "update_record", "get_record", "get_image", "find_image_uses", "count_records_since"]:
         monkeypatch.setattr(main.store, name, getattr(fake, name))
     monkeypatch.setattr(main, "db", lambda: FakeDb())
     monkeypatch.setattr(main, "org_catalogue", lambda org: (catalogue, None))
@@ -120,6 +127,11 @@ def test_record_pages_render(client, sharp_photo, catalogue, settings, seen, exp
     assert client.get(f"/images/{record.images[0].image_id}").status_code == 200
     for path in ["/", "/records", "/orders/ORD-1", f"/api/records/{record.record_id}"]:
         assert client.get(path).status_code == 200, path
+    dl = client.get(f"/api/records/{record.record_id}?download=1")
+    assert "attachment" in dl.headers["content-disposition"]
+    from pack_manager.evidence import verify
+    from pack_manager.models import EvidenceRecord
+    assert verify(EvidenceRecord.model_validate_json(dl.content))  # the downloaded file verifies on its own
 
 
 def test_verify_upload_creates_record_and_override_keeps_history(client, sharp_photo):
@@ -164,3 +176,35 @@ def test_other_org_gets_404(client, sharp_photo, catalogue, settings):
     assert client.get(f"/records/{record.record_id}").status_code == 404
     assert client.get(f"/images/{record.images[0].image_id}").status_code == 404
     assert client.get("/orders/ORD-1").status_code == 404
+
+
+def test_same_photo_for_another_order_is_flagged(client, sharp_photo):
+    add_order(client.fake, ("CAP-BLU", 1), order_id="ORD-1")
+    add_order(client.fake, ("CAP-BLU", 1), order_id="ORD-2")
+    client.post("/login", data={"code": "alpha-demo"})
+    upload = {"photos": ("box.jpg", sharp_photo, "image/jpeg")}
+    first = client.post("/orders/ORD-1/verify", files=upload, follow_redirects=False).headers["location"]
+    again = client.post("/orders/ORD-1/verify", files=upload, follow_redirects=False).headers["location"]
+    other = client.post("/orders/ORD-2/verify", files=upload, follow_redirects=False).headers["location"]
+
+    def reuse(url):
+        rec = client.fake.records[url.rsplit("/", 1)[1]]
+        return next(c for c in rec.checks if c.check_key == "photo_reuse")
+
+    assert reuse(first).verdict.value == "PASS"
+    assert reuse(again).verdict.value == "PASS"  # re-checking the same order is fine
+    assert reuse(other).verdict.value == "UNCERTAIN" and "ORD-1" in reuse(other).detail
+
+
+def test_daily_limit_fails_open_to_pending(client, sharp_photo, monkeypatch):
+    import app.main as main
+
+    monkeypatch.setattr(main.settings, "daily_checks_per_org", 1)
+    add_order(client.fake, ("CAP-BLU", 1))
+    client.post("/login", data={"code": "alpha-demo"})
+    upload = {"photos": ("box.jpg", sharp_photo, "image/jpeg")}
+    client.post("/orders/ORD-1/verify", files=upload)
+    url = client.post("/orders/ORD-1/verify", files=upload, follow_redirects=False).headers["location"]
+    rec = client.fake.records[url.rsplit("/", 1)[1]]
+    assert rec.outcome.decision == Decision.PENDING
+    assert "1 AI checks. Check this box by hand." in client.get(url).text

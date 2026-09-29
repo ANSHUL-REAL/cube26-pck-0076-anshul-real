@@ -108,10 +108,13 @@ def test_guessing_an_image_id_returns_nothing(database, alpha_record):
     from app import store
 
     image_id = alpha_record.images[0].image_id
+    sha = alpha_record.images[0].sha256
     with database.org(ALPHA) as cur:
         assert store.get_image(cur, image_id) is not None
+        assert store.find_image_uses(cur, [sha])
     with database.org(BRAVO) as cur:
         assert store.get_image(cur, image_id) is None
+        assert store.find_image_uses(cur, [sha]) == []  # the reuse check can't reveal other orgs' photos
 
 
 def test_no_tenant_set_means_no_rows(database, alpha_record):

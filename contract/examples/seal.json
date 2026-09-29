@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-15D0D51A853D",
+  "record_id": "PCK-ECF69324EDA5",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -29,7 +29,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "image_id": "039e1894-d41b-4e2d-a1df-69ac1f7af1a2",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -49,6 +49,7 @@
     }
   ],
   "observations": {
+    "uncertainty": null,
     "expected_vs_observed": [
       {
         "sku": "SKU-MUG-11",
@@ -251,7 +252,7 @@
   "outcome": {
     "decision": "SEAL",
     "decided_by": "agent",
-    "decided_at": "2026-09-28T17:35:33Z",
+    "decided_at": "2026-09-29T06:25:28Z",
     "reasons": [
       "Every ordered item is in the box in the right quantity, and nothing else is."
     ],
@@ -259,5 +260,5 @@
   },
   "overrides": [],
   "status": "final",
-  "content_hash": "sha256:df2c5a53c119e41fa1b86c981f68b5857750db9dabf080ebdb1430b47bc8c506"
+  "content_hash": "sha256:17967213cc9d5d7592ae2c63a16df72c6d7a788e03e85b680ebf4966f7b9af8d"
 }

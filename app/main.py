@@ -7,6 +7,7 @@ import base64
 import logging
 import time
 import uuid
+from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
 
@@ -92,6 +93,24 @@ class _NoModel:
 
     def perceive(self, *args, **kwargs):
         raise PerceptionError("GEMINI_API_KEY is not set.")
+
+
+class _OverLimit:
+    """Used once an organisation reaches its daily number of AI checks."""
+
+    def perceive(self, *args, **kwargs):
+        raise PerceptionError(
+            f"This company has used today's {settings.daily_checks_per_org} AI checks. Check this box by hand.")
+
+
+def perceiver_for(org_id: str):
+    limit = settings.daily_checks_per_org
+    if limit:
+        today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+        with db().org(org_id) as cur:
+            if store.count_records_since(cur, today) >= limit:
+                return _OverLimit()
+    return perceiver()
 
 
 @lru_cache
@@ -248,10 +267,12 @@ async def verify_submit(
             return _verify_page(request, user, order, error=str(exc))
 
     catalogue, root = org_catalogue(user["org"])
+    with db().org(user["org"]) as cur:
+        earlier = store.find_image_uses(cur, [p.sha256 for p in prepared])
     try:
         record = await run_in_threadpool(
-            verify_box, order, prepared, catalogue, perceiver(), settings,
-            operator_label=user["operator"], catalogue_root=root, force_quality=force,
+            verify_box, order, prepared, catalogue, perceiver_for(user["org"]), settings,
+            operator_label=user["operator"], catalogue_root=root, force_quality=force, earlier_uses=earlier,
         )
     except QualityRejected as exc:
         rejected = [
@@ -382,7 +403,7 @@ def api_records(request: Request, order_id: str | None = None, unit_id: str | No
 
 
 @app.get("/api/records/{record_id}")
-def api_record(request: Request, record_id: str):
+def api_record(request: Request, record_id: str, download: bool = False):
     user = _api_user(request)
     if not user:
         return JSONResponse({"error": "unauthorised"}, status_code=401)
@@ -390,6 +411,9 @@ def api_record(request: Request, record_id: str):
         record = store.get_record(cur, record_id)
     if not record:
         return JSONResponse({"error": "not found"}, status_code=404)
+    if download:  # exactly the hashed record, so the file can be verified on its own
+        return Response(record.model_dump_json(indent=2), media_type="application/json",
+                        headers={"Content-Disposition": f'attachment; filename="{record.record_id}.json"'})
     return {**record.model_dump(mode="json"), "_hash_verified": verify(record)}
 
 

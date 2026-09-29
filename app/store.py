@@ -132,10 +132,31 @@ def list_records(cur, decision: str | None = None, order_id: str | None = None,
     return cur.fetchall()
 
 
+def find_image_uses(cur, sha256s: list[str]) -> list[dict]:
+    """Earlier records in this organisation that used any of these exact photos."""
+    if not sha256s:
+        return []
+    cur.execute(
+        """
+        select i.sha256, r.record_id, r.order_id
+        from images i join records r on r.record_id = i.record_id
+        where i.sha256 = any(%s)
+        order by r.captured_at
+        """,
+        (list(sha256s),),
+    )
+    return [dict(row) for row in cur.fetchall()]
+
+
 def get_image(cur, image_id: str) -> tuple[str, bytes] | None:
     cur.execute("select mime, content from images where image_id = %s", (image_id,))
     row = cur.fetchone()
     return (row["mime"], bytes(row["content"])) if row else None
+
+
+def count_records_since(cur, since) -> int:
+    cur.execute("select count(*) as n from records where captured_at >= %s", (since,))
+    return cur.fetchone()["n"]
 
 
 def counts_by_decision(cur) -> dict[str, int]:

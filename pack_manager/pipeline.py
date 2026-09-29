@@ -14,7 +14,7 @@ from pathlib import Path
 from . import __version__
 from .catalogue import select_candidates
 from .config import Settings
-from .decision import LOCAL_GATE_VERSION, decide
+from .decision import LOCAL_GATE_VERSION, decide, reuse_check
 from .evidence import new_record_id, seal, utcnow
 from .models import (
     AGENT_NAME,
@@ -78,6 +78,7 @@ def verify_box(
     catalogue_root: Path | None = None,
     force_quality: bool = False,
     captured_at: datetime | None = None,
+    earlier_uses: list[dict] | None = None,
 ) -> EvidenceRecord:
     reports = [p.quality for p in prepared]
     if any(r.gate == "FAIL" for r in reports) and not force_quality:
@@ -110,6 +111,8 @@ def verify_box(
             Check(check_key="vision", verdict=Verdict.NOT_CHECKED, confidence=None,
                   detail=f"Vision model unavailable: {exc}", model_version=settings.gemini_model),
         ]
+        if earlier_uses is not None:
+            checks.insert(1, reuse_check(order, earlier_uses)[0])
         record = EvidenceRecord(
             record_id=new_record_id(),
             organization_id=order.organization_id,
@@ -123,14 +126,14 @@ def verify_box(
             checks=checks,
             outcome=Outcome(
                 decision=Decision.PENDING, decided_by=None, decided_at=None,
-                reasons=["The vision model did not answer. The photos are saved."],
+                reasons=["The vision model did not answer. The photos are saved.", f"Cause: {exc}"],
                 fix_instructions=["Check the box by hand against the order, then record your decision."],
             ),
             status=RecordStatus.PENDING,
         )
         return seal(record)
 
-    result = decide(order, catalogue, perception, reports, settings)
+    result = decide(order, catalogue, perception, reports, settings, earlier_uses=earlier_uses)
     agent["model_version"] = perception.model_version
     agent["prompt_version"] = perception.prompt_version
     observations = {

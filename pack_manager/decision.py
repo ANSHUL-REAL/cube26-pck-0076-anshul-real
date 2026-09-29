@@ -28,7 +28,8 @@ from .models import (
 LOCAL_GATE_VERSION = "local-quality-gate/1"
 
 # Most useful reason first: a substitution explains a missing line better than the reverse.
-_ORDER = ["wrong_item", "extra_item", "line_quantity", "line_present", "scene_coverage", "image_quality"]
+_ORDER = ["photo_reuse", "wrong_item", "extra_item", "line_quantity", "line_present", "scene_coverage",
+          "image_quality"]
 
 
 def _priority(check: Check) -> int:
@@ -69,18 +70,72 @@ def _pick_short_line(o: DetectedObject, short: dict[str, int], catalogue: Catalo
     return open_lines[0]
 
 
+_PHOTO_CHECKS = {"image_quality", "scene_coverage", "photo_reuse"}
+
+
+def reuse_check(order: Order, earlier_uses: list[dict]) -> tuple[Check, str | None]:
+    """Was this exact photo already used for a different order? Returns the check and a hand check.
+
+    The same photo for the same order is a re-check (e.g. after the model timed out), not reuse.
+    """
+    other = [u for u in earlier_uses if u["order_id"] != order.order_id]
+    same = sorted({u["record_id"] for u in earlier_uses if u["order_id"] == order.order_id})
+    if other:
+        refs = sorted({u["record_id"] for u in other})
+        orders = sorted({u["order_id"] for u in other if u["order_id"]})
+        check = Check(
+            check_key="photo_reuse", verdict=Verdict.UNCERTAIN, confidence=None, model_version=LOCAL_GATE_VERSION,
+            detail=f"This exact photo was already used for another order ({', '.join(orders or refs)}), so it can't show this box.",
+            evidence={"records": refs},
+        )
+        return check, "Take a new photo of this box. The photo uploaded was already used for another order."
+    detail = "The photo hasn't been used for any other order."
+    if same:
+        detail += f" It was used for an earlier check of this order ({', '.join(same)})."
+    return Check(check_key="photo_reuse", verdict=Verdict.PASS, confidence=1.0, model_version=LOCAL_GATE_VERSION,
+                 detail=detail, evidence={"records": same}), None
+
+
+def _uncertainty(checks: list[Check], needed: list[str], hand_checks: list[str], decision: Decision) -> dict | None:
+    """Known / unknown / missing evidence / next action, for any result with unclear checks.
+
+    Built from the checks themselves, so it can't say more than the checks do.
+    """
+    unclear = [c for c in checks if c.verdict == Verdict.UNCERTAIN]
+    if not unclear:
+        return None
+    photo_only = all(c.check_key.split(":")[0] in _PHOTO_CHECKS for c in unclear)
+    if decision == Decision.STOP_AND_FIX:
+        action = "Fix the problems listed, then check the unclear items by hand before sealing."
+    elif photo_only:
+        action = "Retake the photo with the whole box in the frame and items spread out, then check again."
+    else:
+        action = f"Don't seal yet. {hand_checks[0] if hand_checks else 'Check the box by hand.'} Then record Seal or Stop and fix."
+    return {
+        "known": [c.detail for c in sorted(checks, key=_priority) if c.verdict in (Verdict.PASS, Verdict.FAIL)],
+        "unknown": [c.detail for c in sorted(unclear, key=_priority)],
+        "missing_evidence": list(dict.fromkeys(needed)),
+        "next_action": action,
+    }
+
+
 def decide(
     order: Order,
     catalogue: Catalogue,
     perception: Perception,
     quality: list[QualityReport],
     settings: Settings,
+    earlier_uses: list[dict] | None = None,
 ) -> DecisionResult:
+    """`earlier_uses`: records that used the same photo bytes, when the caller looked them up.
+    None means reuse wasn't checked (CLI, eval), and no photo_reuse check is added."""
     tau = settings.match_threshold
     expected = order.expected()
     title = catalogue.title
     checks: list[Check] = []
     hand_checks: list[str] = []
+    # What evidence would settle each unclear check, for the uncertainty summary.
+    needed: list[str] = []
 
     def add(key, verdict, conf, detail, evidence=None, local=False):
         checks.append(
@@ -101,9 +156,18 @@ def decide(
         detail = "; ".join(f"Photo {i}: {' '.join(q.reasons)}" for i, q in failed)
         add("image_quality", Verdict.UNCERTAIN, None, detail + " The operator chose to continue.", local=True)
         hand_checks.append("Retake the photo. " + failed[0][1].reasons[0])
+        needed.append("A sharp, well-lit photo. " + failed[0][1].reasons[0])
     else:
         add("image_quality", Verdict.PASS, 1.0,
             f"{len(quality)} photo(s) passed the blur, exposure, glare and resolution checks.", local=True)
+
+    # 1b. Is this photo new, or was it already used for another order?
+    if earlier_uses is not None:
+        check, hand = reuse_check(order, earlier_uses)
+        checks.append(check)
+        if hand:
+            hand_checks.append(hand)
+            needed.append("A new photo of this box, taken now.")
 
     # 2. Can we see the whole box?
     sc = perception.scene
@@ -126,6 +190,10 @@ def decide(
         detail = "; ".join(why).capitalize() + "." + (f" {sc.notes}" if sc.notes else "")
         add("scene_coverage", Verdict.UNCERTAIN, sc.visibility_confidence, detail)
         hand_checks.append("Take a photo that shows the whole inside of the box, with stacked items spread out.")
+        if not sc.box_interior_fully_visible:
+            needed.append("A photo with the whole inside of the box in the frame.")
+        if sc.items_may_be_hidden or sc.visibility_confidence < settings.visibility_threshold:
+            needed.append("A view of stacked or covered items: spread them out, or add a photo from an angle.")
 
     # 3. Sort what the model saw.
     products = [o for o in perception.objects if o.classification != "NON_PRODUCT"]
@@ -179,6 +247,10 @@ def decide(
             why = f"possible match {', '.join(_ref(o) for o in possible)} is unclear" if possible else "not seen, but items may be hidden"
             add(f"line_present:{sku}", pv, max((o.confidence for o in possible), default=None),
                 f"{name}: {why}.", {"possible_object_ids": pids})
+            feature = catalogue.get(sku).distinguishing_features if catalogue.get(sku) else ""
+            needed.append(f"Whether {name} is in the box"
+                          + (f": a clear view of {', '.join(_ref(o) for o in possible)}" if possible else "")
+                          + (f" showing {feature}" if feature else "") + ".")
 
         exact = not possible and covered and count_certain and consistent
         if exact and n == qty:
@@ -210,6 +282,7 @@ def decide(
             add(f"line_quantity:{sku}", qv, min(confs) if confs else None,
                 f"{name}: {', '.join(parts)}; {qty} ordered.", {"object_ids": ids, "possible_object_ids": pids})
             hand_checks.append(f"Count {name} by hand: there should be {qty}.")
+            needed.append(f"A count of {name} with every unit visible.")
 
         rows.append({
             "sku": sku, "title": name, "ordered": qty, "found": n, "unclear": len(possible),
@@ -257,6 +330,10 @@ def decide(
         ) + "."
         add("wrong_item", Verdict.UNCERTAIN, max(o.confidence for o in possible_wrong), detail,
             {"object_ids": [o.object_id for o in possible_wrong]})
+        for o in possible_wrong:
+            look = catalogue.get(o.sku).distinguishing_features if catalogue.get(o.sku) else ""
+            needed.append(f"A close-up of {_ref(o)}" + (f" showing {look}" if look else " showing its label or colour")
+                          + f", to tell whether it is {title(o.sku)}.")
     else:
         add("wrong_item", Verdict.PASS, clean_conf, "No product from outside the order was found.")
 
@@ -272,6 +349,9 @@ def decide(
             {"object_ids": [o.object_id for o, _ in component_ambiguous] + [o.object_id for o in possible_extra]})
         for o, parent in component_ambiguous:
             hand_checks.append(f"Check {_ref(o)}: is it loose, or part of the {title(parent)} packaging?")
+            needed.append(f"Whether {_ref(o)} is loose or packed inside the {title(parent)} box.")
+        for o in possible_extra:
+            needed.append(f"A clear view of {_ref(o)} to identify it.")
     else:
         add("extra_item", Verdict.PASS, clean_conf, "Nothing outside the order is in the box.")
 
@@ -298,6 +378,7 @@ def decide(
         instructions = []
 
     observations = {
+        "uncertainty": _uncertainty(checks, needed, hand_checks, decision),
         "expected_vs_observed": rows,
         "detected_items": [
             {**o.model_dump(), "title": title(o.sku) if o.sku else None} for o in perception.objects

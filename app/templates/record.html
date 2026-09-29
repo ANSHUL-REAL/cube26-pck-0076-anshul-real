@@ -22,6 +22,7 @@
       <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
     {% elif decision == "PENDING" %}
       <p>The AI check didn't finish. The photos are saved, so check the box by hand and record your decision below.</p>
+      {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
     {% elif r.outcome.reasons %}
       <p>{{ r.outcome.reasons[0] }}</p>
     {% endif %}
@@ -44,6 +45,29 @@
 <section class="card" style="margin-bottom:var(--gap)">
   <div class="card-head"><h2>{{ icon("clipboard-list", 18) }}What to do</h2></div>
   <ol class="todo {{ tone }}">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
+</section>
+{% endif %}
+
+{% set u = obs.get("uncertainty") %}
+{% if u %}
+<section class="card" style="margin-bottom:var(--gap)">
+  <div class="card-head"><h2>{{ icon("circle-help", 18) }}Why it can't be sure</h2></div>
+  <div class="card-body">
+    <div class="why" style="margin-top:0">
+      <div>
+        <h3>{{ icon("circle-help", 16) }}Can't tell yet</h3>
+        <ul>{% for x in u.unknown %}<li>{{ x }}</li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h3>{{ icon("camera", 16) }}What would settle it</h3>
+        <ul>{% for x in u.missing_evidence %}<li>{{ x }}</li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h3>{{ icon("check", 16) }}Already known</h3>
+        <ul class="muted">{% for x in u.known %}<li>{{ x }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+  </div>
 </section>
 {% endif %}
 
@@ -166,7 +190,9 @@
         <dt>Photo {{ loop.index }}</dt><dd><span class="mono">sha256 {{ img.sha256 }}</span><div class="muted small">{{ img.width }}×{{ img.height }} · blur score {{ img.quality.blur_var }} · photo check {{ img.quality.gate }}</div></dd>
       {% endfor %}
       <dt>Content hash</dt><dd><span class="mono">{{ r.content_hash }}</span></dd>
-      <dt>Raw record</dt><dd><a class="btn secondary" href="/api/records/{{ r.record_id }}" style="padding:6px 12px">{{ icon("braces", 15) }}View JSON</a></dd>
+      <dt>Raw record</dt><dd style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn secondary" href="/api/records/{{ r.record_id }}" style="padding:6px 12px">{{ icon("braces", 15) }}View JSON</a>
+        <a class="btn secondary" href="/api/records/{{ r.record_id }}?download=1" download style="padding:6px 12px">{{ icon("upload", 15, "flip") }}Download record</a></dd>
     </dl>
 
     {% if r.overrides %}

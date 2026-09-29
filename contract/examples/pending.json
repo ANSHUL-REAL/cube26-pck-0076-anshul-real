@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-310631162C78",
+  "record_id": "PCK-1D3E107C1547",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -24,7 +24,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "d522f43e-8141-46c8-ab06-1ffcb60f166b",
+      "image_id": "039e1894-d41b-4e2d-a1df-69ac1f7af1a2",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -71,7 +71,8 @@
     "decided_by": null,
     "decided_at": null,
     "reasons": [
-      "The vision model did not answer. The photos are saved."
+      "The vision model did not answer. The photos are saved.",
+      "Cause: timed out after 25 s"
     ],
     "fix_instructions": [
       "Check the box by hand against the order, then record your decision."
@@ -79,5 +80,5 @@
   },
   "overrides": [],
   "status": "pending",
-  "content_hash": "sha256:55cf89fcbec539ef1ea90680db12327f3efceafd7f2290895c27e2ed587ef70b"
+  "content_hash": "sha256:819229704c3045f92fa67d9c0e6c31e28106048ba0fda48170f21efd9d1f4c0a"
 }

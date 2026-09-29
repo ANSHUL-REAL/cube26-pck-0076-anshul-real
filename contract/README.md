@@ -27,7 +27,7 @@ The examples come from the real pipeline (quality gate → decision rules → ha
 | `captured_at` | UTC time the photos were taken (server time) |
 | `operator_label` | Who packed / checked the box |
 | `images[]` | `image_id` (UUIDv4), `role`, `sha256` of the stored image, `original_sha256` of the upload, size, and the local `quality` gate result |
-| `observations` | What was found: `expected_vs_observed[]`, `detected_items[]` (with `box_2d` on the photo), `missing[]`, `wrong[]`, `extra[]`, `over_quantity[]`, `unclear[]`, `non_product_items[]`, `scene`, token `usage`, `cost_usd` |
+| `observations` | What was found: `uncertainty` (below), `expected_vs_observed[]`, `detected_items[]` (with `box_2d` on the photo), `missing[]`, `wrong[]`, `extra[]`, `over_quantity[]`, `unclear[]`, `non_product_items[]`, `scene`, token `usage`, `cost_usd` |
 | `checks[]` | `check_key`, `verdict` (PASS / FAIL / UNCERTAIN / NOT_CHECKED), `confidence`, `detail`, `model_version`, `latency_ms`, `evidence`. All model-based checks share one `model_version` and `latency_ms` because they come from **one** model call |
 | `outcome` | `decision` (SEAL / STOP_AND_FIX / UNCERTAIN / PENDING), `decided_by` (`agent` or `operator:<label>`), `decided_at`, `reasons[]`, `fix_instructions[]` |
 | `overrides[]` | Each human decision: `original_decision`, `new_decision`, `reason_code`, `note`, `operator_label`, `at`, `prior_content_hash`. Appended, never replaced |
@@ -44,7 +44,19 @@ The examples come from the real pipeline (quality gate → decision rules → ha
 | `line_quantity:<SKU>` | count equals the order | count is short or over | count can't be established |
 | `wrong_item` | no product from outside the order | a different product or variant is in the box | an item might be a look-alike |
 | `extra_item` | nothing unexplained | an unknown product is in the box | could be an extra, a component of an ordered item or packaging |
+| `photo_reuse` | the photo hasn't been used for another order (web app only) | — | the exact photo was already used for a different order |
 | `vision` | — | — | `NOT_CHECKED` when the model failed (fail-open) |
+
+### `observations.uncertainty`
+
+Present whenever a check is UNCERTAIN, otherwise `null`. It is built only from the checks, so it never says more than they do:
+
+| Field | Meaning |
+|---|---|
+| `known` | Details of the checks that passed or failed |
+| `unknown` | Details of the unclear checks, most important first |
+| `missing_evidence` | What would settle each unclear check ("A count of Cotton Bath Towel with every unit visible.") |
+| `next_action` | One sentence for the operator |
 
 `qty` counts **sellable units**: an order of `SKU-MUG-11:2` (a set of 2 mugs) means 2 boxed sets, i.e. 4 mugs.
 

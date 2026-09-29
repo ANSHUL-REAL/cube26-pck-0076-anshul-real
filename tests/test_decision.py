@@ -173,3 +173,56 @@ def test_checks_from_the_model_share_model_version_and_latency(catalogue, settin
     model_checks = [c for c in r.checks if c.check_key != "image_quality"]
     assert {c.model_version for c in model_checks} == {"test-model"}
     assert {c.latency_ms for c in model_checks} == {1234}
+
+
+# ---- uncertainty summary: known / unknown / missing evidence / next action
+
+
+def test_sealed_box_has_no_uncertainty_summary(catalogue, settings):
+    r = run(make_order(("CAP-BLU", 1)), perception([obj(1, "CAP-BLU")]), catalogue, settings)
+    assert r.observations["uncertainty"] is None
+
+
+def test_stacked_items_summary_says_what_would_settle_it(catalogue, settings):
+    order = make_order(("TSHIRT-BLK", 3))
+    p = perception([obj(1, "TSHIRT-BLK"), obj(2, "TSHIRT-BLK")], hidden=True, vis_conf=0.5,
+                   counts=[SkuCount(sku="TSHIRT-BLK", count=2, count_certain=False)])
+    r = run(order, p, catalogue, settings)
+    u = r.observations["uncertainty"]
+    assert r.decision == Decision.UNCERTAIN
+    assert any("Black T-Shirt" in x for x in u["unknown"])
+    assert "A count of Black T-Shirt with every unit visible." in u["missing_evidence"]
+    assert any("stacked or covered" in x for x in u["missing_evidence"])
+    assert u["next_action"].startswith("Don't seal yet.")
+    assert all("Black T-Shirt: found" not in x for x in u["unknown"])  # facts go to "known"
+
+
+def test_loose_cable_summary_asks_if_it_is_inside_the_lamp_box(catalogue, settings):
+    p = perception([obj(1, "LAMP"), obj(2, "CABLE")])
+    r = run(make_order(("LAMP", 1)), p, catalogue, settings)
+    u = r.observations["uncertainty"]
+    assert "Whether #2 is loose or packed inside the Desk Lamp box." in u["missing_evidence"]
+
+
+def test_bad_photo_only_summary_says_retake(catalogue, settings):
+    blurry = QualityReport(gate="FAIL", reasons=["Photo looks blurry."], width=1600, height=1200,
+                           blur_var=10, mean_luma=120, clipped_pct=0, dark_pct=0)
+    r = run(make_order(("CAP-BLU", 1)), perception([obj(1, "CAP-BLU")]), catalogue, settings, quality=[blurry])
+    u = r.observations["uncertainty"]
+    assert r.decision == Decision.UNCERTAIN
+    assert u["next_action"].startswith("Retake the photo")
+    assert u["missing_evidence"] == ["A sharp, well-lit photo. Photo looks blurry."]
+
+
+def test_photo_used_for_another_order_cannot_seal(catalogue, settings):
+    order = make_order(("CAP-BLU", 1), order_id="ORD-9")
+    earlier = [{"sha256": "x", "record_id": "PCK-OLD", "order_id": "ORD-1"}]
+    r = decide(order, catalogue, perception([obj(1, "CAP-BLU")]), [good_photo()], settings, earlier_uses=earlier)
+    assert r.decision == Decision.UNCERTAIN
+    assert verdicts(r)["photo_reuse"] == Verdict.UNCERTAIN
+    assert r.reasons[0].startswith("This exact photo was already used for another order (ORD-1)")
+
+
+def test_reuse_not_checked_adds_no_check(catalogue, settings):
+    r = run(make_order(("CAP-BLU", 1)), perception([obj(1, "CAP-BLU")]), catalogue, settings)
+    assert "photo_reuse" not in verdicts(r)
