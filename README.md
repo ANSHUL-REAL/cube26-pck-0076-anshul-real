@@ -12,6 +12,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Record format for other tracks | [contract/](contract/README.md) |
 | Problems found in the brief and data | [FINDINGS.md](FINDINGS.md) |
+| Build log | [docs/BUILD-LOG.md](docs/BUILD-LOG.md) |
 | Organisers' original brief | [docs/ORIGINAL-BRIEF.md](docs/ORIGINAL-BRIEF.md) |
 
 ---
