@@ -4,6 +4,8 @@ CHECK BY HAND with the evidence behind it."""
 from __future__ import annotations
 
 import base64
+import csv
+import io
 import logging
 import time
 import uuid
@@ -22,6 +24,7 @@ from pack_manager import __version__
 from pack_manager.catalogue import load_org_catalogue, reference_images
 from pack_manager.config import get_settings
 from pack_manager.evidence import apply_override, verify
+from pack_manager.export import CSV_COLUMNS, record_row
 from pack_manager.models import OVERRIDE_REASONS, Catalogue, Decision, EvidenceRecord
 from pack_manager.orders import parse_orders_csv
 from pack_manager.pipeline import Photo, QualityRejected, prepare_photos, rerun_box, verify_box
@@ -455,14 +458,44 @@ def _api_user(request: Request) -> dict | None:
 
 
 @app.get("/api/records")
-def api_records(request: Request, order_id: str | None = None, unit_id: str | None = None):
+def api_records(request: Request, order_id: str | None = None, unit_id: str | None = None,
+                since: datetime | None = None):
+    """For other pods. With `since`: records captured at or after it, oldest first; pass the
+    returned `next_since` to get the next page, and dedupe by record_id."""
     user = _api_user(request)
     if not user:
         return JSONResponse({"error": "unauthorised"}, status_code=401)
     with db().org(user["org"]) as cur:
-        rows = store.list_records(cur, order_id=order_id, unit_id=unit_id, limit=500)
+        rows = store.list_records(cur, order_id=order_id, unit_id=unit_id, since=since, limit=500)
         full = [store.get_record(cur, r["record_id"]).model_dump(mode="json") for r in rows]
-    return {"records": full}
+    out: dict = {"records": full}
+    if since is not None:
+        out["next_since"] = full[-1]["captured_at"] if full else since.isoformat()
+    return out
+
+
+def _cell(value: str) -> str:
+    """Stop spreadsheet apps from running a cell as a formula (order ids can come from a CSV import)."""
+    return "'" + value if value[:1] in ("=", "+", "-", "@", "\t", "\r") else value
+
+
+@app.get("/api/records.csv")
+def api_records_csv(request: Request, since: datetime | None = None):
+    """Every record as CSV: the organisers' pack_sample.csv columns first, then ours."""
+    user = _api_user(request)
+    if not user:
+        return JSONResponse({"error": "unauthorised"}, status_code=401)
+    with db().org(user["org"]) as cur:
+        rows = store.list_records(cur, since=since, limit=1000)
+        records = [store.get_record(cur, r["record_id"]) for r in rows]
+    buf = io.StringIO()
+    writer = csv.DictWriter(buf, CSV_COLUMNS, lineterminator="\n")
+    writer.writeheader()
+    for record in records:
+        if record:
+            writer.writerow({k: _cell(v) for k, v in record_row(record).items()})
+    return Response(buf.getvalue(), media_type="text/csv; charset=utf-8",
+                    headers={"Content-Disposition": 'attachment; filename="pack-records.csv"'})
 
 
 @app.get("/api/records/{record_id}")

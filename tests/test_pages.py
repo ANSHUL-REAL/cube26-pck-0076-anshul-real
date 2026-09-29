@@ -35,7 +35,7 @@ class FakeStore:
     def upsert_order(self, cur, order, source="demo"):
         self.orders[(cur, order.order_id)] = order
 
-    def list_records(self, cur, decision=None, order_id=None, unit_id=None, limit=200, query=None):
+    def list_records(self, cur, decision=None, order_id=None, unit_id=None, limit=200, query=None, since=None):
         return [
             {"record_id": r.record_id, "order_id": r.subject["order_id"], "decision": r.outcome.decision.value,
              "status": r.status.value, "captured_at": r.captured_at, "operator_label": r.operator_label,
@@ -46,6 +46,7 @@ class FakeStore:
             and (unit_id is None or r.subject.get("unit_id") == unit_id)
             and (decision is None or r.outcome.decision.value == decision)
             and (query is None or query.lower() in (r.subject["order_id"] + r.record_id).lower())
+            and (since is None or r.captured_at >= since)
         ]
 
     def counts_by_decision(self, cur):
@@ -344,3 +345,34 @@ def test_app_url_is_the_admin_url_as_pack_app(tmp_path):
     write_env_value("DATABASE_URL", "postgresql://a", env)
     write_env_value("NEW_KEY", "1", env)
     assert env.read_text(encoding="utf-8") == "# keep me\nDATABASE_URL=postgresql://a\nGEMINI_MODEL=m\nNEW_KEY=1\n"
+
+
+def test_records_csv_uses_the_organisers_columns_first(client, sharp_photo):
+    import csv as csvlib
+
+    from pack_manager.export import SAMPLE_COLUMNS
+
+    rid = _pending_box(client, sharp_photo, order_id="=HYPERLINK(1)")
+    client.post(f"/records/{rid}/decision", data={"decision": "SEAL", "reason_code": "agent_unavailable", "note": ""})
+    resp = client.get("/api/records.csv")
+    assert resp.status_code == 200 and resp.headers["content-type"].startswith("text/csv")
+    rows = list(csvlib.DictReader(resp.text.splitlines()))
+    assert list(rows[0])[: len(SAMPLE_COLUMNS)] == SAMPLE_COLUMNS
+    row = rows[0]
+    assert row["order_id"] == "'=HYPERLINK(1)"  # not run as a formula in a spreadsheet
+    assert (row["agent_decision"], row["final_decision"], row["decided_by"]) == ("PENDING", "SEAL", "operator")
+    assert row["operator_verdict"] == "seal" and row["hash_verified"] == "yes"
+    assert row["order_lines"] == "CAP-BLU:1" and row["photo_refs"].startswith("images/")
+
+    client.get("/logout")
+    assert client.get("/api/records.csv").status_code == 401
+
+
+def test_api_since_returns_a_cursor(client, sharp_photo):
+    rid = _pending_box(client, sharp_photo)
+    captured = client.fake.records[rid].captured_at
+    body = client.get("/api/records", params={"since": captured.isoformat()}).json()
+    assert [r["record_id"] for r in body["records"]] == [rid] and body["next_since"]
+    later = captured.replace(year=captured.year + 1).isoformat()
+    assert client.get("/api/records", params={"since": later}).json()["records"] == []
+    assert client.get("/api/records", params={"since": "not-a-date"}).status_code == 422

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import datetime
 
 import psycopg2.extras
 
@@ -115,20 +116,26 @@ def get_record(cur, record_id: str) -> EvidenceRecord | None:
 
 
 def list_records(cur, decision: str | None = None, order_id: str | None = None,
-                 unit_id: str | None = None, limit: int = 200, query: str | None = None) -> list[dict]:
+                 unit_id: str | None = None, limit: int = 200, query: str | None = None,
+                 since: datetime | None = None) -> list[dict]:
+    """Newest first. With `since` (for other pods syncing): oldest first from that time on,
+    inclusive, so a record sharing the boundary timestamp is never skipped (dedupe by record_id)."""
+    order = "asc" if since else "desc"
     cur.execute(
-        """
+        f"""
         select record_id, order_id, unit_id, decision, status, captured_at,
                record->>'operator_label' as operator_label, jsonb_array_length(record->'overrides') as overrides
         from records
         where (%(d)s::text is null or decision = %(d)s)
           and (%(o)s::text is null or order_id = %(o)s)
           and (%(u)s::text is null or unit_id = %(u)s)
+          and (%(s)s::timestamptz is null or captured_at >= %(s)s)
           and (%(q)s::text is null or order_id ilike %(like)s or record_id ilike %(like)s or unit_id ilike %(like)s)
-        order by captured_at desc
+        order by captured_at {order}, record_id {order}
         limit %(limit)s
         """,
-        {"d": decision, "o": order_id, "u": unit_id, "limit": limit, "q": query or None, "like": f"%{query or ''}%"},
+        {"d": decision, "o": order_id, "u": unit_id, "s": since, "limit": limit, "q": query or None,
+         "like": f"%{query or ''}%"},
     )
     return cur.fetchall()
 
