@@ -2,73 +2,76 @@
 {% block title %}Orders · Pack Manager{% endblock %}
 {% block content %}
 {% import "_macros.html" as m %}
-{% set todo = rows | selectattr("decision", "none") | list %}
-{% set done = rows | rejectattr("decision", "none") | list %}
 
 <div class="page-head">
   <div>
     <h1>Orders</h1>
     <p>Pick an order, photograph the open box, and get a result before you seal it.</p>
   </div>
-  <div class="head-actions">
-    <form class="searchbox" method="get" action="/" role="search">
-      {{ icon("search", 18) }}
-      <input type="search" name="q" value="{{ q }}" placeholder="Search order, unit or SKU" aria-label="Search orders">
-    </form>
-    <a class="btn secondary" href="/orders/import" title="Import orders">Import</a>
+  <div class="actions">
+    <a class="btn secondary" href="/orders/import">Import orders</a>
   </div>
 </div>
 
 <div class="summary">
-  <div class="cell"><span class="n">{{ todo | length }}</span><span class="l">To check</span></div>
+  <a class="cell" href="/?view=todo"><span class="n">{{ view_counts.todo }}</span><span class="l">To check</span></a>
   <a class="cell seal" href="/records?decision=SEAL"><span class="n">{{ counts.get("SEAL", 0) }}</span><span class="l"><span class="dot"></span>Sealed</span></a>
   <a class="cell stop" href="/records?decision=STOP_AND_FIX"><span class="n">{{ counts.get("STOP_AND_FIX", 0) }}</span><span class="l"><span class="dot"></span><span class="hide-sm">Stopped to fix</span><span class="show-sm">Stopped</span></span></a>
   <a class="cell unsure" href="/records?decision=UNCERTAIN"><span class="n">{{ counts.get("UNCERTAIN", 0) }}</span><span class="l"><span class="dot"></span><span class="hide-sm">Check by hand{% if counts.get("PENDING") %} · {{ counts.PENDING }} waiting{% endif %}</span><span class="show-sm">By hand</span></span></a>
 </div>
 
-{% macro order_row(row) %}
-  {% set o = row.order %}
-  <div class="item">
-    <div class="tiles">{% for line in o.lines[:3] %}{{ m.tile(line.sku, catalogue.title(line.sku), thumbs) }}{% endfor %}</div>
-    <div class="grow">
-      <div class="title">
-        <a class="stretch" style="color:inherit" href="{{ '/records/' ~ row.record_id if row.decision else '/orders/' ~ o.order_id }}">{{ o.order_id }}</a>
-        {% if o.channel %}<span class="chan hide-sm">{{ o.channel }}</span>{% endif %}
-      </div>
-      <div class="sub">
-        {%- for line in o.lines %}{{ line.qty }} × {{ catalogue.title(line.sku) }}{% if not loop.last %} · {% endif %}{% endfor -%}
-      </div>
-      {% if row.decision %}<div class="status show-sm">{{ m.badge(row.decision, sm=true) }}</div>{% endif %}
-    </div>
-    <div class="end">
-      {% if row.decision %}
-        {{ m.badge(row.decision) }}
-        <a class="btn secondary sm above" href="/orders/{{ o.order_id }}">Check again</a>
-      {% else %}
-        <span class="btn secondary sm cta">Check box</span>
-      {% endif %}
-    </div>
-    <span class="go">{{ icon("chevron-right", 20) }}</span>
+<section class="card index">
+  <div class="index-bar">
+    <nav class="tabs" aria-label="Show orders">
+      {% for key, name in [("todo", "To check"), ("done", "Checked"), ("all", "All")] %}
+        <a href="/?view={{ key }}{{ '&q=' ~ q | urlencode if q }}" class="{{ 'on' if view == key }}">{{ name }} <span class="count">{{ view_counts[key] }}</span></a>
+      {% endfor %}
+    </nav>
+    <form class="searchbox" method="get" action="/" role="search">
+      {{ icon("search", 17) }}
+      <input type="hidden" name="view" value="{{ view }}">
+      <input type="search" name="q" value="{{ q }}" placeholder="Search order, box or SKU" aria-label="Search orders">
+    </form>
   </div>
-{% endmacro %}
 
-{% if rows %}
-  {% if todo %}
-  <section class="group">
-    <h2 class="section-title">To check <span class="count">{{ todo | length }}</span></h2>
-    <div class="list">{% for row in todo %}{{ order_row(row) }}{% endfor %}</div>
-  </section>
-  {% endif %}
-  {% if done %}
-  <section class="group">
-    <h2 class="section-title">Checked <span class="count">{{ done | length }}</span></h2>
-    <div class="list">{% for row in done %}{{ order_row(row) }}{% endfor %}</div>
-  </section>
-  {% endif %}
-{% else %}
-  <div class="card empty">
-    <h2>No orders{% if q %} match "{{ q }}"{% endif %}</h2>
-    {% if q %}<p><a href="/">Show all orders</a></p>{% else %}<p>Orders appear here once they're imported.</p>{% endif %}
+  {% if rows %}
+  <div class="table orders-table" role="table">
+    <div class="tr th" role="row"><span>Order</span><span>Items</span><span>Channel</span><span>Status</span><span></span></div>
+    {% for row in rows %}
+      {% set o = row.order %}
+      {% set href = '/records/' ~ row.record_id if row.decision else '/orders/' ~ o.order_id %}
+      <div class="tr" role="row">
+        <span class="c-main">
+          <span class="tiles">{% for line in o.lines[:3] %}{{ m.tile(line.sku, catalogue.title(line.sku), thumbs) }}{% endfor %}</span>
+          <span class="c-text">
+            <a class="stretch strong" href="{{ href }}">{{ o.order_id }}</a>
+            <span class="sub show-sm">{% for line in o.lines %}{{ line.qty }} × {{ catalogue.title(line.sku) }}{% if not loop.last %} · {% endif %}{% endfor %}</span>
+          </span>
+        </span>
+        <span class="c-items hide-sm">{% for line in o.lines %}{{ line.qty }} × {{ catalogue.title(line.sku) }}{% if not loop.last %}<br>{% endif %}{% endfor %}</span>
+        <span class="c-chan hide-sm">{{ o.channel or "—" }}</span>
+        <span class="c-status">{% if row.decision %}{{ m.badge(row.decision, sm=true) }}{% else %}<span class="badge plain sm hide-sm"><span class="dot"></span>Not checked</span>{% endif %}</span>
+        <span class="c-act hide-sm">
+          {% if row.decision %}<a class="btn secondary sm above" href="/orders/{{ o.order_id }}">Check again</a>
+          {% else %}<span class="btn secondary sm cta">Check box</span>{% endif %}
+        </span>
+        <span class="go show-sm">{{ icon("chevron-right", 18) }}</span>
+      </div>
+    {% endfor %}
   </div>
-{% endif %}
+  {% else %}
+  <div class="empty">
+    {% if q %}
+      <h2>No orders match "{{ q }}"</h2>
+      <p><a href="/?view={{ view }}">Clear the search</a></p>
+    {% elif view == "todo" %}
+      <h2>All caught up</h2>
+      <p>Every order has been checked. <a href="/orders/import">Import more orders</a>.</p>
+    {% else %}
+      <h2>No orders yet</h2>
+      <p><a href="/orders/import">Import today's orders</a> to get started.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
 {% endblock %}

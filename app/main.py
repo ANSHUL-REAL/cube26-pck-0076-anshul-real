@@ -189,14 +189,20 @@ def logout(request: Request):
 
 
 @app.get("/", response_class=HTMLResponse)
-def orders(request: Request, q: str | None = None):
+def orders(request: Request, q: str | None = None, view: str = "todo"):
     user = current_user(request)
     with db().org(user["org"]) as cur:
         rows = store.list_orders(cur, q)
         counts = store.counts_by_decision(cur)
     catalogue, _ = org_catalogue(user["org"])
-    return page(request, "orders.html", rows=rows, counts=counts, q=q or "", catalogue=catalogue,
-                thumbs=_thumbs(catalogue))
+    views = {
+        "todo": [r for r in rows if not r["decision"]],
+        "done": [r for r in rows if r["decision"]],
+        "all": rows,
+    }
+    view = view if view in views else "todo"
+    return page(request, "orders.html", rows=views[view], view=view, view_counts={k: len(v) for k, v in views.items()},
+                counts=counts, q=q or "", catalogue=catalogue, thumbs=_thumbs(catalogue))
 
 
 @app.get("/orders/import", response_class=HTMLResponse)
@@ -331,13 +337,14 @@ def _object_states(record: EvidenceRecord) -> dict[str, str]:
 
 
 @app.get("/records", response_class=HTMLResponse)
-def records(request: Request, decision: str | None = None):
+def records(request: Request, decision: str | None = None, q: str | None = None):
     user = current_user(request)
     decision = decision if decision in DECISION_UI else None
+    q = (q or "").strip()[:100]
     with db().org(user["org"]) as cur:
-        rows = store.list_records(cur, decision=decision)
+        rows = store.list_records(cur, decision=decision, query=q or None)
         counts = store.counts_by_decision(cur)
-    return page(request, "records.html", rows=rows, counts=counts, decision=decision)
+    return page(request, "records.html", rows=rows, counts=counts, decision=decision, q=q)
 
 
 @app.get("/records/{record_id}", response_class=HTMLResponse)

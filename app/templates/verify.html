@@ -2,14 +2,20 @@
 {% block title %}{{ order.order_id }} · Pack Manager{% endblock %}
 {% block content %}
 {% import "_macros.html" as m %}
-<a class="back" href="/">{{ icon("arrow-left", 16) }}All orders</a>
+{% set total = lines | sum(attribute="qty") %}
+<a class="back" href="/">{{ icon("arrow-left", 16) }}Orders</a>
 
 <div class="page-head">
   <div>
-    <h1 class="id">{{ order.order_id }}</h1>
-    {% if order.channel or order.unit_id %}
-    <p class="facts">{% if order.channel %}<span>{{ order.channel }}</span>{% endif %}{% if order.unit_id %}<span>Box <span class="mono">{{ order.unit_id }}</span></span>{% endif %}</p>
-    {% endif %}
+    <div class="title-row">
+      <h1 class="id">{{ order.order_id }}</h1>
+      {% if history %}{{ m.badge(history[0].decision) }}{% else %}<span class="badge plain"><span class="dot"></span>Not checked</span>{% endif %}
+    </div>
+    <p class="facts">
+      {% if order.channel %}<span>{{ order.channel }}</span>{% endif %}
+      {% if order.unit_id %}<span>Box {{ order.unit_id }}</span>{% endif %}
+      <span>{{ total }} item{{ "s" if total != 1 }}</span>
+    </p>
   </div>
   <div class="steps" aria-label="Progress">
     <span class="step done"><span class="num">1</span>Order</span><span class="sep"></span>
@@ -18,38 +24,17 @@
   </div>
 </div>
 
-<div class="grid side">
-  <section class="card">
-    <div class="card-head">
-      <h2>Should be in the box</h2>
-      <span class="count">{{ lines | sum(attribute="qty") }} item{{ "s" if lines | sum(attribute="qty") != 1 }}</span>
-    </div>
-    <ul class="lines">
-      {% for line in lines %}
-      <li>
-        {{ m.tile(line.sku, line.title, [line.sku] if line.thumb else [], "lg") }}
-        <div class="name">
-          <div>{{ line.title }}</div>
-          <div class="muted small">{{ line.sku }}{% for k, v in line.attributes.items() %} · {{ v }}{% endfor %}</div>
-        </div>
-        <div class="qty"><span>×</span>{{ line.qty }}</div>
-      </li>
-      {% endfor %}
-    </ul>
-    <div class="card-foot"><span>The AI isn't shown this list. It counts what it sees on its own, then the two are compared.</span></div>
-  </section>
+<div class="layout verify-layout">
+  <section class="card card-pad area-photo">
+    <h2>Photograph the open box</h2>
+    <p class="muted small" style="margin:4px 0 18px">The AI lists what it sees, then the list is compared with the order.</p>
 
-  <section class="card card-pad">
-    <h2 style="margin-bottom:16px">Photo of the open box</h2>
-
-    {% if error %}<div class="callout error" style="margin-bottom:16px"><div>{{ error }}</div></div>{% endif %}
+    {% if error %}<div class="callout error" style="margin-bottom:16px">{{ error }}</div>{% endif %}
 
     {% if rejected %}
       <div class="callout warn">
-        <div>
-          <strong>The photo could be clearer.</strong>
-          <ul>{% for r in rejected if not r.ok %}{% for reason in r.reasons %}<li>Photo {{ r.n }}: {{ reason }}</li>{% endfor %}{% endfor %}</ul>
-        </div>
+        <strong>The photo could be clearer.</strong>
+        <ul>{% for r in rejected if not r.ok %}{% for reason in r.reasons %}<li>Photo {{ r.n }}: {{ reason }}</li>{% endfor %}{% endfor %}</ul>
       </div>
       <div class="previews">{% for r in rejected %}<img src="{{ r.src }}" alt="Photo {{ r.n }}">{% endfor %}</div>
       <form method="post" action="/orders/{{ order.order_id }}/verify" data-busy style="margin:14px 0 22px">
@@ -79,20 +64,40 @@
       </ul>
     </form>
   </section>
-</div>
 
-{% if history %}
-<section class="card" style="margin-top:var(--gap)">
-  <div class="card-head"><h2>Earlier checks of this order</h2></div>
-  <ul class="history">
-    {% for h in history %}
-    <li>
-      {{ m.badge(h.decision, sm=true) }}
-      <span class="muted">{{ h.captured_at | when }} · {{ h.operator_label }}</span>
-      <a href="/records/{{ h.record_id }}">Open {{ icon("chevron-right", 16) }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-</section>
-{% endif %}
+  <section class="card area-items">
+    <div class="card-head">
+      <h2>Should be in the box</h2>
+      <span class="count">{{ total }} item{{ "s" if total != 1 }}</span>
+    </div>
+    <ul class="lines">
+      {% for line in lines %}
+      <li>
+        {{ m.tile(line.sku, line.title, [line.sku] if line.thumb else [], "lg") }}
+        <div class="name">
+          <div>{{ line.title }}</div>
+          <div class="muted small">{{ line.sku }}{% for k, v in line.attributes.items() %} · {{ v }}{% endfor %}</div>
+        </div>
+        <div class="qty"><span>×</span>{{ line.qty }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="card-foot">The AI isn't shown this list. It counts what it sees on its own, then the two are compared.</div>
+  </section>
+
+  {% if history %}
+  <section class="card area-history">
+    <div class="card-head"><h2>Earlier checks</h2><span class="count">{{ history | length }}</span></div>
+    <ul class="history">
+      {% for h in history %}
+      <li>
+        {{ m.badge(h.decision, sm=true) }}
+        <span class="muted">{{ h.captured_at | when }} · {{ h.operator_label }}</span>
+        <a href="/records/{{ h.record_id }}">Open {{ icon("chevron-right", 15) }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</div>
 {% endblock %}

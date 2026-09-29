@@ -7,63 +7,54 @@
 {% set order_id = r.subject.order_id %}
 {% set needs_human = r.status.value in ("pending", "pending_review") %}
 {% set state_word = {"ok": "matches the order", "problem": "wrong or extra", "unsure": "unclear", "insert": "packaging or insert"} %}
+{% set products = obs.get("detected_items", []) | rejectattr("classification", "equalto", "NON_PRODUCT") | list %}
 
 <a class="back" href="/orders/{{ order_id }}">{{ icon("arrow-left", 16) }}{{ order_id }}</a>
 
+<div class="page-head">
+  <div>
+    <div class="title-row">
+      <h1 class="id">{{ order_id }}</h1>
+      {{ m.badge(decision) }}
+    </div>
+    <p class="facts">
+      <span>Checked {{ r.captured_at | when }}</span>
+      <span>by {{ r.operator_label }}</span>
+      <span class="hide-sm">{{ r.record_id }}</span>
+    </p>
+  </div>
+  <div class="actions">
+    <button class="btn secondary" type="button" data-copy-link>Copy link</button>
+    <a class="btn secondary hide-sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a>
+  </div>
+</div>
+
 <section class="verdict {{ tone }}">
-  <div class="grow">
-    {% if r.overrides %}<div class="kicker">Decided by hand</div>{% endif %}
-    <h1>{{ label }}</h1>
-    {% if r.overrides %}
-      {% set last = r.overrides[-1] %}
-      <p>Decided by {{ last.operator_label }} ({{ reasons.get(last.reason_code, last.reason_code) }}{% if last.note %}: "{{ last.note }}"{% endif %}). The agent's result was <strong>{{ DECISION_UI[agent_decision.value][0] }}</strong>.</p>
-    {% elif decision == "SEAL" %}
-      <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
-    {% elif decision == "PENDING" %}
-      <p>The AI check didn't finish. The photos are saved, so check the box by hand and record your decision below.</p>
-      {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
-    {% elif r.outcome.reasons %}
-      <p>{{ r.outcome.reasons[0] }}</p>
-    {% endif %}
-    <div class="meta">
-      <span>{{ r.captured_at | when }}</span>
-      <span>{{ r.operator_label }}</span>
-      {% if decision != "PENDING" and not r.overrides %}
-      <span class="score"><b class="PASS">{{ tally.PASS }}</b> checks passed{% if tally.FAIL %}, <b class="FAIL">{{ tally.FAIL }}</b> failed{% endif %}{% if tally.UNCERTAIN %}, <b class="UNCERTAIN">{{ tally.UNCERTAIN }}</b> unclear{% endif %}</span>
-      {% endif %}
-    </div>
-  </div>
-</section>
+  {% if r.overrides %}<div class="kicker">Decided by hand</div>{% endif %}
+  <h2 class="verdict-title">{{ label }}</h2>
+  {% if r.overrides %}
+    {% set last = r.overrides[-1] %}
+    <p>Decided by {{ last.operator_label }} ({{ reasons.get(last.reason_code, last.reason_code) }}{% if last.note %}: "{{ last.note }}"{% endif %}). The agent's result was <strong>{{ DECISION_UI[agent_decision.value][0] }}</strong>.</p>
+  {% elif decision == "SEAL" %}
+    <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
+  {% elif decision == "PENDING" %}
+    <p>The AI check didn't finish. The photos are saved, so check the box by hand and record your decision below.</p>
+    {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
+  {% elif r.outcome.reasons %}
+    <p>{{ r.outcome.reasons[0] }}</p>
+  {% endif %}
 
-{% if r.outcome.fix_instructions and not r.overrides %}
-<section class="card" style="margin-bottom:var(--gap)">
-  <div class="card-head"><h2>What to do</h2></div>
-  <ol class="todo {{ tone }}">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
-</section>
-{% endif %}
-
-{% set u = obs.get("uncertainty") %}
-{% if u %}
-<section class="card" style="margin-bottom:var(--gap)">
-  <div class="card-head"><h2>Why it can't be sure</h2></div>
-  <div class="card-body">
-    <div class="why" style="margin-top:0">
-      <div>
-        <h3>Can't tell yet</h3>
-        <ul>{% for x in u.unknown %}<li>{{ x }}</li>{% endfor %}</ul>
-      </div>
-      <div>
-        <h3>What would settle it</h3>
-        <ul>{% for x in u.missing_evidence %}<li>{{ x }}</li>{% endfor %}</ul>
-      </div>
-      <div>
-        <h3>Already known</h3>
-        <ul class="muted">{% for x in u.known %}<li>{{ x }}</li>{% endfor %}</ul>
-      </div>
+  {% if r.outcome.fix_instructions and not r.overrides %}
+    <div class="verdict-steps">
+      <div class="label">What to do</div>
+      <ol class="todo {{ tone }}">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
     </div>
-  </div>
+  {% endif %}
+
+  {% if decision != "PENDING" and not r.overrides %}
+    <p class="score"><b class="PASS">{{ tally.PASS }}</b> checks passed{% if tally.FAIL %} · <b class="FAIL">{{ tally.FAIL }}</b> failed{% endif %}{% if tally.UNCERTAIN %} · <b class="UNCERTAIN">{{ tally.UNCERTAIN }}</b> unclear{% endif %}</p>
+  {% endif %}
 </section>
-{% endif %}
 
 {% if needs_human %}
 <section class="card card-pad decide-card" style="margin-bottom:var(--gap)">
@@ -73,132 +64,154 @@
 </section>
 {% endif %}
 
-<div class="grid two">
-  <section class="card">
-    <div class="card-head"><h2>Order vs box</h2></div>
-    {% if obs.get("expected_vs_observed") %}
-      <ul class="checklist">
-        {% for row in obs.expected_vs_observed %}
-          {% set v = "FAIL" if "FAIL" in (row.present, row.quantity) else ("UNCERTAIN" if "UNCERTAIN" in (row.present, row.quantity) else "PASS") %}
-          <li>
-            {{ m.tile(row.sku, row.title, thumbs, "sm") }}
-            <div class="grow"><div class="nm">{{ row.title }}</div><div class="muted small">{{ row.sku }}</div></div>
-            <div class="tally"><b>{{ row.found }}</b>{% if row.unclear %}<span class="muted small"> +{{ row.unclear }}?</span>{% endif %}<span>of {{ row.ordered }} found</span></div>
-            <span class="badge {{ v }} sm"><span class="dot"></span>{{ {"PASS": "OK", "FAIL": "Problem", "UNCERTAIN": "Unclear"}[v] }}</span>
-          </li>
+{% set u = obs.get("uncertainty") %}
+{% if u %}
+<section class="card" style="margin-bottom:var(--gap)">
+  <div class="card-head"><h2>Why it can't be sure</h2></div>
+  <div class="card-body">
+    <div class="why" style="margin-top:0">
+      <div><h3>Can't tell yet</h3><ul>{% for x in u.unknown %}<li>{{ x }}</li>{% endfor %}</ul></div>
+      <div><h3>What would settle it</h3><ul>{% for x in u.missing_evidence %}<li>{{ x }}</li>{% endfor %}</ul></div>
+      <div><h3>Already known</h3><ul class="muted">{% for x in u.known %}<li>{{ x }}</li>{% endfor %}</ul></div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<div class="layout record-layout">
+  <div class="stack-main">
+    <section class="card">
+      <div class="card-head"><h2>What the camera saw</h2>{% if obs.get("detected_items") %}<span class="count">{{ products | length }} item{{ "s" if products | length != 1 }} found</span>{% endif %}</div>
+      <div class="card-body">
+        {% for img in r.images %}
+          {% set pic = loop.index %}
+          <figure class="photo">
+            <img src="/images/{{ img.image_id }}" alt="Photo {{ pic }} of the open box">
+            {% for o in obs.get("detected_items", []) if o.photo == pic and o.box_2d %}
+              {% set b = o.box_2d %}
+              <div class="box {{ states.get(o.object_id, 'ok') }}"
+                   style="top:{{ b[0] / 10 }}%;left:{{ b[1] / 10 }}%;height:{{ (b[2] - b[0]) / 10 }}%;width:{{ (b[3] - b[1]) / 10 }}%"
+                   title="{{ o.title or o.description }}"><span>{{ o.object_id[1:] }}</span></div>
+            {% endfor %}
+          </figure>
         {% endfor %}
-      </ul>
-      {% set notes = obs.get("wrong", []) + obs.get("extra", []) + obs.get("unclear", []) + obs.get("non_product_items", []) %}
-      {% if notes %}
-      <ul class="notes">
-        {% for w in obs.get("wrong", []) %}<li><span class="badge FAIL sm">Wrong item</span><span>Expected {{ w.expected_title }}, found {{ w.found_title }} (#{{ w.object_id[1:] }})</span></li>{% endfor %}
-        {% for e in obs.get("extra", []) %}<li><span class="badge FAIL sm">Extra</span><span>{{ e.title }} (#{{ e.object_id[1:] }})</span></li>{% endfor %}
-        {% for u in obs.get("unclear", []) %}<li><span class="badge UNCERTAIN sm">Unclear</span><span>#{{ u.object_id[1:] }}: {{ u.description }}</span></li>{% endfor %}
-        {% for n in obs.get("non_product_items", []) %}<li><span class="badge plain sm">Ignored</span><span>#{{ n.object_id[1:] }}: {{ n.description }}</span></li>{% endfor %}
-      </ul>
-      {% endif %}
-    {% else %}
-      <ul class="checklist">
-        {% for line in r.subject.expected_lines %}
-          <li>
-            {{ m.tile(line.sku, catalogue.title(line.sku), thumbs, "sm") }}
-            <div class="grow"><div class="nm">{{ catalogue.title(line.sku) }}</div><div class="muted small">{{ line.sku }}</div></div>
-            <div class="tally"><b>{{ line.qty }}</b><span>ordered</span></div>
-          </li>
-        {% endfor %}
-      </ul>
+        {% if obs.get("detected_items") %}
+          <ul class="found">
+            {% for o in obs.detected_items %}
+              {% set st = states.get(o.object_id, 'ok') %}
+              <li class="{{ st }}">
+                <span class="n">{{ o.object_id[1:] }}</span>
+                <span class="what">{{ o.title or o.description or "Unidentified item" }} <span class="muted small">· {{ state_word[st] }}</span></span>
+                {% if o.classification != "NON_PRODUCT" %}<span class="conf">{{ (o.confidence * 100) | round | int }}% sure</span>{% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% elif decision == "PENDING" %}
+          <p class="muted small" style="margin-top:12px">No items were marked because the AI check didn't run.</p>
+        {% endif %}
+      </div>
+    </section>
+
+    {% if not needs_human %}
+    <details class="fold">
+      <summary>Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
+      <div class="inner">
+        <p class="muted small">Record what you decided by hand. The agent's result stays on the record next to yours.</p>
+        {% include "_decide_form.html" %}
+      </div>
+    </details>
     {% endif %}
-  </section>
-  <section class="card">
-    <div class="card-head"><h2>What the camera saw</h2></div>
-    <div class="card-body">
-      {% for img in r.images %}
-        {% set pic = loop.index %}
-        <figure class="photo">
-          <img src="/images/{{ img.image_id }}" alt="Photo {{ pic }} of the open box">
-          {% for o in obs.get("detected_items", []) if o.photo == pic and o.box_2d %}
-            {% set b = o.box_2d %}
-            <div class="box {{ states.get(o.object_id, 'ok') }}"
-                 style="top:{{ b[0] / 10 }}%;left:{{ b[1] / 10 }}%;height:{{ (b[2] - b[0]) / 10 }}%;width:{{ (b[3] - b[1]) / 10 }}%"
-                 title="{{ o.title or o.description }}"><span>{{ o.object_id[1:] }}</span></div>
+
+    <details class="fold">
+      <summary>Evidence details <span class="count">{{ r.checks | length }} checks</span>{{ icon("chevron-down", 18, "chev") }}</summary>
+      <div class="inner">
+        <ul class="checks">
+          {% for c in r.checks %}
+          <li>
+            <div><div class="key">{{ c.check_key }}</div><div class="detail">{{ c.detail }}</div></div>
+            <span class="v {{ c.verdict.value }}"><span class="dot"></span>{{ {"PASS": "Pass", "FAIL": "Fail", "UNCERTAIN": "Unclear", "NOT_CHECKED": "Not checked"}.get(c.verdict.value, c.verdict.value) }}{% if c.confidence is not none %}<span class="conf"> · {{ "%.2f" | format(c.confidence) }}</span>{% endif %}</span>
+          </li>
           {% endfor %}
-        </figure>
-      {% endfor %}
-      {% if obs.get("detected_items") %}
-        <ul class="found">
-          {% for o in obs.detected_items %}
-            {% set st = states.get(o.object_id, 'ok') %}
-            <li class="{{ st }}">
-              <span class="n">{{ o.object_id[1:] }}</span>
-              <span class="what">{{ o.title or o.description or "Unidentified item" }} <span class="muted small">· {{ state_word[st] }}</span></span>
-              {% if o.classification != "NON_PRODUCT" %}<span class="conf">{{ (o.confidence * 100) | round | int }}% sure</span>{% endif %}
+        </ul>
+        <div class="subhead">Photos and hash</div>
+        <dl class="meta">
+          {% for img in r.images %}
+            <dt>Photo {{ loop.index }}</dt><dd><span class="mono">sha256 {{ img.sha256 }}</span><div class="muted small">{{ img.width }}×{{ img.height }} · blur score {{ img.quality.blur_var }} · photo check {{ img.quality.gate }}</div></dd>
+          {% endfor %}
+          <dt>Content hash</dt><dd><span class="mono">{{ r.content_hash }}</span></dd>
+          {% if obs.get("usage") %}
+            <dt>Model call</dt><dd>{{ r.checks[-1].latency_ms }} ms · {{ obs.usage.get("total_tokens", 0) }} tokens{% if obs.get("cost_usd") is not none %} · ${{ "%.4f" | format(obs.cost_usd) }}{% endif %}{% if obs.get("cached_response") %} · cached{% endif %}</dd>
+          {% endif %}
+        </dl>
+      </div>
+    </details>
+  </div>
+
+  <aside class="stack-side">
+    <section class="card">
+      <div class="card-head"><h2>Order vs box</h2></div>
+      {% if obs.get("expected_vs_observed") %}
+        <ul class="checklist">
+          {% for row in obs.expected_vs_observed %}
+            {% set v = "FAIL" if "FAIL" in (row.present, row.quantity) else ("UNCERTAIN" if "UNCERTAIN" in (row.present, row.quantity) else "PASS") %}
+            <li>
+              {{ m.tile(row.sku, row.title, thumbs, "sm") }}
+              <div class="grow"><div class="nm">{{ row.title }}</div><div class="muted small">{{ row.sku }} · <span class="tone-{{ {'PASS': 'seal', 'FAIL': 'stop', 'UNCERTAIN': 'unsure'}[v] }}">{{ {"PASS": "OK", "FAIL": "Problem", "UNCERTAIN": "Unclear"}[v] }}</span></div></div>
+              <div class="tally"><b>{{ row.found }}{% if row.unclear %}<small>+{{ row.unclear }}?</small>{% endif %}</b><span>of {{ row.ordered }}</span></div>
             </li>
           {% endfor %}
         </ul>
-      {% elif decision == "PENDING" %}
-        <p class="muted small" style="margin-top:12px">No items were marked because the AI check didn't run.</p>
+        {% set notes = obs.get("wrong", []) + obs.get("extra", []) + obs.get("unclear", []) + obs.get("non_product_items", []) %}
+        {% if notes %}
+        <ul class="notes">
+          {% for w in obs.get("wrong", []) %}<li><span class="badge FAIL sm">Wrong item</span><span>Expected {{ w.expected_title }}, found {{ w.found_title }} (#{{ w.object_id[1:] }})</span></li>{% endfor %}
+          {% for e in obs.get("extra", []) %}<li><span class="badge FAIL sm">Extra</span><span>{{ e.title }} (#{{ e.object_id[1:] }})</span></li>{% endfor %}
+          {% for x in obs.get("unclear", []) %}<li><span class="badge UNCERTAIN sm">Unclear</span><span>#{{ x.object_id[1:] }}: {{ x.description }}</span></li>{% endfor %}
+          {% for n in obs.get("non_product_items", []) %}<li><span class="badge plain sm">Ignored</span><span>#{{ n.object_id[1:] }}: {{ n.description }}</span></li>{% endfor %}
+        </ul>
+        {% endif %}
+      {% else %}
+        <ul class="checklist">
+          {% for line in r.subject.expected_lines %}
+            <li>
+              {{ m.tile(line.sku, catalogue.title(line.sku), thumbs, "sm") }}
+              <div class="grow"><div class="nm">{{ catalogue.title(line.sku) }}</div><div class="muted small">{{ line.sku }}</div></div>
+              <div class="tally"><b>{{ line.qty }}</b><span>ordered</span></div>
+            </li>
+          {% endfor %}
+        </ul>
       {% endif %}
-    </div>
-  </section>
+    </section>
 
+    <section class="card">
+      <div class="card-head"><h2>Evidence</h2></div>
+      <div class="card-body">
+        <p class="hash {{ 'ok' if hash_ok else 'bad' }}"><span class="dot"></span>{% if hash_ok %}Content hash matches record{% else %}Content hash does not match: this record was changed after it was saved{% endif %}</p>
+        <dl class="kv">
+          <dt>Record</dt><dd>{{ r.record_id }}</dd>
+          <dt>Photos</dt><dd>{{ r.images | length }}</dd>
+          <dt>Agent</dt><dd>{{ r.agent.version }}{% if r.agent.model_version %} · {{ r.agent.model_version }}{% endif %}</dd>
+          <dt>Company</dt><dd>{{ r.organization_id }}{% if r.client_id %} · {{ r.client_id }}{% endif %}</dd>
+        </dl>
+        <div class="btn-row">
+          <a class="btn secondary sm" href="/api/records/{{ r.record_id }}">View JSON</a>
+          <a class="btn secondary sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>History</h2></div>
+      <div class="card-body">
+        <ol class="events">
+          <li><b>Photos taken</b> by {{ r.operator_label }}<span>{{ r.captured_at | when }}</span></li>
+          <li><b>AI check: {{ DECISION_UI[agent_decision.value][0] }}</b>{% if decision != "PENDING" or r.overrides %} · {{ tally.PASS }} of {{ r.checks | length }} checks passed{% endif %}<span>{{ r.captured_at | when }}</span></li>
+          {% for o in r.overrides %}
+          <li><b>{{ o.operator_label }}: {{ DECISION_UI[o.new_decision.value][0] }}</b> · {{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}<span>{{ o.at | when }}</span></li>
+          {% endfor %}
+        </ol>
+      </div>
+    </section>
+  </aside>
 </div>
-
-{% if not needs_human %}
-<details class="fold" style="margin-top:var(--gap)">
-  <summary>Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
-  <div class="inner">
-    <p class="muted small">Record what you decided by hand. The agent's result stays on the record next to yours.</p>
-    {% include "_decide_form.html" %}
-  </div>
-</details>
-{% endif %}
-
-<details class="fold" style="margin-top:12px">
-  <summary>
-    Evidence details
-    {% if hash_ok %}<span class="badge PASS sm"><span class="dot"></span>hash matches record</span>{% else %}<span class="badge FAIL sm"><span class="dot"></span>hash does not match</span>{% endif %}
-    {{ icon("chevron-down", 18, "chev") }}
-  </summary>
-  <div class="inner">
-    <div class="subhead" style="margin-top:0">Checks</div>
-    <ul class="checks">
-      {% for c in r.checks %}
-      <li>
-        <div><div class="key">{{ c.check_key }}</div><div class="detail">{{ c.detail }}</div></div>
-        <span class="v {{ c.verdict.value }}"><span class="dot"></span>{{ {"PASS": "Pass", "FAIL": "Fail", "UNCERTAIN": "Unclear", "NOT_CHECKED": "Not checked"}.get(c.verdict.value, c.verdict.value) }}{% if c.confidence is not none %}<span class="conf"> · {{ "%.2f" | format(c.confidence) }}</span>{% endif %}</span>
-      </li>
-      {% endfor %}
-    </ul>
-
-    <div class="subhead">Record</div>
-    <dl class="meta">
-      <dt>Record</dt><dd>{{ r.record_id }} · {{ r.schema_version }} · status {{ r.status.value }}</dd>
-      <dt>Company</dt><dd>{{ r.organization_id }}{% if r.client_id %} · client {{ r.client_id }}{% endif %}</dd>
-      <dt>Captured</dt><dd>{{ r.captured_at | when }} by {{ r.operator_label }}</dd>
-      <dt>Agent</dt><dd>{{ r.agent.name }} {{ r.agent.version }} · prompt {{ r.agent.prompt_version }}{% if r.agent.model_version %} · {{ r.agent.model_version }}{% endif %}</dd>
-      {% if obs.get("usage") %}
-        <dt>Model call</dt><dd>{{ r.checks[-1].latency_ms }} ms · {{ obs.usage.get("total_tokens", 0) }} tokens{% if obs.get("cost_usd") is not none %} · ${{ "%.4f" | format(obs.cost_usd) }}{% endif %}{% if obs.get("cached_response") %} · cached{% endif %}</dd>
-      {% endif %}
-      {% for img in r.images %}
-        <dt>Photo {{ loop.index }}</dt><dd><span class="mono">sha256 {{ img.sha256 }}</span><div class="muted small">{{ img.width }}×{{ img.height }} · blur score {{ img.quality.blur_var }} · photo check {{ img.quality.gate }}</div></dd>
-      {% endfor %}
-      <dt>Content hash</dt><dd><span class="mono">{{ r.content_hash }}</span></dd>
-      <dt>Raw record</dt><dd style="display:flex;gap:8px;flex-wrap:wrap">
-        <a class="btn secondary sm" href="/api/records/{{ r.record_id }}">View JSON</a>
-        <a class="btn secondary sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a></dd>
-    </dl>
-
-    {% if r.overrides %}
-      <div class="subhead">Decision history</div>
-      <ul class="timeline">
-        <li><strong>Agent</strong>: {{ DECISION_UI[agent_decision.value][0] }} <span class="muted">· {{ r.captured_at | when }}</span></li>
-        {% for o in r.overrides %}
-        <li><strong>{{ o.operator_label }}</strong>: {{ DECISION_UI[o.original_decision.value][0] }} → {{ DECISION_UI[o.new_decision.value][0] }}
-          <span class="muted">· {{ o.at | when }}</span>
-          <div class="muted small">{{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}</div></li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  </div>
-</details>
 {% endblock %}

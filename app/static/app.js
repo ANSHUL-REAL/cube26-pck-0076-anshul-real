@@ -75,4 +75,13 @@ document.addEventListener("click", (e) => {
     input.value = demo.dataset.code;
     input.form.requestSubmit();
   }
+
+  // "Copy link" on a record: for sending to a teammate who can sign in.
+  const copy = e.target.closest("button[data-copy-link]");
+  if (copy && navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(() => {
+      copy.textContent = "Link copied";
+      setTimeout(() => (copy.textContent = "Copy link"), 2000);
+    });
+  }
 });

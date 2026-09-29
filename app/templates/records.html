@@ -5,36 +5,53 @@
 <div class="page-head">
   <div>
     <h1>Records</h1>
-    <p>Every checked box, with its photos and the reasons behind the result.</p>
+    <p>Every checked box, with its photos and the reasons behind the result. Search by order to answer a customer claim.</p>
   </div>
 </div>
 
-<nav class="tabs" aria-label="Filter by result">
-  <a href="/records" class="{{ 'on' if not decision }}">All <span class="count">{{ counts.values() | sum }}</span></a>
-  {% for key in ["SEAL", "STOP_AND_FIX", "UNCERTAIN", "PENDING"] %}
-    <a href="/records?decision={{ key }}" class="{{ 'on' if decision == key }}">{{ DECISION_UI[key][0] }} <span class="count">{{ counts.get(key, 0) }}</span></a>
-  {% endfor %}
-</nav>
+<section class="card index">
+  <div class="index-bar">
+    <nav class="tabs" aria-label="Filter by result">
+      <a href="/records{{ '?q=' ~ q | urlencode if q }}" class="{{ 'on' if not decision }}">All <span class="count">{{ counts.values() | sum }}</span></a>
+      {% for key in ["SEAL", "STOP_AND_FIX", "UNCERTAIN", "PENDING"] %}
+        <a href="/records?decision={{ key }}{{ '&q=' ~ q | urlencode if q }}" class="{{ 'on' if decision == key }}">{{ DECISION_UI[key][0] }} <span class="count">{{ counts.get(key, 0) }}</span></a>
+      {% endfor %}
+    </nav>
+    <form class="searchbox" method="get" action="/records" role="search">
+      {{ icon("search", 17) }}
+      {% if decision %}<input type="hidden" name="decision" value="{{ decision }}">{% endif %}
+      <input type="search" name="q" value="{{ q }}" placeholder="Search order or record ID" aria-label="Search records">
+    </form>
+  </div>
 
-{% if rows %}
-<div class="list">
-  {% for row in rows %}
-    {% set label, tone = DECISION_UI[row.decision] %}
-    <div class="item">
-      <div class="grow">
-        <div class="title"><a class="stretch" style="color:inherit" href="/records/{{ row.record_id }}">{{ row.order_id }}</a>
-          {% if row.overrides %}<span class="chan hide-sm">decided by hand</span>{% endif %}</div>
-        <div class="sub"><span class="show-sm tone-{{ tone }}">{{ label }} · </span>{{ row.captured_at | when }} · {{ row.operator_label }}<span class="hide-sm"> · <span class="mono">{{ row.record_id }}</span></span></div>
+  {% if rows %}
+  <div class="table records-table" role="table">
+    <div class="tr th" role="row"><span>Order</span><span>Result</span><span>Checked</span><span>By</span><span>Record</span></div>
+    {% for row in rows %}
+      {% set label, tone = DECISION_UI[row.decision] %}
+      <div class="tr" role="row">
+        <span class="c-main"><span class="c-text">
+          <a class="stretch strong" href="/records/{{ row.record_id }}">{{ row.order_id }}</a>
+          <span class="sub show-sm">{{ row.captured_at | when }} · {{ row.operator_label }}</span>
+        </span></span>
+        <span class="c-status">{{ m.badge(row.decision, sm=true) }}{% if row.overrides %}<span class="chan hide-sm"> by hand</span>{% endif %}</span>
+        <span class="hide-sm muted">{{ row.captured_at | when }}</span>
+        <span class="hide-sm muted">{{ row.operator_label }}</span>
+        <span class="hide-sm muted small">{{ row.record_id }}</span>
+        <span class="go show-sm">{{ icon("chevron-right", 18) }}</span>
       </div>
-      <div class="end">{{ m.badge(row.decision) }}</div>
-      <span class="go">{{ icon("chevron-right", 20) }}</span>
-    </div>
-  {% endfor %}
-</div>
-{% else %}
-  <div class="card empty">
-    <h2>No records {{ "with this result " if decision }}yet</h2>
-    <p>Check a box from the <a href="/">Orders</a> page and its record appears here.</p>
+    {% endfor %}
   </div>
-{% endif %}
+  {% else %}
+  <div class="empty">
+    {% if q %}
+      <h2>No records match "{{ q }}"</h2>
+      <p><a href="/records">Clear the search</a></p>
+    {% else %}
+      <h2>No records {{ "with this result " if decision }}yet</h2>
+      <p>Check a box from the <a href="/">Orders</a> page and its record appears here.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
 {% endblock %}

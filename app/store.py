@@ -115,7 +115,7 @@ def get_record(cur, record_id: str) -> EvidenceRecord | None:
 
 
 def list_records(cur, decision: str | None = None, order_id: str | None = None,
-                 unit_id: str | None = None, limit: int = 200) -> list[dict]:
+                 unit_id: str | None = None, limit: int = 200, query: str | None = None) -> list[dict]:
     cur.execute(
         """
         select record_id, order_id, unit_id, decision, status, captured_at,
@@ -124,10 +124,11 @@ def list_records(cur, decision: str | None = None, order_id: str | None = None,
         where (%(d)s::text is null or decision = %(d)s)
           and (%(o)s::text is null or order_id = %(o)s)
           and (%(u)s::text is null or unit_id = %(u)s)
+          and (%(q)s::text is null or order_id ilike %(like)s or record_id ilike %(like)s or unit_id ilike %(like)s)
         order by captured_at desc
         limit %(limit)s
         """,
-        {"d": decision, "o": order_id, "u": unit_id, "limit": limit},
+        {"d": decision, "o": order_id, "u": unit_id, "limit": limit, "q": query or None, "like": f"%{query or ''}%"},
     )
     return cur.fetchall()
 

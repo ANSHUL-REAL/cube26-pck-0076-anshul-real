@@ -35,7 +35,7 @@ class FakeStore:
     def upsert_order(self, cur, order, source="demo"):
         self.orders[(cur, order.order_id)] = order
 
-    def list_records(self, cur, decision=None, order_id=None, unit_id=None, limit=200):
+    def list_records(self, cur, decision=None, order_id=None, unit_id=None, limit=200, query=None):
         return [
             {"record_id": r.record_id, "order_id": r.subject["order_id"], "decision": r.outcome.decision.value,
              "status": r.status.value, "captured_at": r.captured_at, "operator_label": r.operator_label,
@@ -45,6 +45,7 @@ class FakeStore:
             and (order_id is None or r.subject["order_id"] == order_id)
             and (unit_id is None or r.subject.get("unit_id") == unit_id)
             and (decision is None or r.outcome.decision.value == decision)
+            and (query is None or query.lower() in (r.subject["order_id"] + r.record_id).lower())
         ]
 
     def counts_by_decision(self, cur):
@@ -247,3 +248,19 @@ def test_orders_csv_import_rejects_bad_files(client):
     bad = client.post("/orders/import", files={"file": ("x.csv", bytes([0xff, 0xfe, 0x00]), "text/csv")})
     assert "Save the file as CSV (UTF-8)" in bad.text
 
+
+
+def test_order_tabs_and_record_search(client, sharp_photo, catalogue, settings):
+    fake = client.fake
+    order = add_order(fake, ("CAP-BLU", 1), order_id="ORD-77")
+    prepared = prepare_photos([Photo(sharp_photo)], settings)
+    record = verify_box(order, prepared, catalogue, OraclePerceiver({"CAP-BLU": 1}), settings, operator_label="op_alpha")
+    fake.save_record(None, record, prepared)
+    client.post("/login", data={"code": "alpha-demo"})
+
+    assert "ORD-77" in client.get("/?view=todo").text  # the in-memory store never marks orders checked
+    assert "ORD-77" not in client.get("/?view=done").text
+    assert client.get("/?view=nonsense").status_code == 200
+
+    assert record.record_id in client.get("/records?q=ord-77").text
+    assert 'No records match "nope"' in client.get("/records?q=nope").text
