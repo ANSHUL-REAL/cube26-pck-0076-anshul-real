@@ -1,6 +1,7 @@
 """Run the agent over the eval boxes and save one evidence record per box.
 
     python eval/run_eval.py --split dev --run dev-v1
+    python eval/freeze.py --split test                            # first, once labels are in; commit it
     python eval/run_eval.py --split test --run test-v1            # the held-out run
     python eval/run_eval.py --split test --run test-v1-order --reveal-order   # ablation
 
@@ -18,6 +19,7 @@ import time
 from datetime import datetime, timezone
 
 from common import EVAL_DIR, ORG, ROOT, load_manifest
+from freeze import differences, fingerprint, frozen_path
 
 from pack_manager.catalogue import load_org_catalogue
 from pack_manager.config import get_settings
@@ -33,9 +35,25 @@ def main() -> None:
     ap.add_argument("--reveal-order", action="store_true", help="ablation: tell the model the order")
     ap.add_argument("--delay", type=float, default=4.0, help="seconds between uncached model calls")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--unfrozen", action="store_true",
+                    help="run the test split without a matching freeze; the run is then marked as not held-out")
     args = ap.parse_args()
 
     settings = get_settings().model_copy(update={"gemini_max_retries": 3})
+    frozen = None
+    if args.split == "test":
+        path = frozen_path("test")
+        if path.exists():
+            frozen = json.loads(path.read_text(encoding="utf-8"))
+            diff = differences(frozen, fingerprint("test", settings))
+            frozen = {"file": path.relative_to(ROOT).as_posix(), "frozen_at": frozen["frozen_at"], "matches": not diff,
+                      "changed_since": diff}
+        if not (frozen and frozen["matches"]) and not args.unfrozen:
+            raise SystemExit(
+                "The test set isn't frozen, or something changed since it was:\n  "
+                + ("\n  ".join(frozen["changed_since"]) if frozen else "no eval/frozen-test.json")
+                + "\nFreeze it (python eval/freeze.py --split test) and commit that before the held-out run, "
+                "or pass --unfrozen: the run is then reported as not held-out.")
     catalogue, root = load_org_catalogue(ROOT / settings.catalogue_dir, ORG)
     perceiver = GeminiPerceiver(settings)
     out = EVAL_DIR / "results" / args.run / "records"
@@ -48,6 +66,7 @@ def main() -> None:
         "split": args.split, "reveal_order": args.reveal_order, "model": settings.gemini_model,
         "match_threshold": settings.match_threshold, "visibility_threshold": settings.visibility_threshold,
         "started_at": first or datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "frozen": frozen,
     }, indent=2), encoding="utf-8")
 
     boxes = load_manifest(args.split)

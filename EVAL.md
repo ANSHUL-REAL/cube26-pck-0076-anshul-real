@@ -36,10 +36,14 @@ Lighting (window / lamp), angle (top-down / ~45°) and distance vary across boxe
 2. **Two human labellers, from the photos only.** They get a label sheet (`eval/make_label_sheet.py`) showing each order and its photos, never the answer, and choose Seal / Stop and fix / Can't tell. They label independently, **before** the agent runs. This measures how hard the task is from the same photos the agent sees. The label sheet timestamps every choice, and the report checks that every label is older than the agent's first run.
 3. **The agent**, run once: `python eval/run_eval.py --split test --run test-v1`.
 
+**The freeze.** Once both label files are in, `python eval/freeze.py --split test` writes `eval/frozen-test.json`: the model, prompt version, thresholds, a hash of the agent's code, and SHA-256 hashes of the manifest rows, every photo, the catalogue and both label files. It is committed **before** the run. `run_eval.py` refuses a test run that doesn't match it (or marks the run "not held-out" if forced), and the report's first line says which. The commit history shows the freeze, with the labels, came before the results.
+
 ## Metrics (never blended into one number)
 
 - **Box decision vs physical truth:** confusion matrix (truth SEAL / STOP × agent SEAL / STOP / UNCERTAIN / PENDING).
 - **False-SEAL rate** = bad boxes the agent sealed ÷ bad boxes. **The headline error**: a mis-ship let through.
+- **Bad boxes among the agent's SEALs**: of the boxes it said to seal, how many were wrong. What a seller actually experiences.
+- **Every rate is shown as a count over its denominator with a 95% Wilson interval.** With about 50 boxes, 0 false SEALs out of ~25 bad boxes still allows a true rate up to ~13%, so a rate under target whose interval reaches above it is reported as "met, not proven".
 - **False-STOP rate** = good boxes the agent stopped ÷ good boxes. The throughput cost, and what makes operators stop trusting it.
 - **UNCERTAIN rate**, split by truth good / bad and by scenario. UNCERTAIN on a bad box still stops the box from being sealed. Target ≤ 25%.
 - **PENDING rate** (the model didn't answer). Target ≤ 2%.
@@ -58,13 +62,18 @@ Lighting (window / lamp), angle (top-down / ~45°) and distance vary across boxe
 
 Reference targets from the Verity background documents: per-check false positives < 2%, false negatives < 1%, kappa ≥ 0.7, p95 ≤ 5 s, cost ≤ $0.008 per decision.
 
-**Kill condition:** false-SEAL above 5% while UNCERTAIN is 25% or lower means the agent shouldn't gate sealing. It should only record evidence.
+**Kill condition:** false-SEAL above 5% while UNCERTAIN is 25% or lower means the agent shouldn't gate sealing. It should only record evidence. The report checks this, and the other kill thresholds from the one-pager (false STOP > 15%, UNCERTAIN > 40%, PENDING > 5%), automatically in a "targets" table.
 
 ## Reproduce
 
 ```bash
 python eval/make_label_sheet.py --split test
 ```
+
+```bash
+python eval/freeze.py --split test
+```
+Commit `eval/` now (photos, manifest, labels, `frozen-test.json`), then:
 
 ```bash
 python eval/run_eval.py --split test --run test-v1

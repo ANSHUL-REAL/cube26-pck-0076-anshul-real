@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import statistics
 from collections import Counter, defaultdict
 from datetime import datetime
@@ -36,6 +37,60 @@ def cohen_kappa(a: list[str], b: list[str], labels: list[str]) -> float | None:
 
 def pct(num: int, den: int) -> str:
     return f"{num}/{den} ({num / den:.0%})" if den else "n/a"
+
+
+def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float] | None:
+    """95% Wilson score interval for k successes in n. With ~50 boxes a 0% rate still has
+    an upper bound well above 0, and the report says so."""
+    if not n:
+        return None
+    p, d = k / n, 1 + z * z / n
+    centre = (p + z * z / (2 * n)) / d
+    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
+def rate(k: int, n: int) -> str:
+    if not n:
+        return "n/a"
+    lo, hi = wilson(k, n)
+    return f"{k}/{n} ({k / n:.0%}; 95% CI {lo:.0%} to {hi:.0%})"
+
+
+# Targets and kill thresholds, copied from the one-pager, which was written before any real
+# box was photographed. (measure, numerator, denominator, target, kill-above)
+TARGETS = ["false_SEAL", "false_STOP", "UNCERTAIN", "PENDING"]
+TARGET_TEXT = {
+    "false_SEAL": ("False SEAL (bad boxes sealed / bad boxes)", 0.02, 0.05, "> 5% while UNCERTAIN is 25% or lower"),
+    "false_STOP": ("False STOP (good boxes stopped / good boxes)", 0.05, 0.15, "> 15%"),
+    "UNCERTAIN": ("UNCERTAIN (sent to a hand check / all boxes)", 0.25, 0.40, "> 40%"),
+    "PENDING": ("PENDING (model didn't answer / all boxes)", 0.02, 0.05, "> 5%"),
+}
+
+
+def against_targets(counts: dict[str, tuple[int, int]]) -> tuple[list[dict], list[str]]:
+    """One row per target, plus the kill conditions that tripped (empty list = none)."""
+    rows, kills = [], []
+    share = {k: (a / b if b else None) for k, (a, b) in counts.items()}
+    for key in TARGETS:
+        name, target, kill, kill_text = TARGET_TEXT[key]
+        k, n = counts[key]
+        value = share[key]
+        if value is None:
+            status = "no data"
+        else:
+            hi = wilson(k, n)[1]
+            tripped = value > kill and (key != "false_SEAL" or (share["UNCERTAIN"] or 0) <= 0.25)
+            if tripped:
+                status = "KILL"
+                kills.append(f"{name}: {k}/{n} ({value:.0%}), kill if {kill_text}")
+            elif value <= target:
+                status = "met" if hi <= target else f"met, not proven (upper bound {hi:.0%})"
+            else:
+                status = "missed"
+        rows.append({"measure": name, "result": rate(k, n), "target": f"{target:.0%} or less",
+                     "kill_if": kill_text, "status": status})
+    return rows, kills
 
 
 LABEL_TIMES: dict[str, str] = {}  # labeller -> time of their last label (ISO, UTC)
@@ -130,6 +185,11 @@ def main() -> None:
     pending = sum(v for (_, a), v in confusion.items() if a == "PENDING")
     decided = [(boxes[b].decision_truth, records[b].outcome.decision.value) for b in ids
                if records[b].outcome.decision.value in ("SEAL", "STOP_AND_FIX")]
+    agent_seals = sum(v for (_, a), v in confusion.items() if a == "SEAL")
+    target_rows, kills = against_targets({
+        "false_SEAL": (false_seal, bad), "false_STOP": (false_stop, good),
+        "UNCERTAIN": (uncertain, len(ids)), "PENDING": (pending, len(ids)),
+    })
 
     # ---------------- per check vs physical truth
     # Identity and count are scored separately: finding a SKU is much easier than counting
@@ -183,19 +243,22 @@ def main() -> None:
         "run": args.run, **run_info, "boxes_scored": len(ids),
         "box_decision": {
             "bad_boxes": bad, "good_boxes": good,
-            "false_SEAL_rate": pct(false_seal, bad),
-            "false_STOP_rate": pct(false_stop, good),
-            "uncertain_rate": pct(uncertain, len(ids)),
+            "false_SEAL_rate": rate(false_seal, bad),
+            "false_STOP_rate": rate(false_stop, good),
+            "uncertain_rate": rate(uncertain, len(ids)),
+            "bad_boxes_among_agent_seals": rate(false_seal, agent_seals),
             "uncertain_on_bad_boxes": pct(confusion[("STOP_AND_FIX", "UNCERTAIN")], bad),
             "uncertain_on_good_boxes": pct(confusion[("SEAL", "UNCERTAIN")], good),
             "accuracy_when_decided": pct(sum(t == a for t, a in decided), len(decided)),
             "pending_model_failures": pending,
-            "pending_rate": pct(pending, len(ids)),
+            "pending_rate": rate(pending, len(ids)),
             "confusion": {f"{t} -> {a}": v for (t, a), v in sorted(confusion.items())},
         },
         "checks": {"all_items_present: line_present (per order line)": check_table(present_rows),
                    "quantities_correct: line_quantity (per order line whose item is in the box)": check_table(count_rows),
                    "unexpected_product: wrong_item or extra_item (per box)": check_table(unexpected_rows)},
+        "against_targets": target_rows,
+        "kill_conditions_tripped": kills,
         "per_scenario": {k: dict(v) for k, v in sorted(per_scenario.items())},
         "occlusion_vs_other": {k: dict(v) for k, v in sorted(by_cause.items())},
         "humans": human,
@@ -211,8 +274,19 @@ def main() -> None:
 
     # ---------------- report
     bd = metrics["box_decision"]
+    fz = run_info.get("frozen")
+    if run_info["split"] != "test":
+        frozen_line = "Not the held-out split."
+    elif fz and fz.get("matches"):
+        frozen_line = (f"Held out: **yes**. Frozen at {fz['frozen_at']} in `{fz['file']}` (model, prompt, thresholds, "
+                       "agent code, manifest, photos, catalogue and both label files hashed); the run matched it.")
+    else:
+        frozen_line = ("Held out: **NO**. The run did not match a freeze of the test set"
+                       + (f" (changed: {'; '.join(fz['changed_since'])})" if fz else "") + ". Treat these numbers as tuned.")
     lines = [
         f"# Eval report: {args.run}",
+        "",
+        frozen_line,
         "",
         f"Split: **{run_info['split']}** · boxes scored: **{len(ids)}** · model: `{run_info['model']}`"
         f" · order revealed to model: **{run_info['reveal_order']}**"
@@ -225,6 +299,7 @@ def main() -> None:
         f"| False STOP (good box stopped) | {bd['false_STOP_rate']} of good boxes |",
         f"| UNCERTAIN (sent to a human) | {bd['uncertain_rate']} of all boxes |",
         f"| … on bad boxes / on good boxes | {bd['uncertain_on_bad_boxes']} / {bd['uncertain_on_good_boxes']} |",
+        f"| Bad boxes among the agent's SEALs | {bd['bad_boxes_among_agent_seals']} |",
         f"| Accuracy when the agent decided | {bd['accuracy_when_decided']} |",
         f"| Model failures (\"Needs your decision\") | {bd['pending_model_failures']} boxes, {bd['pending_rate']} (target: 2% or less) |",
         "",
@@ -232,6 +307,15 @@ def main() -> None:
     ]
     for t in ["SEAL", "STOP_AND_FIX"]:
         lines.append(f"| {t} | " + " | ".join(str(confusion[(t, a)]) for a in ["SEAL", "STOP_AND_FIX", "UNCERTAIN", "PENDING"]) + " |")
+    lines += ["", "## Against the targets set before the eval", "",
+              "95% CI = Wilson score interval. \"Met, not proven\" means the rate is under the target but the sample is "
+              "too small to rule out a rate above it.", "",
+              "| Measure | Result | Target | Kill if | Status |", "|---|---|---|---|---|"]
+    for r in target_rows:
+        lines.append(f"| {r['measure']} | {r['result']} | {r['target']} | {r['kill_if']} | {r['status']} |")
+    lines += ["", ("**Kill condition tripped:** " + "; ".join(kills) +
+                   ". Per the one-pager, Pack Manager must not gate sealing; it runs only as an evidence recorder.")
+              if kills else "No kill condition tripped."]
     lines += ["", "## Per check", "",
               "FAIL means a problem is present. FN = a real problem the agent passed; FP = a false alarm.", "",
               "| Check | n | Caught | Missed (FN) | False alarm (FP) | Uncertain on problem / on OK | Recall | Precision |",

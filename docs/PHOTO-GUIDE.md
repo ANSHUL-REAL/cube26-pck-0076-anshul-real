@@ -100,4 +100,10 @@ python eval/make_label_sheet.py --split test
 
 This makes one file, `eval/label_sheet_test.html`, showing only the order and the photos (never the answer). Send it to two people. **Ideally neither of them watched you pack**, because someone who packed the boxes already knows the answers. If you have to be one of the labellers, we'll say so in the report. Each person picks Seal / Stop and fix / Can't tell for every box, taps "Download my labels", and sends you the CSV. Put both CSVs in `eval/labels/`.
 
-Labels must be done **before** the agent runs on the test set.
+Labels must be done **before** the agent runs on the test set. When both CSVs are in, freeze the test set and commit it:
+
+```bash
+python eval/freeze.py --split test
+```
+
+This hashes the photos, the manifest, both label files and the agent's settings into `eval/frozen-test.json`. The held-out run refuses to start if any of them changed afterwards.
