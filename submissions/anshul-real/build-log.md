@@ -2,6 +2,12 @@
 
 Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
+## Wed 30 Sep
+
+- **Box plan before the shoot.** `eval/plan_boxes.py` plans all 70 boxes from the catalogue and writes the manifest (the answer key) before any photo exists, plus a phone checklist to pack from. It checks its own plan: every box can be packed with what's at home (a new `on_hand` column in `products.csv`), and every kind of box has the truth it's meant to have. Kinds are shuffled, so a box number doesn't give its answer away.
+- **Test set cut from 60 to 50 boxes** to match the brief's "50 units", before any photo was taken. 24 should seal and 26 should stop.
+- The photo import takes the whole shoot (practice and test boxes) in one go.
+
 ## Tue 29 Sep
 
 - **Design review of the UNCERTAIN and fail-open questions.** Both calls were confirmed. The review asked for four things, now answered in [05-design-review-reply.md](05-design-review-reply.md):

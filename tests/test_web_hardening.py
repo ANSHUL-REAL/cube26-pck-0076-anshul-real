@@ -431,7 +431,7 @@ def test_session_cookie_secure_flag_follows_the_setting():
 
     session = next(m for m in main.app.user_middleware if m.cls is SessionMiddleware)
     assert session.kwargs["https_only"] is main.settings.secure_cookies
-    assert main.get_settings().model_fields["secure_cookies"].default is False  # local HTTP keeps working
+    assert type(main.get_settings()).model_fields["secure_cookies"].default is False  # local HTTP keeps working
 
 
 def test_cookie_signed_with_the_default_secret_is_not_a_sign_in(client):

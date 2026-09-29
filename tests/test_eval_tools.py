@@ -5,6 +5,7 @@ GeminiPerceiver always gets a fake client here: the real (paid) model is never c
 
 import io
 import json
+import os
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -206,6 +207,22 @@ def test_import_fills_one_run_of_empty_boxes(eval_dir, tmp_path, monkeypatch, ca
     out = capsys.readouterr().out
     assert "stopping before T02" in out
     assert "T01 " in out and "T03 " not in out  # never skips T02 and shifts T03 onto the next photos
+
+
+def test_import_takes_the_whole_shoot_in_plan_order(eval_dir, tmp_path, monkeypatch):
+    (eval_dir / "manifest.csv").write_text(
+        HEADER + "D01,dev,correct,CAP-BLU:1,CAP-BLU:1,,\nD02,dev,missing,CAP-BLU:1,,,\n"
+        "T01,test,correct,CAP-BLU:1,CAP-BLU:1,,\n", encoding="utf-8")
+    src = tmp_path / "phone"
+    for n in range(3):
+        write_photo(src / f"IMG_{n}.jpg", 30 * n)
+        os.utime(src / f"IMG_{n}.jpg", (1_790_000_000 + 60 * n,) * 2)
+    monkeypatch.setattr(sys, "argv", ["import_photos.py", "--from", str(src), "--split", "all",
+                                      "--per-box", "1", "--apply"])
+    import_photos.main()
+    # Each box gets the photo taken in its turn (the photos differ by brightness).
+    got = [int(np.asarray(Image.open(eval_dir / "boxes" / b / "1.jpg"))[0, 0, 0]) for b in ("D01", "D02", "T01")]
+    assert all(abs(v - want) <= 3 for v, want in zip(got, (0, 30, 60))), got
 
 
 @pytest.mark.parametrize("save", [import_photos.save_clean, build_catalogue.save_clean])

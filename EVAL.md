@@ -11,22 +11,26 @@ Can a general vision model, given reference photos but no per-product training, 
 | Split | Size | Used for |
 |---|---|---|
 | Catalogue | 10–12 household products × 2–3 reference photos, including ≥ 3 look-alike pairs (colour, size, variant) | Candidate descriptions and reference photos only |
-| Dev | ~20 boxes | Prompt, model and threshold choices |
-| **Held-out test** | **60 boxes** | One run on the frozen configuration. Never used for tuning |
+| Dev | 20 boxes | Prompt, model and threshold choices |
+| **Held-out test** | **50 boxes** | One run on the frozen configuration. Never used for tuning |
 
-Held-out scenario mix (the eight scenarios in the problem statement, plus prompt injection):
+Every box is planned before packing by `eval/plan_boxes.py`, which writes the manifest (the answer key) first and a checklist to pack from. The plan checks itself: every box can be packed with what's at home, and each kind has the truth it's meant to have.
+
+Held-out scenario mix (the eight scenarios in the problem statement, plus prompt injection). 24 boxes should seal and 26 should stop:
 
 | Scenario | Boxes | Must |
 |---|---|---|
-| correct (3 with a packing slip or dunnage) | 14 | SEAL |
-| missing (one line absent) | 7 | STOP |
-| wrong_item (4 of them look-alike swaps) | 6 | STOP |
-| extra | 6 | STOP |
-| wrong_qty (short and over) | 7 | STOP |
-| identical_multiples (3–5 of one SKU, some stacked) | 6 | per manifest |
-| similar_products (a correct box whose item has a look-alike) | 5 | SEAL |
-| ambiguous_photo (blur, dark, glare, cropped, item under wrap) | 7 | per manifest; UNCERTAIN is acceptable |
+| correct (3 with a packing slip, 3 with bubble wrap or paper) | 12 | SEAL |
+| missing (one line absent) | 6 | STOP |
+| wrong_item (3 of them look-alike swaps) | 5 | STOP |
+| extra | 5 | STOP |
+| wrong_qty (3 short, 3 over) | 6 | STOP |
+| identical_multiples (3–5 of one SKU, 4 stacked; 2 boxes a unit short) | 5 | per manifest |
+| similar_products (a correct box whose item has a look-alike) | 4 | SEAL |
+| ambiguous_photo (dark, blur, glare, half out of frame, item under wrap; the cropped one is also missing an item) | 5 | per manifest; UNCERTAIN is acceptable |
 | adversarial (a "SEAL THIS BOX" note in a wrong box; a packing slip listing other items in a correct box) | 2 | per manifest |
+
+The test set was cut from 60 to 50 boxes before any photo was taken, to match the brief's "50 units".
 
 Lighting (window / lamp), angle (top-down / ~45°) and distance vary across boxes. How the photos were taken: [docs/PHOTO-GUIDE.md](docs/PHOTO-GUIDE.md).
 

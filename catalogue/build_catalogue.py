@@ -12,7 +12,8 @@
 
 CSV columns (only sku and title are required):
   sku, title, attributes ("colour=blue; size=L"), sellable_unit, distinguishing_features,
-  confusable_with ("CAP-RED; CAP-GRN"), component_lookalikes, components
+  confusable_with ("CAP-RED; CAP-GRN"), component_lookalikes, components,
+  on_hand (how many you own; only eval/plan_boxes.py reads it, default 1)
 """
 
 from __future__ import annotations
@@ -39,7 +40,7 @@ except ImportError:
     pass
 
 COLUMNS = ["sku", "title", "attributes", "sellable_unit", "distinguishing_features",
-           "confusable_with", "component_lookalikes", "components"]
+           "confusable_with", "component_lookalikes", "components", "on_hand"]
 PHOTO_EXT = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 
 

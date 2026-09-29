@@ -2,6 +2,7 @@
 
     python eval/import_photos.py --from "D:/phone/DCIM/Camera" --split test            # preview
     python eval/import_photos.py --from "D:/phone/DCIM/Camera" --split test --apply    # copy
+    python eval/import_photos.py --from "D:/phone/DCIM/Camera" --split all             # D01..T50 in one go
 
 Photos are sorted by the time they were taken (EXIF, else file time) and grouped into
 boxes: a new box starts when more than --gap seconds pass between two photos (or use
@@ -110,7 +111,8 @@ def contact_sheet(pairs, split: str) -> Path:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--from", dest="src", required=True, help="folder with the phone's photos")
-    ap.add_argument("--split", default="test", choices=["dev", "test"])
+    ap.add_argument("--split", default="test", choices=["dev", "test", "all"],
+                    help="all = practice and test boxes in manifest order, for one shoot")
     ap.add_argument("--gap", type=float, default=25, help="seconds between photos that start a new box")
     ap.add_argument("--per-box", type=int, default=0, help="fixed number of photos per box instead of --gap")
     ap.add_argument("--start", help="first box id to fill, e.g. T31 (default: first box without photos)")
