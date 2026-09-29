@@ -31,6 +31,7 @@ from pack_manager.vision.base import PerceptionError
 from . import store
 from .db import Database
 from .icons import icon
+from .migrate import DEMO_CODES, ORGS
 
 log = logging.getLogger("pack_manager.app")
 BASE = Path(__file__).resolve().parent
@@ -166,18 +167,23 @@ def _stash_put(org: str, order_id: str, photos: list[PreparedImage]) -> str:
 # ------------------------------------------------------------------ sign in
 
 
+# The public demo companies shown on the sign-in page (seeded by app.migrate).
+DEMO_ORGS = [{"code": code, "name": ORGS[org].removesuffix(" (demo)")} for code, (org, _) in DEMO_CODES.items()]
+
+
 @app.get("/login", response_class=HTMLResponse)
 def login_form(request: Request):
-    return page(request, "login.html", demo_codes=["alpha-demo", "bravo-demo"])
+    return page(request, "login.html", demo_orgs=DEMO_ORGS)
 
 
 @app.post("/login")
 def login(request: Request, code: str = Form(...)):
+    code = code.strip()
     with db().anonymous() as cur:
         found = store.resolve_code(cur, code)
     if not found:
-        return page(request, "login.html", status_code=401, error="That access code isn't recognised.",
-                    demo_codes=["alpha-demo", "bravo-demo"])
+        return page(request, "login.html", status_code=401, error="That access code isn't recognised. Check it and try again.",
+                    demo_orgs=DEMO_ORGS)
     with db().org(found["organization_id"]) as cur:
         name = store.org_name(cur, found["organization_id"])
     request.session["user"] = {"org": found["organization_id"], "org_name": name,

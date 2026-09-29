@@ -68,12 +68,15 @@ document.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-decision]");
   if (btn) btn.form.querySelector("input[name=decision]").value = btn.dataset.decision;
 
-  // Demo access codes on the sign-in page.
-  const demo = e.target.closest("button[data-code]");
-  if (demo) {
-    const input = document.getElementById("code");
-    input.value = demo.dataset.code;
-    input.form.requestSubmit();
+  // "Show" / "Hide" on the access code field.
+  const reveal = e.target.closest("button[data-reveal]");
+  if (reveal) {
+    const input = document.getElementById(reveal.dataset.reveal);
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    reveal.textContent = show ? "Hide" : "Show";
+    reveal.setAttribute("aria-pressed", String(show));
+    input.focus();
   }
 
   // "Copy link" on a record: for sending to a teammate who can sign in.

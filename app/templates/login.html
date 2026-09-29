@@ -1,25 +1,68 @@
 {% extends "base.html" %}
 {% block title %}Sign in · Pack Manager{% endblock %}
 {% block body %}
-<main class="login">
-  <div class="login-card">
-    <div class="brand"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></div>
-    <h1>Check every box before it's sealed.</h1>
-    <p class="lead">Photograph the open box. You'll know whether to seal it, fix it, or check it by hand, and the photo is kept as proof of what was sent.</p>
-    {% if error %}<div class="callout error" style="margin-top:24px"><div>{{ error }}</div></div>{% endif %}
-    <form method="post" action="/login" class="stack" style="margin-top:28px" data-busy>
-      <div>
-        <label class="field" for="code">Access code</label>
-        <input id="code" name="code" type="password" autocomplete="off" required autofocus>
-      </div>
-      <button class="btn full lg" type="submit">Sign in</button>
-    </form>
-    {% if demo_codes %}
-    <div class="demo">
-      <p><b>Trying the demo?</b> Pick a company. Neither can see the other's orders or photos.</p>
-      <div class="demo-codes">{% for c in demo_codes %}<button type="button" data-code="{{ c }}">{{ c }}</button>{% endfor %}</div>
+<div class="auth">
+  <section class="auth-story" aria-label="About Pack Manager">
+    <a class="brand" href="/login"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></a>
+
+    <div class="auth-pitch">
+      <h1>Check every box before it's sealed.</h1>
+      <p class="lead">Photograph the open box. Pack Manager compares it with the order and tells the packer what to do. The photo and the result are kept as the record of what was sent.</p>
     </div>
-    {% endif %}
-  </div>
-</main>
+
+    <ol class="auth-steps">
+      <li><span class="n">1</span><div><b>Pick the order</b><span>From your order list, or import a CSV.</span></div></li>
+      <li><span class="n">2</span><div><b>Photograph the open box</b><span>One photo from above. Up to three if items are stacked.</span></div></li>
+      <li><span class="n">3</span><div><b>Follow the result</b>
+        <ul class="auth-outcomes">
+          <li class="seal"><span class="dot"></span><b>Seal</b><span>Everything ordered is there, nothing extra.</span></li>
+          <li class="stop"><span class="dot"></span><b>Stop and fix</b><span>Something is missing, wrong or extra. It says what to change.</span></li>
+          <li class="unsure"><span class="dot"></span><b>Check by hand</b><span>The photo can't settle it. Look before sealing.</span></li>
+        </ul>
+      </div></li>
+    </ol>
+
+    <p class="auth-foot">The AI lists what it sees. Fixed rules make the decision, and a person can always overrule it.</p>
+  </section>
+
+  <section class="auth-panel">
+    <div class="auth-form">
+      <a class="brand auth-brand-sm" href="/login"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></a>
+      <h2 class="auth-title">Sign in</h2>
+      <p class="muted">Use the access code from your team lead.</p>
+
+      {% if error %}<div class="callout error" role="alert">{{ error }}</div>{% endif %}
+
+      <form method="post" action="/login" class="stack auth-code" data-busy>
+        <div>
+          <label class="field" for="code">Access code</label>
+          <div class="reveal">
+            <input id="code" name="code" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" required {% if not error %}autofocus{% endif %}>
+            <button type="button" class="reveal-btn" data-reveal="code" aria-controls="code" aria-pressed="false">Show</button>
+          </div>
+        </div>
+        <button class="btn full lg" type="submit">Sign in</button>
+      </form>
+
+      {% if demo_orgs %}
+      <div class="auth-demo">
+        <div class="auth-or"><span>or try a demo company</span></div>
+        <div class="demo-list">
+          {% for d in demo_orgs %}
+          <form method="post" action="/login" data-busy>
+            <input type="hidden" name="code" value="{{ d.code }}">
+            <button type="submit" class="demo-org">
+              <span class="demo-mark" aria-hidden="true">{{ d.name[:1] }}</span>
+              <span class="demo-text"><b>{{ d.name }}</b><span>Code <span class="mono">{{ d.code }}</span></span></span>
+              <span class="demo-go" aria-hidden="true">Open</span>
+            </button>
+          </form>
+          {% endfor %}
+        </div>
+        <p class="small muted">The two companies are kept apart by the database: neither can see the other's orders, records or photos.</p>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+</div>
 {% endblock %}
