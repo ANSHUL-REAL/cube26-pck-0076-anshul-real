@@ -89,6 +89,8 @@ document.addEventListener("click", (e) => {
     input.focus();
   }
 
+  if (e.target.closest("button[data-print]")) window.print();
+
   // "Copy link" on a record: for sending to a teammate who can sign in. The clipboard needs
   // HTTPS; on plain HTTP (a phone on the local network) the link is shown to copy by hand.
   const copy = e.target.closest("button[data-copy-link]");
@@ -127,3 +129,18 @@ document.querySelectorAll(".tabs").forEach((tabs) => {
 // The web font can arrive after this runs and make the tabs wider: measure again then.
 if (document.fonts) document.fonts.ready.then(() => document.querySelectorAll(".tabs").forEach(showSelectedTab));
 window.addEventListener("resize", () => document.querySelectorAll(".tabs").forEach(markTabs));
+
+// Printing a record: the folded evidence details go on paper too, then fold up again.
+window.addEventListener("beforeprint", () => {
+  document.querySelectorAll("details[data-print-open]:not([open])").forEach((d) => {
+    d.open = true;
+    d.dataset.printOpened = "1";
+  });
+  document.querySelectorAll("[data-print-time]").forEach((el) => (el.textContent = new Date().toLocaleString()));
+});
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll("details[data-print-opened]").forEach((d) => {
+    d.open = false;
+    delete d.dataset.printOpened;
+  });
+});

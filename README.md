@@ -100,6 +100,12 @@ python -m pack_manager verify --catalogue catalogue/sample --order order.json --
 ```
 
 ```bash
+python -m pack_manager check-record PCK-0123456789AB.json --photo box.jpg
+```
+
+That checks a downloaded evidence record on its own, e.g. to answer a buyer's "item missing" claim. It reports whether the record matches its content hash, whether every earlier version matches too, and whether each photo is one of the record's (the stored copy or the phone original). A record page also prints as a one-page evidence sheet (**Print evidence**).
+
+```bash
 python -m pack_manager models
 ```
 

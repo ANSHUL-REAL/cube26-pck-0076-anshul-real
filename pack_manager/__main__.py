@@ -1,6 +1,7 @@
 """Command line: python -m pack_manager <command>
 
   verify         check one box: order JSON + photo(s) -> evidence record JSON
+  check-record   check a downloaded evidence record (and its photos) against its hashes
   replay-sample  run the organisers' pack_sample.csv through the decision engine
   models         list the Gemini models your API key can use
 """
@@ -8,6 +9,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -56,6 +58,44 @@ def cmd_verify(args) -> int:
     for line in o.fix_instructions:
         print(f"  - {line}", file=sys.stderr)
     return 0
+
+
+def cmd_check_record(args) -> int:
+    """For whoever holds a downloaded record, e.g. to answer a buyer's claim: was it edited after
+    it was saved, and are these the photos it was made from? Exit 0 if everything matches."""
+    from .evidence import verify, verify_history
+    from .models import EvidenceRecord
+
+    try:
+        record = EvidenceRecord.model_validate_json(Path(args.record).read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        print(f"Can't read {args.record} as an evidence record: {exc}", file=sys.stderr)
+        return 2
+
+    good = verify(record)
+    print(f"{record.record_id} · order {record.subject.get('order_id', '?')} · {record.outcome.decision.value}"
+          f" · checked {record.captured_at:%Y-%m-%d %H:%M} UTC")
+    print("OK   the record matches its content hash" if good else
+          "BAD  the record does not match its content hash: it was changed after it was saved")
+    if good and record.overrides:
+        history = verify_history(record)
+        n = len(record.overrides)
+        if history is True:
+            print(f"OK   the agent's result and {n} later hand decision{'s' if n > 1 else ''} all match their hashes")
+        elif history is None:
+            print("?    earlier versions can't be rebuilt: a hand decision was saved before overrides kept them")
+        else:
+            good = False
+            print("BAD  an earlier version does not match its hash")
+
+    for path in args.photo or []:
+        digest = hashlib.sha256(Path(path).read_bytes()).hexdigest()
+        found = [f"photo {i} ({kind})" for i, img in enumerate(record.images, 1)
+                 for kind, h in (("the stored copy", img.sha256), ("the original upload", img.original_sha256))
+                 if h == digest]
+        good = good and bool(found)
+        print(f"OK   {path} is {found[0]}" if found else f"BAD  {path} is not one of this record's photos")
+    return 0 if good else 1
 
 
 def cmd_replay(args) -> int:
@@ -111,6 +151,11 @@ def main(argv: list[str] | None = None) -> int:
     v.add_argument("--oracle", help="skip the model; treat these contents as seen, e.g. 'SKU-A:2;SKU-B:1'")
     v.add_argument("--out", help="write the evidence record here instead of stdout")
     v.set_defaults(func=cmd_verify)
+
+    c = sub.add_parser("check-record", help="check a downloaded evidence record against its hashes")
+    c.add_argument("record", help="the record's JSON file (Download record on its page)")
+    c.add_argument("--photo", action="append", help="a photo to match against the record's photos (repeatable)")
+    c.set_defaults(func=cmd_check_record)
 
     r = sub.add_parser("replay-sample", help="replay the organisers' sample CSV")
     r.add_argument("--csv", default="data/pack_sample.csv")

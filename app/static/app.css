@@ -640,3 +640,30 @@ details.fold summary .count { margin-left: 4px; }
   .verdict-steps .todo li { padding: 9px 14px; }
   .verdict-steps .label { padding: 10px 14px 2px; }
 }
+
+/* ------------------------------------------------------------ printed evidence sheet (record page) */
+.print-only { display: none; }
+@media print {
+  @page { margin: 12mm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff; font-size: 12px; }
+  main.wrap { padding: 0; max-width: none; }
+  .topbar, .tabbar, .back, .page-head .actions, .decide-card, form.retry, .btn-row, .no-print { display: none !important; }
+  .print-only { display: block; }
+  .print-head { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 8px; margin-bottom: 14px;
+                border-bottom: 1px solid var(--border-strong); font-size: 12px; }
+  .print-head span { color: var(--muted); text-align: right; overflow-wrap: anywhere; }
+  .print-foot { margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--border-strong); break-inside: avoid; }
+  .print-foot h2 { font-size: 13px; margin-bottom: 4px; }
+  .print-foot p { color: var(--text-2); }
+  .print-foot .cmd { display: block; margin: 6px 0; white-space: nowrap; font-size: 11px; color: var(--text); }
+  .notes li { display: block; }
+  .notes li .badge { margin-right: 6px; }
+  .card, details.fold, .verdict { box-shadow: none; break-inside: avoid; }
+  .verdict { padding: 16px 20px; }
+  .verdict-title { font-size: 34px; }
+  .record-layout { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 14px; }
+  .photo { max-width: 100%; }
+  details.fold > summary .i.chev { display: none; }
+  a { text-decoration: none !important; }
+}

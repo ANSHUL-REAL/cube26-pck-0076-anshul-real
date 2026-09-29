@@ -91,7 +91,7 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 Handbook section 9 field names; full reference in [`contract/README.md`](contract/README.md). Highlights:
 
 - Each photo is stored with the SHA-256 of the exact bytes the model saw, plus the SHA-256 of the original upload.
-- `content_hash` = SHA-256 over canonical JSON (sorted keys, compact, hash field excluded). The record page recomputes it and shows "matches record" or a warning.
+- `content_hash` = SHA-256 over canonical JSON (sorted keys, compact, hash field excluded). The record page recomputes it and shows "matches record" or a warning. Offline, `python -m pack_manager check-record` does the same for a downloaded record and matches photos to it.
 - **Overrides are data.** An operator decision appends `{original_decision, new_decision, reason_code, note, operator_label, at, prior_content_hash, prior_outcome, prior_status}` and re-hashes. The agent's checks and reasons stay in the record unchanged. Reason codes are a fixed list, so overrides can be counted in the eval.
 - **The override chain can be checked.** Because each override keeps what it replaced, every earlier version of the record can be rebuilt and compared with its `prior_content_hash`, back to the agent's original (`verify_history`). An override is refused on a record that doesn't match its hash, so re-hashing can't hide an edit.
 

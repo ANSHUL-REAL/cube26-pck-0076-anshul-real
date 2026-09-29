@@ -62,7 +62,7 @@ Present whenever a check is UNCERTAIN, otherwise `null`. It is built only from t
 
 ## What the content hash does and doesn't prove
 
-It shows whether a record was changed after it was hashed: anyone can recompute it (`GET /api/records/{id}` returns `_hash_verified`). Each override stores the hash from before it. It is **not** an append-only log, a hash chain or an externally anchored proof. Someone with database access could rewrite a record and its hash together.
+It shows whether a record was changed after it was hashed: anyone can recompute it (`GET /api/records/{id}` returns `_hash_verified`). Offline, with the downloaded file (`?download=1`): `python -m pack_manager check-record <record>.json --photo <photo>` checks the hash, every earlier version, and whether a photo is one of the record's. Each override stores the hash from before it. It is **not** an append-only log, a hash chain or an externally anchored proof. Someone with database access could rewrite a record and its hash together.
 
 ## Reading records (for Returns and Recovery)
 

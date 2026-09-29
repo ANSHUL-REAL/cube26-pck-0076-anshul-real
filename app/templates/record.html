@@ -11,6 +11,11 @@
 
 <a class="back" href="/orders/{{ order_id | urlpart }}">{{ icon("arrow-left", 16) }}{{ order_id }}</a>
 
+<div class="print-only print-head">
+  <div><b>Pack evidence</b> · {{ user.org_name }}</div>
+  <span>{{ request.base_url }}records/{{ r.record_id | urlpart }} · printed <span data-print-time></span></span>
+</div>
+
 <div class="page-head">
   <div>
     <div class="title-row">
@@ -25,6 +30,7 @@
   </div>
   <div class="actions">
     <button class="btn secondary" type="button" data-copy-link="/records/{{ r.record_id | urlpart }}">Copy link</button>
+    <button class="btn secondary hide-sm" type="button" data-print>Print evidence</button>
     <a class="btn secondary hide-sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a>
   </div>
 </div>
@@ -143,7 +149,7 @@
     </section>
 
     {% if not needs_human and not retry %}
-    <details class="fold"{% if error %} open{% endif %}>
+    <details class="fold no-print"{% if error %} open{% endif %}>
       <summary>Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
       <div class="inner">
         <p class="muted small">Record what you decided by hand. The agent's result stays on the record next to yours.</p>
@@ -152,7 +158,7 @@
     </details>
     {% endif %}
 
-    <details class="fold">
+    <details class="fold" data-print-open>
       <summary>Evidence details <span class="count">{{ r.checks | length }} checks</span>{{ icon("chevron-down", 18, "chev") }}</summary>
       <div class="inner">
         <ul class="checks">
@@ -166,7 +172,7 @@
         <div class="subhead">Photos and hash</div>
         <dl class="meta">
           {% for img in r.images %}
-            <dt>Photo {{ loop.index }}</dt><dd><span class="mono">sha256 {{ img.sha256 }}</span><div class="muted small">{{ img.width }}×{{ img.height }} · blur score {{ img.quality.blur_var }} · photo check {{ img.quality.gate }}</div></dd>
+            <dt>Photo {{ loop.index }}</dt><dd><span class="mono">sha256 {{ img.sha256 }}</span><div class="muted small">original upload: sha256 <span class="mono">{{ img.original_sha256 }}</span></div><div class="muted small">{{ img.width }}×{{ img.height }} · blur score {{ img.quality.blur_var }} · photo check {{ img.quality.gate }}</div></dd>
           {% endfor %}
           <dt>Content hash</dt><dd><span class="mono">{{ r.content_hash }}</span></dd>
           {% if obs.get("usage") %}
@@ -248,4 +254,13 @@
     </section>
   </aside>
 </div>
+
+<section class="print-only print-foot">
+  <h2>How to check this record</h2>
+  <p>Download the record ({{ r.record_id }}.json) from its page, then run:</p>
+  <code class="mono cmd">python -m pack_manager check-record {{ r.record_id }}.json --photo photo.jpg</code>
+  <p>It recomputes the content hash (SHA-256 of the record's canonical JSON) and each earlier version's hash,
+    and says whether a photo is one of this record's. The hash shows whether the record was edited after it
+    was saved. It doesn't prove when the record was made, or what was outside the photo.</p>
+</section>
 {% endblock %}

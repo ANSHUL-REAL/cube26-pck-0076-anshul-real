@@ -186,6 +186,9 @@ def test_record_pages_render(client, sharp_photo, catalogue, settings, seen, exp
     html = client.get(f"/records/{record.record_id}").text
     assert expected is None or expected in html
     assert "Evidence details" in html and record.content_hash in html and "matches record" in html
+    # The printed sheet says how anyone can check the record, and shows the phone original's hash.
+    assert "data-print" in html and f"check-record {record.record_id}.json" in html
+    assert record.images[0].original_sha256 in html
     assert client.get(f"/images/{record.images[0].image_id}").status_code == 200
     for path in ["/", "/records", "/orders/ORD-1", f"/api/records/{record.record_id}"]:
         assert client.get(path).status_code == 200, path
