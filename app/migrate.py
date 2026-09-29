@@ -11,6 +11,7 @@ import argparse
 import csv
 import json
 from pathlib import Path
+from urllib.parse import quote, urlsplit, urlunsplit
 
 import psycopg2
 from psycopg2 import sql
@@ -50,6 +51,26 @@ def migrate(admin_url: str, app_password: str) -> None:
         cur.execute("revoke all on function resolve_access_code(text) from public")
         cur.execute("grant execute on function resolve_access_code(text) to pack_app")
     conn.close()
+
+
+def app_url_from_admin(admin_url: str, app_password: str) -> str:
+    """The app's connection string: the admin URL's host, database and options, as pack_app."""
+    u = urlsplit(admin_url)
+    host = f"[{u.hostname}]" if ":" in (u.hostname or "") else (u.hostname or "")
+    netloc = f"pack_app:{quote(app_password, safe='')}@{host}" + (f":{u.port}" if u.port else "")
+    return urlunsplit((u.scheme, netloc, u.path, u.query, u.fragment))
+
+
+def write_env_value(key: str, value: str, path: Path = ROOT / ".env") -> None:
+    """Set KEY=value in .env, replacing an existing line or adding one. Never prints the value."""
+    lines = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+    for i, line in enumerate(lines):
+        if line.split("=", 1)[0].strip() == key:
+            lines[i] = f"{key}={value}"
+            break
+    else:
+        lines.append(f"{key}={value}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def _as_org(cur, org_id: str) -> None:
@@ -108,6 +129,10 @@ def main() -> None:
         raise SystemExit("DATABASE_ADMIN_URL is not set.")
     migrate(settings.database_admin_url, settings.pack_app_db_password)
     print("Schema, policies and pack_app role are in place.")
+    if not settings.database_url:
+        write_env_value("DATABASE_URL", app_url_from_admin(settings.database_admin_url,
+                                                          settings.pack_app_db_password))
+        print("DATABASE_URL was empty: wrote the pack_app connection string (same host) to .env.")
     if not args.no_seed:
         print("Seeded orders per organisation:", seed(settings.database_admin_url, not args.no_sample_orders))
 

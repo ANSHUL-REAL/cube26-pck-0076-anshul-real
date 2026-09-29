@@ -80,7 +80,7 @@ Copy `.env.example` to `.env` and fill in `GEMINI_API_KEY` (from Google AI Studi
 ```bash
 docker compose up -d db
 ```
-(or point `DATABASE_URL` / `DATABASE_ADMIN_URL` in `.env` at a hosted Postgres)
+(or put a hosted Postgres admin connection string, e.g. Neon's, in `DATABASE_ADMIN_URL` and leave `DATABASE_URL` empty: the migration fills it in with the restricted `pack_app` role on the same host)
 
 ```bash
 python -m app.migrate
@@ -113,7 +113,7 @@ The tenant-isolation tests run against real Postgres and are skipped when `DATAB
 ## Deploy
 
 1. A hosted Postgres (e.g. Neon). Put its admin connection string in `DATABASE_ADMIN_URL` locally and run `python -m app.migrate --no-sample-orders` once. This creates the tables, policies and the restricted `pack_app` role, without the organisers' dummy orders: the live demo shows only real orders, imported on the Import page or from `catalogue/<org>/orders.json`.
-2. On Render: **New → Blueprint** and pick this repository ([`render.yaml`](render.yaml)). Set `DATABASE_URL` to the **`pack_app`** connection string (never the admin one) and `GEMINI_API_KEY`.
+2. On Render: **New → Blueprint** and pick this repository ([`render.yaml`](render.yaml)). Set `DATABASE_URL` to the **`pack_app`** connection string (never the admin one; the migration wrote it to your local `.env`) and `GEMINI_API_KEY`.
 3. Check `https://<your-app>.onrender.com/healthz`. The free plan sleeps when idle, so the first request can take ~30 s.
 
 ## Repository

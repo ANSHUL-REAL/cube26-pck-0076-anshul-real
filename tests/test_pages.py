@@ -325,3 +325,20 @@ def test_rerun_refuses_photos_that_do_not_match_the_record(sharp_photo, catalogu
     record = verify_box(order, prepared, catalogue, OraclePerceiver({"CAP-BLU": 1}), settings, operator_label="op")
     with pytest.raises(ValueError, match="doesn't match its hash"):
         rerun_box(record, [prepared[0].jpeg + b"x"], catalogue, OraclePerceiver({}), settings, retried_by="op")
+
+
+def test_app_url_is_the_admin_url_as_pack_app(tmp_path):
+    from app.migrate import app_url_from_admin, write_env_value
+
+    admin = "postgresql://neondb_owner:s3cret@ep-cool-1-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    assert app_url_from_admin(admin, "p@ss/w:rd") == (
+        "postgresql://pack_app:p%40ss%2Fw%3Ard@ep-cool-1-pooler.ap-southeast-1.aws.neon.tech/neondb"
+        "?sslmode=require&channel_binding=require")
+    assert app_url_from_admin("postgresql://postgres:pw@localhost:5432/pack_manager", "x") == \
+        "postgresql://pack_app:x@localhost:5432/pack_manager"
+
+    env = tmp_path / ".env"
+    env.write_text("# keep me\nDATABASE_URL=\nGEMINI_MODEL=m\n", encoding="utf-8")
+    write_env_value("DATABASE_URL", "postgresql://a", env)
+    write_env_value("NEW_KEY", "1", env)
+    assert env.read_text(encoding="utf-8") == "# keep me\nDATABASE_URL=postgresql://a\nGEMINI_MODEL=m\nNEW_KEY=1\n"
