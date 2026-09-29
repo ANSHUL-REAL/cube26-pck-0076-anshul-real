@@ -24,7 +24,7 @@ def cmd_verify(args) -> int:
     order = Order.model_validate(json.loads(Path(args.order).read_text(encoding="utf-8")))
     prepared = prepare_photos([Photo(Path(p).read_bytes()) for p in args.photo], settings)
 
-    if args.oracle:
+    if args.oracle is not None:  # --oracle "" means an empty box, not "use the model"
         from .vision.oracle import OraclePerceiver
 
         observed = Order(order_id="obs", organization_id="obs", lines=parse_lines(args.oracle)).expected()
@@ -86,7 +86,18 @@ def cmd_models(_args) -> int:
     return 0
 
 
+def utf8_output() -> None:
+    """Windows consoles and redirected output default to cp1252, which can't print model text
+    such as Hindi labels. Switch to UTF-8 where the stream allows it."""
+    for stream, errors in ((sys.stdout, "strict"), (sys.stderr, "replace")):
+        try:
+            stream.reconfigure(encoding="utf-8", errors=errors)
+        except (AttributeError, ValueError, OSError):  # not a reconfigurable text stream
+            pass
+
+
 def main(argv: list[str] | None = None) -> int:
+    utf8_output()
     parser = argparse.ArgumentParser(prog="pack_manager", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)

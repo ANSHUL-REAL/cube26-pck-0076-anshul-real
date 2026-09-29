@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import json
 import sys
 from pathlib import Path
@@ -55,6 +56,35 @@ def split_attrs(text: str) -> dict[str, str]:
     return out
 
 
+def read_rows(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    """Column names and rows of products.csv as saved by Excel or Google Sheets.
+
+    Excel's "CSV UTF-8" starts with a byte-order mark and its plain "CSV (Comma delimited)"
+    is Windows-1252, so both are accepted. Column names are matched without case or outer
+    spaces ("SKU", " Title ", "Sellable unit" all work).
+    """
+    raw = path.read_bytes()
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        text = raw.decode("cp1252", errors="replace")
+    reader = csv.reader(io.StringIO(text, newline=""))
+    columns = [c.strip().lower().replace(" ", "_") for c in next(reader, [])]
+    rows = [{k: v.strip() for k, v in zip(columns, row) if k} for row in reader]
+    return columns, rows
+
+
+def save_clean(src: Path, dest: Path, max_side: int) -> None:
+    """Upright, resized JPEG with no metadata (no EXIF/GPS, device info, XMP or comments)."""
+    with Image.open(src) as img:
+        # The colour profile is kept only when it still matches the pixels (an RGB source).
+        icc = img.info.get("icc_profile") if img.mode in ("RGB", "RGBA") else None
+        img = ImageOps.exif_transpose(img).convert("RGB")
+        img.thumbnail((max_side, max_side), Image.LANCZOS)
+        img.info = {}  # Pillow would otherwise copy a JPEG comment into the new file
+        img.save(dest, "JPEG", quality=90, **({"icc_profile": icc} if icc else {}))
+
+
 def import_photos(src: Path, images: Path, skus: set[str], max_side: int) -> None:
     for folder in sorted(p for p in src.iterdir() if p.is_dir()):
         if folder.name not in skus:
@@ -66,10 +96,7 @@ def import_photos(src: Path, images: Path, skus: set[str], max_side: int) -> Non
         for old in dest.glob("*.jpg"):
             old.unlink()
         for n, path in enumerate(files, 1):
-            with Image.open(path) as img:
-                img = ImageOps.exif_transpose(img).convert("RGB")
-                img.thumbnail((max_side, max_side), Image.LANCZOS)
-                img.save(dest / f"{n}.jpg", "JPEG", quality=90)
+            save_clean(path, dest / f"{n}.jpg", max_side)
         print(f"  {folder.name}: {len(files)} photo(s)")
 
 
@@ -91,8 +118,12 @@ def main() -> None:
                         "blue fabric; the red cap is the same shape", "CAP-RED", "", ""])
         raise SystemExit(f"Created {csv_path}. Fill in one row per product (replace the example), then run this again.")
 
-    with open(csv_path, newline="", encoding="utf-8-sig") as f:
-        rows = [r for r in csv.DictReader(f) if (r.get("sku") or "").strip()]
+    columns, rows = read_rows(csv_path)
+    rows = [r for r in rows if r.get("sku")]
+    if not rows:
+        raise SystemExit(f"No products read from {csv_path}, so catalogue.json was not changed. The first row "
+                         f"must name the columns, including sku and title (found: {', '.join(columns) or 'none'}), "
+                         "and each product row needs a sku.")
     items = {}
     for r in rows:
         sku = r["sku"].strip()

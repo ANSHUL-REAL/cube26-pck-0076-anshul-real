@@ -12,14 +12,13 @@ before the agent ran. Error types are always reported separately, never blended.
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import math
 import statistics
 from collections import Counter, defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 
-from common import EVAL_DIR, load_manifest
+from common import EVAL_DIR, load_manifest, read_csv
 
 from pack_manager.models import EvidenceRecord
 
@@ -27,12 +26,18 @@ DECISIONS = ["SEAL", "STOP_AND_FIX", "UNCERTAIN"]
 
 
 def cohen_kappa(a: list[str], b: list[str], labels: list[str]) -> float | None:
+    """None when kappa is undefined: no boxes, or both sides gave the same single answer
+    to every box (chance agreement is then 100%)."""
     n = len(a)
     if n == 0:
         return None
     po = sum(x == y for x, y in zip(a, b)) / n
     pe = sum((a.count(lab) / n) * (b.count(lab) / n) for lab in labels)
-    return 1.0 if pe == 1 else round((po - pe) / (1 - pe), 3)
+    return None if pe == 1 else round((po - pe) / (1 - pe), 3)
+
+
+def kappa_text(k: float | None) -> str:
+    return "n/a (undefined: no boxes, or every label was the same answer)" if k is None else str(k)
 
 
 def pct(num: int, den: int) -> str:
@@ -93,22 +98,37 @@ def against_targets(counts: dict[str, tuple[int, int]]) -> tuple[list[dict], lis
     return rows, kills
 
 
-LABEL_TIMES: dict[str, str] = {}  # labeller -> time of their last label (ISO, UTC)
+LABEL_TIMES: dict[str, list[str]] = {}  # labeller -> every labelled_at in their file, as written
 
 
 def load_labels() -> dict[str, dict[str, str]]:
     """{labeller: {box_id: decision}} from eval/labels/*.csv. Also records each labeller's
-    last labelled_at in LABEL_TIMES, to check the labels came before the agent ran."""
+    labelled_at times in LABEL_TIMES, to check the labels came before the agent ran."""
     out: dict[str, dict[str, str]] = {}
+    source: dict[str, str] = {}  # labeller -> the file their labels came from
     for path in sorted((EVAL_DIR / "labels").glob("*.csv")):
-        with open(path, newline="", encoding="utf-8") as f:
-            for r in csv.DictReader(f):
-                who = (r.get("labeller") or path.stem).strip()
-                out.setdefault(who, {})[r["box_id"].strip()] = r["decision"].strip().upper()
-                t = (r.get("labelled_at") or "").strip()
-                if t:
-                    LABEL_TIMES[who] = max(LABEL_TIMES.get(who, ""), t)
+        for r in read_csv(path):
+            if not (r.get("box_id") and r.get("decision")):
+                continue
+            who = r.get("labeller") or path.stem
+            if source.setdefault(who, path.name) != path.name:
+                # Two files under one name would silently merge two people into one labeller.
+                raise SystemExit(f"Labeller '{who}' appears in both {source[who]} and {path.name}. "
+                                 "Each labeller's file must carry their own name; remove or rename one.")
+            out.setdefault(who, {})[r["box_id"]] = r["decision"].upper()
+            if r.get("labelled_at"):
+                LABEL_TIMES.setdefault(who, []).append(r["labelled_at"])
     return out
+
+
+def parse_time(text: str) -> datetime | None:
+    """An ISO date and time. One without a timezone (e.g. after Excel re-saved the file) is
+    taken as UTC, which is what the label sheet writes. None if it can't be read."""
+    try:
+        t = datetime.fromisoformat(text.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return t if t.tzinfo else t.replace(tzinfo=timezone.utc)
 
 
 def labelled_before(names: list[str], started_at: str | None) -> str:
@@ -117,9 +137,21 @@ def labelled_before(names: list[str], started_at: str | None) -> str:
     missing = [n for n in names if n not in LABEL_TIMES]
     if missing:
         return f"unknown ({', '.join(missing)}: no timestamps in the label file)"
-    start = datetime.fromisoformat(started_at)
-    late = [n for n in names if datetime.fromisoformat(LABEL_TIMES[n].replace("Z", "+00:00")) >= start]
-    return f"NO: {', '.join(late)} labelled after the agent ran" if late else "yes"
+    start = parse_time(started_at)
+    if start is None:
+        return f"unknown (run start time {started_at!r} is not a date and time)"
+    late, unreadable = [], []
+    for n in names:
+        times = [parse_time(t) for t in LABEL_TIMES[n]]
+        if None in times:
+            unreadable.append(n)
+        elif max(times) >= start:
+            late.append(n)
+    if late:
+        return f"NO: {', '.join(late)} labelled after the agent ran"
+    if unreadable:
+        return f"unknown ({', '.join(unreadable)}: labelled_at not readable as a date and time)"
+    return "yes"
 
 
 def check_table(rows: list[tuple[str, str]]) -> dict:
@@ -183,8 +215,6 @@ def main() -> None:
     false_stop = confusion[("SEAL", "STOP_AND_FIX")]
     uncertain = sum(v for (_, a), v in confusion.items() if a == "UNCERTAIN")
     pending = sum(v for (_, a), v in confusion.items() if a == "PENDING")
-    decided = [(boxes[b].decision_truth, records[b].outcome.decision.value) for b in ids
-               if records[b].outcome.decision.value in ("SEAL", "STOP_AND_FIX")]
     agent_seals = sum(v for (_, a), v in confusion.items() if a == "SEAL")
     target_rows, kills = against_targets({
         "false_SEAL": (false_seal, bad), "false_STOP": (false_stop, good),
@@ -234,7 +264,9 @@ def main() -> None:
     fresh = [r for r in records.values() if not (r.observations or {}).get("cached_response")
              and r.outcome.decision.value != "PENDING"]
     lat = sorted(c.latency_ms for r in records.values() for c in r.checks[-1:] if c.latency_ms)
-    tokens = [r.observations.get("usage", {}).get("total_tokens", 0) for r in records.values() if r.observations]
+    # Only boxes the model answered: a PENDING record has no usage and would count as 0 tokens.
+    tokens = [r.observations["usage"]["total_tokens"] for r in records.values()
+              if isinstance((r.observations or {}).get("usage"), dict) and r.observations["usage"].get("total_tokens")]
     costs = [r.observations.get("cost_usd") for r in records.values()
              if r.observations and r.observations.get("cost_usd") is not None]
     gate_fail = sum(any(i.quality.gate == "FAIL" for i in r.images) for r in records.values())
@@ -249,7 +281,6 @@ def main() -> None:
             "bad_boxes_among_agent_seals": rate(false_seal, agent_seals),
             "uncertain_on_bad_boxes": pct(confusion[("STOP_AND_FIX", "UNCERTAIN")], bad),
             "uncertain_on_good_boxes": pct(confusion[("SEAL", "UNCERTAIN")], good),
-            "accuracy_when_decided": pct(sum(t == a for t, a in decided), len(decided)),
             "pending_model_failures": pending,
             "pending_rate": rate(pending, len(ids)),
             "confusion": {f"{t} -> {a}": v for (t, a), v in sorted(confusion.items())},
@@ -266,6 +297,7 @@ def main() -> None:
                        "p95": lat[min(len(lat) - 1, int(len(lat) * 0.95))] if lat else None,
                        "note": "model call only, as recorded when first run (cached re-runs keep the original latency)"},
         "tokens_per_box_mean": round(statistics.mean(tokens)) if tokens else None,
+        "boxes_with_token_counts": len(tokens),
         "cost_usd_per_box_mean": round(statistics.mean(costs), 5) if costs else None,
         "fresh_model_calls_this_run": len(fresh),
         "boxes_with_a_photo_failing_the_quality_gate": gate_fail,
@@ -275,11 +307,14 @@ def main() -> None:
     # ---------------- report
     bd = metrics["box_decision"]
     fz = run_info.get("frozen")
-    if run_info["split"] != "test":
+    if run_info["split"] == "dev":
         frozen_line = "Not the held-out split."
     elif fz and fz.get("matches"):
-        frozen_line = (f"Held out: **yes**. Frozen at {fz['frozen_at']} in `{fz['file']}` (model, prompt, thresholds, "
-                       "agent code, manifest, photos, catalogue and both label files hashed); the run matched it.")
+        frozen_line = (("Held out: **yes**. " if run_info["split"] == "test" else
+                        "Held out: **no**, split `all` includes the dev boxes. Its test boxes: ")
+                       + f"frozen at {fz['frozen_at']} in `{fz['file']}` (settings, prompt, agent and eval code, "
+                       "manifest, box photos, catalogue files and reference photos, and both label files hashed); "
+                       "the run matched it.")
     else:
         frozen_line = ("Held out: **NO**. The run did not match a freeze of the test set"
                        + (f" (changed: {'; '.join(fz['changed_since'])})" if fz else "") + ". Treat these numbers as tuned.")
@@ -300,7 +335,6 @@ def main() -> None:
         f"| UNCERTAIN (sent to a human) | {bd['uncertain_rate']} of all boxes |",
         f"| … on bad boxes / on good boxes | {bd['uncertain_on_bad_boxes']} / {bd['uncertain_on_good_boxes']} |",
         f"| Bad boxes among the agent's SEALs | {bd['bad_boxes_among_agent_seals']} |",
-        f"| Accuracy when the agent decided | {bd['accuracy_when_decided']} |",
         f"| Model failures (\"Needs your decision\") | {bd['pending_model_failures']} boxes, {bd['pending_rate']} (target: 2% or less) |",
         "",
         "| Truth \\ Agent | SEAL | STOP_AND_FIX | UNCERTAIN | PENDING |", "|---|---|---|---|---|",
@@ -337,14 +371,15 @@ def main() -> None:
     if human:
         lines += [f"- Labellers: {', '.join(human['labellers'])}; boxes labelled by both: {human['boxes_labelled_by_both']}",
                   f"- All labels made before the agent ran: **{human['all_labels_made_before_the_agent_ran']}**",
-                  f"- Cohen's kappa, human vs human: **{human['kappa_human_vs_human']}**",
-                  f"- Humans agreed on {human['humans_agree_on']} boxes; agent vs that consensus: kappa **{human['kappa_agent_vs_human_consensus']}**"]
+                  f"- Cohen's kappa, human vs human: **{kappa_text(human['kappa_human_vs_human'])}**",
+                  f"- Humans agreed on {human['humans_agree_on']} boxes; agent vs that consensus: kappa "
+                  f"**{kappa_text(human['kappa_agent_vs_human_consensus'])}**"]
         lines += [f"- {k.replace('_', ' ')}: {v}" for k, v in human.items() if k.endswith(("_vs_physical_truth", "_uncertain"))]
     else:
         lines.append("No label files found in eval/labels/.")
     lines += ["", "## Cost and speed", "",
               f"- Model latency p50 / p95: {metrics['latency_ms']['p50']} / {metrics['latency_ms']['p95']} ms",
-              f"- Tokens per box (mean): {metrics['tokens_per_box_mean']}",
+              f"- Tokens per box (mean over the {len(tokens)} boxes the model answered): {metrics['tokens_per_box_mean']}",
               f"- Cost per box (mean, paid-tier list price from .env): {metrics['cost_usd_per_box_mean']}",
               f"- Boxes with a photo failing the local quality gate: {gate_fail}",
               "", "## Every box the agent got wrong or sent to a human", "",

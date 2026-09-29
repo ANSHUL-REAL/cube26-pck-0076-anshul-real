@@ -6,15 +6,17 @@
 Photos are sorted by the time they were taken (EXIF, else file time) and grouped into
 boxes: a new box starts when more than --gap seconds pass between two photos (or use
 --per-box N for a fixed number per box). Groups are matched to the manifest rows of the
-split, in order, starting at --start (default: the first box that has no photos yet).
+split, in order, starting at --start. By default they fill the first run of boxes with no
+photos yet, and stop before the next box that already has photos (never overwritten
+unless you name it with --start).
 
 It always writes eval/import_check_<split>.html: each box's order and real contents next
 to its photos, so you can confirm at a glance that nothing shifted by one. Source files
 are never moved or deleted.
 
 Copies are saved as upright JPEGs, at most 1600 px on the long side (what the model is sent
-anyway), with all EXIF metadata removed: phone photos carry GPS location, and these files
-end up in a public repository.
+anyway), with all metadata removed (EXIF, XMP, comments; only the colour profile is kept):
+phone photos carry GPS location, and these files end up in a public repository.
 """
 
 from __future__ import annotations
@@ -66,11 +68,14 @@ def group(photos: list[tuple[datetime, Path]], gap: float, per_box: int) -> list
 
 
 def save_clean(src: Path, dest: Path, max_side: int) -> None:
-    """Upright, resized JPEG with no EXIF (no GPS, no device info)."""
+    """Upright, resized JPEG with no metadata (no EXIF/GPS, device info, XMP or comments)."""
     with Image.open(src) as img:
+        # The colour profile is kept only when it still matches the pixels (an RGB source).
+        icc = img.info.get("icc_profile") if img.mode in ("RGB", "RGBA") else None
         img = ImageOps.exif_transpose(img).convert("RGB")
         img.thumbnail((max_side, max_side), Image.LANCZOS)
-        img.save(dest, "JPEG", quality=90)
+        img.info = {}  # Pillow would otherwise copy a JPEG comment into the new file
+        img.save(dest, "JPEG", quality=90, **({"icc_profile": icc} if icc else {}))
 
 
 def thumb(path: Path, side: int = 360) -> str:
@@ -130,7 +135,14 @@ def main() -> None:
             raise SystemExit(f"{args.start} is not a {args.split} box in the manifest.")
         boxes = boxes[ids.index(args.start):]
     else:
-        boxes = [b for b in boxes if not b.photos]
+        # One contiguous run of empty boxes: the photos were taken in manifest order, so
+        # skipping a box that already has photos would shift every later box by one.
+        first = next((i for i, b in enumerate(boxes) if not b.photos), len(boxes))
+        end = next((i for i in range(first, len(boxes)) if boxes[i].photos), len(boxes))
+        if end < len(boxes):
+            print(f"Filling {boxes[first].box_id} to {boxes[end - 1].box_id}; stopping before {boxes[end].box_id}, "
+                  "which already has photos. Use --start to go past it.")
+        boxes = boxes[first:end]
 
     groups = group(photos, args.gap, args.per_box)
     pairs = list(zip(boxes, groups))

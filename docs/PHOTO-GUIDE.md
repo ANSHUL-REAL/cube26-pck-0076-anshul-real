@@ -106,4 +106,4 @@ Labels must be done **before** the agent runs on the test set. When both CSVs ar
 python eval/freeze.py --split test
 ```
 
-This hashes the photos, the manifest, both label files and the agent's settings into `eval/frozen-test.json`. The held-out run refuses to start if any of them changed afterwards.
+This hashes the box photos, the manifest, both label files, the catalogue (reference photos included), the agent's and the eval's code and every non-secret setting into `eval/frozen-test.json`. The held-out run refuses to start if any of them changed afterwards.

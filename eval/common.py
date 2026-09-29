@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import csv
+import io
+import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -11,6 +13,7 @@ EVAL_DIR = Path(__file__).resolve().parent
 ROOT = EVAL_DIR.parent
 sys.path.insert(0, str(ROOT))
 
+from pack_manager.config import Settings, get_settings  # noqa: E402
 from pack_manager.models import Order, parse_lines  # noqa: E402
 
 ORG = "org_demo_alpha"
@@ -19,6 +22,29 @@ SCENARIOS = [
     "correct", "missing", "wrong_item", "extra", "wrong_qty",
     "identical_multiples", "similar_products", "ambiguous_photo", "adversarial",
 ]
+
+
+def eval_settings() -> Settings:
+    """The app's settings with more retries, so a rate limit leaves fewer boxes pending.
+    run_eval.py runs with these and freeze.py hashes these same ones."""
+    return get_settings().model_copy(update={"gemini_max_retries": 3})
+
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    """Rows of a CSV that people edit by hand (Excel, Google Sheets).
+
+    Handles Excel's "CSV UTF-8" (starts with a byte-order mark) and its plain "CSV (Comma
+    delimited)" (Windows-1252). Column names ignore case and spaces ("Box ID" is box_id).
+    """
+    raw = path.read_bytes()
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        text = raw.decode("cp1252", errors="replace")
+    return [
+        {k.strip().lower().replace(" ", "_"): v.strip() if isinstance(v, str) else "" for k, v in row.items() if k}
+        for row in csv.DictReader(io.StringIO(text, newline=""))
+    ]
 
 
 def counts(text: str) -> dict[str, int]:
@@ -59,7 +85,7 @@ class Box:
     @property
     def hidden(self) -> bool:
         """An item was (partly) under another item or filler when photographed."""
-        return "hidden" in {w.strip().lower() for w in self.conditions.split(";")}
+        return "hidden" in {w.strip().lower() for w in re.split(r"[;,]", self.conditions)}
 
     def line_truth(self, sku: str) -> str:
         return "PASS" if self.actual.get(sku, 0) == self.expected[sku] else "FAIL"
@@ -75,11 +101,9 @@ class Box:
 
 
 def load_manifest(split: str | None = None) -> list[Box]:
-    path = EVAL_DIR / "manifest.csv"
-    with open(path, newline="", encoding="utf-8") as f:
-        boxes = [
-            Box(**{k: (r.get(k) or "").strip() for k in Box.__dataclass_fields__})
-            for r in csv.DictReader(f)
-            if (r.get("box_id") or "").strip() and not r["box_id"].startswith("#")
-        ]
+    boxes = [
+        Box(**{k: r.get(k, "") for k in Box.__dataclass_fields__})
+        for r in read_csv(EVAL_DIR / "manifest.csv")
+        if r.get("box_id") and not r["box_id"].startswith("#")
+    ]
     return [b for b in boxes if split in (None, "all") or b.split == split]

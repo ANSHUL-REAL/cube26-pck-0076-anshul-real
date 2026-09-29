@@ -1,13 +1,18 @@
 """Gemini implementation of the perceiver: one call per box, with a response cache.
 
-The cache is keyed by model, prompt version, photo hashes and candidate references, so
-re-running the eval or reloading a record never spends quota twice on the same input.
+The cache is keyed by everything the model is sent: model, thinking budget, system
+instruction and every prompt part (candidate texts and reference photos, allowed inserts,
+box photos, task). Re-running the eval or reloading a record never spends quota twice on
+the same input, and any change to the input makes a fresh call.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import logging
+import os
+import tempfile
 import time
 from pathlib import Path
 
@@ -24,6 +29,7 @@ from .base import PerceptionError
 from .prompt import PROMPT_VERSION, SYSTEM_INSTRUCTION, VisionResponse, build_parts, normalise
 
 RETRYABLE = {429, 500, 502, 503, 504}
+log = logging.getLogger(__name__)
 
 
 class GeminiPerceiver:
@@ -57,16 +63,56 @@ class GeminiPerceiver:
             )
         return types.GenerateContentConfig(**kwargs)
 
-    def _cache_key(self, photos: list[PreparedImage], refs: list[tuple[CatalogueItem, list[bytes]]]) -> str:
+    def _cache_key(self, parts: list[str | bytes], candidates: list[CatalogueItem]) -> str:
+        """Hash of everything the model is sent and the settings that change its answer."""
         h = hashlib.sha256()
-        h.update(f"{self.model}|{self.prompt_version}|{sorted((self.order_hint or {}).items())}".encode())
-        for p in photos:
-            h.update(p.sha256.encode())
-        for item, images in refs:
-            h.update(item.model_dump_json().encode())
-            for img in images:
-                h.update(hashlib.sha256(img).digest())
+        h.update(f"{self.model}|{self.prompt_version}|{self.settings.gemini_thinking_budget}".encode())
+        h.update(hashlib.sha256(SYSTEM_INSTRUCTION.encode()).digest())
+        h.update(hashlib.sha256(json.dumps(VisionResponse.model_json_schema(), sort_keys=True).encode()).digest())
+        for item in candidates:
+            h.update(hashlib.sha256(item.model_dump_json().encode()).digest())
+        # Every prompt part in order: candidate texts and reference photos, allowed inserts,
+        # the order (eval ablation only), box photos and the task text. One digest per part.
+        for part in parts:
+            h.update(hashlib.sha256(part if isinstance(part, bytes) else part.encode()).digest())
         return h.hexdigest()
+
+    @staticmethod
+    def _read_cache(path: Path) -> tuple[dict, VisionResponse] | None:
+        """The saved answer, or None. A file that can't be read or doesn't validate (e.g. cut
+        short by a crash) is deleted, so the box gets a fresh call instead of failing forever."""
+        if not path.exists():
+            return None
+        try:
+            entry = json.loads(path.read_text(encoding="utf-8"))
+            if not (isinstance(entry.get("usage"), dict) and isinstance(entry.get("model_version"), str)
+                    and isinstance(entry.get("latency_ms"), int)):
+                raise ValueError("missing or wrong fields")
+            return entry, VisionResponse.model_validate(json.loads(entry["text"]))
+        except Exception as exc:  # any unreadable file means: ask the model again
+            log.warning("Discarding unreadable cache file %s: %s", path.name, exc)
+            try:
+                path.unlink(missing_ok=True)
+            except OSError:
+                pass
+            return None
+
+    @staticmethod
+    def _write_cache(path: Path, entry: dict) -> None:
+        """Written to a temporary file and renamed, so a crash never leaves half a file.
+        Best effort: if the cache can't be written, the answer is still used."""
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=f".{path.stem[:16]}-", suffix=".tmp")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as f:
+                    json.dump(entry, f)
+                os.replace(tmp, path)
+            except BaseException:
+                Path(tmp).unlink(missing_ok=True)
+                raise
+        except OSError as exc:
+            log.warning("Could not save the model answer to the cache: %s", exc)
 
     def _call(self, contents: list) -> tuple[str, dict, str, int]:
         attempts = self.settings.gemini_max_retries + 1
@@ -109,30 +155,26 @@ class GeminiPerceiver:
             (item, reference_images(item, catalogue_root, self.settings) if catalogue_root else [])
             for item in candidates
         ]
-        key = self._cache_key(photos, refs)
-        cache_file = self.cache_dir / f"{key}.json" if self.cache_dir else None
+        parts = build_parts([p.jpeg for p in photos], refs, allowed_inserts, self.order_hint)
+        cache_file = self.cache_dir / f"{self._cache_key(parts, candidates)}.json" if self.cache_dir else None
 
-        cached = False
-        if cache_file and cache_file.exists():
-            entry = json.loads(cache_file.read_text(encoding="utf-8"))
-            cached = True
+        hit = self._read_cache(cache_file) if cache_file else None
+        cached = hit is not None
+        if hit:
+            entry, resp = hit
         else:
-            parts = build_parts([p.jpeg for p in photos], refs, allowed_inserts, self.order_hint)
             contents = [
                 types.Part.from_bytes(data=p, mime_type="image/jpeg") if isinstance(p, bytes) else p
                 for p in parts
             ]
             text, usage, model_version, latency_ms = self._call(contents)
             entry = {"text": text, "usage": usage, "model_version": model_version, "latency_ms": latency_ms}
-
-        try:
-            resp = VisionResponse.model_validate(json.loads(entry["text"]))
-        except (json.JSONDecodeError, ValidationError) as exc:
-            raise PerceptionError(f"Model output did not match the schema: {exc}") from exc
-
-        if cache_file and not cached:
-            cache_file.parent.mkdir(parents=True, exist_ok=True)
-            cache_file.write_text(json.dumps(entry), encoding="utf-8")
+            try:
+                resp = VisionResponse.model_validate(json.loads(text))
+            except (json.JSONDecodeError, ValidationError) as exc:
+                raise PerceptionError(f"Model output did not match the schema: {exc}") from exc
+            if cache_file:
+                self._write_cache(cache_file, entry)
 
         skus = [c.sku for c in candidates]
         objects, counts, scene, issues = normalise(resp, skus, len(photos))

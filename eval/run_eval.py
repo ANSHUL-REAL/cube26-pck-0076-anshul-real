@@ -5,6 +5,8 @@
     python eval/run_eval.py --split test --run test-v1            # the held-out run
     python eval/run_eval.py --split test --run test-v1-order --reveal-order   # ablation
 
+--split all includes the test boxes, so it needs the same freeze as --split test.
+
 Model answers are cached by photo + prompt + model, so re-running costs no quota. Boxes
 that failed (e.g. rate limit) come back as PENDING records; just run the command again.
 Photos that fail the quality gate are still verified (forced), because in the eval we
@@ -18,11 +20,10 @@ import json
 import time
 from datetime import datetime, timezone
 
-from common import EVAL_DIR, ORG, ROOT, load_manifest
+from common import EVAL_DIR, ORG, ROOT, eval_settings, load_manifest
 from freeze import differences, fingerprint, frozen_path
 
 from pack_manager.catalogue import load_org_catalogue
-from pack_manager.config import get_settings
 from pack_manager.models import Decision
 from pack_manager.pipeline import Photo, prepare_photos, verify_box
 from pack_manager.vision.gemini import GeminiPerceiver
@@ -36,12 +37,14 @@ def main() -> None:
     ap.add_argument("--delay", type=float, default=4.0, help="seconds between uncached model calls")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--unfrozen", action="store_true",
-                    help="run the test split without a matching freeze; the run is then marked as not held-out")
+                    help="run the test boxes (split test or all) without a matching freeze; "
+                         "the run is then marked as not held-out")
     args = ap.parse_args()
 
-    settings = get_settings().model_copy(update={"gemini_max_retries": 3})
+    settings = eval_settings()
     frozen = None
-    if args.split == "test":
+    # Any run that shows the agent a test box must match the freeze, not only --split test.
+    if args.split == "test" or (args.split == "all" and load_manifest("test")):
         path = frozen_path("test")
         if path.exists():
             frozen = json.loads(path.read_text(encoding="utf-8"))
@@ -50,7 +53,8 @@ def main() -> None:
                       "changed_since": diff}
         if not (frozen and frozen["matches"]) and not args.unfrozen:
             raise SystemExit(
-                "The test set isn't frozen, or something changed since it was:\n  "
+                f"--split {args.split} runs the test boxes, but the test set isn't frozen, "
+                "or something changed since it was:\n  "
                 + ("\n  ".join(frozen["changed_since"]) if frozen else "no eval/frozen-test.json")
                 + "\nFreeze it (python eval/freeze.py --split test) and commit that before the held-out run, "
                 "or pass --unfrozen: the run is then reported as not held-out.")
