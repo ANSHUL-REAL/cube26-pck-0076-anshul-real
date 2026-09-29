@@ -3,13 +3,16 @@
 from __future__ import annotations
 
 import json
+import logging
 import random
 from functools import lru_cache
 from pathlib import Path
 
 from .config import Settings
 from .models import Catalogue, CatalogueItem, Order
-from .quality import prepare_reference
+from .quality import ImageDecodeError, prepare_reference
+
+log = logging.getLogger(__name__)
 
 
 def load_catalogue(folder: str | Path) -> Catalogue:
@@ -73,5 +76,10 @@ def reference_images(item: CatalogueItem, root: str | Path, settings: Settings) 
     for rel in item.reference_images[: settings.ref_images_per_sku]:
         path = Path(root) / rel
         if path.exists():
-            out.append(_reference_bytes(str(path), settings.ref_max_side_px))
+            try:
+                out.append(_reference_bytes(str(path), settings.ref_max_side_px))
+            except (ImageDecodeError, OSError):
+                # One unreadable reference photo mustn't make every box that shows this sku
+                # (even as a decoy) fail; the model still gets the text description.
+                log.warning("Skipping unreadable reference photo %s", path)
     return out

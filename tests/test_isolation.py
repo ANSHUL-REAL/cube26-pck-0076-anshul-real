@@ -1,7 +1,9 @@
 """Tenant isolation, tested against a real Postgres (engineering rule 1).
 
-Needs DATABASE_URL (the pack_app role) and DATABASE_ADMIN_URL in the environment or .env,
-e.g. `docker compose up -d db && python -m app.migrate`. Skipped otherwise.
+Needs TEST_DATABASE_URL / TEST_DATABASE_ADMIN_URL, or else DATABASE_URL (the pack_app role) and
+DATABASE_ADMIN_URL, in the environment or .env, e.g. `docker compose up -d db && python -m app.migrate`.
+Skipped otherwise. The tests only add orders named ISO-..., and delete them again before and after,
+so running them against the demo database leaves it as it was.
 """
 
 import os
@@ -16,15 +18,32 @@ from pack_manager.pipeline import Photo, prepare_photos, verify_box
 from pack_manager.vision.oracle import OraclePerceiver
 
 S = Settings()
+APP_URL = os.environ.get("TEST_DATABASE_URL") or S.database_url
+ADMIN_URL = os.environ.get("TEST_DATABASE_ADMIN_URL") or S.database_admin_url
 # In CI (REQUIRE_DB=1) a missing or unreachable database is a failure, not a skip.
 REQUIRE_DB = bool(os.environ.get("REQUIRE_DB"))
 pytestmark = pytest.mark.skipif(
-    not REQUIRE_DB and not (S.database_url and S.database_admin_url),
+    not REQUIRE_DB and not (APP_URL and ADMIN_URL),
     reason="DATABASE_URL / DATABASE_ADMIN_URL not set",
 )
 
 ALPHA, BRAVO = "org_demo_alpha", "org_demo_bravo"
 TENANT_TABLES = ["organizations", "orders", "records", "images"]
+
+
+def _remove_test_rows() -> None:
+    """Delete what these tests add (orders named ISO-...). RLS is forced even for the owner,
+    so each organisation's rows are deleted with that organisation set."""
+    conn = psycopg2.connect(ADMIN_URL)
+    with conn, conn.cursor() as cur:
+        for org in (ALPHA, BRAVO):
+            cur.execute("select set_config('app.org_id', %s, true)", (org,))
+            test_ids = ("ISO-%",)
+            cur.execute("delete from images where record_id in "
+                        "(select record_id from records where order_id like %s)", test_ids)
+            cur.execute("delete from records where order_id like %s", test_ids)
+            cur.execute("delete from orders where order_id like %s", test_ids)
+    conn.close()
 
 
 @pytest.fixture(scope="module")
@@ -33,15 +52,17 @@ def database():
     from app.migrate import migrate, seed
 
     try:
-        migrate(S.database_admin_url, S.pack_app_db_password)
-        seed(S.database_admin_url)
-        d = Database(S.database_url)
+        migrate(ADMIN_URL, S.pack_app_db_password)
+        seed(ADMIN_URL, sample_orders=False)  # organisations and demo codes only
+        _remove_test_rows()
+        d = Database(APP_URL)
     except psycopg2.OperationalError as exc:
         if REQUIRE_DB:
             raise
         pytest.skip(f"database not reachable: {exc}")
     yield d
     d.close()
+    _remove_test_rows()
 
 
 @pytest.fixture(scope="module")

@@ -203,6 +203,28 @@
         "prior_content_hash": {
           "title": "Prior Content Hash",
           "type": "string"
+        },
+        "prior_outcome": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Outcome"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "prior_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RecordStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [

@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-A202A0319E62",
+  "record_id": "PCK-CB9DC7A1860B",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -25,7 +25,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "8cf4688e-c89b-45d9-b3b7-b2e38179dab9",
+      "image_id": "16f9a6d4-7374-4f44-8676-40e1e3fefd50",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -215,7 +215,7 @@
   "outcome": {
     "decision": "UNCERTAIN",
     "decided_by": "agent",
-    "decided_at": "2026-09-29T16:59:55Z",
+    "decided_at": "2026-09-29T17:41:34Z",
     "reasons": [
       "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
       "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked"
@@ -228,5 +228,5 @@
   },
   "overrides": [],
   "status": "pending_review",
-  "content_hash": "sha256:91e61e9a4cd2c034e6d4c63836861ab761a924a4b2ffac32b2b589f06ca34ddb"
+  "content_hash": "sha256:423bd8a75694f8c68c67a99c1d94a9bda8ac34920116d581aa21d3efec80edcd"
 }

@@ -9,9 +9,10 @@ Design choices (see ARCHITECTURE.md):
 
 from __future__ import annotations
 
+import math
 from enum import Enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from ..models import CatalogueItem, DetectedObject, Scene, SkuCount
 
@@ -46,6 +47,9 @@ class Classification(str, Enum):
 
 
 class VObject(BaseModel):
+    # Every field stays required in the schema the model is given. When parsing, small slips
+    # (a float in box_2d, a missing optional-looking field) are repaired instead of throwing
+    # the whole answer away and failing open to PENDING.
     object_id: str = Field(description="o1, o2, ...")
     photo: int = Field(description="1-based number of the photo where the object is clearest")
     box_2d: list[int] = Field(description="[ymin, xmin, ymax, xmax] normalised to 0-1000")
@@ -56,6 +60,23 @@ class VObject(BaseModel):
     alternative_skus: list[str]
     deciding_feature: str
     partially_hidden: bool
+
+    @model_validator(mode="before")
+    @classmethod
+    def _fill_missing(cls, data):
+        if isinstance(data, dict):
+            defaults = {"object_id": "", "photo": 1, "box_2d": [], "description": "", "sku": "",
+                        "alternative_skus": [], "deciding_feature": "", "partially_hidden": False}
+            data = {**defaults, **{k: v for k, v in data.items() if v is not None}}
+        return data
+
+    @field_validator("box_2d", mode="before")
+    @classmethod
+    def _round_box(cls, v):
+        try:
+            return [int(round(float(x))) for x in v]
+        except (TypeError, ValueError):
+            return []
 
 
 class VCount(BaseModel):
@@ -121,7 +142,8 @@ def build_parts(
 
 
 def _clamp01(x: float) -> float:
-    return max(0.0, min(1.0, float(x)))
+    x = float(x)
+    return max(0.0, min(1.0, x)) if math.isfinite(x) else 0.0
 
 
 def _clean_box(box: list[int]) -> list[int] | None:
@@ -139,17 +161,32 @@ def normalise(
     """Turn the raw model answer into validated perception objects.
 
     A sku outside the candidate list can't be trusted, so that object becomes an
-    UNKNOWN_PRODUCT and the reason is kept in its description.
+    UNKNOWN_PRODUCT and the reason is kept in its description. Skus are matched without
+    regard to case or spaces. An object the model called packaging or unknown while also
+    naming a candidate sku contradicts itself: it is kept as an unclear product that could
+    be that sku (confidence capped at 0.5), never silently dropped.
     """
-    allowed = set(candidate_skus)
+    canon = {s.strip().lower(): s for s in candidate_skus}
+
+    def known(raw: str) -> str | None:
+        return canon.get((raw or "").strip().lower())
+
     objects = []
     for i, o in enumerate(resp.objects, 1):
         cls = o.classification.value
-        sku = o.sku.strip() or None
+        raw = o.sku.strip()
+        sku = known(raw)
         desc = o.description
-        if cls == "CANDIDATE" and sku not in allowed:
-            desc = f"{desc} (model named unknown sku {sku!r})".strip()
-            cls, sku = "UNKNOWN_PRODUCT", None
+        conf = _clamp01(o.confidence)
+        alternatives = [a for a in (known(x) for x in o.alternative_skus) if a]
+        if cls == "CANDIDATE" and sku is None:
+            desc = f"{desc} (model named unknown sku {raw!r})".strip()
+            cls = "UNKNOWN_PRODUCT"
+        elif cls != "CANDIDATE" and sku is not None:
+            desc = f"{desc} (model called it {cls.lower().replace('_', ' ')} but also named {sku})".strip()
+            cls, conf = "UNKNOWN_PRODUCT", min(conf, 0.5)
+            alternatives = [sku, *alternatives]
+            sku = None
         if cls != "CANDIDATE":
             sku = None
         objects.append(
@@ -160,16 +197,16 @@ def normalise(
                 description=desc,
                 classification=cls,
                 sku=sku,
-                confidence=_clamp01(o.confidence),
-                alternative_skus=[s for s in o.alternative_skus if s in allowed and s != sku],
+                confidence=conf,
+                alternative_skus=list(dict.fromkeys(a for a in alternatives if a != sku)),
                 deciding_feature=o.deciding_feature,
                 partially_hidden=o.partially_hidden,
             )
         )
     counts = [
-        SkuCount(sku=c.sku, count=max(0, c.count), count_certain=c.count_certain, reason=c.reason)
+        SkuCount(sku=known(c.sku), count=max(0, c.count), count_certain=c.count_certain, reason=c.reason)
         for c in resp.counts
-        if c.sku in allowed
+        if known(c.sku)
     ]
     scene = Scene(
         box_interior_fully_visible=resp.scene.box_interior_fully_visible,

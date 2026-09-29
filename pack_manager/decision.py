@@ -206,14 +206,18 @@ def decide(
         if sc.items_may_be_hidden or sc.visibility_confidence < settings.visibility_threshold:
             needed.append("A view of stacked or covered items: spread them out, or add a photo from an angle.")
 
-    # 3. Sort what the model saw.
-    products = [o for o in perception.objects if o.classification != "NON_PRODUCT"]
-    inserts = [o for o in perception.objects if o.classification == "NON_PRODUCT"]
+    # 3. Sort what the model saw. "Packaging" is only ignored when the model is sure of it: a
+    # low-confidence insert, or one it thinks could be a candidate, may be a product under wrap.
+    def surely_packaging(o: DetectedObject) -> bool:
+        return o.classification == "NON_PRODUCT" and o.confidence >= tau and not o.alternative_skus
+
+    products = [o for o in perception.objects if not surely_packaging(o)]
+    inserts = [o for o in perception.objects if surely_packaging(o)]
     confident: dict[str, list[DetectedObject]] = defaultdict(list)
     unknown_confident: list[DetectedObject] = []
     tentative: list[DetectedObject] = []
     for o in products:
-        if o.confidence < tau:
+        if o.confidence < tau or o.classification == "NON_PRODUCT":
             tentative.append(o)
         elif o.sku:
             confident[o.sku].append(o)
@@ -234,7 +238,19 @@ def decide(
 
     # 4. Every order line: present? right quantity?
     rows, shortfall, overage, add_up_to = [], {}, {}, {}
+    uncatalogued = [s for s in expected if catalogue.get(s) is None]
     for sku, qty in expected.items():
+        if sku in uncatalogued:
+            # The model was never shown this product, so "not found" means nothing.
+            add(f"line_present:{sku}", Verdict.UNCERTAIN, None,
+                f"{sku} isn't in the product catalogue, so it can't be recognised in the photo.")
+            add(f"line_quantity:{sku}", Verdict.UNCERTAIN, None,
+                f"{sku}: {qty} ordered; not counted, because it isn't in the product catalogue.")
+            hand_checks.append(f"Check {sku} by hand: there should be {qty}. Add it to the catalogue so it can be checked.")
+            needed.append(f"{sku} added to the product catalogue, or a hand check of it.")
+            rows.append({"sku": sku, "title": sku, "ordered": qty, "found": 0, "unclear": 0,
+                         "present": "UNCERTAIN", "quantity": "UNCERTAIN"})
+            continue
         objs = confident.get(sku, [])
         n = len(objs)
         possible = [o for o in tentative if could_be(o, sku)]
@@ -249,13 +265,18 @@ def decide(
         if n >= 1:
             pv = Verdict.PASS
             add(f"line_present:{sku}", pv, max(confs), f"{name}: found ({', '.join(_ref(o) for o in objs)}).", {"object_ids": ids})
-        elif not possible and covered:
+        elif not possible and covered and not (mc and mc.count > 0):
             pv = Verdict.FAIL
             add(f"line_present:{sku}", pv, sc.visibility_confidence,
                 f"{name}: not in the box, and the whole box is visible.")
         else:
             pv = Verdict.UNCERTAIN
-            why = f"possible match {', '.join(_ref(o) for o in possible)} is unclear" if possible else "not seen, but items may be hidden"
+            if possible:
+                why = f"possible match {', '.join(_ref(o) for o in possible)} is unclear"
+            elif covered:
+                why = f"the model counted {mc.count} but didn't point to one"
+            else:
+                why = "not seen, but items may be hidden"
             add(f"line_present:{sku}", pv, max((o.confidence for o in possible), default=None),
                 f"{name}: {why}.", {"possible_object_ids": pids})
             feature = catalogue.get(sku).distinguishing_features if catalogue.get(sku) else ""
@@ -305,10 +326,17 @@ def decide(
     wrong_pairs: list[tuple[str, DetectedObject]] = []
     extras: list[DetectedObject] = []
     component_ambiguous: list[tuple[DetectedObject, str]] = []
+    maybe_uncatalogued: list[DetectedObject] = []
+    parts_left = {parent: expected[parent] for parent in set(component_of.values())}
     non_expected = [o for sku, objs in confident.items() if sku not in expected for o in objs] + unknown_confident
     for o in non_expected:
-        if o.sku and o.sku in component_of:
+        if o.sku and o.sku in component_of and parts_left[component_of[o.sku]] > 0:
+            # At most one loose part per parent item ordered can be "the part inside it".
+            parts_left[component_of[o.sku]] -= 1
             component_ambiguous.append((o, component_of[o.sku]))
+            continue
+        if o.sku is None and uncatalogued:
+            maybe_uncatalogued.append(o)
             continue
         target = _pick_short_line(o, short_left, catalogue)
         if target:
@@ -318,7 +346,12 @@ def decide(
             extras.append(o)
     short_left = {s: k for s, k in short_left.items() if k > 0}
 
-    possible_wrong = [o for o in tentative if o.sku and o.sku not in expected]
+    # (object, the non-ordered sku it may be): its best guess, or any alternative it named.
+    possible_wrong = []
+    for o in tentative:
+        other = next((s for s in [o.sku, *o.alternative_skus] if s and s not in expected), None)
+        if other:
+            possible_wrong.append((o, other))
     possible_extra = [o for o in tentative if o.sku is None]
 
     for o in tentative:
@@ -337,14 +370,15 @@ def decide(
             {"pairs": [{"expected_sku": e, "found_sku": o.sku, "object_id": o.object_id} for e, o in wrong_pairs]})
     elif possible_wrong:
         detail = "; ".join(
-            f"{_ref(o)} may be {title(o.sku)} (confidence {o.confidence:.2f})" for o in possible_wrong
+            f"{_ref(o)} may be {title(other)} (confidence {o.confidence:.2f})" for o, other in possible_wrong
         ) + "."
-        add("wrong_item", Verdict.UNCERTAIN, max(o.confidence for o in possible_wrong), detail,
-            {"object_ids": [o.object_id for o in possible_wrong]})
-        for o in possible_wrong:
-            look = catalogue.get(o.sku).distinguishing_features if catalogue.get(o.sku) else ""
+        add("wrong_item", Verdict.UNCERTAIN, max(o.confidence for o, _ in possible_wrong), detail,
+            {"object_ids": [o.object_id for o, _ in possible_wrong]})
+        for o, other in possible_wrong:
+            look = catalogue.get(other).distinguishing_features if catalogue.get(other) else ""
+            hand_checks.append(f"Check {_ref(o)} by hand: is it {title(other)}?")
             needed.append(f"A close-up of {_ref(o)}" + (f" showing {look}" if look else " showing its label or colour")
-                          + f", to tell whether it is {title(o.sku)}.")
+                          + f", to tell whether it is {title(other)}.")
     else:
         add("wrong_item", Verdict.PASS, clean_conf, "No product from outside the order was found.")
 
@@ -352,12 +386,17 @@ def decide(
         detail = "; ".join(f"{_name(o, catalogue)} ({_ref(o)})" for o in extras)
         add("extra_item", Verdict.FAIL, min(o.confidence for o in extras), f"Not in the order: {detail}.",
             {"object_ids": [o.object_id for o in extras]})
-    elif component_ambiguous or possible_extra:
+    elif component_ambiguous or possible_extra or maybe_uncatalogued:
         bits = [f"{_name(o, catalogue)} ({_ref(o)}) could be the part that ships inside {title(parent)}"
                 for o, parent in component_ambiguous]
-        bits += [f"unclear product {_ref(o)}: {o.description}" for o in possible_extra]
+        bits += [f"unclear product {_ref(o)}: {_short(o.description)}" for o in possible_extra]
+        bits += [f"{_name(o, catalogue)} ({_ref(o)}) could be {' or '.join(uncatalogued)}, which isn't in the catalogue"
+                 for o in maybe_uncatalogued]
         add("extra_item", Verdict.UNCERTAIN, None, "; ".join(bits) + ".",
-            {"object_ids": [o.object_id for o, _ in component_ambiguous] + [o.object_id for o in possible_extra]})
+            {"object_ids": [o.object_id for o, _ in component_ambiguous] + [o.object_id for o in possible_extra]
+             + [o.object_id for o in maybe_uncatalogued]})
+        for o in maybe_uncatalogued:
+            hand_checks.append(f"Check {_ref(o)} by hand: is it {' or '.join(uncatalogued)}?")
         for o, parent in component_ambiguous:
             hand_checks.append(f"Check {_ref(o)}: is it loose, or part of the {title(parent)} packaging?")
             needed.append(f"Whether {_ref(o)} is loose or packed inside the {title(parent)} box.")

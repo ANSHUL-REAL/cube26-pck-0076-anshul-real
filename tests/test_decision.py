@@ -237,3 +237,46 @@ def test_model_descriptions_read_well_mid_sentence():
     long = "A white rectangular box or carton with 'CERAMIC MUG x2' printed on its visible surface."
     out = _short(long)
     assert out.startswith("a white rectangular box") and out.endswith("…") and len(out) <= 61
+
+
+def test_unsure_packaging_that_could_be_the_item_is_not_ignored(catalogue, settings):
+    # "blue fabric under paper" called packaging at 0.30, but it could be a second cap: never SEAL.
+    order = make_order(("CAP-BLU", 1))
+    p = perception([obj(1, "CAP-BLU"), obj(2, None, conf=0.30, cls="NON_PRODUCT", alts=["CAP-BLU"],
+                                            desc="blue fabric under paper")])
+    r = run(order, p, catalogue, settings)
+    assert r.decision == Decision.UNCERTAIN
+    # Packaging the model is sure of is still ignored.
+    p = perception([obj(1, "CAP-BLU"), obj(2, None, conf=0.97, cls="NON_PRODUCT", desc="packing slip")])
+    assert run(order, p, catalogue, settings).decision == Decision.SEAL
+
+
+def test_ordered_sku_missing_from_catalogue_is_a_hand_check_not_a_stop(catalogue, settings):
+    order = make_order(("MUG-XL", 1))
+    r = run(order, perception([obj(1, None, conf=0.9, desc="A large white mug")]), catalogue, settings)
+    assert r.decision == Decision.UNCERTAIN
+    assert verdicts(r)["line_present:MUG-XL"] == Verdict.UNCERTAIN
+    assert not any(i.startswith("Replace") for i in r.fix_instructions)
+
+
+def test_model_count_without_an_object_is_unclear_not_missing(catalogue, settings):
+    order = make_order(("CAP-BLU", 1))
+    p = perception([], counts=[SkuCount(sku="CAP-BLU", count=1, count_certain=True)])
+    r = run(order, p, catalogue, settings)
+    assert r.decision == Decision.UNCERTAIN
+    assert "counted 1 but didn't point to one" in [c for c in r.checks if c.check_key == "line_present:CAP-BLU"][0].detail
+
+
+def test_unclear_item_that_may_be_the_lookalike_is_a_possible_wrong_item(catalogue, settings):
+    order = make_order(("CAP-BLU", 1))
+    r = run(order, perception([obj(1, "CAP-BLU", conf=0.55, alts=["CAP-RED"])]), catalogue, settings)
+    assert verdicts(r)["wrong_item"] == Verdict.UNCERTAIN
+    assert "Check #1 by hand: is it Red Cap?" in r.fix_instructions
+
+
+def test_only_one_loose_part_per_parent_can_be_the_part_inside_it(catalogue, settings):
+    order = make_order(("LAMP", 1))
+    p = perception([obj(1, "LAMP")] + [obj(i, "CABLE") for i in range(2, 6)])
+    r = run(order, p, catalogue, settings)
+    assert r.decision == Decision.STOP_AND_FIX
+    assert len(r.observations["extra"]) == 3

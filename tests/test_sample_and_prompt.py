@@ -49,3 +49,35 @@ def test_normalise_rejects_invented_skus_and_bad_boxes():
     assert objects[0].alternative_skus == ["CAP-BLU"]
     assert objects[1].sku == "CAP-BLU" and objects[1].box_2d == [10, 10, 500, 500]
     assert [c.sku for c in counts] == ["CAP-BLU"]
+
+
+def test_normalise_repairs_small_slips_and_keeps_self_contradicting_objects():
+    import math as _math
+
+    from pack_manager.vision.prompt import VisionResponse, normalise
+
+    resp = VisionResponse.model_validate({
+        "objects": [
+            # float box, missing deciding_feature, lower-case sku
+            {"object_id": "o1", "photo": 1, "box_2d": [10.4, 20.6, 500.2, 600.9], "description": "cap",
+             "classification": "CANDIDATE", "sku": " cap-blu ", "confidence": 0.9, "alternative_skus": [],
+             "partially_hidden": False},
+            # called packaging but also named a candidate
+            {"object_id": "o2", "photo": 1, "box_2d": [1, 1, 50, 50], "description": "coiled cable",
+             "classification": "NON_PRODUCT", "sku": "CABLE", "confidence": 0.9, "alternative_skus": [],
+             "deciding_feature": "", "partially_hidden": False},
+            {"object_id": "o3", "photo": 1, "box_2d": [1, 1, 50, 50], "description": "?",
+             "classification": "UNKNOWN_PRODUCT", "sku": "", "confidence": _math.nan, "alternative_skus": [],
+             "deciding_feature": "", "partially_hidden": False},
+        ],
+        "counts": [{"sku": "CAP-BLU ", "count": 1, "count_certain": True, "reason": ""}],
+        "scene": {"box_interior_fully_visible": True, "items_may_be_hidden": False,
+                  "visibility_confidence": 0.9, "notes": ""},
+        "image_issues": [],
+    })
+    objects, counts, _, _ = normalise(resp, ["CAP-BLU", "CABLE"], n_photos=1)
+    assert objects[0].sku == "CAP-BLU" and objects[0].box_2d == [10, 21, 500, 601]
+    assert (objects[1].classification, objects[1].sku, objects[1].alternative_skus) == ("UNKNOWN_PRODUCT", None, ["CABLE"])
+    assert objects[1].confidence <= 0.5
+    assert objects[2].confidence == 0.0  # NaN is not "certain"
+    assert [c.sku for c in counts] == ["CAP-BLU"]

@@ -84,6 +84,10 @@ def verify_box(
     earlier_uses: list[dict] | None = None,
     extra_observations: dict | None = None,
 ) -> EvidenceRecord:
+    if not prepared:
+        raise ValueError("At least one photo of the box is needed.")
+    if not order.lines:
+        raise ValueError("The order has no lines to check the box against.")
     reports = [p.quality for p in prepared]
     if any(r.gate == "FAIL" for r in reports) and not force_quality:
         raise QualityRejected(reports)

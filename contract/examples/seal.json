@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-C5BADFAD06AA",
+  "record_id": "PCK-33C53D0B6E26",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -29,7 +29,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "8cf4688e-c89b-45d9-b3b7-b2e38179dab9",
+      "image_id": "16f9a6d4-7374-4f44-8676-40e1e3fefd50",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -252,7 +252,7 @@
   "outcome": {
     "decision": "SEAL",
     "decided_by": "agent",
-    "decided_at": "2026-09-29T16:59:55Z",
+    "decided_at": "2026-09-29T17:41:34Z",
     "reasons": [
       "Every ordered item is in the box in the right quantity, and nothing else is."
     ],
@@ -260,5 +260,5 @@
   },
   "overrides": [],
   "status": "final",
-  "content_hash": "sha256:75b69c7e9d9bedec469d3da2e05abdf7ae08e5c15259615169424d4174b9e7ee"
+  "content_hash": "sha256:4c220dca25164ecc1f112952ca2ec343825600912e4bf48fb73c1c41553613da"
 }

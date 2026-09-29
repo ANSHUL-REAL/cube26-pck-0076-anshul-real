@@ -42,6 +42,29 @@ def verify(record: EvidenceRecord) -> bool:
     return bool(record.content_hash) and record.content_hash == compute_hash(record)
 
 
+def verify_history(record: EvidenceRecord) -> bool | None:
+    """Check the record, then rebuild it as it was before each override and check that against
+    the override's prior_content_hash, back to the agent's original record.
+
+    True: every version matches. False: something doesn't. None: an override was made before
+    overrides stored what they replaced, so the earlier versions can't be rebuilt.
+    """
+    if not verify(record):
+        return False
+    current = record
+    while current.overrides:
+        last = current.overrides[-1]
+        if last.prior_outcome is None or last.prior_status is None:
+            return None
+        current = current.model_copy(update={
+            "overrides": current.overrides[:-1], "outcome": last.prior_outcome,
+            "status": last.prior_status, "content_hash": last.prior_content_hash,
+        })
+        if not verify(current):
+            return False
+    return True
+
+
 def apply_override(
     record: EvidenceRecord,
     new_decision: Decision,
@@ -50,7 +73,13 @@ def apply_override(
     note: str = "",
     at: datetime | None = None,
 ) -> EvidenceRecord:
-    """Record a human decision. The agent's checks and the prior outcome are kept."""
+    """Record a human decision. The agent's checks and the prior outcome are kept.
+
+    Refuses a record that doesn't match its content hash: sealing a new hash over an edited
+    record would hide the edit.
+    """
+    if not verify(record):
+        raise ValueError("This record doesn't match its content hash, so it can't be changed.")
     at = at or utcnow()
     entry = Override(
         original_decision=record.outcome.decision,
@@ -60,6 +89,8 @@ def apply_override(
         operator_label=operator_label,
         at=at,
         prior_content_hash=record.content_hash,
+        prior_outcome=record.outcome,
+        prior_status=record.status,
     )
     outcome = record.outcome.model_copy(
         update={"decision": new_decision, "decided_by": f"operator:{operator_label}", "decided_at": at}

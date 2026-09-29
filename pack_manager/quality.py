@@ -13,7 +13,7 @@ from dataclasses import dataclass
 
 import cv2
 import numpy as np
-from PIL import Image, ImageOps, UnidentifiedImageError
+from PIL import Image, ImageOps
 
 from .config import Settings
 from .models import QualityReport
@@ -28,6 +28,13 @@ except ImportError:  # pragma: no cover
 
 class ImageDecodeError(ValueError):
     pass
+
+
+# Phones take 12-24 MP photos by default; 30 MP leaves room and keeps decoding within a small
+# server's memory. Checked from the header, before any pixels are decoded, so a tiny file that
+# claims to be 20000 x 20000 can't exhaust memory.
+MAX_PIXELS = 30_000_000
+TOO_LARGE = "This image is too large ({}). Send a normal phone photo."
 
 
 @dataclass
@@ -46,10 +53,21 @@ class PreparedImage:
 def _load_upright(data: bytes) -> Image.Image:
     try:
         img = Image.open(io.BytesIO(data))
-        img = ImageOps.exif_transpose(img)
-        return img.convert("RGB")
-    except (UnidentifiedImageError, OSError) as exc:
+        w, h = img.size
+    except Image.DecompressionBombError as exc:
+        raise ImageDecodeError(TOO_LARGE.format("over 170 megapixels")) from exc
+    except Exception as exc:  # Pillow raises many types for bad files (OSError, SyntaxError, ...)
         raise ImageDecodeError("Could not read this file as an image.") from exc
+    if w * h > MAX_PIXELS:
+        raise ImageDecodeError(TOO_LARGE.format(f"{w}x{h}"))
+    if min(w, h) < 1:
+        raise ImageDecodeError("Could not read this file as an image.")
+    try:
+        img = ImageOps.exif_transpose(img).convert("RGB")
+    except Exception as exc:
+        raise ImageDecodeError("Could not read this file as an image.") from exc
+    img.info = {}  # drop EXIF (GPS), comments and other metadata before anything is saved
+    return img
 
 
 def _resize(img: Image.Image, max_side: int) -> Image.Image:
@@ -57,7 +75,7 @@ def _resize(img: Image.Image, max_side: int) -> Image.Image:
     scale = max_side / max(w, h)
     if scale >= 1:
         return img
-    return img.resize((round(w * scale), round(h * scale)), Image.LANCZOS)
+    return img.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
 
 
 def to_jpeg(img: Image.Image, quality: int = 88) -> bytes:
@@ -71,7 +89,7 @@ def assess(rgb: np.ndarray, settings: Settings, original_size: tuple[int, int]) 
     # Measure blur at a fixed working size so the threshold means the same for every photo.
     h, w = gray.shape
     scale = 1024 / max(h, w)
-    work = cv2.resize(gray, (round(w * scale), round(h * scale)), interpolation=cv2.INTER_AREA)
+    work = cv2.resize(gray, (max(1, round(w * scale)), max(1, round(h * scale))), interpolation=cv2.INTER_AREA)
     blur_var = float(cv2.Laplacian(work, cv2.CV_64F).var())
     mean_luma = float(gray.mean())
     clipped_pct = float((gray >= 250).mean() * 100)

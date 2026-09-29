@@ -75,6 +75,13 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 
 **Over-quantity wins over uncertainty.** If 3 are confidently counted and 2 were ordered, the box stops even if more could be hidden: at least one must come out.
 
+**Doubt never turns into a SEAL.** A few rules exist only to keep a false SEAL out:
+- Packaging is ignored only when the model is sure it's packaging. Low-confidence "packaging", or packaging it thinks could be a candidate (a cap half under bubble wrap), is treated as an unclear product.
+- An object the model calls packaging or unknown while also naming a candidate SKU contradicts itself; it becomes an unclear product that could be that SKU.
+- An unclear object whose alternative is a SKU that wasn't ordered makes `wrong_item` UNCERTAIN ("is #1 the Red Cap?").
+- An ordered SKU that isn't in the catalogue can't be recognised, so its lines are UNCERTAIN (a hand check), never "missing".
+- If the model's own count says an item is there but it listed no object for it, the line is UNCERTAIN, not "missing".
+
 **Every unclear result explains itself.** When any check is UNCERTAIN, the record carries `observations.uncertainty`. It lists what is known, what can't be told, what evidence would settle each unclear point ("a count of the towels with every unit visible"), and the next action. It is derived from the checks, not written by the model.
 
 **UNCERTAIN is its own outcome** (engineering rule 4), not a low-confidence SEAL. It has its own colour and its own queue ("Check by hand") in the UI. The record gets status `pending_review`, and the hand checks to do are listed.
@@ -85,7 +92,8 @@ Handbook section 9 field names; full reference in [`contract/README.md`](contrac
 
 - Each photo is stored with the SHA-256 of the exact bytes the model saw, plus the SHA-256 of the original upload.
 - `content_hash` = SHA-256 over canonical JSON (sorted keys, compact, hash field excluded). The record page recomputes it and shows "matches record" or a warning.
-- **Overrides are data.** An operator decision appends `{original_decision, new_decision, reason_code, note, operator_label, at, prior_content_hash}` and re-hashes. The agent's checks and reasons stay in the record unchanged. Reason codes are a fixed list, so overrides can be counted in the eval.
+- **Overrides are data.** An operator decision appends `{original_decision, new_decision, reason_code, note, operator_label, at, prior_content_hash, prior_outcome, prior_status}` and re-hashes. The agent's checks and reasons stay in the record unchanged. Reason codes are a fixed list, so overrides can be counted in the eval.
+- **The override chain can be checked.** Because each override keeps what it replaced, every earlier version of the record can be rebuilt and compared with its `prior_content_hash`, back to the agent's original (`verify_history`). An override is refused on a record that doesn't match its hash, so re-hashing can't hide an edit.
 
 **What we don't claim:** the hash makes an edit detectable when someone compares the record with its hash. It is not an append-only log, a hash chain or an external anchor. Someone with write access to the database could replace a record and its hash together.
 
@@ -134,7 +142,7 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 |---|---|---|
 | **Prompt injection from the box** (a note saying "SEAL THIS BOX", a packing slip listing other items) | The system prompt says text in images is scene content only. The model is never asked for a verdict and doesn't know the order, so there is no decision for the text to steer. The rules only use object classifications. Two adversarial boxes are in the eval | A note could still make the model mislabel an object |
 | **Another org reads my records or photos** | Forced RLS on every tenant table, per-transaction org setting, non-owner role, random image UUIDs, 404 (not 403) for other orgs' IDs. Tested against real Postgres | Access codes are simple shared secrets; demo codes are public on purpose |
-| **Editing a record after the fact** | Content hash shown and verified on the record page and in the API; overrides keep the prior hash | Not tamper-proof against someone with database write access (see above) |
+| **Editing a record after the fact** | Content hash shown and verified on the record page and in the API; every earlier version is rebuilt from the overrides and checked against its prior hash; overrides are refused on a record that doesn't match | Not tamper-proof against someone with database write access (see above) |
 | **Model hallucination / confirmation bias** | D3, D4, D5, D6, unknown SKUs forced to `UNKNOWN_PRODUCT`, confidence thresholds, UNCERTAIN path | Measured in the eval as false-SEAL rate; see EVAL.md |
 | **Quota exhaustion or outage** | Fail-open `pending`, retry with backoff, response cache, and a daily cap of AI checks per organisation (`DAILY_CHECKS_PER_ORG`, default 60) so one tenant or a public demo can't use up a shared key | Boxes need a hand decision during an outage or over the cap |
 | **Reusing an old photo** (a packer uploads a photo of an earlier, correct box) | The stored photo's SHA-256 is looked up among the organisation's records; the same photo for a *different* order makes `photo_reuse` UNCERTAIN, so the box can't be sealed on it. Lookups go through RLS, so they never reveal another organisation's photos | Only exact copies are caught; a re-taken photo of an old box isn't |

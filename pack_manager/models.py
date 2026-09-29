@@ -124,11 +124,15 @@ class Order(BaseModel):
 
 
 def parse_lines(text: str) -> list[OrderLine]:
-    """Parse the sample-data format ``SKU:qty;SKU:qty``."""
+    """Parse the sample-data format ``SKU:qty;SKU:qty``. Raises ValueError on anything else,
+    e.g. "CAP:1,MUG:2" (commas instead of semicolons) or a line without a sku."""
     lines = []
     for part in filter(None, (p.strip() for p in text.split(";"))):
-        sku, _, qty = part.rpartition(":")
-        lines.append(OrderLine(sku=sku.strip(), qty=int(qty)))
+        sku, sep, qty = part.rpartition(":")
+        sku = sku.strip()
+        if not sep or not sku or any(c in sku for c in ":,"):
+            raise ValueError(f'"{part}" should look like SKU:qty, with ";" between lines')
+        lines.append(OrderLine(sku=sku, qty=int(qty)))
     return lines
 
 
@@ -228,6 +232,10 @@ class Override(BaseModel):
     operator_label: str
     at: datetime
     prior_content_hash: str
+    # What the override replaced, so the record as it was before can be rebuilt and checked
+    # against prior_content_hash (evidence.verify_history). None on overrides made before this.
+    prior_outcome: Outcome | None = None
+    prior_status: RecordStatus | None = None
 
 
 class EvidenceRecord(BaseModel):
