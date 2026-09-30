@@ -58,6 +58,16 @@ Each check's `detail.source_checks` holds our checks it was built from (one per 
 
 **A record link that needs no sign-in** (section 4). "Copy share link" on a record gives `/r/<signed token>`: a read-only page with that record's photos, the contract JSON and our record file. The token is signed with the app's secret, names one organisation and one record, and reaches nothing else. Anyone who has the link can view that record, so share it like the record itself.
 
+**The capture page against section 4.**
+
+Met:
+- "Take guided photos" opens the rear camera (`getUserMedia`, HTTPS only), with a frame on screen and what each of up to three shots should show.
+- Photos are sent with progress and retried when the connection drops.
+- A failed model call still saves the photos and a `pending` record.
+- Every decision needs a reason.
+- The record link needs no sign-in.
+- Once the photos are sent, a "Keep packing" link shows within 2 seconds.
+
 **Where Pack doesn't meet section 4 yet**, to raise with the organisers rather than work around:
 
 - *Presigned direct upload.* Photos go into the Postgres table under row-level security (section 5), not an object store, so the upload URLs point at the app itself. Each is a single-slot, 15-minute URL whose token is the permission, and retrying is safe, but the bytes do pass through the app server. Moving to an object store with presigned URLs is a storage change, not an API change.
