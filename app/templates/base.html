@@ -3,10 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta name="color-scheme" content="light dark">
   <title>{% block title %}Pack Manager{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Instrument+Serif&display=swap">
+  {% if front_page %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&display=swap">{% endif %}
   <link rel="stylesheet" href="/static/app.css?v={{ ASSET_VERSION }}">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f4f8f'/%3E%3Cpath d='M16 7l8 4.5v9L16 25l-8-4.5v-9z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M8 11.5l8 4.5 8-4.5M16 16v9' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
   <script src="/static/app.js?v={{ ASSET_VERSION }}" defer></script>
@@ -24,13 +27,14 @@
         <a href="/results" class="{{ 'on' if path.startswith('/results') }}">Results</a>
       </nav>
       <div class="who">
+        <button type="button" class="theme-btn" data-theme-toggle aria-label="Switch between light and dark"><span class="t-dark">{{ icon("moon", 17) }}</span><span class="t-light">{{ icon("sun", 17) }}</span></button>
         <div class="org"><b>{{ user.org_name }}</b><span>{{ user.operator }}</span></div>
         <form method="post" action="/logout" class="signout-form"><button class="signout" type="submit">Sign out</button></form>
       </div>
     </div>
   </header>
 {% elif site_nav %}
-  <header class="topbar site-top">
+  <header class="topbar site-top{{ ' on-ink' if front_page }}">
     <div class="wrap topbar-inner">
       <a class="brand" href="/"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></a>
       <nav>
@@ -39,13 +43,14 @@
         <a href="/#proof">Records</a>
       </nav>
       <div class="who">
+        <button type="button" class="theme-btn" data-theme-toggle aria-label="Switch between light and dark"><span class="t-dark">{{ icon("moon", 17) }}</span><span class="t-light">{{ icon("sun", 17) }}</span></button>
         <a class="btn sm secondary" href="/login">Sign in</a>
         <a class="btn sm site-demo" href="/#demo">Try the demo</a>
       </div>
     </div>
   </header>
 {% endif %}
-<main class="wrap{{ ' site' if front_page }}">
+<main class="{{ 'site' if front_page else 'wrap' }}">
   {% block content %}{% endblock %}
 </main>
 {% if user %}

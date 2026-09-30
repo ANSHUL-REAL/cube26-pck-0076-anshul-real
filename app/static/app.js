@@ -79,6 +79,14 @@ function copied(button) {
 }
 
 document.addEventListener("click", (e) => {
+  // Light / dark. Saved in this browser; until chosen, the page follows the device.
+  if (e.target.closest("button[data-theme-toggle]")) {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (err) { /* private mode: not remembered */ }
+  }
+
   // "Show" / "Hide" on the access code field.
   const reveal = e.target.closest("button[data-reveal]");
   if (reveal) {
