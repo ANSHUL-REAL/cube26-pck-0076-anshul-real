@@ -156,6 +156,18 @@
             "evidence": {}
           }
         ],
+        "by_sku": {
+          "B00CWEB7VI": "pass",
+          "B00NDIFKQU": "fail",
+          "B0183JF0FE": "pass",
+          "B018EAZ94E": "fail"
+        },
+        "by_asin": {
+          "B00CWEB7VI": "pass",
+          "B00NDIFKQU": "fail",
+          "B0183JF0FE": "pass",
+          "B018EAZ94E": "fail"
+        },
         "lines": [
           {
             "sku": "B00CWEB7VI",
@@ -262,6 +274,18 @@
             }
           }
         ],
+        "by_sku": {
+          "B00CWEB7VI": "pass",
+          "B00NDIFKQU": "fail",
+          "B0183JF0FE": "fail",
+          "B018EAZ94E": "fail"
+        },
+        "by_asin": {
+          "B00CWEB7VI": "pass",
+          "B00NDIFKQU": "fail",
+          "B0183JF0FE": "fail",
+          "B018EAZ94E": "fail"
+        },
         "expected_vs_observed": [
           {
             "sku": "B00CWEB7VI",
@@ -454,5 +478,5 @@
   },
   "overrides": [],
   "status": "complete",
-  "content_hash": "523241e9289f9214ecd3c78ad9eb09b070ccfb76046e7bfe4b15fca2bc2abdcc"
+  "content_hash": "47cc94c020376cd2008c3ad9b6d434eeaafd5f839b210fbd1ad6f3da41055e62"
 }

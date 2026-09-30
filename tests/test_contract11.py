@@ -273,3 +273,16 @@ def test_the_share_link_page_has_no_override_forms(client, settings, sharp_photo
     record = _box(client, settings, sharp_photo, {"CAP-BLU": 1})
     html = client.get(_share(client, record)).text
     assert "/check" not in html and "Override</summary>" not in html and "All items present" in html
+
+
+def test_each_ordered_product_has_its_own_verdict_for_recovery():
+    """Recovery data contract, section 3: a charge can name one SKU of a multi-product order."""
+    checks = {c["check_key"]: c for c in to_contract(example("stop_and_fix"))["checks"]}
+    lines = {line["sku"] for line in example("stop_and_fix").subject["expected_lines"]}
+    for key in ("all_items_present", "quantities_correct"):
+        by_sku = checks[key]["detail"]["by_sku"]
+        assert set(by_sku) == lines and set(by_sku.values()) <= {"pass", "fail", "uncertain"}
+    assert "pass" in checks["all_items_present"]["detail"]["by_sku"].values()  # one line passes, others fail
+    # No model answer: every product is uncertain (no evidence), never pass.
+    pending = {c["check_key"]: c for c in to_contract(example("pending"))["checks"]}
+    assert set(pending["quantities_correct"]["detail"]["by_sku"].values()) == {"uncertain"}

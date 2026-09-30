@@ -37,6 +37,17 @@ GET  /v1/records?since=&agent=&cursor=&limit=   -> {records[], next_cursor}
 
 Each check's `detail.source_checks` holds our checks it was built from (one per order line for `all_items_present` and `quantities_correct`). `order_matches_manifest.detail` holds the decision, reasons, fix steps, the model's object list with boxes on the photo, the agent and prompt versions, token usage, and our own record's id and hash. A rolled-up check fails if any part failed, is uncertain if any part couldn't be judged, and passes only if all passed. When the model didn't answer, every model-based check is `uncertain` with `detail.not_checked`.
 
+`all_items_present`, `quantities_correct`, `no_extra_items` and `order_matches_manifest` are Pack's keys in the organisers' check-key registry (Recovery data contract, section 5). The other three are additions, which the registry allows. None will be renamed.
+
+**Using Pack records against a charge** (Recovery data contract, sections 3, 6 and 7):
+
+- **Join.** Match the charge's `amazon_order_id` to `subject.order_id`, or its `shipment_id` to `subject.shipment_id` when the order came with one. A Pack record covers a whole order (`subject.type` = `order`).
+- **A charge on one product.** Use `all_items_present.detail.by_sku` and `quantities_correct.detail.by_sku` (and `by_asin`, when the catalogue has ASINs). They give that product's own verdict, so a charge on product A can be matched even if product B in the same box failed.
+- **Mis-ship.** The evidence is `all_items_present` = pass and `quantities_correct` = pass, from a record captured before the charge event (`captured_at`).
+- **Uncertain means no evidence.** Pack writes `uncertain` whenever the photo can't settle a point: hidden items, a failed photo check, or the model not answering. It is never a low-confidence pass, so treating it as no record, as section 6 says, loses nothing Pack actually saw.
+- **Overrides.** The `checks` are always the agent's own results. A person's correction is in `overrides[]` with `from_verdict`, `to_verdict`, `reason`, `by` and `at`. Whether a person's "pass" counts as evidence for a claim is Recovery's decision. Pack keeps both, so either choice can be made from the same record.
+- **Not covered by Pack:** item condition. Pack checks what is in the box, not its condition, so it has no `condition_grade`.
+
 **How our values fill the contract's fields:**
 
 | Contract field | Pack writes |

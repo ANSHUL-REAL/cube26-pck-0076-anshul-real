@@ -139,6 +139,18 @@ def contract_checks(record: EvidenceRecord, catalogue: Catalogue | None = None) 
             if item and item.asin:
                 asins[line["sku"]] = item.asin
 
+    def per_product(kind: str) -> dict:
+        """The verdict for each ordered product, so a charge on one SKU or ASIN (Recovery data
+        contract, section 3) can be matched to it even when another line of the order failed.
+        A product the agent didn't judge is uncertain, which Recovery treats as no evidence."""
+        judged = {c.check_key.split(":", 1)[1]: _VERDICT[c.verdict] for c in by_key.get(kind, [])}
+        skus = [line["sku"] for line in record.subject.get("expected_lines", [])]
+        by_sku = {sku: "uncertain" if not_checked else judged.get(sku, "uncertain") for sku in skus}
+        out = {"by_sku": by_sku}
+        if asins:
+            out["by_asin"] = {asins[sku]: v for sku, v in by_sku.items() if sku in asins}
+        return out
+
     checks = [
         _rollup("image_quality", quality, quality[0].detail if quality else "No photo checks ran.",
                 local, 0, False, {"images": images}),
@@ -150,11 +162,13 @@ def contract_checks(record: EvidenceRecord, catalogue: Catalogue | None = None) 
         _rollup("all_items_present", by_key.get("line_present", []),
                 f"{len(by_key.get('line_present', []))} ordered product(s) looked for.",
                 model, latency, not_checked,
-                {"lines": [x for x in lines if x["check"] == "line_present"], "missing": obs.get("missing", [])}),
+                {**per_product("line_present"),
+                 "lines": [x for x in lines if x["check"] == "line_present"], "missing": obs.get("missing", [])}),
         _rollup("quantities_correct", by_key.get("line_quantity", []),
                 f"{len(by_key.get('line_quantity', []))} ordered product(s) counted.",
                 model, latency, not_checked,
-                {"expected_vs_observed": obs.get("expected_vs_observed", []),
+                {**per_product("line_quantity"),
+                 "expected_vs_observed": obs.get("expected_vs_observed", []),
                  "over_quantity": obs.get("over_quantity", [])}),
         _rollup("no_extra_items", by_key.get("wrong_item", []) + by_key.get("extra_item", []),
                 "Wrong products (a look-alike instead of the ordered one) and products outside the order.",

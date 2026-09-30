@@ -4,6 +4,7 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Thu 1 Oct
 
+- **Recovery data contract** read. Its check-key registry lists exactly Pack's four keys (`all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`), so nothing is renamed. Our three other keys are additions, which it allows. Charges can name one SKU or ASIN while a Pack record covers a whole order, so `all_items_present` and `quantities_correct` now carry each ordered product's own verdict (`detail.by_sku`, `by_asin`). `contract/README.md` explains how Recovery joins a charge to a Pack record, and why Pack's `uncertain` is safe to treat as no evidence.
 - **An override on every check** (Evidence Contract 1.1, section 4). Each of the seven checks on a record page has its own Override, with a required reason and an optional note. The correction is appended to the record with the result it replaced. The AI's checks, the box decision and the contract's content hash stay as they were. Older records keep their hashes: a box decision is still written exactly as before. Tested against real Postgres too, where the append-only rule accepts it.
 
 ## Wed 30 Sep

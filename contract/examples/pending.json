@@ -1,5 +1,5 @@
 {
-  "record_id": "4d354dcc-67c2-4b93-b917-95d48d1bb660",
+  "record_id": "d73c790c-1370-413f-987f-6e7e9421ebf0",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -25,7 +25,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "07bc089a-2162-493c-9f38-efe3b27f2d38",
+      "image_id": "94cf29a8-f429-4878-bbd2-1d7e70052d8b",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -81,5 +81,5 @@
   },
   "overrides": [],
   "status": "pending",
-  "content_hash": "sha256:402d7b2324391804c8f1ad279f8ea1bb3e154777c578e8e040a2a7f130a89fad"
+  "content_hash": "sha256:6f3d7e1b4ee7facf95ca93b5d6043ce68019d03e2e552ce61ca22e20c12deb8e"
 }

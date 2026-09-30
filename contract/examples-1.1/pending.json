@@ -1,5 +1,5 @@
 {
-  "record_id": "4d354dcc-67c2-4b93-b917-95d48d1bb660",
+  "record_id": "d73c790c-1370-413f-987f-6e7e9421ebf0",
   "schema_version": "1.1",
   "organization_id": "9d0135ac-73f5-5695-b3df-5c54da0dbb9e",
   "client_id": "80f770ed-befe-5d48-bced-0b9c92c05d28",
@@ -18,7 +18,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "key": "07bc089a-2162-493c-9f38-efe3b27f2d38",
+      "key": "94cf29a8-f429-4878-bbd2-1d7e70052d8b",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "bytes": 500893,
       "taken_at": "2026-09-28T10:30:00Z"
@@ -44,7 +44,7 @@
         ],
         "images": [
           {
-            "key": "07bc089a-2162-493c-9f38-efe3b27f2d38",
+            "key": "94cf29a8-f429-4878-bbd2-1d7e70052d8b",
             "role": "top_down",
             "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
             "mime": "image/jpeg",
@@ -97,6 +97,12 @@
         "summary": "0 ordered product(s) looked for.",
         "source_checks": [],
         "not_checked": "The vision model didn't answer, so this wasn't checked.",
+        "by_sku": {
+          "SKU-PUZZLE-500": "uncertain"
+        },
+        "by_asin": {
+          "B0DUMMY729": "uncertain"
+        },
         "lines": [],
         "missing": []
       },
@@ -111,6 +117,12 @@
         "summary": "0 ordered product(s) counted.",
         "source_checks": [],
         "not_checked": "The vision model didn't answer, so this wasn't checked.",
+        "by_sku": {
+          "SKU-PUZZLE-500": "uncertain"
+        },
+        "by_asin": {
+          "B0DUMMY729": "uncertain"
+        },
         "expected_vs_observed": [],
         "over_quantity": []
       },
@@ -169,9 +181,9 @@
         },
         "error": "timed out after 25 s",
         "internal_record": {
-          "record_id": "4d354dcc-67c2-4b93-b917-95d48d1bb660",
+          "record_id": "d73c790c-1370-413f-987f-6e7e9421ebf0",
           "schema_version": "cube.evidence.v1",
-          "content_hash": "sha256:402d7b2324391804c8f1ad279f8ea1bb3e154777c578e8e040a2a7f130a89fad"
+          "content_hash": "sha256:6f3d7e1b4ee7facf95ca93b5d6043ce68019d03e2e552ce61ca22e20c12deb8e"
         }
       },
       "model_version": "gemini-2.5-flash",
@@ -185,5 +197,5 @@
   },
   "overrides": [],
   "status": "pending",
-  "content_hash": "3c722f085cbac92d8136f4f774931cfe3d21a497469f16ccdfaa295c3f27024f"
+  "content_hash": "79549e59b476db517476eb8aa1888dd0bac5ebf99d6fa3a66c9a997ebae9d1e8"
 }

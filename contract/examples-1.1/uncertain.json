@@ -136,6 +136,14 @@
             }
           }
         ],
+        "by_sku": {
+          "B00H9HJSFU": "pass",
+          "B005FEGYCO": "uncertain"
+        },
+        "by_asin": {
+          "B00H9HJSFU": "pass",
+          "B005FEGYCO": "uncertain"
+        },
         "lines": [
           {
             "sku": "B00H9HJSFU",
@@ -189,6 +197,14 @@
             }
           }
         ],
+        "by_sku": {
+          "B00H9HJSFU": "uncertain",
+          "B005FEGYCO": "uncertain"
+        },
+        "by_asin": {
+          "B00H9HJSFU": "uncertain",
+          "B005FEGYCO": "uncertain"
+        },
         "expected_vs_observed": [
           {
             "sku": "B00H9HJSFU",
@@ -355,5 +371,5 @@
   },
   "overrides": [],
   "status": "complete",
-  "content_hash": "5cd33a4af11cca1336b18298070e7c74f8cd78596ab331e1e8e56635c98f459e"
+  "content_hash": "616e53644f54856fdf0c1fc3c80477d3e4119f71e4f23593170ca920967ffba5"
 }

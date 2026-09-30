@@ -138,6 +138,14 @@
             }
           }
         ],
+        "by_sku": {
+          "B00GM60NL2": "pass",
+          "B00PQ7N1RQ": "pass"
+        },
+        "by_asin": {
+          "B00GM60NL2": "pass",
+          "B00PQ7N1RQ": "pass"
+        },
         "lines": [
           {
             "sku": "B00GM60NL2",
@@ -191,6 +199,14 @@
             }
           }
         ],
+        "by_sku": {
+          "B00GM60NL2": "pass",
+          "B00PQ7N1RQ": "pass"
+        },
+        "by_asin": {
+          "B00GM60NL2": "pass",
+          "B00PQ7N1RQ": "pass"
+        },
         "expected_vs_observed": [
           {
             "sku": "B00GM60NL2",
@@ -370,5 +386,5 @@
   },
   "overrides": [],
   "status": "complete",
-  "content_hash": "02cc05ad74f8a6e915c1880eee4d0ccaaf30af8802a4e6c69534e84c41149fcd"
+  "content_hash": "f988525fa17a65ca064d94d5bb9c2991e717b60d1ecf86b262cc5cea2797137c"
 }
