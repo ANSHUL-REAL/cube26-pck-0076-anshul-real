@@ -31,6 +31,17 @@ DEMO_CODES = {
     "alpha-demo": ("org_demo_alpha", "op_alpha"),
     "bravo-demo": ("org_demo_bravo", "op_bravo"),
 }
+# More public demo codes, one per role or station, so each person's checks and overrides carry
+# their own label. Listed in ACCESS-CODES.md. They are public: never use them for real data.
+STATION_CODES = {
+    "alpha-packer-1": ("org_demo_alpha", "packer_1"),
+    "alpha-packer-2": ("org_demo_alpha", "packer_2"),
+    "alpha-lead": ("org_demo_alpha", "team_lead"),
+    "alpha-judge": ("org_demo_alpha", "judge"),
+    "bravo-packer-1": ("org_demo_bravo", "packer_1"),
+    "bravo-lead": ("org_demo_bravo", "team_lead"),
+    "bravo-judge": ("org_demo_bravo", "judge"),
+}
 
 
 def migrate(admin_url: str, app_password: str) -> None:
@@ -78,6 +89,28 @@ def _as_org(cur, org_id: str) -> None:
     cur.execute("select set_config('app.org_id', %s, true)", (org_id,))
 
 
+def _seed_codes(cur) -> int:
+    codes = {**DEMO_CODES, **STATION_CODES}
+    for code, (org_id, operator) in codes.items():
+        _as_org(cur, org_id)
+        cur.execute(
+            """insert into access_codes (code_hash, organization_id, operator_label) values (%s, %s, %s)
+               on conflict (code_hash) do update set organization_id = excluded.organization_id,
+               operator_label = excluded.operator_label""",
+            (hash_code(code), org_id, operator),
+        )
+    return len(codes)
+
+
+def seed_codes(admin_url: str) -> int:
+    """Only the access codes: adds new ones without touching orders or records."""
+    conn = psycopg2.connect(admin_url)
+    with conn, conn.cursor() as cur:
+        n = _seed_codes(cur)
+    conn.close()
+    return n
+
+
 def seed(admin_url: str, sample_orders: bool = True) -> dict[str, int]:
     """Organisations, demo access codes, the organisers' sample orders, and any orders in
     catalogue/<org>/orders.json. Rows are written with app.org_id set, so the same
@@ -91,13 +124,7 @@ def seed(admin_url: str, sample_orders: bool = True) -> dict[str, int]:
                 "insert into organizations (id, name) values (%s, %s) on conflict (id) do update set name = excluded.name",
                 (org_id, name),
             )
-        for code, (org_id, operator) in DEMO_CODES.items():
-            cur.execute(
-                """insert into access_codes (code_hash, organization_id, operator_label) values (%s, %s, %s)
-                   on conflict (code_hash) do update set organization_id = excluded.organization_id,
-                   operator_label = excluded.operator_label""",
-                (hash_code(code), org_id, operator),
-            )
+        _seed_codes(cur)
 
         with open(ROOT / "data" / "pack_sample.csv", newline="", encoding="utf-8") as f:
             for r in csv.DictReader(f) if sample_orders else []:
@@ -122,12 +149,16 @@ def seed(admin_url: str, sample_orders: bool = True) -> dict[str, int]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-seed", action="store_true")
+    parser.add_argument("--codes-only", action="store_true", help="Only add or update the access codes.")
     parser.add_argument("--no-sample-orders", action="store_true",
                         help="Don't load the organisers' dummy orders; use real orders only.")
     args = parser.parse_args()
     settings = get_settings()
     if not settings.database_admin_url:
         raise SystemExit("DATABASE_ADMIN_URL is not set.")
+    if args.codes_only:
+        print("Access codes in place:", seed_codes(settings.database_admin_url))
+        return
     migrate(settings.database_admin_url, settings.pack_app_db_password)
     print("Schema, policies and pack_app role are in place.")
     if not settings.database_url:

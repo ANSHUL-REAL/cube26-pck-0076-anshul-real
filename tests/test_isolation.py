@@ -167,6 +167,10 @@ def test_access_codes_are_not_readable_but_resolve(database):
     with database.anonymous() as cur:
         assert store.resolve_code(cur, "bravo-demo")["organization_id"] == BRAVO
         assert store.resolve_code(cur, "nope") is None
+        from app.migrate import STATION_CODES
+        for code, (org, operator) in STATION_CODES.items():  # every listed code signs in where it says
+            found = store.resolve_code(cur, code)
+            assert found and found["organization_id"] == org and found["operator_label"] == operator, code
     with pytest.raises(psycopg2.Error):
         with database.anonymous() as cur:
             cur.execute("select * from access_codes")

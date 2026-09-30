@@ -6,7 +6,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 
 | | |
 |---|---|
-| Live demo | **https://pack-manager-lzht.onrender.com**: the demo access codes are on the sign-in page. Held-out results at [/results](https://pack-manager-lzht.onrender.com/results). Free plan: the first request after an idle spell takes about 30 s |
+| Live demo | **https://pack-manager-lzht.onrender.com**: two one-click demo companies are on the sign-in page; more codes (per station, team lead, judge) in [ACCESS-CODES.md](ACCESS-CODES.md). Held-out results at [/results](https://pack-manager-lzht.onrender.com/results). Free plan: the first request after an idle spell takes about 30 s |
 | Demo video | _added after recording_ |
 | Eval | [EVAL.md](EVAL.md): one frozen, held-out run of the real vision model on 50 real warehouse photos (public dataset). False SEAL 2/26, false STOP 12/24: a kill condition set in advance tripped, and we report it. Rules alone: 0 errors. A separate, disclosed set of 50 AI-generated boxes: false SEAL 1/26, false STOP 1/24. Also on the app's public `/results` page |
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
@@ -63,7 +63,7 @@ Packers sign in with a short access code, not an email and password or a Google 
 - **No personal data.** No emails, passwords or names are collected, so there is nothing to leak or reset.
 - **One login for people and programs.** Returns and Recovery send the same code in an `X-Access-Code` header to read `/v1`.
 
-The two demo codes (`alpha-demo`, `bravo-demo`) are public on purpose, so judges can get in with one click. Each demo company is capped at 60 AI checks a day to protect the shared model key.
+The demo codes are public on purpose, so judges can get in with one click: `alpha-demo` and `bravo-demo` on the sign-in page, plus per-station, team-lead and judge codes in [ACCESS-CODES.md](ACCESS-CODES.md). Each demo company is capped at 60 AI checks a day to protect the shared model key.
 
 **What codes don't do:** they identify a station or role, not a verified person, and they don't expire. Next steps: a team-lead page to issue and revoke codes, then company single sign-on (Google Workspace or Microsoft, via OIDC) for team leads. Packers would keep codes, because sign-on doesn't suit a shared bench device.
 
