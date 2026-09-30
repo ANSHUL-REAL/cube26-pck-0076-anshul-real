@@ -554,3 +554,18 @@ def test_same_host_passes_behind_an_https_proxy(client):
     resp = client.post("/login", headers={"Origin": "https://testserver"}, data={"code": "alpha-demo"},
                        follow_redirects=False)
     assert resp.status_code == 303
+
+
+def test_results_page_is_public_and_shows_the_held_out_numbers(client):
+    import json
+
+    from app import main
+
+    client.cookies.clear()  # judges read it without signing in
+    r = client.get("/results")
+    assert r.status_code == 200
+    m = json.loads((main.EVAL_RESULTS / main.RESULTS_RUN / "metrics.json").read_text(encoding="utf-8"))
+    assert m["box_decision"]["false_SEAL_rate"].split(" (")[0] in r.text
+    assert "Amazon Bin Image Dataset" in r.text and "No person labelled" in r.text
+    if m["kill_conditions_tripped"]:
+        assert "kill condition we set in advance tripped" in r.text

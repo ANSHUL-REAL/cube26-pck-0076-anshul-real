@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Results · Pack Manager{% endblock %}
+{% block content %}
+{% set bd = m.box_decision %}
+{% set c = bd.confusion %}
+{% set rows = {} %}
+{% for r in m.against_targets %}{% set _ = rows.update({r.measure.split(" (")[0]: r}) %}{% endfor %}
+{% macro n(text) %}{{ text.split(" (")[0] }}{% endmacro %}
+{% macro rest(text) %}{{ text.split(" (", 1)[1].rstrip(")") if " (" in text else "" }}{% endmacro %}
+
+{% if not user %}<a class="back" href="/login">{{ icon("arrow-left", 16) }}Sign in</a>{% endif %}
+
+<div class="page-head">
+  <div>
+    <h1>How it did on {{ m.boxes_scored }} unseen boxes</h1>
+    <p>One run of <span class="mono">{{ m.model }}</span> on a held-out set, with everything frozen before the run{% if m.frozen and m.frozen.frozen_at %} ({{ m.frozen.frozen_at[:10] }}){% endif %}. Nothing was tuned on these boxes.</p>
+  </div>
+</div>
+
+<div class="callout warn results-source">
+  <strong>Where the photos come from.</strong> Real warehouse bin photos from the public Amazon Bin Image Dataset, not our own shoot. The right answer for each box is Amazon's record of the bin, and each box's order was written before any run: either exactly the bin, or one planned mistake. No person labelled these photos. Bins are shot through elastic straps and are often cluttered, which is harder than a packing bench.
+</div>
+
+<div class="summary results-summary">
+  {% for key, label, tone in [("False SEAL", "wrong boxes sealed", "stop"), ("False STOP", "good boxes stopped", "unsure"), ("UNCERTAIN", "sent to a person", "unsure"), ("PENDING", "AI didn't answer", "")] %}
+  {% set r = rows.get(key) %}
+  {% if r %}
+  <div class="cell {{ tone }}">
+    <span class="n">{{ n(r.result) }}</span>
+    <span class="l">{% if tone %}<span class="dot"></span>{% endif %}{{ label }}</span>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+{% if m.kill_conditions_tripped %}
+<div class="callout error results-verdict">
+  <strong>A kill condition we set in advance tripped:</strong> {{ m.kill_conditions_tripped | join("; ") }}. On these photos Pack Manager shouldn't block sealing. It should keep the photo and the record, and let a person decide.
+</div>
+{% endif %}
+
+<section class="card results-card">
+  <div class="card-head"><h2>Against the targets set before the eval</h2></div>
+  <div class="table results-table">
+    <div class="tr th"><span>Measure</span><span>Result (95% interval)</span><span>Target</span><span>Status</span></div>
+    {% for r in m.against_targets %}
+    <div class="tr">
+      <span class="strong">{{ r.measure.split(" (")[0] }}<span class="muted small sub"> {{ r.measure.split(" (", 1)[1].rstrip(")") if " (" in r.measure else "" }}</span></span>
+      <span><b>{{ n(r.result) }}</b> <span class="muted small">{{ rest(r.result) }}</span></span>
+      <span class="muted">{{ r.target }}</span>
+      <span class="status-{{ r.status.split(' ')[0] | lower | replace(',', '') }}">{{ r.status }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="layout results-layout">
+  <section class="card">
+    <div class="card-head"><h2>Every box</h2><span class="count">truth vs agent</span></div>
+    <div class="card-body">
+      <table class="matrix">
+        <thead><tr><th></th><th>Seal</th><th>Stop</th><th>By hand</th></tr></thead>
+        <tbody>
+          {% for t, label in [("SEAL", "Should seal"), ("STOP_AND_FIX", "Should stop")] %}
+          <tr><th>{{ label }}</th>{% for a in ["SEAL", "STOP_AND_FIX", "UNCERTAIN"] %}<td class="{{ 'ok' if a == t else ('bad' if a != 'UNCERTAIN' else '') }}">{{ c.get(t ~ " -> " ~ a, 0) }}</td>{% endfor %}</tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:12px">"By hand" on a bad box still stops it from being sealed. It costs a person's time, not a mis-ship.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2>Where the errors come from</h2></div>
+    <div class="card-body">
+      {% if oracle %}
+      <p><b>Rules alone:</b> given a perfect list of what's in each bin, the rules decided {{ oracle.box_decision.confusion.get("SEAL -> SEAL", 0) + oracle.box_decision.confusion.get("STOP_AND_FIX -> STOP_AND_FIX", 0) }} of {{ oracle.boxes_scored }} boxes right. Every error above comes from what the model saw.</p>
+      {% endif %}
+      <p style="margin-top:10px"><b>The main one:</b> the model called a strapped, cluttered bin "fully visible", then missed a product under the straps or another item, so a good box read as "missing".</p>
+      <p class="muted small" style="margin-top:12px">Speed: {{ (m.latency_ms.p50 / 1000) | round(1) }} s typical, {{ (m.latency_ms.p95 / 1000) | round(1) }} s slowest 5%. About {{ m.tokens_per_box_mean }} tokens per box.</p>
+    </div>
+  </section>
+</div>
+
+<section class="card results-card">
+  <div class="card-head"><h2>By kind of box</h2></div>
+  <div class="table results-scenarios">
+    <div class="tr th"><span>Kind</span><span>Boxes</span><span>Right</span><span>By hand</span><span>False seal</span><span>False stop</span></div>
+    {% for k, v in m.per_scenario.items() %}
+    <div class="tr"><span class="strong">{{ k.replace("_", " ") }}</span><span>{{ v.n }}</span><span>{{ v.correct }}</span><span>{{ v.uncertain }}</span><span>{{ v.false_seal }}</span><span>{{ v.false_stop }}</span></div>
+    {% endfor %}
+  </div>
+</section>
+
+<p class="muted small results-foot">The method was committed before any data existed. Full report, every wrong box and why: <a href="{{ repo_url }}/blob/main/EVAL.md">EVAL.md</a>.</p>
+{% endblock %}

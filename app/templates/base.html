@@ -21,6 +21,7 @@
       <nav>
         <a href="/" class="{{ 'on' if path == '/' or path.startswith('/orders') }}">Orders</a>
         <a href="/records" class="{{ 'on' if path.startswith('/records') }}">Records</a>
+        <a href="/results" class="{{ 'on' if path.startswith('/results') }}">Results</a>
       </nav>
       <div class="who">
         <div class="org"><b>{{ user.org_name }}</b><span>{{ user.operator }}</span></div>
@@ -36,6 +37,7 @@
   <nav class="tabbar" aria-label="Main">
     <a href="/" class="{{ 'on' if path == '/' or path.startswith('/orders') }}">Orders</a>
     <a href="/records" class="{{ 'on' if path.startswith('/records') }}">Records</a>
+    <a href="/results" class="{{ 'on' if path.startswith('/results') }}">Results</a>
   </nav>
 {% endif %}
 {% endblock %}

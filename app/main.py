@@ -6,6 +6,7 @@ from __future__ import annotations
 import base64
 import csv
 import io
+import json
 import logging
 import secrets
 import time
@@ -785,6 +786,30 @@ def api_record(request: Request, record_id: str, download: bool = False):
         return Response(record.model_dump_json(indent=2), media_type="application/json",
                         headers={"Content-Disposition": f'attachment; filename="{record.record_id}.json"'})
     return {**record.model_dump(mode="json"), "_hash_verified": verify(record)}
+
+
+# ------------------------------------------------------------------ eval results (public)
+
+# The held-out run shown on /results, and the same boxes with perfect perception.
+RESULTS_RUN, ORACLE_RUN = "abid-test-v1", "abid-test-oracle"
+EVAL_RESULTS = BASE.parent / "eval" / "results"
+REPO_URL = "https://github.com/ANSHUL-REAL/cube26-pck-0076-anshul-real"
+
+
+def _metrics(run: str) -> dict | None:
+    try:
+        return json.loads((EVAL_RESULTS / run / "metrics.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+@app.get("/results", response_class=HTMLResponse)
+def results_page(request: Request):
+    """The held-out eval as measured. Public: the same numbers are in the repository."""
+    held = _metrics(RESULTS_RUN)
+    if not held:
+        return not_found(request, "The eval results")
+    return page(request, "results.html", m=held, oracle=_metrics(ORACLE_RUN), repo_url=REPO_URL)
 
 
 @app.get("/healthz")
