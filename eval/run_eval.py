@@ -25,7 +25,7 @@ import json
 import time
 from datetime import datetime, timezone
 
-from common import EVAL_DIR, ORG, ROOT, eval_settings, load_manifest
+from common import EVAL_DIR, ORG, ROOT, dataset, eval_settings, load_manifest
 from freeze import differences, fingerprint, frozen_path
 
 from pack_manager.catalogue import load_org_catalogue
@@ -86,7 +86,7 @@ def main() -> None:
     # because the report checks that every human label was made before the agent ran.
     first = json.loads(run_file.read_text(encoding="utf-8")).get("started_at") if run_file.exists() else None
     run_file.write_text(json.dumps({
-        "split": args.split, "reveal_order": args.reveal_order,
+        "split": args.split, "reveal_order": args.reveal_order, "dataset": dataset().get("name", "own shoot"),
         "perceiver": "oracle" if args.oracle else "model",
         "model": "none (oracle)" if args.oracle else settings.gemini_model,
         "match_threshold": settings.match_threshold, "visibility_threshold": settings.visibility_threshold,

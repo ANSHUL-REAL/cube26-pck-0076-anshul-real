@@ -18,7 +18,7 @@ import statistics
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 
-from common import EVAL_DIR, load_manifest, read_csv
+from common import EVAL_DIR, dataset, load_manifest, read_csv
 
 from pack_manager.models import EvidenceRecord
 
@@ -323,6 +323,7 @@ def main() -> None:
         "",
         frozen_line,
         "",
+        *([f"Dataset: **{dataset()['name']}**. {dataset().get('note', '')}", ""] if dataset().get("name") else []),
         f"Split: **{run_info['split']}** · boxes scored: **{len(ids)}** · model: `{run_info['model']}`"
         f" · order revealed to model: **{run_info['reveal_order']}**"
         f" · thresholds: match {run_info['match_threshold']}, visibility {run_info['visibility_threshold']}",
@@ -379,7 +380,9 @@ def main() -> None:
                   f"**{kappa_text(human['kappa_agent_vs_human_consensus'])}**"]
         lines += [f"- {k.replace('_', ' ')}: {v}" for k, v in human.items() if k.endswith(("_vs_physical_truth", "_uncertain"))]
     else:
-        lines.append("No label files found in eval/labels/.")
+        lines.append("No human labellers for this dataset: " + dataset()["ground_truth"] + "."
+                     if dataset().get("human_labels") is False and dataset().get("ground_truth")
+                     else "No label files found in eval/labels/.")
     lines += ["", "## Cost and speed", "",
               f"- Model latency p50 / p95: {metrics['latency_ms']['p50']} / {metrics['latency_ms']['p95']} ms",
               f"- Tokens per box (mean over the {len(tokens)} boxes the model answered): {metrics['tokens_per_box_mean']}",

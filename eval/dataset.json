@@ -1,0 +1,13 @@
+{
+  "name": "Amazon Bin Image Dataset (public, CC BY-NC-SA 3.0 US)",
+  "source": "https://registry.opendata.aws/amazon-bin-imagery/",
+  "org": "org_bench_abid",
+  "human_labels": false,
+  "ground_truth": "each bin's contents as recorded by Amazon (the dataset's metadata), with the order for each box written by eval/abid/build_abid.py from a fixed seed before any run",
+  "note": "Real warehouse bin photos, not our own shoot: the author had no products to photograph. Ground truth is Amazon's record of each bin, not two human labellers. Photos are small (the gate's minimum side is set to the camera's size before any run) and bins are cluttered, so expect more UNCERTAIN than in a packing station.",
+  "settings": {
+    "min_side_px": 200,
+    "blur_min_var": 3.0
+  },
+  "settings_why": "Set for this camera from the dev photos alone, before any model run: minimum side 200 px (the shortest side across all 70 photos is 252 px); blur score 3.0 (all 20 dev photos were readable by eye, the lowest scored 3.6; the phone setting is 60)."
+}

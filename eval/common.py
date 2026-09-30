@@ -4,19 +4,38 @@ from __future__ import annotations
 
 import csv
 import io
+import json
+import os
 import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-EVAL_DIR = Path(__file__).resolve().parent
-ROOT = EVAL_DIR.parent
+CODE_DIR = Path(__file__).resolve().parent
+ROOT = CODE_DIR.parent
 sys.path.insert(0, str(ROOT))
+
+# EVAL_SET=<name> points every script at eval/<name>/: its own manifest, boxes, dataset.json,
+# labels, freeze and results, so a second dataset never mixes with the one in eval/ itself.
+EVAL_SET = os.environ.get("EVAL_SET", "").strip()
+EVAL_DIR = CODE_DIR / EVAL_SET if EVAL_SET else CODE_DIR
+if EVAL_SET and not EVAL_DIR.is_dir():
+    raise SystemExit(f"EVAL_SET={EVAL_SET}, but there is no folder eval/{EVAL_SET}/.")
 
 from pack_manager.config import Settings, get_settings  # noqa: E402
 from pack_manager.models import Order, parse_lines  # noqa: E402
 
-ORG = "org_demo_alpha"
+
+
+def dataset() -> dict:
+    """eval/dataset.json, present when the eval runs on a dataset other than our own shoot: its
+    name and source, the catalogue's organisation, whether two humans labelled it, and settings
+    fixed for its camera before any run. Absent for a home shoot."""
+    path = EVAL_DIR / "dataset.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+ORG = dataset().get("org", "org_demo_alpha")
 PHOTO_EXT = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
 SCENARIOS = [
     "correct", "missing", "wrong_item", "extra", "wrong_qty",
@@ -25,9 +44,9 @@ SCENARIOS = [
 
 
 def eval_settings() -> Settings:
-    """The app's settings with more retries, so a rate limit leaves fewer boxes pending.
-    run_eval.py runs with these and freeze.py hashes these same ones."""
-    return get_settings().model_copy(update={"gemini_max_retries": 3})
+    """The app's settings with more retries, so a rate limit leaves fewer boxes pending, and
+    the dataset's fixed settings if any. run_eval.py runs with these; freeze.py hashes them."""
+    return get_settings().model_copy(update={"gemini_max_retries": 3, **dataset().get("settings", {})})
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:

@@ -19,7 +19,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from common import EVAL_DIR, ORG, ROOT, eval_settings, load_manifest
+from common import CODE_DIR, EVAL_DIR, ORG, ROOT, dataset, eval_settings, load_manifest
 
 from pack_manager.config import Settings
 from pack_manager.vision.prompt import PROMPT_VERSION
@@ -29,7 +29,7 @@ from pack_manager.vision.prompt import PROMPT_VERSION
 NOT_FROZEN = {"gemini_api_key", "database_url", "database_admin_url", "pack_app_db_password",
               "session_secret", "cache_dir", "daily_checks_per_org", "secure_cookies"}
 SECRET_WORDS = ("key", "secret", "password", "url")
-EVAL_CODE = ["common.py", "run_eval.py"]  # decide what the agent is given in an eval run
+EVAL_CODE = ["common.py", "run_eval.py", "dataset.json"]  # decide what the agent is given in an eval run
 SKIP_FILES = {"thumbs.db", "desktop.ini"}  # written by Windows Explorer, never read
 
 
@@ -60,7 +60,8 @@ def fingerprint(split: str, settings: Settings) -> dict:
     rows = "\n".join("|".join([b.box_id, b.split, b.scenario, b.order_lines, b.actual_contents, b.conditions])
                      for b in boxes)
     code = {p.relative_to(ROOT).as_posix(): _sha(p.read_bytes()) for p in sorted((ROOT / "pack_manager").rglob("*.py"))}
-    code |= {f"eval/{name}": _sha((EVAL_DIR / name).read_bytes()) for name in EVAL_CODE if (EVAL_DIR / name).exists()}
+    where = {name: (EVAL_DIR if name == "dataset.json" else CODE_DIR) / name for name in EVAL_CODE}
+    code |= {f"eval/{name}": _sha(p.read_bytes()) for name, p in where.items() if p.exists()}
     # The org's own catalogue and the organisers' sample one, which it is merged with.
     catalogue_dir = ROOT / settings.catalogue_dir
     return {
@@ -98,7 +99,7 @@ def main() -> None:
     missing = [b for b, photos in now["photos_sha256"].items() if not photos]
     if missing:
         raise SystemExit(f"These boxes have no photos yet: {', '.join(missing)}. Import the photos first.")
-    if args.split == "test" and len(now["labels_sha256"]) < 2:
+    if args.split == "test" and len(now["labels_sha256"]) < 2 and dataset().get("human_labels", True):
         raise SystemExit("Freeze after both labellers' files are in eval/labels/ (found "
                          f"{len(now['labels_sha256'])}). The freeze proves the labels existed before the run.")
     path = frozen_path(args.split)

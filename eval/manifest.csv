@@ -1,1 +1,71 @@
 box_id,split,scenario,order_lines,actual_contents,conditions,notes
+D01,dev,correct,1855842106:1;B00006IFHD:2;B00025K0VC:2,1855842106:1;B00006IFHD:2;B00025K0VC:2,abid,ABID bin 256022. Order matches the bin.
+D02,dev,extra,B00KWCTNLI:1,B00KWCTNLI:1;B00XNYJYPM:1,abid,"ABID bin 121799. Order leaves out B00XNYJYPM, which is in the bin."
+D03,dev,correct,B0001VTZ86:1;B005BFL0RQ:2;B017SUW3OA:2;B01DXUTSLA:1,B0001VTZ86:1;B005BFL0RQ:2;B017SUW3OA:2;B01DXUTSLA:1,abid,ABID bin 307725. Order matches the bin.
+D04,dev,extra,B000LKTMLM:1,B000LKTMLM:1;B016I0J2Z4:1,abid,"ABID bin 503330. Order leaves out B016I0J2Z4, which is in the bin."
+D05,dev,correct,B005PK0ISE:1;B00MSGYGYU:2,B005PK0ISE:1;B00MSGYGYU:2,abid,ABID bin 40264. Order matches the bin.
+D06,dev,identical_multiples,B004ISKODS:1;B015NHY582:3;B01DDT2VR4:1;B01EK51BVC:1,B004ISKODS:1;B015NHY582:3;B01DDT2VR4:1;B01EK51BVC:1,abid,ABID bin 60472. Order matches the bin.
+D07,dev,identical_multiples,B00GM028SY:1;B00PR70HUY:1;B00U11SPO6:1;B01ER2SMHY:3,B00GM028SY:1;B00PR70HUY:1;B00U11SPO6:1;B01ER2SMHY:3,abid,ABID bin 418145. Order matches the bin.
+D08,dev,missing,B00HNL8A74:3;B0045V36PQ:1,B00HNL8A74:3,abid,"ABID bin 77980. Order also asks for B0045V36PQ, which isn't in the bin."
+D09,dev,correct,B00PKRM6PU:1,B00PKRM6PU:1,abid,ABID bin 283832. Order matches the bin.
+D10,dev,wrong_item,1932543244:4;B009NQ980A:1,1932543244:4;B00HFJEZBO:1,abid,"ABID bin 450771. Order asks for B009NQ980A instead of B00HFJEZBO, which is in the bin."
+D11,dev,wrong_item,B011OONHE6:3,B005R2HRZ2:3,abid,"ABID bin 47008. Order asks for B011OONHE6 instead of B005R2HRZ2, which is in the bin."
+D12,dev,extra,B000MK2PZ6:1;B00NVMIQE6:2,B000MK2PZ6:1;B00NVMIQE6:2;B00PQBO0JK:2,abid,"ABID bin 394618. Order leaves out B00PQBO0JK, which is in the bin."
+D13,dev,wrong_item,B01A5LAW4C:1;B00U8IR15G:3,B00BCRZN6G:1;B00U8IR15G:3,abid,"ABID bin 168864. Order asks for B01A5LAW4C instead of B00BCRZN6G, which is in the bin."
+D14,dev,missing,128542817X:1;1285454316:1;B00LBZUA30:1;B0199ELGWI:3;B011KW8EUY:1,128542817X:1;1285454316:1;B00LBZUA30:1;B0199ELGWI:3,abid,"ABID bin 35254. Order also asks for B011KW8EUY, which isn't in the bin."
+D15,dev,correct,B00380DYOS:1;B00GPV68MW:2;B00KD6YW6O:1;B01BZFAF5S:1,B00380DYOS:1;B00GPV68MW:2;B00KD6YW6O:1;B01BZFAF5S:1,abid,ABID bin 72025. Order matches the bin.
+D16,dev,wrong_qty,B004JRMIDM:1;B00IYYX3G2:1,B004JRMIDM:1;B00IYYX3G2:2,abid,ABID bin 335004. Order says 1 x B00IYYX3G2; the bin has 2.
+D17,dev,wrong_qty,B00LMJSGMM:1,B00LMJSGMM:2,abid,ABID bin 324009. Order says 1 x B00LMJSGMM; the bin has 2.
+D18,dev,missing,B00AQ6OS60:3;B01CIQCA9W:2;B01FGBOJMC:1;B00930URLA:1,B00AQ6OS60:3;B01CIQCA9W:2;B01FGBOJMC:1,abid,"ABID bin 57381. Order also asks for B00930URLA, which isn't in the bin."
+D19,dev,identical_multiples,B003FP6N9Y:3,B003FP6N9Y:3,abid,ABID bin 186946. Order matches the bin.
+D20,dev,wrong_qty,B015EMXVMW:5,B015EMXVMW:4,abid,ABID bin 75145. Order says 5 x B015EMXVMW; the bin has 4.
+T01,test,correct,B00GM60NL2:1;B00PQ7N1RQ:1,B00GM60NL2:1;B00PQ7N1RQ:1,abid,ABID bin 427407. Order matches the bin.
+T02,test,missing,B00H9HJSFU:6;B005FEGYCO:1,B00H9HJSFU:6,abid,"ABID bin 328601. Order also asks for B005FEGYCO, which isn't in the bin."
+T03,test,wrong_qty,B00795W9KI:2;B00UDEZF26:3,B00795W9KI:1;B00UDEZF26:3,abid,ABID bin 48226. Order says 2 x B00795W9KI; the bin has 1.
+T04,test,correct,B003V1DN3G:1,B003V1DN3G:1,abid,ABID bin 438032. Order matches the bin.
+T05,test,missing,B00CWEB7VI:1;B00NDIFKQU:1;B0183JF0FE:2;B018EAZ94E:1,B00CWEB7VI:1;B00NDIFKQU:1;B0183JF0FE:2,abid,"ABID bin 100237. Order also asks for B018EAZ94E, which isn't in the bin."
+T06,test,wrong_item,B00VVC6TTW:1,B0037NZ5ES:1,abid,"ABID bin 176520. Order asks for B00VVC6TTW instead of B0037NZ5ES, which is in the bin."
+T07,test,correct,B00KBLCQ96:1;B00U1Q9X74:1,B00KBLCQ96:1;B00U1Q9X74:1,abid,ABID bin 488030. Order matches the bin.
+T08,test,identical_multiples,B00KAG34DY:3;B01EL7S7A2:3,B00KAG34DY:3;B01EL7S7A2:3,abid,ABID bin 486369. Order matches the bin.
+T09,test,wrong_qty,B00QML0LV4:3,B00QML0LV4:4,abid,ABID bin 530956. Order says 3 x B00QML0LV4; the bin has 4.
+T10,test,extra,B0061G4B6G:1,B000IBPD0S:1;B0061G4B6G:1,abid,"ABID bin 51197. Order leaves out B000IBPD0S, which is in the bin."
+T11,test,wrong_qty,B005CSTIHG:4;B00B9LDX8K:1,B005CSTIHG:3;B00B9LDX8K:1,abid,ABID bin 446017. Order says 4 x B005CSTIHG; the bin has 3.
+T12,test,wrong_item,B012W2LOJ4:1;B00BP3PSZ8:2;B01GX5IZUM:1,B0015TTXTY:1;B00BP3PSZ8:2;B01GX5IZUM:1,abid,"ABID bin 452681. Order asks for B012W2LOJ4 instead of B0015TTXTY, which is in the bin."
+T13,test,wrong_item,B001F0QS5A:1;B0083WVGTG:1;B009VWO4PU:1;B019XRI278:1,B001F0QS5A:1;B0083WVGTG:1;B015Z3PV4Q:1;B019XRI278:1,abid,"ABID bin 308674. Order asks for B009VWO4PU instead of B015Z3PV4Q, which is in the bin."
+T14,test,wrong_item,B009VWO4PU:1;B019UJ3IS2:1;B015FMTGSE:1,B009VWO4PU:1;B00NZRDN4U:1;B015FMTGSE:1,abid,"ABID bin 41437. Order asks for B019UJ3IS2 instead of B00NZRDN4U, which is in the bin."
+T15,test,correct,B00ZC9OZVY:1,B00ZC9OZVY:1,abid,ABID bin 175774. Order matches the bin.
+T16,test,wrong_qty,B001EW3C1W:1;B019UXTD8C:2,B001EW3C1W:2;B019UXTD8C:2,abid,ABID bin 39329. Order says 1 x B001EW3C1W; the bin has 2.
+T17,test,wrong_qty,B000NZT6KM:1;B000TM8RAE:1;B004M15U12:2,B000NZT6KM:1;B000TM8RAE:1;B004M15U12:1,abid,ABID bin 431639. Order says 2 x B004M15U12; the bin has 1.
+T18,test,correct,B00HIWWAXS:1;B00WO0AJ96:1,B00HIWWAXS:1;B00WO0AJ96:1,abid,ABID bin 108372. Order matches the bin.
+T19,test,identical_multiples,0374403619:1;B00HS5ERWC:3;B00XDAR6RE:1,0374403619:1;B00HS5ERWC:3;B00XDAR6RE:1,abid,ABID bin 226972. Order matches the bin.
+T20,test,correct,B000BRP65G:2,B000BRP65G:2,abid,ABID bin 325499. Order matches the bin.
+T21,test,identical_multiples,B00D901B4W:4;B00SS1DJRE:1;B014ALOPYG:1,B00D901B4W:4;B00SS1DJRE:1;B014ALOPYG:1,abid,ABID bin 116072. Order matches the bin.
+T22,test,correct,B00BMJNWE4:1;B00MIQDIKS:1;B018RGGUKM:1,B00BMJNWE4:1;B00MIQDIKS:1;B018RGGUKM:1,abid,ABID bin 420173. Order matches the bin.
+T23,test,extra,B00V8YB1QE:1,B00V8YB1QE:1;B00WRGY8DU:1,abid,"ABID bin 96905. Order leaves out B00WRGY8DU, which is in the bin."
+T24,test,wrong_item,B0192Q4RTW:1;B01BH7JAIW:1,B00SJ1289I:1;B01BH7JAIW:1,abid,"ABID bin 441743. Order asks for B0192Q4RTW instead of B00SJ1289I, which is in the bin."
+T25,test,wrong_item,B00A6ZZBDU:1;B01HIZZPQS:1,B00G1373PK:1;B01HIZZPQS:1,abid,"ABID bin 240048. Order asks for B00A6ZZBDU instead of B00G1373PK, which is in the bin."
+T26,test,missing,B00IXHC0JG:4;B00OGS9KQ2:1;B01E5ZC0PS:1;B00YQ9PHE0:1,B00IXHC0JG:4;B00OGS9KQ2:1;B01E5ZC0PS:1,abid,"ABID bin 434024. Order also asks for B00YQ9PHE0, which isn't in the bin."
+T27,test,correct,B00BL6DN10:1;B00Y1N2VMC:1,B00BL6DN10:1;B00Y1N2VMC:1,abid,ABID bin 141416. Order matches the bin.
+T28,test,extra,B0006HUNYU:1;B019TTJ5P8:1,B0006HUNYU:1;B00DQR8TXO:1;B019TTJ5P8:1,abid,"ABID bin 86560. Order leaves out B00DQR8TXO, which is in the bin."
+T29,test,missing,B00XBBVINI:1;B01AZMIBE4:1;B000VDX6TI:1,B00XBBVINI:1;B01AZMIBE4:1,abid,"ABID bin 450115. Order also asks for B000VDX6TI, which isn't in the bin."
+T30,test,identical_multiples,B00CAO41GI:5;B00NJ31VT4:1,B00CAO41GI:5;B00NJ31VT4:1,abid,ABID bin 516687. Order matches the bin.
+T31,test,extra,B0010KK01S:1;B01ENO07BA:1,B0010KK01S:1;B00ZWLDGK8:3;B01ENO07BA:1,abid,"ABID bin 493403. Order leaves out B00ZWLDGK8, which is in the bin."
+T32,test,identical_multiples,B01HNFKG5S:5,B01HNFKG5S:5,abid,ABID bin 147155. Order matches the bin.
+T33,test,correct,B00O0MRAQG:1;B00RV48J1K:1,B00O0MRAQG:1;B00RV48J1K:1,abid,ABID bin 289233. Order matches the bin.
+T34,test,correct,B0013A01DW:1;B00U58U5IE:1,B0013A01DW:1;B00U58U5IE:1,abid,ABID bin 81386. Order matches the bin.
+T35,test,wrong_qty,B00S05KTOO:2,B00S05KTOO:1,abid,ABID bin 423825. Order says 2 x B00S05KTOO; the bin has 1.
+T36,test,identical_multiples,B007DW6DYU:4,B007DW6DYU:4,abid,ABID bin 51607. Order matches the bin.
+T37,test,correct,B00IB6IAA2:1;B00Y9IC0PW:1,B00IB6IAA2:1;B00Y9IC0PW:1,abid,ABID bin 437298. Order matches the bin.
+T38,test,correct,B00A6CZV74:1;B00XL70YKA:1,B00A6CZV74:1;B00XL70YKA:1,abid,ABID bin 49336. Order matches the bin.
+T39,test,identical_multiples,B0122MI7K8:3;B01ASVDR8M:1,B0122MI7K8:3;B01ASVDR8M:1,abid,ABID bin 480441. Order matches the bin.
+T40,test,missing,B013FHAOC8:2;B01BLDWSOA:1;B01CDGDLN6:2;B01DDC0VFU:1,B013FHAOC8:2;B01BLDWSOA:1;B01CDGDLN6:2,abid,"ABID bin 161878. Order also asks for B01DDC0VFU, which isn't in the bin."
+T41,test,wrong_item,B001KYS2UA:6,B004YDG8RS:6,abid,"ABID bin 384954. Order asks for B001KYS2UA instead of B004YDG8RS, which is in the bin."
+T42,test,identical_multiples,B00GQ3IC4Q:2;B00X001S4E:4,B00GQ3IC4Q:2;B00X001S4E:4,abid,ABID bin 414468. Order matches the bin.
+T43,test,wrong_qty,B00GCAXW70:3;B011BWCT72:2,B00GCAXW70:2;B011BWCT72:2,abid,ABID bin 329700. Order says 3 x B00GCAXW70; the bin has 2.
+T44,test,missing,B00HNTVJAG:1;B00IXZAH9S:2;B00SD8IC5Q:2;B01AQO0PQI:1;B00WR23VRI:1,B00HNTVJAG:1;B00IXZAH9S:2;B00SD8IC5Q:2;B01AQO0PQI:1,abid,"ABID bin 248194. Order also asks for B00WR23VRI, which isn't in the bin."
+T45,test,correct,B00JBK78V4:1,B00JBK78V4:1,abid,ABID bin 362252. Order matches the bin.
+T46,test,correct,B000FPN8TK:1;B00LLGI2IO:1;B00V2PB16O:1,B000FPN8TK:1;B00LLGI2IO:1;B00V2PB16O:1,abid,ABID bin 521971. Order matches the bin.
+T47,test,extra,B000DZH3XO:3,B000DZH3XO:3;B00Q6VFE2G:1,abid,"ABID bin 352761. Order leaves out B00Q6VFE2G, which is in the bin."
+T48,test,extra,B0134V3VZM:2,B00ZRDCFN0:4;B0134V3VZM:2,abid,"ABID bin 280925. Order leaves out B00ZRDCFN0, which is in the bin."
+T49,test,identical_multiples,1119049105:3;B00JNJPS4W:1,1119049105:3;B00JNJPS4W:1,abid,ABID bin 232615. Order matches the bin.
+T50,test,correct,B000AO9PMK:1;B00ND00XZG:1;B01EXNVWBK:1,B000AO9PMK:1;B00ND00XZG:1;B01EXNVWBK:1,abid,ABID bin 194506. Order matches the bin.
