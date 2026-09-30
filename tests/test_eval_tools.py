@@ -181,6 +181,35 @@ def test_split_all_needs_the_test_freeze(eval_dir, monkeypatch):
         run_eval.main()
 
 
+def test_oracle_run_scores_the_rules_without_the_model(eval_dir, monkeypatch, sharp_photo):
+    (eval_dir / "manifest.csv").write_text(
+        HEADER + "D01,dev,correct,SKU-MUG-11:1,SKU-MUG-11:1,,\n"
+        "D02,dev,extra,SKU-MUG-11:1,SKU-MUG-11:1;OTHER:1,,\n"  # a product outside the catalogue
+        "D03,dev,missing,SKU-MUG-11:1;SKU-CABLE-USBC:1,SKU-MUG-11:1,,\n", encoding="utf-8")
+    for bid in ("D01", "D02", "D03"):  # sharp photos: one that fails the photo check can never seal
+        (eval_dir / "boxes" / bid).mkdir(parents=True)
+        (eval_dir / "boxes" / bid / "1.jpg").write_bytes(sharp_photo)
+    monkeypatch.setattr(run_eval, "eval_settings", lambda: Settings(_env_file=None, gemini_api_key=None))
+    monkeypatch.setattr(sys, "argv", ["run_eval.py", "--split", "dev", "--run", "o", "--oracle"])
+    run_eval.main()
+    run = eval_dir / "results" / "o"
+    assert json.loads((run / "run.json").read_text(encoding="utf-8"))["perceiver"] == "oracle"
+    got = {p.stem: json.loads(p.read_text(encoding="utf-8"))["outcome"]["decision"] for p in (run / "records").glob("*.json")}
+    assert got["D01"] == "SEAL" and got["D03"] == "STOP_AND_FIX"
+    assert got["D02"] != "SEAL"  # an uncatalogued extra product never seals
+    monkeypatch.setattr(sys, "argv", ["metrics.py", "--run", "o"])
+    metrics.main()
+    assert "**Oracle run: no model.**" in (run / "report.md").read_text(encoding="utf-8")
+
+
+def test_run_without_a_key_says_what_to_do(eval_dir, monkeypatch):
+    (eval_dir / "manifest.csv").write_text(HEADER + "D01,dev,correct,SKU-MUG-11:1,SKU-MUG-11:1,,\n", encoding="utf-8")
+    monkeypatch.setattr(run_eval, "eval_settings", lambda: Settings(_env_file=None, gemini_api_key=None))
+    monkeypatch.setattr(sys, "argv", ["run_eval.py", "--split", "dev", "--run", "k"])
+    with pytest.raises(SystemExit, match="use --oracle for a dry run"):
+        run_eval.main()
+
+
 # ---------------------------------------------------------------- label sheet and photo import
 
 def test_label_sheet_shows_only_the_photos_the_agent_gets(eval_dir, monkeypatch):

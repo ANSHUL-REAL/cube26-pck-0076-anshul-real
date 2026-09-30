@@ -4,6 +4,11 @@
     python eval/freeze.py --split test                            # first, once labels are in; commit it
     python eval/run_eval.py --split test --run test-v1            # the held-out run
     python eval/run_eval.py --split test --run test-v1-order --reveal-order   # ablation
+    python eval/run_eval.py --split dev --run dev-oracle --oracle      # the rules alone, no model
+
+--oracle skips the model: the agent is given exactly what the manifest says was packed, as a
+perfect object list. It measures the decision rules on their own (what's left over is the
+model's share of the errors) and costs nothing, so it's also a dry run of the whole pipeline.
 
 --split all includes the test boxes, so it needs the same freeze as --split test.
 
@@ -26,7 +31,15 @@ from freeze import differences, fingerprint, frozen_path
 from pack_manager.catalogue import load_org_catalogue
 from pack_manager.models import Decision
 from pack_manager.pipeline import Photo, prepare_photos, verify_box
+from pack_manager.vision.base import PerceptionError
 from pack_manager.vision.gemini import GeminiPerceiver
+from pack_manager.vision.oracle import OraclePerceiver
+
+
+def oracle_for(box) -> OraclePerceiver:
+    """Perfect perception of what was physically packed; OTHER is a product not in the catalogue."""
+    seen = {sku: n for sku, n in box.actual.items() if sku != "OTHER"}
+    return OraclePerceiver(seen, ["a product that isn't in the catalogue"] * box.actual.get("OTHER", 0))
 
 
 def main() -> None:
@@ -34,6 +47,7 @@ def main() -> None:
     ap.add_argument("--split", default="dev", choices=["dev", "test", "all"])
     ap.add_argument("--run", required=True, help="name of the results folder, e.g. test-v1")
     ap.add_argument("--reveal-order", action="store_true", help="ablation: tell the model the order")
+    ap.add_argument("--oracle", action="store_true", help="skip the model: perfect perception from the manifest")
     ap.add_argument("--delay", type=float, default=4.0, help="seconds between uncached model calls")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--unfrozen", action="store_true",
@@ -58,8 +72,13 @@ def main() -> None:
                 + ("\n  ".join(frozen["changed_since"]) if frozen else "no eval/frozen-test.json")
                 + "\nFreeze it (python eval/freeze.py --split test) and commit that before the held-out run, "
                 "or pass --unfrozen: the run is then reported as not held-out.")
+    if args.oracle and args.reveal_order:
+        raise SystemExit("--oracle doesn't use the model, so --reveal-order means nothing with it.")
     catalogue, root = load_org_catalogue(ROOT / settings.catalogue_dir, ORG)
-    perceiver = GeminiPerceiver(settings)
+    try:
+        perceiver = None if args.oracle else GeminiPerceiver(settings)
+    except PerceptionError as exc:
+        raise SystemExit(f"{exc} Add it to .env, or use --oracle for a dry run without the model.") from None
     out = EVAL_DIR / "results" / args.run / "records"
     out.mkdir(parents=True, exist_ok=True)
     run_file = out.parent / "run.json"
@@ -67,7 +86,9 @@ def main() -> None:
     # because the report checks that every human label was made before the agent ran.
     first = json.loads(run_file.read_text(encoding="utf-8")).get("started_at") if run_file.exists() else None
     run_file.write_text(json.dumps({
-        "split": args.split, "reveal_order": args.reveal_order, "model": settings.gemini_model,
+        "split": args.split, "reveal_order": args.reveal_order,
+        "perceiver": "oracle" if args.oracle else "model",
+        "model": "none (oracle)" if args.oracle else settings.gemini_model,
         "match_threshold": settings.match_threshold, "visibility_threshold": settings.visibility_threshold,
         "started_at": first or datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "frozen": frozen,
@@ -82,7 +103,10 @@ def main() -> None:
             print(f"[{i}/{len(boxes)}] {box.box_id}: no photos in eval/boxes/{box.box_id}/, skipped")
             continue
         prepared = prepare_photos([Photo(p.read_bytes()) for p in box.photos[: settings.max_box_photos]], settings)
-        perceiver.order_hint = box.expected if args.reveal_order else None
+        if args.oracle:
+            perceiver = oracle_for(box)
+        else:
+            perceiver.order_hint = box.expected if args.reveal_order else None
         record = verify_box(box.order, prepared, catalogue, perceiver, settings,
                             operator_label="eval", catalogue_root=root, force_quality=True)
         (out / f"{box.box_id}.json").write_text(record.model_dump_json(indent=2), encoding="utf-8")
@@ -91,7 +115,7 @@ def main() -> None:
         pending += d == Decision.PENDING
         print(f"[{i}/{len(boxes)}] {box.box_id} {box.scenario:20} truth={box.decision_truth:13} agent={d.value}"
               + (" (cached)" if cached else ""))
-        if not cached and i < len(boxes):
+        if not cached and not args.oracle and i < len(boxes):
             time.sleep(args.delay)
     print(f"\nSaved to {out}. Pending (model failed): {pending}. Re-run to retry them.")
     print(f"Next: python eval/metrics.py --run {args.run}")

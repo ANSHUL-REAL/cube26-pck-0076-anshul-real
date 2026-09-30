@@ -7,6 +7,7 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 - **Box plan before the shoot.** `eval/plan_boxes.py` plans all 70 boxes from the catalogue and writes the manifest (the answer key) before any photo exists, plus a phone checklist to pack from. It checks its own plan: every box can be packed with what's at home (a new `on_hand` column in `products.csv`), and every kind of box has the truth it's meant to have. Kinds are shuffled, so a box number doesn't give its answer away.
 - **Test set cut from 60 to 50 boxes** to match the brief's "50 units", before any photo was taken. 24 should seal and 26 should stop.
 - The photo import takes the whole shoot (practice and test boxes) in one go.
+- **Dry run of the whole eval** on dummy photos, in a throwaway copy of the repo: product sheet, catalogue, plan, 70-photo import, label sheet, two label files, freeze, held-out run, report. Every step worked. It found one bug (running the eval without an API key crashed instead of saying what to do). New `--oracle` run: perfect perception from the manifest, to measure the rules alone. On the planned mix the rules decided all 50 boxes as the manifest says.
 - **Evidence for buyer claims** (the Recovery step). A record page prints as an evidence sheet, and `python -m pack_manager check-record` checks a downloaded record away from the app: its hash, every earlier version, and whether a photo is one of its own (the stored copy or the phone original). Tried on a live record from the hosted database.
 
 ## Tue 29 Sep

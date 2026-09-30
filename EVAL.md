@@ -62,6 +62,7 @@ Lighting (window / lamp), angle (top-down / ~45°) and distance vary across boxe
 - **Human agreement:** Cohen's kappa human A vs human B, and the agent vs the boxes where both humans agree.
 - **Latency** p50 / p95 per box, and **cost per box** from the API's token counts at Google's published prices.
 - **Ablation:** the same boxes with the order revealed to the model (`--reveal-order`). This tests design decision D3 (hiding the order prevents confirmation bias).
+- **Rules alone:** the same boxes with perfect perception (`--oracle`): the agent is given exactly what the manifest says was packed. This separates the rules' errors from the model's. It runs after the held-out run, under the same freeze, and is never used to change the rules. In a dry run on dummy photos of the planned 50-box mix, with a dummy catalogue, the rules alone decided all 50 boxes as the manifest says. The oracle run on the real boxes checks that again with the real catalogue.
 - **Failure list:** every wrong or UNCERTAIN box, with expected vs found and a named cause (occlusion, look-alike, glare, count, insert confused for product, hallucinated item, prompt injection).
 
 Reference targets from the Verity background documents: per-check false positives < 2%, false negatives < 1%, kappa ≥ 0.7, p95 ≤ 5 s, cost ≤ $0.008 per decision.

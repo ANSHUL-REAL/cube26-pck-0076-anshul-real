@@ -327,6 +327,9 @@ def main() -> None:
         f" · order revealed to model: **{run_info['reveal_order']}**"
         f" · thresholds: match {run_info['match_threshold']}, visibility {run_info['visibility_threshold']}",
         "",
+        *(["**Oracle run: no model.** The agent was given exactly what the manifest says was packed, as a "
+           "perfect object list. These numbers measure the decision rules alone, not the product.", ""]
+          if run_info.get("perceiver") == "oracle" else []),
         "## Box decision vs what was physically packed",
         "",
         "| Measure | Result |", "|---|---|",
