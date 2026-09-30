@@ -21,7 +21,7 @@ GET  /v1/records/{id}               -> the record
 GET  /v1/records?since=&agent=&cursor=&limit=   -> {records[], next_cursor}
 ```
 
-`GET /v1/records` is oldest first by `captured_at`; `since` filters on it. Paging is by cursor over (`captured_at`, `record_id`), so a record saved while you page is neither skipped nor repeated. `next_cursor` is null on the last page. `agent` other than `pack` returns nothing, since this service only writes Pack records.
+`GET /v1/records` returns records in the order they were saved; `since` filters on `captured_at`. Paging follows the save order, not `captured_at`: `captured_at` is taken when the photos arrive, before the model call, so a check that took longer is saved after a later one and would otherwise be skipped. `next_cursor` is null on the last page. To poll for new records, keep `resume_cursor` from the last response and pass it as `cursor`. A time without a zone is read as UTC. `agent` other than `pack` returns nothing, since this service only writes Pack records.
 
 **Pack's check keys.** They're stable and lowercase, and every record has all seven in this order, whatever happened:
 
@@ -45,7 +45,7 @@ Each check's `detail.source_checks` holds our checks it was built from (one per 
 - **A charge on one product.** Use `all_items_present.detail.by_sku` and `quantities_correct.detail.by_sku` (and `by_asin`, when the catalogue has ASINs). They give that product's own verdict, so a charge on product A can be matched even if product B in the same box failed.
 - **Mis-ship.** The evidence is `all_items_present` = pass and `quantities_correct` = pass, from a record captured before the charge event (`captured_at`).
 - **Uncertain means no evidence.** Pack writes `uncertain` whenever the photo can't settle a point: hidden items, a failed photo check, or the model not answering. It is never a low-confidence pass, so treating it as no record, as section 6 says, loses nothing Pack actually saw.
-- **Overrides.** The `checks` are always the agent's own results. A person's correction is in `overrides[]` with `from_verdict`, `to_verdict`, `reason`, `by` and `at`. Whether a person's "pass" counts as evidence for a claim is Recovery's decision. Pack keeps both, so either choice can be made from the same record.
+- **Overrides.** The `checks` are always the agent's own results. A person's correction is in `overrides[]` with `from_verdict`, `to_verdict`, `reason`, `by` and `at`. An override applies to the whole check, including its `by_sku`: if `quantities_correct` has an override, its `by_sku` is the agent's view from before it. Whether a person's "pass" counts as evidence for a claim is Recovery's decision. Pack keeps both, so either choice can be made from the same record.
 - **Not covered by Pack:** item condition. Pack checks what is in the box, not its condition, so it has no `condition_grade`.
 
 **How our values fill the contract's fields:**

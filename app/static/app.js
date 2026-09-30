@@ -146,9 +146,11 @@ window.addEventListener("afterprint", () => {
   });
 });
 
-// Sending the photos (Evidence Contract 1.1, section 4). Shows upload progress, tries again when
-// the connection drops (warehouse wifi), and once the photos are up offers a way to keep packing:
-// the server finishes the check and saves the record either way. Without this the form posts normally.
+// Sending the photos (Evidence Contract 1.1, section 4). Shows upload progress and tries again
+// when the connection drops before the photos arrive (warehouse wifi). Within 2 s there's always
+// a way past the wait: "Stop sending" while the photos are on their way, then "Keep packing" once
+// they've arrived (the server finishes the check and saves the record either way). Without this
+// script the form posts normally.
 document.addEventListener("submit", (e) => {
   const form = e.target;
   if (!form.matches("[data-upload]") || !window.FormData || !window.XMLHttpRequest) return;
@@ -160,33 +162,64 @@ document.addEventListener("submit", (e) => {
   const say = (msg) => {
     if (text) text.textContent = msg;
   };
-  const started = Date.now();
   let tries = 0;
+  let uploaded = false; // once the photos have arrived, a retry could save the box twice
+  let xhr = null;
+  let stop = null;
 
-  function giveUp() {
+  function reset() {
     form.classList.remove("working");
     form.querySelectorAll("button").forEach((b) => (b.disabled = false));
-    let note = form.querySelector("[data-upload-error]");
-    if (!note) {
-      note = document.createElement("div");
-      note.className = "callout error upload-error";
-      note.dataset.uploadError = "";
-      note.setAttribute("role", "alert");
-      form.prepend(note);
+    if (stop) stop.remove();
+    if (keep) keep.hidden = true;
+  }
+
+  function note(message) {
+    let el = form.querySelector("[data-upload-error]");
+    if (!el) {
+      el = document.createElement("div");
+      el.className = "callout error upload-error";
+      el.dataset.uploadError = "";
+      el.setAttribute("role", "alert");
+      form.prepend(el);
     }
-    note.textContent = "The photos couldn't be sent. Check the connection, then tap the button again. Nothing was lost.";
+    el.textContent = message;
+  }
+
+  function offerWayPast() {
+    if (uploaded) {
+      if (stop) stop.remove();
+      if (keep) keep.hidden = false;
+      return;
+    }
+    if (stop) return;
+    stop = document.createElement("p");
+    stop.className = "keep-going";
+    stop.append("Slow connection. ");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "linkish";
+    button.textContent = "Stop sending";
+    button.addEventListener("click", () => {
+      if (xhr) xhr.abort();
+      reset();
+      note("Sending stopped. Your photos are still selected: tap the button again when the connection is better.");
+    });
+    stop.append(button, ". Your photos stay selected.");
+    form.append(stop);
   }
 
   function send() {
     tries += 1;
-    const xhr = new XMLHttpRequest();
+    xhr = new XMLHttpRequest();
     xhr.open("POST", form.action);
     xhr.upload.onprogress = (ev) => {
       if (ev.lengthComputable && ev.total > 50000) say(`Sending the photos: ${Math.round((ev.loaded / ev.total) * 100)}%`);
     };
     xhr.upload.onload = () => {
+      uploaded = true;
       say("Checking the box. This usually takes a few seconds.");
-      if (keep) setTimeout(() => (keep.hidden = false), Math.max(0, 2000 - (Date.now() - started)));
+      if (stop) offerWayPast(); // already past 2 s: swap "Stop sending" for "Keep packing"
     };
     xhr.onload = () => {
       // A result redirects to the record; anything else (a photo to retake, an error) is a page to show.
@@ -200,8 +233,14 @@ document.addEventListener("submit", (e) => {
       document.close();
     };
     xhr.onerror = () => {
+      if (uploaded) {
+        reset();
+        note("The connection dropped after the photos were sent, so the check may already be saved. Open this order again to see it before checking again.");
+        return;
+      }
       if (tries > 3) {
-        giveUp();
+        reset();
+        note("The photos couldn't be sent. Check the connection, then tap the button again. Nothing was lost.");
         return;
       }
       say(`The connection dropped. Trying again (${tries} of 3)`);
@@ -209,6 +248,9 @@ document.addEventListener("submit", (e) => {
     };
     xhr.send(data);
   }
+  setTimeout(() => {
+    if (form.classList.contains("working")) offerWayPast();
+  }, 2000);
   send();
 });
 
@@ -219,6 +261,11 @@ document.addEventListener("submit", (e) => {
   const view = document.querySelector("[data-camera]");
   const open = document.querySelector("[data-camera-open]");
   if (!view || !open || !window.isSecureContext || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+  try {
+    new DataTransfer(); // how the shots become the form's photos; missing before iOS 14.5
+  } catch (err) {
+    return;
+  }
   const input = open.closest("form").querySelector("input[type=file]");
   const video = view.querySelector("[data-camera-video]");
   const plan = JSON.parse(view.querySelector("[data-camera-plan]").textContent);

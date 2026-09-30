@@ -47,6 +47,7 @@ def migrate(admin_url: str, app_password: str) -> None:
         cur.execute("grant select, insert, update on orders to pack_app")
         cur.execute("grant select, insert, update on records to pack_app")
         cur.execute("grant select, insert on images to pack_app")
+        cur.execute("grant usage on sequence records_saved_seq_seq to pack_app")  # saving a record
         cur.execute("revoke all on access_codes from pack_app")
         cur.execute("revoke all on function resolve_access_code(text) from public")
         cur.execute("grant execute on function resolve_access_code(text) to pack_app")

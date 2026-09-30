@@ -20,9 +20,19 @@ class DatabaseBusy(RuntimeError):
     """Every connection stayed in use for too long."""
 
 
+class _KeepingPool(psycopg2.pool.ThreadedConnectionPool):
+    """Opens connections as they're needed and keeps them for reuse. The stock pool closes every
+    connection returned beyond `minconn`, so with minconn=1 nearly every request opened a new
+    connection to the hosted database (about 0.4 s each, one at a time under the pool's lock)."""
+
+    def __init__(self, maxconn: int, dsn: str):
+        super().__init__(0, maxconn, dsn)  # nothing opened up front
+        self.minconn = maxconn  # but up to maxconn returned connections are kept
+
+
 class Database:
     def __init__(self, dsn: str, maxconn: int = 8, wait_s: float = 30.0):
-        self.pool = psycopg2.pool.ThreadedConnectionPool(1, maxconn, dsn)
+        self.pool = _KeepingPool(maxconn, dsn)
         # The pool raises PoolError when all connections are out. Wait for one instead.
         self._slots = threading.BoundedSemaphore(maxconn)
         self._wait_s = wait_s

@@ -4,6 +4,21 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Thu 1 Oct
 
+- **Review and stress test of everything built since the eval.** Two passes: a code review that confirmed each bug with a script, and a load test against a copy of the app with no model key, which cleaned up every record it made. Fixed, each with a test:
+  - **Paging could skip a record for good.** `captured_at` is taken before the model call, so a slow check is saved after a faster, later one. `/v1/records` now pages in the order records were saved (a new `saved_seq` column), and gives pollers a `resume_cursor`.
+  - **Two `/complete` calls at once made two records.** A capture now makes one record at most. A photo that arrives while it's being checked is refused instead of being silently dropped.
+  - **Capture memory could reach about 2 GB,** and one company could push out another's captures. Now: a cap per company and overall, photos freed once the record is saved, and uploads that aren't photos refused.
+  - **One tap could save a box twice** when the connection dropped after the photos were sent. The page now only retries before they arrive. During a slow upload it offers "Stop sending" within 2 s.
+  - **Database pool:** it closed every returned connection, so each request reconnected to Neon. At 50 concurrent requests `/v1/records` went from about 2 per second with 503 errors to about 15 per second with none. A page of records is now two queries, and API access codes are cached for 5 minutes.
+  - **Six 5400×5400 PNGs at once** took the server to 1.75 GB. Photos are now decoded one at a time, and the peak was 408 MB. The photo check itself is unchanged.
+  - **Smaller fixes:**
+    - `"shots": Infinity` gave a 500.
+    - Reloading after a refused check override gave a 404.
+    - A share link opened while signed in showed the app's menu.
+    - "Other" as a reason now needs a note.
+    - A time without a zone is now read as UTC.
+    - The camera is hidden on phones too old to hand the shots to the form.
+
 - **Recovery data contract** read. Its check-key registry lists exactly Pack's four keys (`all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`), so nothing is renamed. Our three other keys are additions, which it allows. Charges can name one SKU or ASIN while a Pack record covers a whole order, so `all_items_present` and `quantities_correct` now carry each ordered product's own verdict (`detail.by_sku`, `by_asin`). `contract/README.md` explains how Recovery joins a charge to a Pack record, and why Pack's `uncertain` is safe to treat as no evidence.
 - **An override on every check** (Evidence Contract 1.1, section 4). Each of the seven checks on a record page has its own Override, with a required reason and an optional note. The correction is appended to the record with the result it replaced. The AI's checks, the box decision and the contract's content hash stay as they were. Older records keep their hashes: a box decision is still written exactly as before. Tested against real Postgres too, where the append-only rule accepts it.
 

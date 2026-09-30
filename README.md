@@ -8,7 +8,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 |---|---|
 | Live demo | _added on deployment_ |
 | Demo video | _added after recording_ |
-| Eval report | [EVAL.md](EVAL.md): 50 held-out real warehouse photos (public dataset), false SEAL 8%, false STOP 50% |
+| Eval | [EVAL.md](EVAL.md): one frozen, held-out run of the real vision model on 50 real warehouse photos (public dataset). False SEAL 2/26, false STOP 12/24: a kill condition set in advance tripped, and we report it. Rules alone: 0 errors. A separate, disclosed set of 50 AI-generated boxes: false SEAL 1/26, false STOP 1/24. Also on the app's public `/results` page |
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Record format for other tracks | [contract/](contract/README.md): the organisers' Evidence Contract 1.1, served at `/v1` |
 | Problems found in the brief and data | [FINDINGS.md](FINDINGS.md) |
@@ -31,7 +31,7 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 
 ## What it does
 
-1. The day's orders are imported from a CSV (`order_id`, `order_lines` like `SKU-A:2;SKU-B:1`). The operator signs in, picks the order and takes 1–3 photos of the open box.
+1. The day's orders are imported from a CSV (`order_id`, `order_lines` like `SKU-A:2;SKU-B:1`, optional `shipment_id`). The operator signs in, picks the order and takes 1–3 guided photos of the open box with the phone camera (a frame on screen says what each shot should show), or chooses photos.
 2. A local photo check rejects blurry, dark or glare-heavy photos immediately ("Retake: photo looks blurry"), before any model call.
 3. **One** vision-model call lists every object in the box, with a bounding box. The model is not told the order or the quantities.
 4. Deterministic rules compare that list with the order, check by check, and decide:
@@ -44,7 +44,7 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 | PENDING | The model didn't answer (timeout, quota) | Grey "Needs your decision"; photos and record are kept. "Retry AI check" runs it again later as a new, linked record |
 
 5. Every box gets an **evidence record**: the order, photos (with hashes), what was found, every check with its verdict and confidence, the decision and why, and a content hash. The operator can disagree; the override is appended with a reason code, and the agent's original answer is kept.
-6. Returns and Recovery can read records through a JSON API, limited to their own organisation.
+6. Returns and Recovery read records in the organisers' **Evidence Contract 1.1** shape at `/v1`, limited to their own organisation. Each check (`all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`, and more) carries a verdict per ordered product, and a person can override any check with a required reason. A record's share link opens it read-only for a customer, with no sign-in.
 
 **Sample-data check.** Replaying the organisers' `pack_sample.csv` with its `observed_in_box` column as perfect perception: 4 of the 29 boxes have wrong contents. **The rules stop all 4. The human operator in the data sealed 2 of them.** No correct box is stopped. This tests the rules alone, not the vision.
 

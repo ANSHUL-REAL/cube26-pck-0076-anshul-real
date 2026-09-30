@@ -752,3 +752,4 @@ body.camera-on { overflow: hidden; }
 .cc-fix .form-row { grid-template-columns: 1fr; }
 .cc-note { margin: 4px 0 0; }
 @media (max-width: 640px) { .cchecks { padding: 4px 16px 8px; } }
+.linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--brand); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; cursor: pointer; }

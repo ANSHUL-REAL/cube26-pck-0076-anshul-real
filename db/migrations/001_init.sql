@@ -44,6 +44,10 @@ create table if not exists records (
     updated_at      timestamptz not null default now()
 );
 create index if not exists records_org_order on records (organization_id, order_id);
+-- The order records were saved in. /v1/records pages on it: captured_at is taken before the
+-- model call, so a check that took longer is saved after a later one and would be skipped.
+alter table records add column if not exists saved_seq bigserial;
+create index if not exists records_org_seq on records (organization_id, saved_seq);
 create index if not exists records_org_unit on records (organization_id, unit_id);
 -- Finding the AI re-check of a record, so a retried record leaves the "needs a decision" queue.
 create index if not exists records_retry_of on records ((record->'observations'->>'retry_of'));

@@ -3,12 +3,14 @@ CHECK BY HAND with the evidence behind it."""
 
 from __future__ import annotations
 
+import asyncio
 import base64
 import csv
 import io
 import json
 import logging
 import secrets
+import threading
 import time
 import uuid
 from datetime import datetime, timezone
@@ -216,7 +218,8 @@ def current_user(request: Request) -> dict:
 
 
 def page(request: Request, name: str, status_code: int = 200, **ctx) -> HTMLResponse:
-    ctx.setdefault("user", request.session.get("user"))
+    # The shared, read-only record page shows no app navigation, even to someone signed in.
+    ctx.setdefault("user", None if ctx.get("public") else request.session.get("user"))
     return templates.TemplateResponse(request, name, ctx, status_code=status_code)
 
 
@@ -450,6 +453,16 @@ async def _read_capped(upload: UploadFile, cap: int) -> bytes | None:
     return b"".join(chunks)
 
 
+# Decoding a large photo takes up to ~250 MB for a moment. One at a time keeps a small server
+# (512 MB) safe when several arrive together; the model call, which takes longest, isn't held up.
+_decode_slot = threading.BoundedSemaphore(1)
+
+
+def _prepare(photos: list[Photo]) -> list[PreparedImage]:
+    with _decode_slot:
+        return prepare_photos(photos, settings)
+
+
 def _get_order(org: str, order_id: str):
     with db().org(org) as cur:
         return store.get_order(cur, order_id)
@@ -501,10 +514,7 @@ async def verify_submit(
             uploads.append(data)
         try:
             prepared = await run_in_threadpool(
-                prepare_photos,
-                [Photo(data, "top_down" if i == 0 else f"extra_{i}") for i, data in enumerate(uploads)],
-                settings,
-            )
+                _prepare, [Photo(data, "top_down" if i == 0 else f"extra_{i}") for i, data in enumerate(uploads)])
         except (ImageDecodeError, ValueError) as exc:  # the message is written for the packer
             return await again(error=str(exc) or PHOTO_UNREADABLE)
         except Exception as exc:  # any other decoding problem: a message, not a server error
@@ -657,7 +667,7 @@ def record_page(request: Request, record_id: str):
 @app.get("/records/{record_id}/{action}")
 def record_action_reload(record_id: str, action: str):
     """A record page shown after a refused form post has this address; opening it again shows the record."""
-    if action not in ("decision", "retry"):
+    if action not in ("decision", "retry", "check"):
         raise StarletteHTTPException(status_code=404)
     return RedirectResponse(f"/records/{url_part(record_id)}", status_code=303)
 
@@ -747,6 +757,8 @@ def record_decision(
         return again("Choose Seal the box or Stop and fix to record your decision.", 400)
     if reason_code not in OVERRIDE_REASONS:
         return again("Choose a reason for your decision.", 400)
+    if reason_code == "other" and not note:
+        return again('Add a note to say why when the reason is "Other".', 400)
     # The form carries the hash of the record as the operator saw it. The save only goes through
     # if the record still has that hash, so a decision someone else made meanwhile isn't lost.
     if prior_hash and prior_hash != record.content_hash:
@@ -795,6 +807,8 @@ def record_check_override(
         return again("Choose the result you found.", 400)
     if reason_code not in OVERRIDE_REASONS:
         return again("Choose a reason for the change.", 400)
+    if reason_code == "other" and not note:
+        return again('Add a note to say why when the reason is "Other".', 400)
     if prior_hash and prior_hash != record.content_hash:
         return again(CONFLICT, 409)
     try:
@@ -827,12 +841,28 @@ def image(request: Request, image_id: str):
 # ------------------------------------------------------------------ JSON API (for Returns / Recovery)
 
 
+# Access codes that resolved recently, so each API call doesn't wait for a database round trip
+# first. Keyed by the code's hash; a changed or removed code takes effect within CODE_CACHE_S.
+_CODES: dict[str, tuple[dict, float]] = {}
+CODE_CACHE_S = 300
+
+
 def _api_user(request: Request) -> dict | None:
     code = request.headers.get("x-access-code")
     if code:
+        key, now = store.hash_code(code), time.time()
+        hit = _CODES.get(key)
+        if hit and now - hit[1] < CODE_CACHE_S:
+            return dict(hit[0])
         with db().anonymous() as cur:
             found = store.resolve_code(cur, code)
-        return {"org": found["organization_id"], "operator": found["operator_label"]} if found else None
+        if not found:
+            return None
+        user = {"org": found["organization_id"], "operator": found["operator_label"]}
+        if len(_CODES) > 1000:
+            _CODES.clear()
+        _CODES[key] = (user, now)
+        return dict(user)
     return request.session.get("user")
 
 
@@ -992,58 +1022,83 @@ def v1_record(request: Request, record_id: str):
     return _contract_record(user["org"], record)
 
 
-def _cursor(record: EvidenceRecord) -> str:
-    raw = json.dumps([record.captured_at.isoformat(), record.record_id]).encode("utf-8")
-    return base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+def _cursor(record_id: str) -> str:
+    return base64.urlsafe_b64encode(record_id.encode("utf-8")).decode("ascii").rstrip("=")
 
 
-def _after(cursor: str) -> tuple[datetime, str]:
-    raw = base64.urlsafe_b64decode(cursor + "=" * (-len(cursor) % 4))
-    at, record_id = json.loads(raw)
-    return datetime.fromisoformat(at), str(record_id)
+def _after(cursor: str) -> str:
+    return base64.urlsafe_b64decode(cursor + "=" * (-len(cursor) % 4)).decode("utf-8")
+
+
+def _utc(dt: datetime | None) -> datetime | None:
+    """A time sent without a zone is read as UTC, never as the database's local time."""
+    return dt.replace(tzinfo=timezone.utc) if dt is not None and dt.tzinfo is None else dt
 
 
 @app.get("/v1/records")
 def v1_records(request: Request, since: datetime | None = None, agent: str | None = None,
                cursor: str | None = None, limit: int = 100):
-    """What Recovery reads. Oldest first by captured_at; `since` filters on captured_at.
-    Pass `next_cursor` back as `cursor` for the next page; it is null on the last page."""
+    """What Recovery reads, in the order records were saved; `since` filters on captured_at.
+
+    Pass `next_cursor` back as `cursor` for the next page; it is null on the last page. To poll
+    for new records later, keep `resume_cursor` and pass it as `cursor`: it points after the last
+    record returned, so a check that took longer and was saved after a later one isn't skipped
+    (captured_at is taken when the photos arrive, before the model call)."""
     user = _api_user(request)
     if not user:
         return _unauthorised()
     if agent and agent != "pack":  # this service only writes Pack records
-        return {"records": [], "next_cursor": None}
+        return {"records": [], "next_cursor": None, "resume_cursor": cursor}
     try:
         after = _after(cursor) if cursor else None
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, UnicodeDecodeError):
         return JSONResponse({"error": "cursor isn't one this API returned"}, status_code=400)
     limit = max(1, min(limit, 200))
     with db().org(user["org"]) as cur:
-        ids = store.records_page(cur, since, after, limit + 1)
-        records = [store.get_record(cur, rid) for rid in ids[:limit]]
-    records = [r for r in records if r]
-    more = len(ids) > limit
-    return {"records": [_contract_record(user["org"], r) for r in records],
-            "next_cursor": _cursor(records[-1]) if more and records else None}
+        ids = store.records_page(cur, _utc(since), after, limit + 1)
+        if ids is None:
+            return JSONResponse({"error": "cursor isn't one this API returned"}, status_code=400)
+        found = store.get_records(cur, ids[:limit])  # the whole page in two queries
+        sizes = store.image_sizes_many(cur, ids[:limit])
+    records = [found[rid] for rid in ids[:limit] if rid in found]
+    catalogue, _ = org_catalogue(user["org"])
+    last = _cursor(records[-1].record_id) if records else cursor
+    return {"records": [to_contract(r, image_bytes=sizes.get(r.record_id), catalogue=catalogue) for r in records],
+            "next_cursor": last if len(ids) > limit else None, "resume_cursor": last}
 
 
-# Captures in progress: the order, and the photos uploaded so far. Held in memory for a short
-# time, like the photos kept for "use anyway".
+# Captures in progress: the order, and the photos uploaded so far, held in memory for a short
+# time. Memory is capped in bytes, overall and per company, and a company that reaches its share
+# is refused rather than pushing out another company's capture.
 _CAPTURES: dict[str, dict] = {}
-CAPTURE_TTL_S = 900
-CAPTURE_MAX = 50
+CAPTURE_TTL_S = 900  # to finish uploading and call complete
+CAPTURE_RESULT_TTL_S = 3600  # a completed capture keeps only its result, so a late retry gets it
+CAPTURES_PER_ORG = 10
+CAPTURE_BYTES_MAX = 160 * 2**20
+CAPTURE_BYTES_PER_ORG = 60 * 2**20
 SHOTS = [
     "The open box from directly above, with the whole inside in view.",
     "Closer, at a slight angle, so stacked or hidden items show.",
     "Anything the first two didn't show: labels, a variant, a count.",
 ]
+# What a phone photo starts with: JPEG, PNG, WebP, HEIC/HEIF.
+_PHOTO_MAGIC = (b"\xff\xd8\xff", b"\x89PNG\r\n\x1a\n", b"RIFF")
+
+
+def _looks_like_photo(data: bytes) -> bool:
+    return data.startswith(_PHOTO_MAGIC) or data[4:8] == b"ftyp"
 
 
 def _capture(capture_id: str) -> dict | None:
     now = time.time()
-    for key in [k for k, v in _CAPTURES.items() if now - v["at"] > CAPTURE_TTL_S]:
+    for key in [k for k, v in _CAPTURES.items()
+                if now - v["at"] > (CAPTURE_RESULT_TTL_S if v["result"] else CAPTURE_TTL_S)]:
         _CAPTURES.pop(key, None)
     return _CAPTURES.get(capture_id)
+
+
+def _held_bytes(org: str | None = None) -> int:
+    return sum(len(p) for c in _CAPTURES.values() if org in (None, c["org"]) for p in c["photos"] if p)
 
 
 @app.post("/v1/captures")
@@ -1057,18 +1112,21 @@ async def v1_capture_start(request: Request):
         body = await request.json()
         order_id = str(body.get("order_id") or "").strip()
         shots = int(body.get("shots", 2))
-    except (ValueError, TypeError, AttributeError):
+    except (ValueError, TypeError, AttributeError, OverflowError):
         return JSONResponse({"error": 'send JSON like {"order_id": "ORD-1", "shots": 2}'}, status_code=400)
     order = await run_in_threadpool(_get_order, user["org"], order_id) if order_id else None
     if not order:
         return JSONResponse({"error": "order not found"}, status_code=404)
     shots = max(1, min(shots, settings.max_box_photos, len(SHOTS)))
     _capture("")  # drops expired captures
-    while len(_CAPTURES) >= CAPTURE_MAX:
-        _CAPTURES.pop(next(iter(_CAPTURES)))
+    open_here = sum(1 for c in _CAPTURES.values() if c["org"] == user["org"] and c["state"] == "open")
+    if open_here >= CAPTURES_PER_ORG:
+        return JSONResponse({"error": f"{CAPTURES_PER_ORG} captures are already open for this company. "
+                                      "Complete them, or wait 15 minutes."}, status_code=429)
     capture_id, token = str(uuid.uuid4()), secrets.token_urlsafe(24)
     _CAPTURES[capture_id] = {"org": user["org"], "operator": user["operator"], "order_id": order.order_id,
-                             "token": token, "photos": [None] * shots, "at": time.time(), "result": None}
+                             "token": token, "photos": [None] * shots, "at": time.time(), "state": "open",
+                             "done": asyncio.Event(), "result": None}
     base = str(request.base_url).rstrip("/")
     return {
         "capture_id": capture_id,
@@ -1095,13 +1153,21 @@ async def v1_capture_upload(request: Request, capture_id: str, n: int, token: st
     held = _capture(capture_id)
     if not held or not secrets.compare_digest(token, held["token"]) or not 1 <= n <= len(held["photos"]):
         return JSONResponse({"error": "not found or expired"}, status_code=404)
-    if held["result"]:
-        return JSONResponse({"error": "this capture is already complete"}, status_code=409)
+    if held["state"] != "open":
+        return JSONResponse({"error": "this capture is already being checked"}, status_code=409)
     data = await _read_body_capped(request, MAX_PHOTO_BYTES)
     if data is None:
         return JSONResponse({"error": f"photo larger than {MAX_PHOTO_BYTES // 2**20} MB"}, status_code=413)
     if not data:
         return JSONResponse({"error": "empty photo"}, status_code=400)
+    if not _looks_like_photo(data):
+        return JSONResponse({"error": "not a JPEG, PNG, WebP or HEIC photo"}, status_code=415)
+    if held["state"] != "open":  # complete was called while this photo was arriving
+        return JSONResponse({"error": "this capture is already being checked"}, status_code=409)
+    replacing = len(held["photos"][n - 1] or b"")
+    if (_held_bytes(held["org"]) - replacing + len(data) > CAPTURE_BYTES_PER_ORG
+            or _held_bytes() - replacing + len(data) > CAPTURE_BYTES_MAX):
+        return JSONResponse({"error": "too many photos waiting; complete open captures first"}, status_code=503)
     held["photos"][n - 1] = data
     return {"ok": True, "bytes": len(data)}
 
@@ -1109,25 +1175,38 @@ async def v1_capture_upload(request: Request, capture_id: str, n: int, token: st
 @app.post("/v1/captures/{capture_id}/complete")
 async def v1_capture_complete(request: Request, capture_id: str):
     """Runs the check and saves the record. Fails open: if the model errors or times out, the
-    record is still saved, with status "pending". Calling it again returns the same record."""
+    record is still saved, with status "pending". Calling it again, even while the first call is
+    still running, returns the same record: a capture makes one record at most."""
     user = _api_user(request)
     if not user:
         return _unauthorised()
     held = _capture(capture_id)
     if not held or held["org"] != user["org"]:
         return JSONResponse({"error": "not found or expired"}, status_code=404)
+    if held["state"] == "completing":
+        await held["done"].wait()
     if held["result"]:
         return held["result"]
     uploads = [data for data in held["photos"] if data]
     if not uploads:
         return JSONResponse({"error": "no photos were uploaded"}, status_code=400)
+    held["state"] = "completing"  # set before the first await: no second record, no late uploads
+    try:
+        return await _complete_capture(request, user, held, uploads)
+    finally:
+        if not held["result"]:
+            held["state"] = "open"  # nothing saved: the capture can be fixed and completed again
+        held["done"].set()
+        held["done"] = asyncio.Event()
+
+
+async def _complete_capture(request: Request, user: dict, held: dict, uploads: list[bytes]):
     order = await run_in_threadpool(_get_order, user["org"], held["order_id"])
     if not order:
         return JSONResponse({"error": "order not found"}, status_code=404)
     try:
         prepared = await run_in_threadpool(
-            prepare_photos,
-            [Photo(data, "top_down" if i == 0 else f"extra_{i}") for i, data in enumerate(uploads)], settings)
+            _prepare, [Photo(data, "top_down" if i == 0 else f"extra_{i}") for i, data in enumerate(uploads)])
     except (ImageDecodeError, ValueError) as exc:  # the message is written for the packer
         return JSONResponse({"error": str(exc) or PHOTO_UNREADABLE}, status_code=422)
     except Exception as exc:
@@ -1144,6 +1223,7 @@ async def v1_capture_complete(request: Request, capture_id: str):
                       "status": "pending" if record.status.value == "pending" else "complete",
                       "decision": record.outcome.decision.value,
                       "record_url": str(request.base_url).rstrip("/") + share_path(user["org"], record.record_id)}
+    held["state"], held["photos"], held["at"] = "done", [], time.time()  # free the photos now
     return held["result"]
 
 

@@ -247,6 +247,25 @@ def counts_by_decision(cur) -> dict[str, int]:
     return {r["decision"]: r["n"] for r in cur.fetchall()}
 
 
+def get_records(cur, record_ids: list[str]) -> dict[str, EvidenceRecord]:
+    """Several records in one query, by id."""
+    if not record_ids:
+        return {}
+    cur.execute("select record_id, record from records where record_id = any(%s)", (list(record_ids),))
+    return {row["record_id"]: EvidenceRecord.model_validate(row["record"]) for row in cur.fetchall()}
+
+
+def image_sizes_many(cur, record_ids: list[str]) -> dict[str, dict[str, int]]:
+    """Bytes of each stored photo, by record then image id, in one query."""
+    out: dict[str, dict[str, int]] = {rid: {} for rid in record_ids}
+    if record_ids:
+        cur.execute("select record_id, image_id::text as id, octet_length(content) as n from images "
+                    "where record_id = any(%s)", (list(record_ids),))
+        for row in cur.fetchall():
+            out.setdefault(row["record_id"], {})[row["id"]] = row["n"]
+    return out
+
+
 def image_sizes(cur, record_id: str) -> dict[str, int]:
     """Bytes of each stored photo of a record, by image id (for the contract record)."""
     cur.execute("select image_id::text as id, octet_length(content) as n from images where record_id = %s",
@@ -254,18 +273,26 @@ def image_sizes(cur, record_id: str) -> dict[str, int]:
     return {row["id"]: row["n"] for row in cur.fetchall()}
 
 
-def records_page(cur, since: datetime | None, after: tuple[datetime, str] | None, limit: int) -> list[str]:
-    """Record ids oldest first by (captured_at, record_id), from `since` on and strictly after
-    the `after` position. Keyset paging: a record saved meanwhile is never skipped or repeated."""
+def records_page(cur, since: datetime | None, after: str | None, limit: int) -> list[str] | None:
+    """Record ids in the order they were saved (saved_seq), from `since` (on captured_at) on and
+    after the record `after`. Paging on the save order means a check that took longer and was
+    saved after a later one is never skipped. None if `after` isn't a record this company can see."""
+    seq = None
+    if after is not None:
+        cur.execute("select saved_seq from records where record_id = %s", (after,))
+        row = cur.fetchone()
+        if not row:
+            return None
+        seq = row["saved_seq"]
     cur.execute(
         """
         select record_id from records
         where (%(s)s::timestamptz is null or captured_at >= %(s)s)
-          and (%(at)s::timestamptz is null or (captured_at, record_id) > (%(at)s, %(id)s))
-        order by captured_at, record_id
+          and (%(q)s::bigint is null or saved_seq > %(q)s)
+        order by saved_seq
         limit %(limit)s
         """,
-        {"s": since, "at": after[0] if after else None, "id": after[1] if after else None, "limit": limit},
+        {"s": since, "q": seq, "limit": limit},
     )
     return [row["record_id"] for row in cur.fetchall()]
 

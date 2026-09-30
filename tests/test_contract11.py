@@ -128,7 +128,7 @@ def test_get_record_is_the_contract_record_and_other_companies_get_nothing(clien
     rec = valid(client.get(f"/v1/records/{rid}", headers=ALPHA).json())
     assert rec["outcome"]["decision"] == "SEAL" and rec["images"][0]["bytes"] > 0
     assert client.get(f"/v1/records/{rid}", headers=BRAVO).status_code == 404
-    assert client.get("/v1/records", headers=BRAVO).json() == {"records": [], "next_cursor": None}
+    assert client.get("/v1/records", headers=BRAVO).json() == {"records": [], "next_cursor": None, "resume_cursor": None}
 
 
 def test_record_list_pages_with_a_cursor_and_filters(client, settings, sharp_photo):
@@ -286,3 +286,108 @@ def test_each_ordered_product_has_its_own_verdict_for_recovery():
     # No model answer: every product is uncertain (no evidence), never pass.
     pending = {c["check_key"]: c for c in to_contract(example("pending"))["checks"]}
     assert set(pending["quantities_correct"]["detail"]["by_sku"].values()) == {"uncertain"}
+
+
+# ------------------------------------------------------------------ bugs found in review and stress tests
+
+
+@pytest.fixture(autouse=True)
+def _no_captures_left_over():
+    import app.main as main
+    main._CAPTURES.clear()
+    yield
+    main._CAPTURES.clear()
+
+
+def test_a_record_saved_late_is_not_skipped_by_paging(client, settings, sharp_photo):
+    """captured_at is taken before the model call, so a slow check is saved after a faster, later
+    one. Paging follows the save order, so a poller holding resume_cursor still gets it."""
+    from datetime import datetime, timezone
+    fast = _box(client, settings, sharp_photo, {"CAP-BLU": 1}, order_id="ORD-F",
+                at=datetime(2026, 10, 1, 9, 0, 2, tzinfo=timezone.utc))
+    page = client.get("/v1/records", headers=ALPHA).json()
+    assert [r["record_id"] for r in page["records"]] == [fast.record_id] and page["next_cursor"] is None
+    slow = _box(client, settings, sharp_photo, {"CAP-BLU": 1}, order_id="ORD-S",
+                at=datetime(2026, 10, 1, 9, 0, 1, tzinfo=timezone.utc))  # earlier capture, saved later
+    later = client.get(f"/v1/records?cursor={page['resume_cursor']}", headers=ALPHA).json()
+    assert [r["record_id"] for r in later["records"]] == [slow.record_id]
+    # A time without a zone is read as UTC.
+    naive = client.get("/v1/records?since=2026-10-01T09:00:02", headers=ALPHA).json()
+    assert [r["record_id"] for r in naive["records"]] == [fast.record_id]
+
+
+def test_completing_one_capture_twice_at_once_makes_one_record(client, sharp_photo, monkeypatch):
+    import asyncio
+    import time
+
+    import httpx
+
+    import app.main as main
+    add_order(client.fake, ("CAP-BLU", 1))
+    start = _capture(client, sharp_photo)
+    slow = main._check_box
+
+    def slow_check(*args):
+        time.sleep(0.5)
+        return slow(*args)
+
+    monkeypatch.setattr(main, "_check_box", slow_check)
+    url = f"/v1/captures/{start['capture_id']}/complete"
+
+    async def both():
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=main.app), base_url="http://t") as c:
+            late = asyncio.create_task(c.put(start["upload_urls"][0].replace("http://testserver", ""),
+                                             content=sharp_photo))
+            return await asyncio.gather(c.post(url, headers=ALPHA), c.post(url, headers=ALPHA), late)
+
+    first, second, upload = asyncio.run(both())
+    assert first.json() == second.json() and len(client.fake.records) == 1
+    assert upload.status_code in (200, 409)  # never a photo silently left out of a saved record
+    assert main._CAPTURES[start["capture_id"]]["photos"] == []  # freed once the record is saved
+
+
+def test_captures_are_capped_per_company_without_pushing_out_others(client, sharp_photo, monkeypatch):
+    import app.main as main
+    add_order(client.fake, ("CAP-BLU", 1))
+    add_order(client.fake, ("CAP-BLU", 1), org="org_demo_bravo")
+    for _ in range(main.CAPTURES_PER_ORG):
+        assert client.post("/v1/captures", json={"order_id": "ORD-1"}, headers=ALPHA).status_code == 200
+    assert client.post("/v1/captures", json={"order_id": "ORD-1"}, headers=ALPHA).status_code == 429
+    other = client.post("/v1/captures", json={"order_id": "ORD-1"}, headers=BRAVO)
+    assert other.status_code == 200
+    # Memory is capped in bytes too.
+    monkeypatch.setattr(main, "CAPTURE_BYTES_PER_ORG", len(sharp_photo) + 10)
+    urls = other.json()["upload_urls"]
+    assert client.put(urls[0], content=sharp_photo).status_code == 200
+    assert client.put(urls[1], content=sharp_photo).status_code == 503
+    assert client.put(urls[0], content=sharp_photo).status_code == 200  # replacing a photo still fits
+
+
+def test_odd_capture_requests_get_a_clear_answer(client, sharp_photo):
+    add_order(client.fake, ("CAP-BLU", 1))
+    bad = client.post("/v1/captures", content=b'{"order_id": "ORD-1", "shots": Infinity}',
+                      headers={**ALPHA, "content-type": "application/json"})
+    assert bad.status_code == 400
+    url = client.post("/v1/captures", json={"order_id": "ORD-1"}, headers=ALPHA).json()["upload_urls"][0]
+    assert client.put(url, content=b"just some text, not a photo").status_code == 415
+
+
+def test_small_fixes_from_review(client, settings, sharp_photo):
+    import re
+    record = _box(client, settings, sharp_photo, {"CAP-BLU": 1})
+    rid = record.record_id
+    client.post("/login", data={"code": "alpha-demo"})
+    prior = re.search(r'name="prior_hash" value="([^"]*)"', client.get(f"/records/{rid}").text).group(1)
+    # "Other" needs a note, on both forms.
+    r = client.post(f"/records/{rid}/check", data={"check_key": "scene_coverage", "to_verdict": "fail",
+                                                  "reason_code": "other", "prior_hash": prior})
+    assert r.status_code == 400 and "Add a note" in r.text
+    r = client.post(f"/records/{rid}/decision", data={"decision": "STOP_AND_FIX", "reason_code": "other",
+                                                     "prior_hash": prior})
+    assert r.status_code == 400 and "Add a note" in r.text
+    # Reloading the page a refused change left in the address bar goes back to the record.
+    assert client.get(f"/records/{rid}/check", follow_redirects=False).status_code == 303
+    # Someone signed in who opens a share link sees the read-only page, without the app around it.
+    link = client.get(f"/records/{rid}").text.split('data-copy-link="')[1].split('"')[0]
+    shared = client.get(link).text
+    assert "Sign out" not in shared and 'href="/records"' not in shared
