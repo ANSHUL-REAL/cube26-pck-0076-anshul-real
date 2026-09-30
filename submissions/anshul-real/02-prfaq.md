@@ -59,4 +59,4 @@ No. It has a content hash that shows whether a record still matches what was has
 Anything inside sealed retail packaging (a missing scoop inside a sealed protein tub), and items hidden under other items or filler unless it's told to look. Hidden items make it say "check by hand".
 
 **What about privacy?**
-Only box photos and product descriptions are sent to the model. The free Gemini tier used during the build may use prompts to improve Google's products, so only the builder's own household products were photographed. Production would use a paid tier. Photos are stored with their location data (EXIF/GPS) removed.
+Only box photos and product descriptions are sent to the model. The free Gemini tier used during the build may use prompts to improve Google's products, so the build sent only public dataset photos and AI-generated images. Production would use a paid tier. Photos are stored with their location data (EXIF/GPS) removed.

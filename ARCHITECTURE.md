@@ -151,7 +151,7 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 | **Reusing an old photo** (a packer uploads a photo of an earlier, correct box) | The stored photo's SHA-256 is looked up among the organisation's records; the same photo for a *different* order makes `photo_reuse` UNCERTAIN, so the box can't be sealed on it. Lookups go through RLS, so they never reveal another organisation's photos | Only exact copies are caught; a re-taken photo of an old box isn't |
 | **Oversized or malicious uploads** | Images are decoded and re-encoded by Pillow; at most 3 photos per box | No per-org rate limit |
 | **Secrets** | `.env` is git-ignored; only `.env.example` is committed | — |
-| **Data sent to the model provider** | Only box photos and catalogue text are sent. The eval uses the author's own household products. The Gemini **free tier** may use prompts to improve Google's products, so production would use a paid tier | — |
+| **Data sent to the model provider** | Only box photos and catalogue text are sent. The eval sent only public dataset photos (Amazon Bin Image Dataset) and AI-generated images. The Gemini **free tier** may use prompts to improve Google's products, so production would use a paid tier | — |
 
 ## Not built (on purpose)
 

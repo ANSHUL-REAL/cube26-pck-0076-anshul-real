@@ -52,6 +52,21 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 python -m pack_manager replay-sample
 ```
 
+### Sign-in: why access codes, not accounts
+
+Packers sign in with a short access code, not an email and password or a Google account. That's a choice, made for how packing benches work:
+
+- **Stations are shared.** Several packers use one phone or tablet over a shift. Typing a personal password between boxes is what warehouses avoid; they use badge scans and PINs. A code is the browser version of that.
+- **The code decides the company and the name on the record.** Each code maps to one organisation and one operator label (a person or a station), and that label is stamped on every check and override. Nothing in the request can name a different organisation.
+- **The database, not the app, keeps companies apart.** Every tenant table has row-level security, enabled and forced, for a role that isn't the owner. A wrong code or another company's record ID gives a 404, and that is tested against real Postgres.
+- **Codes are never stored.** Only their SHA-256 is kept, in a table the app's role can't read, and one database function answers "which company and operator is this?" for an exact match.
+- **No personal data.** No emails, passwords or names are collected, so there is nothing to leak or reset.
+- **One login for people and programs.** Returns and Recovery send the same code in an `X-Access-Code` header to read `/v1`.
+
+The two demo codes (`alpha-demo`, `bravo-demo`) are public on purpose, so judges can get in with one click. Each demo company is capped at 60 AI checks a day to protect the shared model key.
+
+**What codes don't do:** they identify a station or role, not a verified person, and they don't expire. Next steps: a team-lead page to issue and revoke codes, then company single sign-on (Google Workspace or Microsoft, via OIDC) for team leads. Packers would keep codes, because sign-on doesn't suit a shared bench device.
+
 ## Results
 
 One held-out run on **50 real warehouse bin photos** from the public Amazon Bin Image Dataset. We had no products or labellers for a home shoot; see [EVAL.md](EVAL.md) for why, and what that changes. Ground truth is Amazon's record of each bin; the orders were written before any run.
@@ -188,6 +203,6 @@ Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that
 - **Stacked identical items** are often UNCERTAIN rather than counted. This is by design, and it costs a hand check.
 - **Look-alike variants** (colour, size) are only as good as what the photo shows. When the deciding detail isn't visible, the answer is UNCERTAIN.
 - **Evaluated on warehouse bin photos from a public dataset,** not on a packing bench and not on our own capture. No human labellers; ground truth is Amazon's record. Bench conditions (one open box, phone camera) are likely easier, but that's untested.
-- **Gemini free tier:** rate limits apply, and Google may use free-tier prompts to improve its products, so only the author's own product photos were used. Production would use a paid tier.
+- **Gemini free tier:** rate limits apply, and Google may use free-tier prompts to improve its products, so only public dataset photos and AI-generated images were sent during the build. Production would use a paid tier.
 - The content hash shows whether a record still matches what was hashed. Whoever can change a record can recompute its hash, so it is **not** tamper-evident, immutable, append-only or anchored.
-- No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts.
+- No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts (see [Sign-in](#sign-in-why-access-codes-not-accounts)).
