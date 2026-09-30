@@ -1,5 +1,5 @@
 {
-  "record_id": "cc500670-7f35-4f67-8bc8-b0335353781a",
+  "record_id": "4d354dcc-67c2-4b93-b917-95d48d1bb660",
   "schema_version": "1.1",
   "organization_id": "9d0135ac-73f5-5695-b3df-5c54da0dbb9e",
   "client_id": "80f770ed-befe-5d48-bced-0b9c92c05d28",
@@ -18,7 +18,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "key": "d8bfbb5f-8625-4d7f-ab58-aec2c2d2892b",
+      "key": "07bc089a-2162-493c-9f38-efe3b27f2d38",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "bytes": 500893,
       "taken_at": "2026-09-28T10:30:00Z"
@@ -44,7 +44,7 @@
         ],
         "images": [
           {
-            "key": "d8bfbb5f-8625-4d7f-ab58-aec2c2d2892b",
+            "key": "07bc089a-2162-493c-9f38-efe3b27f2d38",
             "role": "top_down",
             "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
             "mime": "image/jpeg",
@@ -169,9 +169,9 @@
         },
         "error": "timed out after 25 s",
         "internal_record": {
-          "record_id": "cc500670-7f35-4f67-8bc8-b0335353781a",
+          "record_id": "4d354dcc-67c2-4b93-b917-95d48d1bb660",
           "schema_version": "cube.evidence.v1",
-          "content_hash": "sha256:f27ba49ad96f3982f9a2ee5c7bf7f2dcb52dfaf9303588d06ac05bd5c836e98d"
+          "content_hash": "sha256:402d7b2324391804c8f1ad279f8ea1bb3e154777c578e8e040a2a7f130a89fad"
         }
       },
       "model_version": "gemini-2.5-flash",
@@ -185,5 +185,5 @@
   },
   "overrides": [],
   "status": "pending",
-  "content_hash": "399c8e5eb4bfbcfbc58931d72466043b657aedcebfd4d7f8ab1e50d44102150d"
+  "content_hash": "3c722f085cbac92d8136f4f774931cfe3d21a497469f16ccdfaa295c3f27024f"
 }

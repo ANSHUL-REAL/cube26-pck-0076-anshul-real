@@ -61,7 +61,7 @@ class FakeStore:
         rows = [
             {"record_id": r.record_id, "order_id": r.subject["order_id"], "decision": r.outcome.decision.value,
              "status": r.status.value, "captured_at": r.captured_at, "operator_label": r.operator_label,
-             "overrides": len(r.overrides), "retried": self._retried(r)}
+             "overrides": len(r.box_overrides), "retried": self._retried(r)}
             for r in self.records.values()
             if r.organization_id == cur
             and (order_id is None or r.subject["order_id"] == order_id)

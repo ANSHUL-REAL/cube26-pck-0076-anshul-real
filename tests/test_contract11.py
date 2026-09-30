@@ -226,3 +226,50 @@ def test_published_contract_examples_are_valid_and_current():
                             catalogue=catalogue)
         assert fresh == published, "run: python contract/build_contract.py"
         assert all(i["bytes"] > 0 for i in published["images"])
+
+
+# ------------------------------------------------------------------ one override per check
+
+
+def test_a_person_can_override_any_check_with_a_reason(client, settings, sharp_photo):
+    import re
+    record = _box(client, settings, sharp_photo, {"CAP-BLU": 1})
+    rid = record.record_id
+    client.post("/login", data={"code": "alpha-demo"})
+    page = client.get(f"/records/{rid}").text
+    assert page.count('action="/records/' + rid + '/check"') == 6  # every check but the box decision
+    prior = re.search(r'name="prior_hash" value="([^"]*)"', page).group(1)
+    before = client.get(f"/v1/records/{rid}", headers=ALPHA).json()
+
+    form = {"check_key": "quantities_correct", "to_verdict": "fail", "reason_code": "agent_miscount",
+            "note": "counted two", "prior_hash": prior}
+    for missing, message in [("reason_code", "Choose a reason"), ("to_verdict", "Choose the result")]:
+        r = client.post(f"/records/{rid}/check", data={**form, missing: ""})
+        assert r.status_code == 400 and message in r.text
+    r = client.post(f"/records/{rid}/check", data={**form, "check_key": "order_matches_manifest"})
+    assert r.status_code == 400
+    assert client.post(f"/records/{rid}/check", data=form, follow_redirects=False).status_code == 303
+
+    saved = client.fake.records[rid]
+    assert saved.outcome.decision == Decision.SEAL and saved.status == record.status  # box unchanged
+    assert saved.checks == record.checks and saved.box_overrides == []
+    after = valid(client.get(f"/v1/records/{rid}", headers=ALPHA).json())
+    assert after["checks"] == before["checks"] and after["content_hash"] == before["content_hash"]
+    assert after["outcome"]["decided_by"] == "agent"
+    (o,) = after["overrides"]
+    assert (o["check_key"], o["from_verdict"], o["to_verdict"], o["by"]) == ("quantities_correct", "pass", "fail", "op_alpha")
+    assert "counted two" in o["reason"]
+    html = client.get(f"/records/{rid}").text
+    assert "changed quantities right: pass to fail" in html and "Changed by op_alpha" in html
+    # The same result again is refused; a stale form is a conflict.
+    again = client.post(f"/records/{rid}/check", data={**form, "prior_hash": saved.content_hash})
+    assert again.status_code == 400 and "already has that result" in again.text
+    assert client.post(f"/records/{rid}/check", data=form).status_code == 409
+    from pack_manager.evidence import verify_history
+    assert verify_history(saved) is True
+
+
+def test_the_share_link_page_has_no_override_forms(client, settings, sharp_photo):
+    record = _box(client, settings, sharp_photo, {"CAP-BLU": 1})
+    html = client.get(_share(client, record)).text
+    assert "/check" not in html and "Override</summary>" not in html and "All items present" in html

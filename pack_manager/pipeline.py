@@ -217,8 +217,8 @@ def rerun_box(
         earlier_uses=earlier_uses, extra_observations=link,
     )
     # If a person already decided the old box and the AI now disagrees, say so on the record.
-    if record.overrides and new.outcome.decision != Decision.PENDING:
-        human = record.overrides[-1]
+    if record.box_overrides and new.outcome.decision != Decision.PENDING:
+        human = record.box_overrides[-1]
         if human.new_decision != new.outcome.decision:
             new = seal(new.model_copy(update={"observations": {**new.observations, "disagreement": {
                 "human_decision": human.new_decision.value, "human_operator": human.operator_label,

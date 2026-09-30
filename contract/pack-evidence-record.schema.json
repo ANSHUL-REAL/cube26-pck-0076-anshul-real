@@ -225,6 +225,52 @@
             }
           ],
           "default": null
+        },
+        "check_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Check Key"
+        },
+        "from_verdict": {
+          "anyOf": [
+            {
+              "enum": [
+                "pass",
+                "fail",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Verdict"
+        },
+        "to_verdict": {
+          "anyOf": [
+            {
+              "enum": [
+                "pass",
+                "fail",
+                "uncertain"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Verdict"
         }
       },
       "required": [

@@ -2,6 +2,10 @@
 
 Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
+## Thu 1 Oct
+
+- **An override on every check** (Evidence Contract 1.1, section 4). Each of the seven checks on a record page has its own Override, with a required reason and an optional note. The correction is appended to the record with the result it replaced. The AI's checks, the box decision and the contract's content hash stay as they were. Older records keep their hashes: a box decision is still written exactly as before. Tested against real Postgres too, where the append-only rule accepts it.
+
 ## Wed 30 Sep
 
 - **Evidence Contract 1.1** (the organisers' fixed record for Recovery) arrived today. Our record used the handbook's names, but with different shapes: per-product check keys, an `agent` object, no `shipment_id`, and a hash over the whole record. Pack now writes the contract exactly, from our richer record. Nothing is renamed or dropped, and our extras go under `checks[].detail`. The changes:
@@ -13,7 +17,6 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
   - **Wording:** the docs no longer come close to calling the hash tamper-evident.
   - **Open, to raise with the organisers:**
     - Photos pass through the app server, because they're stored under row-level security in Postgres, not in an object store with presigned URLs.
-    - A person overrides the box decision, not each check.
   - **Records unchanged:** the held-out numbers were measured with the decision code this doesn't touch.
 - **Second eval set, AI-generated and disclosed.** 70 boxes, planned before any image was made. With the same frozen model and prompt, nothing tuned: false SEAL 1/26, false STOP 1/24, UNCERTAIN 2/50. It's reported apart from the real photos and never blended, because generated scenes are cleaner than real ones. Its one false SEAL (a boxed mug set called packaging) is the same kind of miss as the bin set's.
 

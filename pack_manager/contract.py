@@ -16,7 +16,8 @@ Check keys are stable, lowercase with underscores, and every record carries all 
     order_matches_manifest the agent's box decision: pass = SEAL, fail = STOP_AND_FIX,
                            uncertain = a person must check (UNCERTAIN or PENDING)
 
-A person's decision on the box is an override of `order_matches_manifest`.
+A person's decision on the box is an override of `order_matches_manifest`; a person can also
+correct any other check (evidence.apply_check_override), which leaves the box decision as it is.
 
 `content_hash` is computed as the contract defines it: SHA-256 over the image hashes,
 concatenated in order, followed by the serialised checks array (JSON, sorted keys, no
@@ -196,6 +197,28 @@ def contract_checks(record: EvidenceRecord, catalogue: Catalogue | None = None) 
     return checks
 
 
+def current_verdicts(record: EvidenceRecord, catalogue: Catalogue | None = None) -> dict[str, str]:
+    """Each check's verdict now: the agent's, then each person's override in turn. The checks
+    in the record never change; this is what they say once the overrides are applied."""
+    verdicts = {c["check_key"]: c["verdict"] for c in contract_checks(record, catalogue)}
+    for o in record.overrides:
+        if o.check_key:
+            verdicts[o.check_key] = o.to_verdict
+        else:
+            verdicts["order_matches_manifest"] = _DECISION_VERDICT[o.new_decision]
+    return verdicts
+
+
+def _override(o) -> dict:
+    reason = f"{o.reason_code} ({OVERRIDE_REASONS.get(o.reason_code, o.reason_code)})" + (f": {o.note}" if o.note else "")
+    if o.check_key:
+        return {"check_key": o.check_key, "from_verdict": o.from_verdict, "to_verdict": o.to_verdict,
+                "reason": reason, "by": o.operator_label, "at": o.at.strftime("%Y-%m-%dT%H:%M:%SZ")}
+    return {"check_key": "order_matches_manifest", "from_verdict": _DECISION_VERDICT[o.original_decision],
+            "to_verdict": _DECISION_VERDICT[o.new_decision], "reason": reason, "by": o.operator_label,
+            "at": o.at.strftime("%Y-%m-%dT%H:%M:%SZ")}
+
+
 def _observed_units(record: EvidenceRecord) -> int | None:
     """Units of product the agent clearly counted in the box, ordered or not. None when it
     couldn't count: the model didn't answer, or some items were unclear or may be hidden."""
@@ -221,15 +244,7 @@ def to_contract(record: EvidenceRecord, image_bytes: dict[str, int] | None = Non
                "bytes": int((image_bytes or {}).get(i.image_id, 0)),
                "taken_at": record.captured_at.strftime("%Y-%m-%dT%H:%M:%SZ")} for i in record.images]
     checks = contract_checks(record, catalogue)
-    overrides = [{
-        "check_key": "order_matches_manifest",
-        "from_verdict": _DECISION_VERDICT[o.original_decision],
-        "to_verdict": _DECISION_VERDICT[o.new_decision],
-        "reason": f"{o.reason_code} ({OVERRIDE_REASONS.get(o.reason_code, o.reason_code)})"
-                  + (f": {o.note}" if o.note else ""),
-        "by": o.operator_label,
-        "at": o.at.strftime("%Y-%m-%dT%H:%M:%SZ"),
-    } for o in record.overrides]
+    overrides = [_override(o) for o in record.overrides]
     decided_at = record.outcome.decided_at or record.captured_at
     return {
         "record_id": as_uuid(record.record_id),
@@ -253,7 +268,7 @@ def to_contract(record: EvidenceRecord, image_bytes: dict[str, int] | None = Non
         "checks": checks,
         "outcome": {
             "decision": record.outcome.decision.value,
-            "decided_by": "operator" if record.overrides else "agent",
+            "decided_by": "operator" if record.box_overrides else "agent",
             "decided_at": decided_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
         },
         "overrides": overrides,

@@ -734,3 +734,21 @@ body.camera-on { overflow: hidden; }
 .camera-shutter:not(:disabled):active { transform: scale(.96); }
 @media print { .camera, .camera-open, .keep-going { display: none !important; } }
 .retry .keep-going { flex-basis: 100%; text-align: left; margin: 0; }
+
+/* ---------------------------------------------------------------- contract checks + override */
+.cchecks { list-style: none; margin: 0; padding: 4px 24px 8px; }
+.cchecks > li { padding: 12px 0; border-top: 1px solid var(--border); }
+.cchecks > li:first-child { border-top: 0; }
+.cc-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.cc-name .nm { font-weight: 500; }
+.cchecks .v { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; white-space: nowrap; color: var(--pending); }
+.cchecks .v.PASS { color: var(--seal); } .cchecks .v.FAIL { color: var(--stop); } .cchecks .v.UNCERTAIN { color: var(--unsure); }
+.cc-fix { margin-top: 6px; }
+.cc-fix > summary { display: inline-block; cursor: pointer; font-size: 13px; color: var(--brand); list-style: none; }
+.cc-fix > summary::-webkit-details-marker { display: none; }
+.cc-fix[open] > summary { color: var(--muted); }
+.cc-fix form { margin-top: 10px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
+.cc-choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.cc-fix .form-row { grid-template-columns: 1fr; }
+.cc-note { margin: 4px 0 0; }
+@media (max-width: 640px) { .cchecks { padding: 4px 16px 8px; } }

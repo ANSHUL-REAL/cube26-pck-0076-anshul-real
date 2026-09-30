@@ -103,3 +103,44 @@ def apply_override(
         }
     )
     return seal(updated)
+
+
+def apply_check_override(
+    record: EvidenceRecord,
+    check_key: str,
+    to_verdict: str,
+    reason_code: str,
+    operator_label: str,
+    note: str = "",
+    at: datetime | None = None,
+) -> EvidenceRecord:
+    """Record a person's correction of one check (Evidence Contract 1.1 key), e.g. "quantities
+    correct: counted by hand". The agent's checks stay as they were, and the box decision doesn't
+    change: deciding the box is apply_override. Refuses a record that doesn't match its hash."""
+    from .contract import CHECK_KEYS, current_verdicts
+
+    if check_key not in CHECK_KEYS or check_key == "order_matches_manifest":
+        raise ValueError("That check can't be changed here. Decide the box with Seal or Stop instead.")
+    if to_verdict not in ("pass", "fail", "uncertain"):
+        raise ValueError("Choose pass, fail or unclear.")
+    if not verify(record):
+        raise ValueError("This record doesn't match its content hash, so it can't be changed.")
+    from_verdict = current_verdicts(record)[check_key]
+    if to_verdict == from_verdict:
+        raise ValueError("That check already has that result.")
+    at = at or utcnow()
+    entry = Override(
+        original_decision=record.outcome.decision,
+        new_decision=record.outcome.decision,
+        reason_code=reason_code,
+        note=note,
+        operator_label=operator_label,
+        at=at,
+        prior_content_hash=record.content_hash,
+        prior_outcome=record.outcome,
+        prior_status=record.status,
+        check_key=check_key,
+        from_verdict=from_verdict,
+        to_verdict=to_verdict,
+    )
+    return seal(record.model_copy(update={"overrides": [*record.overrides, entry]}))

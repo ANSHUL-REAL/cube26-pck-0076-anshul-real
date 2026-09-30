@@ -32,7 +32,7 @@ def record_row(record: EvidenceRecord) -> dict[str, str]:
             seen[item["sku"]] += 1
         elif item.get("classification") == "UNKNOWN_PRODUCT":
             seen["OTHER"] += 1
-    last = record.overrides[-1] if record.overrides else None
+    last = record.box_overrides[-1] if record.box_overrides else None
     final = last.new_decision.value if last else record.outcome.decision.value
     # An override updates the outcome; the agent's own answer is kept in the first override.
     agent = record.overrides[0].original_decision.value if record.overrides else record.outcome.decision.value

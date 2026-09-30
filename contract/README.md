@@ -52,7 +52,7 @@ Each check's `detail.source_checks` holds our checks it was built from (one per 
 | `images[]` | `key` = the photo's random UUID, `sha256` of the stored photo, `bytes`, `taken_at` (= `captured_at`: EXIF times are stripped with the GPS). Size, role, the phone original's hash and the quality result are in `image_quality.detail.images` |
 | `checks[].latency_ms` | the one model call's time for model-based checks; 0 for the local checks, which aren't timed |
 | `outcome` | `decision` = SEAL / STOP_AND_FIX / UNCERTAIN / PENDING; `decided_by` = `agent`, or `operator` once a person decided |
-| `overrides[]` | a person's decision on the box, as an override of `order_matches_manifest`. `reason` = the reason code, its meaning and the note. The reason is required: the form won't save without one |
+| `overrides[]` | a person's correction of one check ("Override" on each check on the record page), or a person's decision on the box, as an override of `order_matches_manifest`. `reason` = the reason code, its meaning and the note. The reason is required: the form won't save without one. Correcting a check doesn't change the box decision |
 | `status` | `pending` when the model didn't answer and no one has decided yet; otherwise `complete`. We never write `failed`: a capture whose photos can't be read is refused before any record exists |
 | `content_hash` | as section 2 defines it: SHA-256 (hex) over the image hashes concatenated in order, then the `checks` array serialised as JSON with sorted keys and no whitespace. Checks never change after a record is written, so an override doesn't change it |
 
@@ -64,14 +64,13 @@ Met:
 - "Take guided photos" opens the rear camera (`getUserMedia`, HTTPS only), with a frame on screen and what each of up to three shots should show.
 - Photos are sent with progress and retried when the connection drops.
 - A failed model call still saves the photos and a `pending` record.
-- Every decision needs a reason.
+- Every check has an Override on the record page: pick a reason, then the result you found. A reason is required, and the AI's result stays on the record.
 - The record link needs no sign-in.
 - Once the photos are sent, a "Keep packing" link shows within 2 seconds.
 
 **Where Pack doesn't meet section 4 yet**, to raise with the organisers rather than work around:
 
 - *Presigned direct upload.* Photos go into the Postgres table under row-level security (section 5), not an object store, so the upload URLs point at the app itself. Each is a single-slot, 15-minute URL whose token is the permission, and retrying is safe, but the bytes do pass through the app server. Moving to an object store with presigned URLs is a storage change, not an API change.
-- *Per-check override.* A person decides the box (`order_matches_manifest`), with a required reason. There is no separate override button on each of the other six checks.
 
 ## Our extended record
 

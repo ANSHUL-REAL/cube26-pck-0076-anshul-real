@@ -11,7 +11,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_serializer
 
 SCHEMA_VERSION = "cube.evidence.v1"
 AGENT_NAME = "pack-manager"
@@ -239,6 +239,23 @@ class Override(BaseModel):
     # against prior_content_hash (evidence.verify_history). None on overrides made before this.
     prior_outcome: Outcome | None = None
     prior_status: RecordStatus | None = None
+    # Set when a person corrects one check rather than deciding the box (Evidence Contract 1.1,
+    # section 4: an override on every check). The box decision is then unchanged, so
+    # original_decision == new_decision. None on a box decision, which is an override of the
+    # contract's order_matches_manifest.
+    check_key: str | None = None
+    from_verdict: Literal["pass", "fail", "uncertain"] | None = None
+    to_verdict: Literal["pass", "fail", "uncertain"] | None = None
+
+    @model_serializer(mode="wrap")
+    def _leave_out_unset_check(self, handler):
+        # Box decisions are written exactly as before these fields existed, so older records keep
+        # their content hash and the database's append-only rule still sees the same overrides.
+        data = handler(self)
+        if isinstance(data, dict) and self.check_key is None:
+            for key in ("check_key", "from_verdict", "to_verdict"):
+                data.pop(key, None)
+        return data
 
 
 class EvidenceRecord(BaseModel):
@@ -257,3 +274,8 @@ class EvidenceRecord(BaseModel):
     overrides: list[Override] = []
     status: RecordStatus
     content_hash: str = ""
+
+    @property
+    def box_overrides(self) -> list[Override]:
+        """A person's decisions on the whole box, leaving out corrections of single checks."""
+        return [o for o in self.overrides if o.check_key is None]

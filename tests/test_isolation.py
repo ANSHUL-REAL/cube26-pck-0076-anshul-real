@@ -254,3 +254,17 @@ def test_contract_endpoints_and_share_links_stay_in_their_company(database, alph
     # The same record id signed as another company's opens nothing.
     assert client.get(share_path(BRAVO, rid)).status_code == 404
     assert client.get(f"{share_path(BRAVO, rid)}/images/{image}").status_code == 404
+
+
+def test_a_check_override_passes_the_append_only_rule(database, alpha_record):
+    """A correction of one check is appended like a box decision, so the database accepts it."""
+    from app import store
+    from pack_manager.evidence import apply_check_override
+
+    with database.org(ALPHA) as cur:
+        current = store.get_record(cur, alpha_record.record_id)
+    updated = apply_check_override(current, "scene_coverage", "uncertain", "hidden_item_verified", "op_alpha")
+    with database.org(ALPHA) as cur:
+        assert store.update_record(cur, updated, prior_hash=current.content_hash)
+    with database.org(ALPHA) as cur:
+        assert store.get_record(cur, alpha_record.record_id).overrides[-1].check_key == "scene_coverage"

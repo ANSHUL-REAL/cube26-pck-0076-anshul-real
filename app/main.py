@@ -32,8 +32,8 @@ from starlette.middleware.sessions import SessionMiddleware
 from pack_manager import __version__
 from pack_manager.catalogue import load_org_catalogue, reference_images
 from pack_manager.config import get_settings
-from pack_manager.contract import as_uuid, to_contract
-from pack_manager.evidence import apply_override, verify, verify_history
+from pack_manager.contract import as_uuid, contract_checks, current_verdicts, to_contract
+from pack_manager.evidence import apply_check_override, apply_override, verify, verify_history
 from pack_manager.export import CSV_COLUMNS, record_row
 from pack_manager.models import OVERRIDE_REASONS, Catalogue, Decision, EvidenceRecord
 from pack_manager.orders import parse_orders_csv
@@ -588,6 +588,29 @@ def _from_share(token: str) -> tuple[str, str] | None:
     return (org, record_id) if isinstance(org, str) and isinstance(record_id, str) else None
 
 
+# The Evidence Contract 1.1 checks, as the record page names them.
+CHECK_LABELS = {
+    "image_quality": "Photo quality",
+    "photo_reuse": "Photo not used before",
+    "scene_coverage": "Whole box in view",
+    "all_items_present": "All items present",
+    "quantities_correct": "Quantities right",
+    "no_extra_items": "Nothing wrong or extra",
+    "order_matches_manifest": "Box matches the order",
+}
+
+
+def _contract_view(record: EvidenceRecord, catalogue: Catalogue) -> list[dict]:
+    """Each contract check with the agent's result, the result now, and who changed it."""
+    now = current_verdicts(record, catalogue)
+    changed = {}
+    for o in record.overrides:
+        changed[o.check_key or "order_matches_manifest"] = o
+    return [{"key": c["check_key"], "label": CHECK_LABELS[c["check_key"]], "agent": c["verdict"],
+             "now": now[c["check_key"]], "summary": c["detail"].get("summary", ""),
+             "by": changed.get(c["check_key"])} for c in contract_checks(record, catalogue)]
+
+
 def _record_page(request: Request, user: dict, record: EvidenceRecord, status_code: int = 200,
                  public: bool = False, **extra):
     catalogue, _ = org_catalogue(user["org"])
@@ -615,6 +638,7 @@ def _record_page(request: Request, user: dict, record: EvidenceRecord, status_co
         public=public, links=links, org_name=org_name,
         history_check=HISTORY_CHECK[verify_history(record)] if record.overrides else None,
         states=_object_states(record), agent_decision=agent_decision, reasons=OVERRIDE_REASONS,
+        box_overrides=record.box_overrides, contract_checks=_contract_view(record, catalogue),
         catalogue=catalogue, obs=record.observations or {}, tally=tally, thumbs=set() if public else _thumbs(catalogue),
         later=later, retry=retry, **{"can_retry": agent_decision == Decision.PENDING and not retry, **extra},
     )
@@ -737,6 +761,52 @@ def record_decision(
     if not saved:
         return again(CONFLICT, 409, shown=latest or record)
     return RedirectResponse(f"/records/{url_part(record_id)}", status_code=303)
+
+
+@app.post("/records/{record_id}/check")
+def record_check_override(
+    request: Request,
+    record_id: str,
+    check_key: str = Form(default=""),
+    to_verdict: str = Form(default=""),
+    reason_code: str = Form(default=""),
+    note: str = Form(default=""),
+    prior_hash: str = Form(default=""),
+):
+    """A person corrects one check, with a reason (Evidence Contract 1.1, section 4). The box
+    decision stays as it is; deciding the box is the Seal / Stop form."""
+    user = current_user(request)
+    note = note.strip()[:500]
+    with db().org(user["org"]) as cur:
+        record = store.get_record(cur, record_id)
+        retry = store.find_retry(cur, record_id) if record else None
+    if not record:
+        return not_found(request, "That record")
+
+    def again(error: str, status_code: int, shown: EvidenceRecord = record):
+        return _record_page(request, user, shown, status_code=status_code, error=error,
+                            reload=error == CONFLICT, open_check=check_key)
+
+    if retry:
+        return again("The AI checked this box again. Make any change on the newer record.", 409)
+    if check_key not in CHECK_LABELS or check_key == "order_matches_manifest":
+        return again("Choose a check to change.", 400)
+    if to_verdict not in ("pass", "fail", "uncertain"):
+        return again("Choose the result you found.", 400)
+    if reason_code not in OVERRIDE_REASONS:
+        return again("Choose a reason for the change.", 400)
+    if prior_hash and prior_hash != record.content_hash:
+        return again(CONFLICT, 409)
+    try:
+        updated = apply_check_override(record, check_key, to_verdict, reason_code, user["operator"], note)
+    except ValueError as exc:  # same result as now, or the record doesn't match its hash
+        return again(str(exc), 409 if "hash" in str(exc) else 400)
+    with db().org(user["org"]) as cur:
+        saved = store.update_record(cur, updated, prior_hash=record.content_hash)
+        latest = None if saved else store.get_record(cur, record_id)
+    if not saved:
+        return again(CONFLICT, 409, shown=latest or record)
+    return RedirectResponse(f"/records/{url_part(record_id)}#checks", status_code=303)
 
 
 @app.get("/images/{image_id}")

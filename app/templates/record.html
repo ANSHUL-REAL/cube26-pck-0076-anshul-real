@@ -6,6 +6,7 @@
 {% set label, tone = DECISION_UI[decision] %}
 {% set order_id = r.subject.order_id %}
 {% set needs_human = r.status.value in ("pending", "pending_review") %}
+{% set verdict_word = {"pass": "pass", "fail": "fail", "uncertain": "unclear"} %}
 {% set state_word = {"ok": "matches the order", "problem": "wrong or extra", "unsure": "unclear", "insert": "packaging or insert"} %}
 {% set products = obs.get("detected_items", []) | rejectattr("classification", "equalto", "NON_PRODUCT") | list %}
 {# pub: the read-only page behind a share link. No sign-in, no forms, no links into the app. #}
@@ -66,10 +67,10 @@
 {% endif %}
 
 <section class="verdict {{ tone }}">
-  {% if r.overrides %}<div class="kicker">Decided by hand</div>{% endif %}
+  {% if box_overrides %}<div class="kicker">Decided by hand</div>{% endif %}
   <h2 class="verdict-title">{{ label }}</h2>
-  {% if r.overrides %}
-    {% set last = r.overrides[-1] %}
+  {% if box_overrides %}
+    {% set last = box_overrides[-1] %}
     <p>Decided by {{ last.operator_label }} ({{ reasons.get(last.reason_code, last.reason_code) }}{% if last.note %}: "{{ last.note }}"{% endif %}). The agent's result was <strong>{{ DECISION_UI[agent_decision.value][0] }}</strong>.</p>
   {% elif decision == "SEAL" %}
     <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
@@ -89,14 +90,14 @@
     </form>
   {% endif %}
 
-  {% if r.outcome.fix_instructions and not r.overrides and not retry %}
+  {% if r.outcome.fix_instructions and not box_overrides and not retry %}
     <div class="verdict-steps">
       <div class="label">What to do</div>
       <ol class="todo {{ tone }}">{% for step in r.outcome.fix_instructions %}<li>{{ step }}</li>{% endfor %}</ol>
     </div>
   {% endif %}
 
-  {% if decision != "PENDING" and not r.overrides %}
+  {% if decision != "PENDING" and not box_overrides %}
     <p class="score"><b class="PASS">{{ tally.PASS }}</b> checks passed{% if tally.FAIL %} · <b class="FAIL">{{ tally.FAIL }}</b> failed{% endif %}{% if tally.UNCERTAIN %} · <b class="UNCERTAIN">{{ tally.UNCERTAIN }}</b> unclear{% endif %}</p>
   {% endif %}
 </section>
@@ -166,6 +167,54 @@
       </div>
     </details>
     {% endif %}
+
+    <section class="card" id="checks">
+      <div class="card-head"><h2>Checks</h2><span class="count">what Recovery reads</span></div>
+      <ul class="cchecks">
+        {% for c in contract_checks %}
+        <li>
+          <div class="cc-row">
+            <div class="cc-name">
+              <div class="nm">{{ c.label }}</div>
+              {% if c.by %}<div class="muted small">Changed by {{ c.by.operator_label }} · the AI said {{ verdict_word[c.agent] }}</div>{% endif %}
+            </div>
+            <span class="v {{ {'pass': 'PASS', 'fail': 'FAIL', 'uncertain': 'UNCERTAIN'}[c.now] }}"><span class="dot"></span>{{ verdict_word[c.now] | capitalize }}</span>
+          </div>
+          {% if not pub and not retry and c.key != "order_matches_manifest" %}
+          <details class="cc-fix no-print"{% if open_check == c.key %} open{% endif %}>
+            <summary>Override</summary>
+            <form method="post" action="/records/{{ r.record_id | urlpart }}/check" data-busy>
+              <input type="hidden" name="prior_hash" value="{{ r.content_hash }}">
+              <input type="hidden" name="check_key" value="{{ c.key }}">
+              <div class="form-row">
+                <div>
+                  <label class="field" for="reason-{{ c.key }}">Reason</label>
+                  <select id="reason-{{ c.key }}" name="reason_code" required>
+                    <option value="" disabled selected>Choose a reason</option>
+                    {% for code, text in reasons.items() %}<option value="{{ code }}">{{ text }}</option>{% endfor %}
+                  </select>
+                </div>
+                <div>
+                  <label class="field" for="note-{{ c.key }}">Note (optional)</label>
+                  <textarea id="note-{{ c.key }}" name="note" rows="1" maxlength="500" placeholder="What did you see?"></textarea>
+                </div>
+              </div>
+              <div class="cc-choices">
+                {% for v in ["pass", "fail", "uncertain"] if v != c.now %}
+                <button class="btn secondary sm" type="submit" name="to_verdict" value="{{ v }}">Mark {{ verdict_word[v] }}</button>
+                {% endfor %}
+              </div>
+              <div class="busy"><span class="spinner"></span>Saving…</div>
+            </form>
+          </details>
+          {% elif not pub and not retry and c.key == "order_matches_manifest" and not needs_human %}
+          <p class="muted small cc-note">Change this with "Disagree with this result?" below.</p>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="card-foot">Changing a check keeps the AI's result on the record and doesn't change the box decision.</div>
+    </section>
 
     <details class="fold" data-print-open>
       <summary>Evidence details <span class="count">{{ r.checks | length }} checks</span>{{ icon("chevron-down", 18, "chev") }}</summary>
@@ -253,7 +302,11 @@
           <li><b>Photos taken</b> by {{ r.operator_label }}<span>{{ (obs.photos_taken_at or r.captured_at) | when }}</span></li>
           <li><b>{{ "AI re-check" if obs.get("retry_of") else "AI check" }}: {{ DECISION_UI[agent_decision.value][0] }}</b>{% if decision != "PENDING" or r.overrides %} · {{ tally.PASS }} of {{ r.checks | length }} checks passed{% endif %}<span>{{ r.captured_at | when }}</span></li>
           {% for o in r.overrides %}
+          {% if o.check_key %}
+          <li><b>{{ o.operator_label }} changed {{ contract_checks | selectattr("key", "equalto", o.check_key) | map(attribute="label") | first | lower }}: {{ verdict_word[o.from_verdict] }} to {{ verdict_word[o.to_verdict] }}</b> · {{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}<span>{{ o.at | when }}</span></li>
+          {% else %}
           <li><b>{{ o.operator_label }}: {{ DECISION_UI[o.new_decision.value][0] }}</b> · {{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}<span>{{ o.at | when }}</span></li>
+          {% endif %}
           {% endfor %}
           {% for l in later | reverse %}
           <li><b>Checked again: <a href="/records/{{ l.record_id | urlpart }}">{{ DECISION_UI[l.decision][0] }}</a></b><span>{{ l.captured_at | when }} · {{ l.record_id }}</span></li>

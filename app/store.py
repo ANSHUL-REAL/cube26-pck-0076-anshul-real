@@ -160,7 +160,9 @@ def list_records(cur, decision: str | None = None, order_id: str | None = None,
     cur.execute(
         f"""
         select record_id, order_id, unit_id, decision, status, captured_at,
-               record->>'operator_label' as operator_label, jsonb_array_length(record->'overrides') as overrides,
+               record->>'operator_label' as operator_label,
+               (select count(*) from jsonb_array_elements(record->'overrides') o
+                where o->>'check_key' is null) as overrides,  -- decisions on the box, not one check
                {_RETRIED} as retried
         from records
         where (%(d)s::text is null or decision = %(d)s)
