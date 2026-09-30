@@ -1,69 +1,62 @@
 {% extends "base.html" %}
 {% block title %}Sign in · Pack Manager{% endblock %}
 {% block body %}
-<div class="auth">
-  <div class="auth-theme"><button type="button" class="theme-btn" data-theme-toggle aria-label="Switch between light and dark"><span class="t-dark">{{ icon("moon", 17) }}</span><span class="t-light">{{ icon("sun", 17) }}</span></button></div>
-  <section class="auth-story" aria-label="About Pack Manager">
+<div class="fp fp-auth">
+  <header class="fp-auth-bar">
     <a class="brand" href="/"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></a>
-
-    <div class="auth-pitch">
-      <h1>Check every box before it's sealed.</h1>
-      <p class="lead">Photograph the open box. Pack Manager compares it with the order and tells the packer what to do. The photo and the result are kept as the record of what was sent.</p>
+    <div class="fp-auth-bar-end">
+      <a class="fp-auth-home" href="/">{{ icon("arrow-left", 15) }}Home</a>
+      <button type="button" class="theme-btn" data-theme-toggle aria-label="Switch between light and dark"><span class="t-dark">{{ icon("moon", 17) }}</span><span class="t-light">{{ icon("sun", 17) }}</span></button>
     </div>
+  </header>
 
-    <ol class="auth-steps">
-      <li><span class="n">1</span><div><b>Pick the order</b><span>From your order list, or import a CSV.</span></div></li>
-      <li><span class="n">2</span><div><b>Photograph the open box</b><span>One photo from above. Up to three if items are stacked.</span></div></li>
-      <li><span class="n">3</span><div><b>Follow the result</b>
-        <ul class="auth-outcomes">
-          <li class="seal"><span class="dot"></span><b>Seal</b><span>Everything ordered is there, nothing extra.</span></li>
-          <li class="stop"><span class="dot"></span><b>Stop and fix</b><span>Something is missing, wrong or extra. It says what to change.</span></li>
-          <li class="unsure"><span class="dot"></span><b>Check by hand</b><span>The photo can't settle it. Look before sealing.</span></li>
-        </ul>
-      </div></li>
-    </ol>
+  <div class="fp-auth-grid">
+    <section class="fp-auth-panel">
+      <div class="fp-auth-card">
+        <h1>Sign in</h1>
+        <p class="fp-auth-sub">Use the access code from your team lead.</p>
 
-    <p class="auth-foot">The AI lists what it sees. Fixed rules make the decision, and a person can always overrule it. <a href="/results">How it did on 50 unseen boxes</a>.</p>
-  </section>
+        {% if error %}<div class="fp-auth-error" role="alert">{{ error }}</div>{% endif %}
 
-  <section class="auth-panel">
-    <div class="auth-form">
-      <a class="brand auth-brand-sm" href="/"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></a>
-      <h2 class="auth-title">Sign in</h2>
-      <p class="muted">Use the access code from your team lead.</p>
-
-      {% if error %}<div class="callout error" role="alert">{{ error }}</div>{% endif %}
-
-      <form method="post" action="/login" class="stack auth-code" data-busy>
-        <div>
-          <label class="field" for="code">Access code</label>
+        <form method="post" action="/login" class="fp-auth-form" data-busy>
+          <label class="fp-label" for="code">Access code</label>
           <div class="reveal">
             <input id="code" name="code" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" required {% if not error %}autofocus{% endif %}>
             <button type="button" class="reveal-btn" data-reveal="code" aria-controls="code" aria-pressed="false">Show</button>
           </div>
-        </div>
-        <button class="btn full lg" type="submit">Sign in</button>
-      </form>
+          <button class="chunky orange full" type="submit">Sign in</button>
+        </form>
 
-      {% if demo_orgs %}
-      <div class="auth-demo">
-        <div class="auth-or"><span>or try a demo company</span></div>
-        <div class="demo-list">
+        {% if demo_orgs %}
+        <div class="fp-or"><span>or try a demo company</span></div>
+        <div class="fp-demo-side">
           {% for d in demo_orgs %}
           <form method="post" action="/login" data-busy>
             <input type="hidden" name="code" value="{{ d.code }}">
-            <button type="submit" class="demo-org">
-              <span class="demo-mark" aria-hidden="true">{{ d.name[:1] }}</span>
-              <span class="demo-text"><b>{{ d.name }}</b><span>Code <span class="mono">{{ d.code }}</span></span></span>
-              <span class="demo-go" aria-hidden="true">Open</span>
+            <button type="submit" class="fp-org">
+              <span class="fp-org-mark" aria-hidden="true">{{ d.name[:1] }}</span>
+              <span class="fp-org-text"><b>{{ d.name }}</b><span>Code <span class="mono">{{ d.code }}</span></span></span>
+              <span class="fp-org-go" aria-hidden="true">Open {{ icon("arrow-right", 15) }}</span>
             </button>
           </form>
           {% endfor %}
         </div>
-        <p class="small muted">The two companies are kept apart by the database: neither can see the other's orders, records or photos.</p>
+        <p class="fp-auth-note">The two companies are kept apart by the database: neither can see the other's orders, records or photos.</p>
+        {% endif %}
       </div>
-      {% endif %}
-    </div>
-  </section>
+    </section>
+
+    <section class="fp-auth-story" aria-label="About Pack Manager">
+      <p class="wordmark sm" aria-hidden="true"><span>pack</span>manager</p>
+      <h2>Check every box before it's sealed.</h2>
+      <p class="fp-auth-lead">Photograph the open box. Pack Manager compares it with the order and tells the packer what to do. The photo and the answer are kept as the record of what was sent.</p>
+      <ul class="fp-auth-answers">
+        <li><b class="seal">Seal</b><span>Everything ordered is there, nothing extra.</span></li>
+        <li><b class="stop">Stop and fix</b><span>Something is missing, wrong or extra. It says what to change.</span></li>
+        <li><b class="unsure">Check by hand</b><span>The photo can't settle it. Look before sealing.</span></li>
+      </ul>
+      <p class="fp-auth-foot">The AI lists what it sees. Fixed rules decide, and a person can always overrule it. <a href="/results">How it did on 50 unseen boxes</a></p>
+    </section>
+  </div>
 </div>
 {% endblock %}

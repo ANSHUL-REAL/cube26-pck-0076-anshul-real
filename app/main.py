@@ -309,18 +309,18 @@ DEMO_ORGS = [{"code": code, "name": ORGS[org].removesuffix(" (demo)")} for code,
 
 @app.get("/login", response_class=HTMLResponse)
 def login_form(request: Request):
-    return page(request, "login.html", demo_orgs=DEMO_ORGS)
+    return page(request, "login.html", bold_page=True, demo_orgs=DEMO_ORGS)
 
 
 @app.post("/login")
 def login(request: Request, code: str = Form(default="")):
     code = code.strip()
     if not code:
-        return page(request, "login.html", status_code=400, error="Enter your access code.", demo_orgs=DEMO_ORGS)
+        return page(request, "login.html", bold_page=True, status_code=400, error="Enter your access code.", demo_orgs=DEMO_ORGS)
     with db().anonymous() as cur:
         found = store.resolve_code(cur, code)
     if not found:
-        return page(request, "login.html", status_code=401, error="That access code isn't recognised. Check it and try again.",
+        return page(request, "login.html", bold_page=True, status_code=401, error="That access code isn't recognised. Check it and try again.",
                     demo_orgs=DEMO_ORGS)
     with db().org(found["organization_id"]) as cur:
         name = store.org_name(cur, found["organization_id"])
