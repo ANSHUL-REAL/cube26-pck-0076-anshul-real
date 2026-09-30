@@ -10,7 +10,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 | Demo video | _added after recording_ |
 | Eval report | [EVAL.md](EVAL.md): 50 held-out real warehouse photos (public dataset), false SEAL 8%, false STOP 50% |
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
-| Record format for other tracks | [contract/](contract/README.md) |
+| Record format for other tracks | [contract/](contract/README.md): the organisers' Evidence Contract 1.1, served at `/v1` |
 | Problems found in the brief and data | [FINDINGS.md](FINDINGS.md) |
 | Build log and hackathon documents | [submissions/anshul-real/](submissions/anshul-real/README.md) |
 | Organisers' original brief | [docs/ORIGINAL-BRIEF.md](docs/ORIGINAL-BRIEF.md) |
@@ -65,6 +65,8 @@ One held-out run on **50 real warehouse bin photos** from the public Amazon Bin 
 | Same boxes, perfect perception (rules alone) | 0 errors |
 
 **A kill condition tripped** (false STOP above 15%). On these photos, with `gemini-3.5-flash-lite`, the agent should record evidence and let a person decide, not gate sealing. The rules made no errors, so every error came from what the model saw. The main one: calling a strapped, cluttered bin "fully visible" and then missing a product.
+
+**A second, separate set: 50 AI-generated boxes** (open shipping boxes on a bench, every image generated and disclosed as such). With the same frozen model and prompt: false SEAL 1/26, false STOP 1/24, UNCERTAIN 2/50. These images are cleaner than real photos, so this is not evidence about real photos, and it's never blended with the numbers above. Its one false SEAL is a boxed product the model called packaging. Details: [EVAL.md](EVAL.md#a-second-set-ai-generated-boxes-reported-separately-never-blended).
 
 **Kill condition:** if the held-out false-SEAL rate is above 5% while UNCERTAIN is 25% or lower, the agent isn't fit to gate sealing. It should then run only as an evidence recorder (photo + record, no verdict).
 
@@ -130,9 +132,10 @@ The tenant-isolation tests run against real Postgres and are skipped when `DATAB
 |---|---|---|
 | `test_decision.py` | 31 | The rules: the eight scenarios from the brief, look-alikes, multipacks, hidden items, prompt injection |
 | `test_pipeline.py`, `test_core_hardening.py` | 19 | Photo gate, fail-open, one model call per box, hashing, the override chain, bad inputs |
-| `test_isolation.py` | 8 | Real Postgres: row-level security, the app role's rights, append-only records |
-| `test_pages.py`, `test_web_hardening.py` | 56 | Every page and API route, CSRF, uploads, conflicts, CSV export |
+| `test_isolation.py` | 9 | Real Postgres: row-level security, the app role's rights, append-only records, the `/v1` API and share links |
+| `test_pages.py`, `test_web_hardening.py` | 57 | Every page and API route, CSRF, uploads, conflicts, CSV export |
 | `test_contract.py`, `test_check_record.py` | 6 | The published schema matches the code; a downloaded record checks out on its own |
+| `test_contract11.py` | 17 | Evidence Contract 1.1: exact shape (strict schema), its content hash, the four `/v1` endpoints, fail-open captures, the no-sign-in record link |
 | `test_eval*.py`, `test_plan_boxes.py`, `test_sample_and_prompt.py` | 32 | Box plan, photo import, label sheet, freeze, metrics, the organisers' sample replay, what the model is shown |
 
 Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that fails if it's broken:
@@ -146,7 +149,7 @@ Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that
 | A failed photo never seals | `test_decision.py::test_forced_bad_photo_never_seals` |
 | Tenancy (RLS forced, restricted role) | `test_isolation.py::test_app_role_cannot_bypass_rls` and the rest of that file |
 | Overrides are data, evidence only grows | `test_core_hardening.py::test_override_chain_can_be_rebuilt_and_checked`, `test_isolation.py::test_records_are_append_only` |
-| Evidence follows the contract | `test_contract.py::test_published_schema_matches_the_code` |
+| Evidence follows the contract | `test_contract11.py::test_every_record_is_exactly_the_contract_shape`, `test_contract.py::test_published_schema_matches_the_code` |
 | No GPS in committed photos | `test_eval_tools.py::test_saved_copies_have_no_gps_exif_or_comment` |
 | Held out means held out | `test_eval_tools.py::test_split_all_needs_the_test_freeze` |
 
@@ -164,7 +167,7 @@ Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that
 | `app/` | Web app (FastAPI, server-rendered pages) and JSON API |
 | `db/migrations/` | Postgres schema with forced row-level security |
 | `catalogue/` | Product descriptions and reference photos per organisation, and a builder that turns a spreadsheet + photo folders into `catalogue.json` |
-| `contract/` | JSON Schema and example records for Returns and Recovery |
+| `contract/` | Evidence Contract 1.1 schema and examples, and our extended record's schema and examples |
 | `eval/` | Eval runner, metrics, label sheet, photo importer (strips GPS), manifest of real packed boxes |
 | `tests/` | Decision scenarios, pipeline, contract, web pages, tenant isolation |
 | `docs/` | Photo guide, organisers' original brief |
@@ -186,5 +189,5 @@ Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that
 - **Look-alike variants** (colour, size) are only as good as what the photo shows. When the deciding detail isn't visible, the answer is UNCERTAIN.
 - **Evaluated on warehouse bin photos from a public dataset,** not on a packing bench and not on our own capture. No human labellers; ground truth is Amazon's record. Bench conditions (one open box, phone camera) are likely easier, but that's untested.
 - **Gemini free tier:** rate limits apply, and Google may use free-tier prompts to improve its products, so only the author's own product photos were used. Production would use a paid tier.
-- The content hash makes an edit detectable; it is **not** tamper-proof, append-only or externally anchored.
+- The content hash shows whether a record still matches what was hashed. Whoever can change a record can recompute its hash, so it is **not** tamper-evident, immutable, append-only or anchored.
 - No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts.

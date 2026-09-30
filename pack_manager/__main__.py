@@ -61,8 +61,8 @@ def cmd_verify(args) -> int:
 
 
 def cmd_check_record(args) -> int:
-    """For whoever holds a downloaded record, e.g. to answer a buyer's claim: was it edited after
-    it was saved, and are these the photos it was made from? Exit 0 if everything matches."""
+    """For whoever holds a downloaded record, e.g. to answer a buyer's claim: does it still match
+    its content hash, and are these the photos it was made from? Exit 0 if everything matches."""
     from .evidence import verify, verify_history
     from .models import EvidenceRecord
 
@@ -76,7 +76,7 @@ def cmd_check_record(args) -> int:
     print(f"{record.record_id} · order {record.subject.get('order_id', '?')} · {record.outcome.decision.value}"
           f" · checked {record.captured_at:%Y-%m-%d %H:%M} UTC")
     print("OK   the record matches its content hash" if good else
-          "BAD  the record does not match its content hash: it was changed after it was saved")
+          "BAD  the record does not match its content hash: its contents are not what was hashed")
     if good and record.overrides:
         history = verify_history(record)
         n = len(record.overrides)

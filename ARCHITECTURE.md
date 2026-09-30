@@ -88,7 +88,9 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 
 ## Evidence record
 
-Handbook section 9 field names; full reference in [`contract/README.md`](contract/README.md). Highlights:
+Other pods read the organisers' **Evidence Contract 1.1** at `/v1` (`GET /v1/records?since=`, `GET /v1/records/{id}`, and the capture endpoints). [`pack_manager/contract.py`](pack_manager/contract.py) writes it from our extended record below: seven stable check keys (`image_quality`, `photo_reuse`, `scene_coverage`, `all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`), our detail under `checks[].detail`, and the contract's own content hash (image hashes + checks). A signed share link opens one record read-only without sign-in. Full reference, and where we don't meet section 4 yet: [`contract/README.md`](contract/README.md).
+
+Our extended record, highlights:
 
 - Each photo is stored with the SHA-256 of the exact bytes the model saw, plus the SHA-256 of the original upload.
 - `content_hash` = SHA-256 over canonical JSON (sorted keys, compact, hash field excluded). The record page recomputes it and shows "matches record" or a warning. Offline, `python -m pack_manager check-record` does the same for a downloaded record and matches photos to it.
@@ -96,7 +98,7 @@ Handbook section 9 field names; full reference in [`contract/README.md`](contrac
 - **Evidence only grows, and the database enforces it.** A trigger on `records` (`records_append_only` in `db/migrations/001_init.sql`) accepts an update only if it adds a hand decision at the end. The agent's checks, observations and photos, and every earlier decision, must stay byte-for-byte the same. The app role also has no DELETE on records or photos. So a bug or a stolen app password can't quietly rewrite history; tested against real Postgres.
 - **The override chain can be checked.** Because each override keeps what it replaced, every earlier version of the record can be rebuilt and compared with its `prior_content_hash`, back to the agent's original (`verify_history`). An override is refused on a record that doesn't match its hash, so re-hashing can't hide an edit.
 
-**What we don't claim:** the hash makes an edit detectable when someone compares the record with its hash. It is not an append-only log, a hash chain or an external anchor. The app can't rewrite a record (see above), but the database owner could drop the trigger and replace a record and its hash together.
+**What we don't claim:** the hash shows whether a record's contents still match the hash. Whoever can change a record can recompute its hash too, so it is not tamper-evident, immutable or anchored (Evidence Contract 1.1 says the same). It is not an append-only log, a hash chain or an external anchor. The app can't rewrite a record (see above), but the database owner could drop the trigger and replace a record and its hash together.
 
 ## Tenancy and access
 
@@ -130,7 +132,7 @@ If a photo fails the quality gate, the operator is told why ("too dark", "blurry
 | D9 | UNCERTAIN is a first-class outcome | Rule 4; the honest answer for hidden or stacked items | Some boxes need a hand check |
 | D10 | Expected contents come only from the order store | Rule 5: never from the model or the sample CSV | Orders must be imported |
 | D11 | RLS forced, non-owner role, photos in the database | Rule 1, including the guessed-image-key case | bytea storage doesn't scale to millions of photos |
-| D12 | Content hash only | The honesty rule: claim what is built | No tamper-evidence against a database admin |
+| D12 | Content hash only | The honesty rule: claim what is built | Not tamper-evident: whoever can change a record can recompute its hash |
 | D13 | Keyed by SKU, not ASIN | The sample data gives one ASIN to two products | — |
 | D14 | Server-rendered HTML, no JS build | Works on any phone browser; small; fast to change | Less interactive |
 | D15 | Decoys in production, not only in the eval | The eval measures the same task that ships; the model must discriminate, not confirm | A slightly longer prompt |

@@ -1,15 +1,78 @@
 # Pack evidence record (contract)
 
-One record per outbound box, written when the box is checked before sealing. Field names follow the **handbook's evidence contract (section 9)**. The organisers have said there is no exact schema yet for `subject`, `agent`, `images` or `outcome`, so this file documents exactly what Pack writes.
+One record per outbound box, written when the box is checked before sealing.
+
+Pack writes the organisers' **Evidence Contract 1.1** (the fixed interface Recovery reads) and keeps its own, richer record underneath. The contract record is made from ours by [`pack_manager/contract.py`](../pack_manager/contract.py). Nothing in the contract is renamed, dropped or repurposed, and everything of ours sits under `checks[].detail`, the one place the contract lets a Manager extend.
+
+## Evidence Contract 1.1 (what Recovery reads)
+
+| File | What it is |
+|---|---|
+| [`evidence-contract-1.1.schema.json`](evidence-contract-1.1.schema.json) | Section 2 written as a strict JSON Schema: no extra field anywhere except inside `checks[].detail` |
+| [`examples-1.1/`](examples-1.1/) | The five examples below, in the contract's shape; a test checks they're valid and current |
+
+**Endpoints** (section 3). Every one is scoped to the caller's organisation: send `X-Access-Code: <the org's code>`, or be signed in. No parameter names an organisation, and another organisation's record is a 404.
+
+```
+POST /v1/captures                   {"order_id": "ORD-1", "shots": 2}  -> {capture_id, upload_urls[], shots[]}
+PUT  <each upload_url>              the photo's bytes (retrying replaces it)
+POST /v1/captures/{id}/complete     -> {record_id, status, decision, record_url}
+GET  /v1/records/{id}               -> the record
+GET  /v1/records?since=&agent=&cursor=&limit=   -> {records[], next_cursor}
+```
+
+`GET /v1/records` is oldest first by `captured_at`; `since` filters on it. Paging is by cursor over (`captured_at`, `record_id`), so a record saved while you page is neither skipped nor repeated. `next_cursor` is null on the last page. `agent` other than `pack` returns nothing, since this service only writes Pack records.
+
+**Pack's check keys.** They're stable and lowercase, and every record has all seven in this order, whatever happened:
+
+| `check_key` | pass | fail | uncertain |
+|---|---|---|---|
+| `image_quality` | local photo checks passed | — | a photo failed them and was used anyway (can never lead to SEAL) |
+| `photo_reuse` | photo not used for another order | — | same photo already used for a different order, or not looked up (eval runs) |
+| `scene_coverage` | whole box visible, nothing hidden | — | box cut off, or items may be stacked or hidden |
+| `all_items_present` | every ordered product seen | an ordered product isn't in a fully visible box | can't tell |
+| `quantities_correct` | every count equals the order | a count is short or over | a count can't be established |
+| `no_extra_items` | nothing outside the order | a wrong product (look-alike) or an unknown product is in the box | could be an extra, a component or packaging |
+| `order_matches_manifest` | the agent's decision was SEAL | STOP_AND_FIX | UNCERTAIN, or PENDING (the model didn't answer) |
+
+Each check's `detail.source_checks` holds our checks it was built from (one per order line for `all_items_present` and `quantities_correct`). `order_matches_manifest.detail` holds the decision, reasons, fix steps, the model's object list with boxes on the photo, the agent and prompt versions, token usage, and our own record's id and hash. A rolled-up check fails if any part failed, is uncertain if any part couldn't be judged, and passes only if all passed. When the model didn't answer, every model-based check is `uncertain` with `detail.not_checked`.
+
+**How our values fill the contract's fields:**
+
+| Contract field | Pack writes |
+|---|---|
+| `record_id`, `organization_id`, `client_id` | UUIDs. New record ids are UUIDs. Our organisation ids are text (`org_demo_alpha`), so they map to a fixed UUIDv5, as do records saved before ids were UUIDs (`GET /v1/records/{id}` finds those too) |
+| `agent` | `pack` |
+| `subject.type` | `order`: Pack inspects an order (section 2 field notes) |
+| `subject.sku`, `subject.asin` | the product when the order has one line, otherwise null (every line is in `quantities_correct.detail`) |
+| `subject.shipment_id` | the order's outbound shipment, when the order came with one (`shipment_id` column in the orders CSV) |
+| `subject.po_line_id` | null: an inbound concept |
+| `subject.quantity_expected` | units ordered, all lines |
+| `subject.quantity_observed` | product units the agent clearly counted in the box, ordered or not; null when it couldn't count (model didn't answer, an item was unclear, or units may be hidden) |
+| `images[]` | `key` = the photo's random UUID, `sha256` of the stored photo, `bytes`, `taken_at` (= `captured_at`: EXIF times are stripped with the GPS). Size, role, the phone original's hash and the quality result are in `image_quality.detail.images` |
+| `checks[].latency_ms` | the one model call's time for model-based checks; 0 for the local checks, which aren't timed |
+| `outcome` | `decision` = SEAL / STOP_AND_FIX / UNCERTAIN / PENDING; `decided_by` = `agent`, or `operator` once a person decided |
+| `overrides[]` | a person's decision on the box, as an override of `order_matches_manifest`. `reason` = the reason code, its meaning and the note. The reason is required: the form won't save without one |
+| `status` | `pending` when the model didn't answer and no one has decided yet; otherwise `complete`. We never write `failed`: a capture whose photos can't be read is refused before any record exists |
+| `content_hash` | as section 2 defines it: SHA-256 (hex) over the image hashes concatenated in order, then the `checks` array serialised as JSON with sorted keys and no whitespace. Checks never change after a record is written, so an override doesn't change it |
+
+**A record link that needs no sign-in** (section 4). "Copy share link" on a record gives `/r/<signed token>`: a read-only page with that record's photos, the contract JSON and our record file. The token is signed with the app's secret, names one organisation and one record, and reaches nothing else. Anyone who has the link can view that record, so share it like the record itself.
+
+**Where Pack doesn't meet section 4 yet**, to raise with the organisers rather than work around:
+
+- *Presigned direct upload.* Photos go into the Postgres table under row-level security (section 5), not an object store, so the upload URLs point at the app itself. Each is a single-slot, 15-minute URL whose token is the permission, and retrying is safe, but the bytes do pass through the app server. Moving to an object store with presigned URLs is a storage change, not an API change.
+- *Per-check override.* A person decides the box (`order_matches_manifest`), with a required reason. There is no separate override button on each of the other six checks.
+
+## Our extended record
 
 | File | What it is |
 |---|---|
 | [`pack-evidence-record.schema.json`](pack-evidence-record.schema.json) | JSON Schema, generated from the code (`EvidenceRecord` in `pack_manager/models.py`); a test fails if they drift |
-| [`examples/seal.json`](examples/seal.json) | Correct box (with a packing slip, which is ignored) |
-| [`examples/stop_and_fix.json`](examples/stop_and_fix.json) | Wrong item: candle trio ordered, water bottle packed (sample row PCK-0044, which the human sealed) |
-| [`examples/uncertain.json`](examples/uncertain.json) | 2 towels ordered, the second one is hidden under the first |
-| [`examples/overridden.json`](examples/overridden.json) | The same box after the operator checked it by hand and chose SEAL |
-| [`examples/pending.json`](examples/pending.json) | The vision model timed out; photos and record are still saved |
+| [`examples/seal.json`](examples/seal.json) | Correct box, with a promotional insert card that is ignored (a real record from the held-out run) |
+| [`examples/stop_and_fix.json`](examples/stop_and_fix.json) | Missing and short products (a real record from the held-out run) |
+| [`examples/uncertain.json`](examples/uncertain.json) | Products under a bin's netting, so presence and counts can't be settled (real record) |
+| [`examples/overridden.json`](examples/overridden.json) | The same box after a person checked under the netting and stopped it (the decision the box's ground truth calls for; eval runs have no real hand decisions) |
+| [`examples/pending.json`](examples/pending.json) | The vision model timed out; photos and record are still saved (scripted: the held-out run had no model failures) |
 | [`build_contract.py`](build_contract.py) | Regenerates all of the above |
 
 The examples come from the real pipeline (quality gate → decision rules → hash → override) with a scripted perception step and a synthetic photo, so they show the shape, not real model output. After the held-out eval, `python contract/build_contract.py --from-run test-v1` replaces the seal, stop, uncertain and pending examples with real records from that run.
@@ -18,12 +81,12 @@ The examples come from the real pipeline (quality gate → decision rules → ha
 
 | Field | Meaning |
 |---|---|
-| `record_id` | `PCK-` + 12 hex characters. Random, so it isn't guessable |
+| `record_id` | A random UUID, so it isn't guessable (records before 30 Sep: `PCK-` + 12 hex characters) |
 | `schema_version` | `cube.evidence.v1` |
 | `organization_id` | Tenant: the seller or 3PL operating the pack bench (`org_demo_alpha`) |
 | `client_id` | For a 3PL: the seller whose order this is. Null for a seller packing its own orders |
 | `agent` | `name`, `version`, `prompt_version`, `model_version` (the exact vision model id) |
-| `subject` | `type: "outbound_box"`, `order_id`, `unit_id`, `channel`, `expected_lines[] {sku, qty}` |
+| `subject` | `type: "outbound_box"`, `order_id`, `unit_id`, `channel`, `shipment_id` (newer records), `expected_lines[] {sku, qty}` |
 | `captured_at` | UTC time the photos were taken (server time) |
 | `operator_label` | Who packed / checked the box |
 | `images[]` | `image_id` (UUIDv4), `role`, `sha256` of the stored image, `original_sha256` of the upload, size, and the local `quality` gate result |
@@ -34,7 +97,7 @@ The examples come from the real pipeline (quality gate → decision rules → ha
 | `status` | `final` (agent decided) · `pending_review` (agent said UNCERTAIN) · `pending` (model failed) · `overridden` (a human decided) |
 | `content_hash` | `sha256:` over the canonical JSON of the record (sorted keys, no spaces, this field left out). It covers the image hashes |
 
-### Check keys
+### Our check keys (rolled up into the contract's keys above)
 
 | `check_key` | PASS | FAIL | UNCERTAIN |
 |---|---|---|---|
@@ -62,24 +125,26 @@ Present whenever a check is UNCERTAIN, otherwise `null`. It is built only from t
 
 ## What the content hash does and doesn't prove
 
-It shows whether a record was changed after it was hashed: anyone can recompute it (`GET /api/records/{id}` returns `_hash_verified`). Offline, with the downloaded file (`?download=1`): `python -m pack_manager check-record <record>.json --photo <photo>` checks the hash, every earlier version, and whether a photo is one of the record's. Each override stores the hash from before it. It is **not** an append-only log, a hash chain or an externally anchored proof. The database refuses any change to a saved record except adding a hand decision at the end, even from the app's own role. The database owner could still turn that off and rewrite a record and its hash together.
+It shows whether a record's contents still match the hash: anyone can recompute it (`GET /api/records/{id}` returns `_hash_verified`). Offline, with the downloaded file (`?download=1`): `python -m pack_manager check-record <record>.json --photo <photo>` checks the hash, every earlier version, and whether a photo is one of the record's. Each override stores the hash from before it. Whoever can change a record can recompute its hash too, so it is **not** tamper-evident, immutable or anchored, and not an append-only log or a hash chain. The database refuses any change to a saved record except adding a hand decision at the end, even from the app's own role. The database owner could still turn that off and rewrite a record and its hash together.
 
-## Reading records (for Returns and Recovery)
+## Reading our extended records
+
+The contract endpoints above are what other pods should use. The older API returns our extended record:
 
 ```
 GET /api/records?order_id=ORD-DUMMY-50044
 GET /api/records?unit_id=UNIT-0044
-GET /api/records/PCK-10F128797250
+GET /api/records/<record_id>
 Header: X-Access-Code: <the org's access code>
 ```
 
-Results are limited to the caller's organisation by Postgres row-level security. Another organisation's record returns 404, not 403. Photos are served only through `GET /images/{image_id}` to a signed-in user of the same organisation.
+Results are limited to the caller's organisation by Postgres row-level security. Another organisation's record returns 404, not 403. Photos are served only through `GET /images/{image_id}` to a signed-in user of the same organisation, or through a record's share link, which serves only that record's photos.
 
 **Join keys.** In Pack, `unit_id` identifies a **whole box / order**, which can hold several SKUs and quantities (see FINDINGS.md). Join on `order_id` and match `sku` inside `expected_lines` / `observations.expected_vs_observed`.
 
 ## Name mapping to the other drafts
 
-| Concept | This record (handbook) | Sample CSVs | Recovery contract-v0 draft |
+| Concept | Our extended record | Sample CSVs | Recovery contract-v0 draft |
 |---|---|---|---|
 | tenant | `organization_id` (+ `client_id`) | `org_id` | `org_id` |
 | person | `operator_label` | `operator_id` | `operator_id` |
@@ -87,5 +152,5 @@ Results are limited to the caller's organisation by Postgres row-level security.
 | check result | `verdict` | — | `result` |
 | hash | `content_hash` | — | `content_sha256` |
 | decision | `outcome.decision` = `SEAL` / `STOP_AND_FIX` / `UNCERTAIN` / `PENDING` | `operator_verdict` = `seal` / `stop_and_fix` | — |
-| all items present | one `line_present:<SKU>` check per order line | — | `all_items_present` |
-| quantities correct | one `line_quantity:<SKU>` check per order line | — | `quantities_correct` |
+| all items present | one `line_present:<SKU>` check per order line (rolled up as `all_items_present` in 1.1) | — | `all_items_present` |
+| quantities correct | one `line_quantity:<SKU>` check per order line (rolled up as `quantities_correct` in 1.1) | — | `quantities_correct` |

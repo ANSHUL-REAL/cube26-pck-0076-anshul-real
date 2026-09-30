@@ -1085,9 +1085,13 @@ EVAL_RESULTS = BASE.parent / "eval" / "results"
 REPO_URL = "https://github.com/ANSHUL-REAL/cube26-pck-0076-anshul-real"
 
 
-def _metrics(run: str) -> dict | None:
+# The AI-generated set: shown on its own, never added to the real-photo numbers.
+SYNTH_RUN, SYNTH_RESULTS = "synth-test-v1", BASE.parent / "eval" / "synthetic" / "results"
+
+
+def _metrics(run: str, where: Path = EVAL_RESULTS) -> dict | None:
     try:
-        return json.loads((EVAL_RESULTS / run / "metrics.json").read_text(encoding="utf-8"))
+        return json.loads((where / run / "metrics.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
 
@@ -1098,7 +1102,8 @@ def results_page(request: Request):
     held = _metrics(RESULTS_RUN)
     if not held:
         return not_found(request, "The eval results")
-    return page(request, "results.html", m=held, oracle=_metrics(ORACLE_RUN), repo_url=REPO_URL)
+    return page(request, "results.html", m=held, oracle=_metrics(ORACLE_RUN), repo_url=REPO_URL,
+                synth=_metrics(SYNTH_RUN, SYNTH_RESULTS))
 
 
 @app.get("/healthz")

@@ -92,5 +92,24 @@
   </div>
 </section>
 
+{% if synth %}
+{% set sc = synth.box_decision.confusion %}
+<section class="card results-card">
+  <div class="card-head"><h2>A second, separate set: AI-generated boxes</h2><span class="count">{{ synth.boxes_scored }} boxes</span></div>
+  <div class="card-body">
+    <p class="muted">Every image here is AI-generated: open shipping boxes on a bench, planned before any image was made. Same frozen model and prompt, nothing tuned on it. Generated scenes are cleaner than real photos, so these numbers say nothing about real photos, and they're never added to the ones above.</p>
+    <table class="matrix" style="margin-top:12px">
+      <thead><tr><th></th><th>Seal</th><th>Stop</th><th>By hand</th></tr></thead>
+      <tbody>
+        {% for t, label in [("SEAL", "Should seal"), ("STOP_AND_FIX", "Should stop")] %}
+        <tr><th>{{ label }}</th>{% for a in ["SEAL", "STOP_AND_FIX", "UNCERTAIN"] %}<td class="{{ 'ok' if a == t else ('bad' if a != 'UNCERTAIN' else '') }}">{{ sc.get(t ~ " -> " ~ a, 0) }}</td>{% endfor %}</tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="small" style="margin-top:12px"><b>Its one wrong seal:</b> a boxed mug set packed as an extra, which the model called packaging.</p>
+  </div>
+</section>
+{% endif %}
+
 <p class="muted small results-foot">The method was committed before any data existed. Full report, every wrong box and why: <a href="{{ repo_url }}/blob/main/EVAL.md">EVAL.md</a>.</p>
 {% endblock %}

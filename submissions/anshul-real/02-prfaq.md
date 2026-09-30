@@ -53,7 +53,7 @@ One model call per box. Cost per box is measured in the eval against a $0.008 bu
 Partly. Uploading a photo that was already used for another order is caught. Taking a new photo of a different, correct box isn't. The photo proves what was in *a* box at that moment, not that it was *this* box, unless the photo shows the shipping label. We don't claim more.
 
 **Is the record tamper-proof?**
-No. It has a content hash that shows whether a record was edited after it was saved, and every override keeps the previous hash. Someone with database access could rewrite a record and its hash together. It isn't a hash chain or anchored anywhere.
+No. It has a content hash that shows whether a record still matches what was hashed, and every override keeps the previous hash. Whoever can change a record can recompute its hash. Someone with database access could rewrite a record and its hash together. It isn't a hash chain or anchored anywhere.
 
 **What can't it see?**
 Anything inside sealed retail packaging (a missing scoop inside a sealed protein tub), and items hidden under other items or filler unless it's told to look. Hidden items make it say "check by hand".

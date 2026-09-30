@@ -4,6 +4,19 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Wed 30 Sep
 
+- **Evidence Contract 1.1** (the organisers' fixed record for Recovery) arrived today. Our record used the handbook's names, but with different shapes: per-product check keys, an `agent` object, no `shipment_id`, and a hash over the whole record. Pack now writes the contract exactly, from our richer record. Nothing is renamed or dropped, and our extras go under `checks[].detail`. The changes:
+  - **Seven stable check keys:** `image_quality`, `photo_reuse`, `scene_coverage`, `all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`.
+  - **The contract's content hash:** image hashes plus checks. Overrides don't change it.
+  - **All four `/v1` endpoints.** Captures return one upload URL per shot, can be retried, and fail open to `pending`.
+  - **A read-only record link that needs no sign-in,** signed for one record and its photos.
+  - **`shipment_id`** on orders.
+  - **Wording:** the docs no longer come close to calling the hash tamper-evident.
+  - **Open, to raise with the organisers:**
+    - Photos pass through the app server, because they're stored under row-level security in Postgres, not in an object store with presigned URLs.
+    - A person overrides the box decision, not each check.
+  - **Records unchanged:** the held-out numbers were measured with the decision code this doesn't touch.
+- **Second eval set, AI-generated and disclosed.** 70 boxes, planned before any image was made. With the same frozen model and prompt, nothing tuned: false SEAL 1/26, false STOP 1/24, UNCERTAIN 2/50. It's reported apart from the real photos and never blended, because generated scenes are cleaner than real ones. Its one false SEAL (a boxed mug set called packaging) is the same kind of miss as the bin set's.
+
 - **Held-out eval run, on a public dataset.** No products or labellers were available for a home shoot, so the eval uses 70 real warehouse photos from the Amazon Bin Image Dataset (CC BY-NC-SA 3.0 US). The orders were written from a fixed seed before any model run; ground truth is Amazon's record of each bin.
   - **Free-tier quota:** the Gemini key allows 20 `gemini-2.5-flash` calls a day, and 2.5-flash-lite is closed to new users. The app and the eval moved to `gemini-3.5-flash-lite`.
   - **Dev:** the lite model called strapped, cluttered bins "fully visible" and stopped good boxes. Prompt `pack-v3` asks for strict visibility answers, and false STOPs halved on dev.

@@ -569,3 +569,5 @@ def test_results_page_is_public_and_shows_the_held_out_numbers(client):
     assert "Amazon Bin Image Dataset" in r.text and "No person labelled" in r.text
     if m["kill_conditions_tripped"]:
         assert "kill condition we set in advance tripped" in r.text
+    # The AI-generated set has its own card, labelled as such, apart from the real-photo numbers.
+    assert "AI-generated boxes" in r.text and "never added to the ones above" in r.text

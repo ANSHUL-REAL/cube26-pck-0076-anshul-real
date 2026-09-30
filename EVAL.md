@@ -36,6 +36,34 @@ One run of `gemini-3.5-flash-lite` with prompt `pack-v3`, frozen in [`eval/froze
 
 Cost per box isn't reported: we haven't checked this model's list price, and won't guess it. The key used is on Gemini's free tier.
 
+## A second set: AI-generated boxes (reported separately, never blended)
+
+**Every image in this set is AI-generated**: the products, their reference photos and the box photos. It is not evidence about real photographs, and its numbers are never added to the ones above. What it adds is the one format the bin photos lack: an open shipping box on a packing bench, shot from above, with reference photos in the catalogue. The 70 boxes were planned by [`eval/plan_boxes.py`](eval/plan_boxes.py) (the same planner as the home shoot) before any image was made. Each image was checked by eye against its plan row and regenerated if it didn't match. Model, date and every prompt: [`eval/synthetic/README.md`](eval/synthetic/README.md), [`prompts.csv`](eval/synthetic/prompts.csv).
+
+Same model and prompt as above (`gemini-3.5-flash-lite`, `pack-v3`), nothing tuned on this set. Frozen in [`eval/synthetic/frozen-test.json`](eval/synthetic/frozen-test.json) and committed before the one held-out run. Report: [`eval/synthetic/results/synth-test-v1/report.md`](eval/synthetic/results/synth-test-v1/report.md).
+
+| Measure (50 held-out boxes) | Result | Target |
+|---|---|---|
+| **False SEAL** | **1/26 (4%; 95% CI 1–19%)** | ≤ 2% |
+| False STOP | 1/24 (4%; 95% CI 1–20%) | ≤ 5% |
+| UNCERTAIN | 2/50 (4%; 95% CI 1–13%) | ≤ 25% |
+| PENDING | 0/50 | ≤ 2% |
+| Latency p50 / p95 | 7.0 s / 8.9 s | p95 ≤ 5 s |
+| Tokens per box | 12,943 (reference photos of the candidates are sent too) | |
+
+| Truth \ Agent | SEAL | STOP_AND_FIX | UNCERTAIN |
+|---|---|---|---|
+| SEAL (24) | 21 | 1 | 2 |
+| STOP_AND_FIX (26) | 1 | 25 | 0 |
+
+No kill condition tripped. **Rules alone:** 0 errors, and the same 2 boxes sent to a person (next point).
+
+- **The false SEAL (T04):** a boxed two-mug gift set was put in as an extra. The model described it as "cardboard insert holding two white mugs" and called it packaging, with confidence 1.0, so the extra product was ignored. Packaging that holds a product is the failure to fix first. It's the same kind of miss as the unseen extra in the bin set (T10 there).
+- **The false STOP (T20):** three stacked baskets. The model saw two and took one for the large look-alike, while saying the box was fully visible.
+- **Sent to a person (T15, T18):** a dark photo and a blurry one. The local photo check caught both, and a photo that fails it can never lead to SEAL.
+
+**Why this set is easier than real photos, and so can't stand in for them:** generated scenes are clean and well lit, the products are drawn to match their generated reference photos, and images that didn't show their plan were regenerated, which favours clear pictures. The dev run (18 of 20 right) was only a check that the pipeline reads the set.
+
 ## What changed from the plan, and why
 
 - **The data.** The plan below was a home shoot of 70 packed boxes and two human labellers. The author had no products to photograph and no labellers, so the eval uses **70 real warehouse photos from the public Amazon Bin Image Dataset** (CC BY-NC-SA 3.0 US; see [`eval/abid/README.md`](eval/abid/README.md)). Each bin's contents as recorded by Amazon stand in for "what was physically packed". The order for each box was written by [`eval/abid/build_abid.py`](eval/abid/build_abid.py) from a fixed seed, before any model run: exactly the bin (must seal), or one planned difference (must stop). The mix is 24 must-seal and 26 must-stop boxes, as planned.
