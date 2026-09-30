@@ -1,0 +1,265 @@
+{
+  "record_id": "PCK-DE56CBAF4C8C",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T11",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B005CSTIHG",
+        "qty": 4
+      },
+      {
+        "sku": "B00B9LDX8K",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ebabc43f-38b4-4c1e-94ec-20e21093deec",
+      "role": "top_down",
+      "sha256": "8174c5ebbe2f2231253a06f3f02c71b4d1408b9b60c7c59ac2e361c260442971",
+      "original_sha256": "12f9febb6d96a00f9732cd6b65056308fba50398c4d10f7ef485b06eff5f2292",
+      "mime": "image/jpeg",
+      "width": 418,
+      "height": 285,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 418,
+        "height": 285,
+        "blur_var": 66.2,
+        "mean_luma": 126.6,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B005CSTIHG",
+        "title": "S Super Stupid Soft Voodoo 165-170g",
+        "ordered": 4,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00B9LDX8K",
+        "title": "plate 6.75 inches rd cool dots brdr",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005CSTIHG",
+        "classification": "CANDIDATE",
+        "sku": "B005CSTIHG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "S Super Stupid Soft Voodoo 165-170g"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005CSTIHG",
+        "classification": "CANDIDATE",
+        "sku": "B005CSTIHG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "S Super Stupid Soft Voodoo 165-170g"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005CSTIHG",
+        "classification": "CANDIDATE",
+        "sku": "B005CSTIHG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "S Super Stupid Soft Voodoo 165-170g"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00B9LDX8K",
+        "classification": "CANDIDATE",
+        "sku": "B00B9LDX8K",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "plate 6.75 inches rd cool dots brdr"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B005CSTIHG",
+        "title": "S Super Stupid Soft Voodoo 165-170g",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00B9LDX8K",
+      "B005CSTIHG",
+      "B000IBPD0S",
+      "B003BKWLAS"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B005CSTIHG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "S Super Stupid Soft Voodoo 165-170g: found (#1, #2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B005CSTIHG",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "S Super Stupid Soft Voodoo 165-170g: 3 in the box, 4 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00B9LDX8K",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "plate 6.75 inches rd cool dots brdr: found (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00B9LDX8K",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "plate 6.75 inches rd cool dots brdr: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "S Super Stupid Soft Voodoo 165-170g: 3 in the box, 4 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × S Super Stupid Soft Voodoo 165-170g."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:27037a511ae4faaa672667eec33e4174da233456c0de1b7226975ec9f7981595"
+}

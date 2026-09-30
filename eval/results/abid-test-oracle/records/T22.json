@@ -1,0 +1,279 @@
+{
+  "record_id": "PCK-499A53A78D48",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T22",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00BMJNWE4",
+        "qty": 1
+      },
+      {
+        "sku": "B00MIQDIKS",
+        "qty": 1
+      },
+      {
+        "sku": "B018RGGUKM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f9f135a0-5ccf-48e8-b1b3-a3a5bc3784a3",
+      "role": "top_down",
+      "sha256": "1b702b111821ca984ec3997a9d055840950545b2299fe09825ce157c5ec4c7d3",
+      "original_sha256": "bb6a4cb253318d8d67d1a03d053692044c544ad8779d458367ca5bfe3e3f1fbe",
+      "mime": "image/jpeg",
+      "width": 512,
+      "height": 305,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 512,
+        "height": 305,
+        "blur_var": 187.5,
+        "mean_luma": 119.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00BMJNWE4",
+        "title": "Primula Teapot with Stainless Steel Infuser and Loose Green Tea Packet, 40-Ounce, Blue Floral",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00MIQDIKS",
+        "title": "NIVEA Kiss of Berry Swirl Vitamin Enriched Lip Care ( Pack of 6)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B018RGGUKM",
+        "title": "York Wallcoverings Candice Olson Kids Daisy Do Wall Charm, Pink/White Lot of 10",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00BMJNWE4",
+        "classification": "CANDIDATE",
+        "sku": "B00BMJNWE4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Primula Teapot with Stainless Steel Infuser and Loose Green Tea Packet, 40-Ounce, Blue Floral"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00MIQDIKS",
+        "classification": "CANDIDATE",
+        "sku": "B00MIQDIKS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "NIVEA Kiss of Berry Swirl Vitamin Enriched Lip Care ( Pack of 6)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B018RGGUKM",
+        "classification": "CANDIDATE",
+        "sku": "B018RGGUKM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "York Wallcoverings Candice Olson Kids Daisy Do Wall Charm, Pink/White Lot of 10"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "1855842106",
+      "B001EW3C1W",
+      "B018RGGUKM",
+      "B00MIQDIKS",
+      "B00BMJNWE4"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00BMJNWE4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Primula Teapot with Stainless Steel Infuser and Loose Green Tea Packet, 40-Ounce, Blue Floral: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00BMJNWE4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Primula Teapot with Stainless Steel Infuser and Loose Green Tea Packet, 40-Ounce, Blue Floral: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00MIQDIKS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "NIVEA Kiss of Berry Swirl Vitamin Enriched Lip Care ( Pack of 6): found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00MIQDIKS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "NIVEA Kiss of Berry Swirl Vitamin Enriched Lip Care ( Pack of 6): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B018RGGUKM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "York Wallcoverings Candice Olson Kids Daisy Do Wall Charm, Pink/White Lot of 10: found (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B018RGGUKM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "York Wallcoverings Candice Olson Kids Daisy Do Wall Charm, Pink/White Lot of 10: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a0aaa0ab77fcbf5705de2b0860f97711b1457012627ca70a40cb09d4b91b0512"
+}

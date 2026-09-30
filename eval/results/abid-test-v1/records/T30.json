@@ -1,0 +1,257 @@
+{
+  "record_id": "PCK-6D96D52EF2E9",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T30",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00CAO41GI",
+        "qty": 5
+      },
+      {
+        "sku": "B00NJ31VT4",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:55:15Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "5b101266-89d0-4659-a659-c29fda4e3a63",
+      "role": "top_down",
+      "sha256": "306ab43c9fdb51da2deabcbeb3ff1d3203f6775c3bbe13a1a91e9172d759ade8",
+      "original_sha256": "c2d6ff5334a98cb4cb173f77caba44e71794315e56c5936828f0a464e67f334c",
+      "mime": "image/jpeg",
+      "width": 346,
+      "height": 318,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 346,
+        "height": 318,
+        "blur_var": 7.9,
+        "mean_luma": 111.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock: 0 clearly counted, some units may be stacked or hidden; 5 ordered.",
+        "Neon Fanny Pack (White): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock: not seen, but items may be hidden.",
+        "Neon Fanny Pack (White): not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). photo is blurry and covered with security tape or plastic film"
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock is in the box.",
+        "A count of Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock with every unit visible.",
+        "Whether Neon Fanny Pack (White) is in the box.",
+        "A count of Neon Fanny Pack (White) with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00CAO41GI",
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock",
+        "ordered": 5,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00NJ31VT4",
+        "title": "Neon Fanny Pack (White)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          238,
+          233,
+          721,
+          786
+        ],
+        "description": "pack of 3 black ink cartridges",
+        "classification": "CANDIDATE",
+        "sku": "B019UJ3IS2",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "shape and alignment of three cartridges matching KODAK ink combo pack",
+        "partially_hidden": true,
+        "title": "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B019UJ3IS2",
+        "title": "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.4,
+      "notes": "photo is blurry and covered with security tape or plastic film"
+    },
+    "image_issues": [
+      "blur",
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B019UJ3IS2",
+      "B0178J2CCY",
+      "B00CAO41GI",
+      "B00NJ31VT4"
+    ],
+    "usage": {
+      "input_tokens": 2027,
+      "output_tokens": 313,
+      "thinking_tokens": 0,
+      "total_tokens": 2340
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.4,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). photo is blurry and covered with security tape or plastic film",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00CAO41GI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00CAO41GI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock: 0 clearly counted, some units may be stacked or hidden; 5 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00NJ31VT4",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Neon Fanny Pack (White): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00NJ31VT4",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Neon Fanny Pack (White): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Not in the order: KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3030,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:55:18Z",
+    "reasons": [
+      "Not in the order: KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges (#1)."
+    ],
+    "fix_instructions": [
+      "Remove KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock by hand: there should be 5.",
+      "Also check: Count Neon Fanny Pack (White) by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:bd4f2cd12e59a3255ae7ee4b4d45c17699dffcdee5e97ce7b4cbb63b262da96b"
+}

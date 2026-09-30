@@ -1,0 +1,368 @@
+{
+  "record_id": "PCK-E990EEB143F6",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T26",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00IXHC0JG",
+        "qty": 4
+      },
+      {
+        "sku": "B00OGS9KQ2",
+        "qty": 1
+      },
+      {
+        "sku": "B01E5ZC0PS",
+        "qty": 1
+      },
+      {
+        "sku": "B00YQ9PHE0",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d0e790fd-2b74-4af1-9d9b-dee4ac4425bf",
+      "role": "top_down",
+      "sha256": "e9a4fc32720da44351aa20c4a5a4e64032ed858c35807a646f1f048d1e377dcd",
+      "original_sha256": "dcdd0d8935c4cadc80488b61c3a8c68cb367baa4c64dd95055f22aa1f528fea9",
+      "mime": "image/jpeg",
+      "width": 398,
+      "height": 272,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 398,
+        "height": 272,
+        "blur_var": 97.9,
+        "mean_luma": 113.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00IXHC0JG",
+        "title": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with ",
+        "ordered": 4,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00OGS9KQ2",
+        "title": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01E5ZC0PS",
+        "title": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00YQ9PHE0",
+        "title": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IXHC0JG",
+        "classification": "CANDIDATE",
+        "sku": "B00IXHC0JG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with "
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IXHC0JG",
+        "classification": "CANDIDATE",
+        "sku": "B00IXHC0JG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with "
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IXHC0JG",
+        "classification": "CANDIDATE",
+        "sku": "B00IXHC0JG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with "
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IXHC0JG",
+        "classification": "CANDIDATE",
+        "sku": "B00IXHC0JG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with "
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00OGS9KQ2",
+        "classification": "CANDIDATE",
+        "sku": "B00OGS9KQ2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01E5ZC0PS",
+        "classification": "CANDIDATE",
+        "sku": "B01E5ZC0PS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc."
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00YQ9PHE0",
+        "title": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2)",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00YQ9PHE0",
+      "B00KBLCQ96",
+      "B00IXHC0JG",
+      "B01E5ZC0PS",
+      "B00OGS9KQ2",
+      "B01BZFAF5S"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00IXHC0JG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : found (#1, #2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IXHC0JG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : 4 of 4.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00OGS9KQ2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: found (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00OGS9KQ2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01E5ZC0PS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: found (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01E5ZC0PS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00YQ9PHE0",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00YQ9PHE0",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): 0 in the box, 1 ordered.",
+      "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:14049e5dc294b12ebc20b5dce07d34b3366cc7b4b27d9e1503dd435039b72aec"
+}

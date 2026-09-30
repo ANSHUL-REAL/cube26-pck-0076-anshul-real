@@ -1,0 +1,183 @@
+{
+  "record_id": "PCK-60C348BA1A37",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T45",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00JBK78V4",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:24Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "6de3df37-fa6c-4354-91b5-0ac2ebc0efec",
+      "role": "top_down",
+      "sha256": "05b64649d6bac68d7f1dfbbb5e4f005bed0e0eb9446d98295e4a316691dbf2f8",
+      "original_sha256": "578b8b0ab560e1b57ee3290960c3c8fe74f7d626bc1bc6dcdaf78b019f8345fc",
+      "mime": "image/jpeg",
+      "width": 508,
+      "height": 660,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 508,
+        "height": 660,
+        "blur_var": 25.6,
+        "mean_luma": 90.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00JBK78V4",
+        "title": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          0,
+          355,
+          876,
+          959
+        ],
+        "description": "cardboard box containing 4-pack binders",
+        "classification": "CANDIDATE",
+        "sku": "B00JBK78V4",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "product label with barcode and text indicating 4 pack binders",
+        "partially_hidden": false,
+        "title": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "The item is clearly visible through the straps of the storage rack."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SKU-CABLE-USBC",
+      "B0001VTZ86",
+      "B00JBK78V4"
+    ],
+    "usage": {
+      "input_tokens": 2025,
+      "output_tokens": 299,
+      "thinking_tokens": 0,
+      "total_tokens": 2324
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2795,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00JBK78V4",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2795,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00JBK78V4",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP): 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2795,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2795,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2795,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:26Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:c08f21b6da7221c374140c0d95e75f84a750c418697ae396fd5d7308937af191"
+}

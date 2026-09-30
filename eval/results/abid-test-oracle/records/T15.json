@@ -1,0 +1,173 @@
+{
+  "record_id": "PCK-D88E7FD44ED7",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T15",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00ZC9OZVY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ceb36243-dc7b-4a07-90ee-3faf3d010353",
+      "role": "top_down",
+      "sha256": "2451d0f8dee1ba9deda9dd35d7e10b6c2772b516b903b88c9114e05dcaf4116d",
+      "original_sha256": "9fbc8ed4c4100b9ba080ef892562999adfe94f5847152f74fbe05f0bcfd8c985",
+      "mime": "image/jpeg",
+      "width": 375,
+      "height": 256,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 375,
+        "height": 256,
+        "blur_var": 82.1,
+        "mean_luma": 117.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00ZC9OZVY",
+        "title": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZC9OZVY",
+        "classification": "CANDIDATE",
+        "sku": "B00ZC9OZVY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00U58U5IE",
+      "B007DW6DYU",
+      "B00ZC9OZVY"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00ZC9OZVY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00ZC9OZVY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:8a3b592fa080c9d07dcada72aae3e9656a419b8ca9250e438bfeed2160298b14"
+}

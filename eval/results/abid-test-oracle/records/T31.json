@@ -1,0 +1,291 @@
+{
+  "record_id": "PCK-04DD21695C10",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T31",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0010KK01S",
+        "qty": 1
+      },
+      {
+        "sku": "B01ENO07BA",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "feadbbc8-9194-4c71-9587-e66c9d4e4f8f",
+      "role": "top_down",
+      "sha256": "46f7614e84240c010ddea356daaf169097fd46d51bbb5c00b2a234f89d4217f7",
+      "original_sha256": "ab6adf7310e3203c2c1488315c76872d93a77a333cfced6debaf0c82ec34df2b",
+      "mime": "image/jpeg",
+      "width": 338,
+      "height": 431,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 338,
+        "height": 431,
+        "blur_var": 22.0,
+        "mean_luma": 108.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 1.48
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0010KK01S",
+        "title": "Crystal Journey Reiki Charged Herbal Pillar - Dreams",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01ENO07BA",
+        "title": "iphone 6S/ iPhone 6 Case, PINO [Shock Absorption] Hybrid Dual Layer Armor Defender Protective Case Cover For iphone 6S/ ",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0010KK01S",
+        "classification": "CANDIDATE",
+        "sku": "B0010KK01S",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Crystal Journey Reiki Charged Herbal Pillar - Dreams"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZWLDGK8",
+        "classification": "CANDIDATE",
+        "sku": "B00ZWLDGK8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs "
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZWLDGK8",
+        "classification": "CANDIDATE",
+        "sku": "B00ZWLDGK8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs "
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZWLDGK8",
+        "classification": "CANDIDATE",
+        "sku": "B00ZWLDGK8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs "
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01ENO07BA",
+        "classification": "CANDIDATE",
+        "sku": "B01ENO07BA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "iphone 6S/ iPhone 6 Case, PINO [Shock Absorption] Hybrid Dual Layer Armor Defender Protective Case Cover For iphone 6S/ "
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00ZWLDGK8",
+        "title": "Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs ",
+        "object_id": "o2"
+      },
+      {
+        "sku": "B00ZWLDGK8",
+        "title": "Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs ",
+        "object_id": "o3"
+      },
+      {
+        "sku": "B00ZWLDGK8",
+        "title": "Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs ",
+        "object_id": "o4"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0010KK01S",
+      "B01DDC0VFU",
+      "B005FEGYCO",
+      "B01ENO07BA"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0010KK01S",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Crystal Journey Reiki Charged Herbal Pillar - Dreams: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0010KK01S",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Crystal Journey Reiki Charged Herbal Pillar - Dreams: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01ENO07BA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "iphone 6S/ iPhone 6 Case, PINO [Shock Absorption] Hybrid Dual Layer Armor Defender Protective Case Cover For iphone 6S/ : found (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01ENO07BA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "iphone 6S/ iPhone 6 Case, PINO [Shock Absorption] Hybrid Dual Layer Armor Defender Protective Case Cover For iphone 6S/ : 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#2); Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#3); Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Not in the order: Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#2); Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#3); Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#4)."
+    ],
+    "fix_instructions": [
+      "Remove Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#2); it is not in the order.",
+      "Remove Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#3); it is not in the order.",
+      "Remove Night lions Tech(TM) Replacement Spare Parts for Syma X8 X8C X8W Venture RC Quadcopter 4pcs Main Blade Propeller & 4pcs  (#4); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ef4606569a1398d58cd5569d593a994915d4361b4bd2ab0d85c9685dde0cd89f"
+}

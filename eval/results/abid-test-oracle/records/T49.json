@@ -1,0 +1,256 @@
+{
+  "record_id": "PCK-3EE070005355",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T49",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "1119049105",
+        "qty": 3
+      },
+      {
+        "sku": "B00JNJPS4W",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0bed540e-5cf9-4454-bf03-8fb1213784ed",
+      "role": "top_down",
+      "sha256": "f8451cbd5b0edfb2a9aaa6266836acf9455cad7302f72a241b8a908e188744e9",
+      "original_sha256": "9c9f6ddb0de2c844b51dfcc43d0622a2ea31caaa9e73864f1af39158a684f656",
+      "mime": "image/jpeg",
+      "width": 430,
+      "height": 551,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 430,
+        "height": 551,
+        "blur_var": 66.3,
+        "mean_luma": 124.4,
+        "clipped_pct": 0.39,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "1119049105",
+        "title": "Starting a Business All-In-One For Dummies",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00JNJPS4W",
+        "title": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1119049105",
+        "classification": "CANDIDATE",
+        "sku": "1119049105",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Starting a Business All-In-One For Dummies"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1119049105",
+        "classification": "CANDIDATE",
+        "sku": "1119049105",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Starting a Business All-In-One For Dummies"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1119049105",
+        "classification": "CANDIDATE",
+        "sku": "1119049105",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Starting a Business All-In-One For Dummies"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00JNJPS4W",
+        "classification": "CANDIDATE",
+        "sku": "B00JNJPS4W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00S05KTOO",
+      "B016I0J2Z4",
+      "1119049105",
+      "B00JNJPS4W"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:1119049105",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Starting a Business All-In-One For Dummies: found (#1, #2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:1119049105",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Starting a Business All-In-One For Dummies: 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00JNJPS4W",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla: found (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00JNJPS4W",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7d1b3ff1df815393d6f47285025de8500d5fe0cd1de9bf2f751fea2dff9e6334"
+}

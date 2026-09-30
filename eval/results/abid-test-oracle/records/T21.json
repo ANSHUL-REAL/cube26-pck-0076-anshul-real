@@ -1,0 +1,324 @@
+{
+  "record_id": "PCK-6940D9E0EBAB",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T21",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00D901B4W",
+        "qty": 4
+      },
+      {
+        "sku": "B00SS1DJRE",
+        "qty": 1
+      },
+      {
+        "sku": "B014ALOPYG",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "bd758f53-1406-411c-9eb5-60b21381e780",
+      "role": "top_down",
+      "sha256": "ed49a63d0eae5e7bec20d06a8791baed80f51bd53038bc93af453194181c11ad",
+      "original_sha256": "42e62b3e2bf32728209078188c290e72145b3973e1a0a479e039349a8854218e",
+      "mime": "image/jpeg",
+      "width": 394,
+      "height": 268,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 394,
+        "height": 268,
+        "blur_var": 48.5,
+        "mean_luma": 120.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00D901B4W",
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black",
+        "ordered": 4,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00SS1DJRE",
+        "title": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B014ALOPYG",
+        "title": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00D901B4W",
+        "classification": "CANDIDATE",
+        "sku": "B00D901B4W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00D901B4W",
+        "classification": "CANDIDATE",
+        "sku": "B00D901B4W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00D901B4W",
+        "classification": "CANDIDATE",
+        "sku": "B00D901B4W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00D901B4W",
+        "classification": "CANDIDATE",
+        "sku": "B00D901B4W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00SS1DJRE",
+        "classification": "CANDIDATE",
+        "sku": "B00SS1DJRE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B014ALOPYG",
+        "classification": "CANDIDATE",
+        "sku": "B014ALOPYG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B007PP26RI",
+      "B00SS1DJRE",
+      "B014ALOPYG",
+      "B00A6CZV74",
+      "B00D901B4W"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00D901B4W",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black: found (#1, #2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00D901B4W",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black: 4 of 4.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00SS1DJRE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85: found (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00SS1DJRE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B014ALOPYG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black): found (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B014ALOPYG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ddae22a2eef16cc08d175727136c53b041446caa3fea70381316d8a956f57cd3"
+}

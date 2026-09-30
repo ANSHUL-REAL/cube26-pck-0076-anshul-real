@@ -1,0 +1,288 @@
+{
+  "record_id": "PCK-217CD0A255B2",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T03",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00795W9KI",
+        "qty": 2
+      },
+      {
+        "sku": "B00UDEZF26",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:50:22Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "c7dad819-9694-40e8-9162-8709e51ab399",
+      "role": "top_down",
+      "sha256": "24a1eadc3a80a278a7923022fbdf292d1dca9fe1e3a5cd14b7fea733e92997a2",
+      "original_sha256": "ef01adbff91bc0edcad9982da8991a7b9e34e492a6f3290fc584c8455d753d8f",
+      "mime": "image/jpeg",
+      "width": 599,
+      "height": 443,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 599,
+        "height": 443,
+        "blur_var": 42.5,
+        "mean_luma": 104.8,
+        "clipped_pct": 0.02,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Dan Verssen Games -23 Field Commander - Rommel Deluxe: found (#3).",
+        "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity: found (#1, #2).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Dan Verssen Games -23 Field Commander - Rommel Deluxe: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity: 2 clearly counted, some units may be stacked or hidden; 3 ordered.",
+        "Items may be stacked or hidden. Strips of tape or bands cross over the view, but all items are still discernible."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Dan Verssen Games -23 Field Commander - Rommel Deluxe with every unit visible.",
+        "A count of Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00795W9KI",
+        "title": "Dan Verssen Games -23 Field Commander - Rommel Deluxe",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00UDEZF26",
+        "title": "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity",
+        "ordered": 3,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          163,
+          27,
+          781,
+          437
+        ],
+        "description": "galvanized metal funnel with flexible neck",
+        "classification": "CANDIDATE",
+        "sku": "B00UDEZF26",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "galvanized metal funnel shape with neck visible",
+        "partially_hidden": false,
+        "title": "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          399,
+          316,
+          931,
+          765
+        ],
+        "description": "galvanized metal funnel with flexible neck",
+        "classification": "CANDIDATE",
+        "sku": "B00UDEZF26",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "galvanized metal funnel shape",
+        "partially_hidden": false,
+        "title": "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          60,
+          835,
+          915,
+          995
+        ],
+        "description": "board game box Field Commander Rommel",
+        "classification": "CANDIDATE",
+        "sku": "B00795W9KI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "board game cover text and graphics visible",
+        "partially_hidden": false,
+        "title": "Dan Verssen Games -23 Field Commander - Rommel Deluxe"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.8,
+      "notes": "Strips of tape or bands cross over the view, but all items are still discernible."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00XBBVINI",
+      "B000IBPD0S",
+      "B00795W9KI",
+      "B00UDEZF26"
+    ],
+    "usage": {
+      "input_tokens": 1972,
+      "output_tokens": 634,
+      "thinking_tokens": 0,
+      "total_tokens": 2606
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.8,
+      "detail": "Items may be stacked or hidden. Strips of tape or bands cross over the view, but all items are still discernible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00795W9KI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dan Verssen Games -23 Field Commander - Rommel Deluxe: found (#3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00795W9KI",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Dan Verssen Games -23 Field Commander - Rommel Deluxe: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00UDEZF26",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00UDEZF26",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.95,
+      "detail": "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity: 2 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10405,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:50:32Z",
+    "reasons": [
+      "Dan Verssen Games -23 Field Commander - Rommel Deluxe: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity: 2 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "Items may be stacked or hidden. Strips of tape or bands cross over the view, but all items are still discernible."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Dan Verssen Games -23 Field Commander - Rommel Deluxe by hand: there should be 2.",
+      "Count Lucas Galvanized Funnel with Flexible Neck, 1 Quart Capacity by hand: there should be 3."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:7eab44cc4459efac9f7411dd66fca810dcee79f2d28f7cbb595e8cfc4e8c9dff"
+}

@@ -1,0 +1,342 @@
+{
+  "record_id": "PCK-EA4A690A6E6D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T26",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00IXHC0JG",
+        "qty": 4
+      },
+      {
+        "sku": "B00OGS9KQ2",
+        "qty": 1
+      },
+      {
+        "sku": "B01E5ZC0PS",
+        "qty": 1
+      },
+      {
+        "sku": "B00YQ9PHE0",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:54:29Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "8ba25fdc-b12b-4756-8da2-945ab8b54f49",
+      "role": "top_down",
+      "sha256": "e9a4fc32720da44351aa20c4a5a4e64032ed858c35807a646f1f048d1e377dcd",
+      "original_sha256": "dcdd0d8935c4cadc80488b61c3a8c68cb367baa4c64dd95055f22aa1f528fea9",
+      "mime": "image/jpeg",
+      "width": 398,
+      "height": 272,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 398,
+        "height": 272,
+        "blur_var": 97.9,
+        "mean_luma": 113.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : 0 clearly counted, some units may be stacked or hidden; 4 ordered.",
+        "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : not seen, but items may be hidden.",
+        "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: not seen, but items may be hidden.",
+        "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: not seen, but items may be hidden.",
+        "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.00). The box interior is completely obscured by dense elastic netting/straps, preventing any product identification."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether 2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with  is in the box.",
+        "A count of 2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with  with every unit visible.",
+        "Whether Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S is in the box.",
+        "A count of Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S with every unit visible.",
+        "Whether Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc. is in the box.",
+        "A count of Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc. with every unit visible.",
+        "Whether We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2) is in the box.",
+        "A count of We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2) with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00IXHC0JG",
+        "title": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with ",
+        "ordered": 4,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00OGS9KQ2",
+        "title": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01E5ZC0PS",
+        "title": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00YQ9PHE0",
+        "title": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          180,
+          0,
+          893,
+          1000
+        ],
+        "description": "Elastic netting and cargo straps covering the box",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Elastic netting bands across the view",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "Elastic netting and cargo straps covering the box"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.0,
+      "notes": "The box interior is completely obscured by dense elastic netting/straps, preventing any product identification."
+    },
+    "image_issues": [
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B00YQ9PHE0",
+      "B00KBLCQ96",
+      "B00IXHC0JG",
+      "B01E5ZC0PS",
+      "B00OGS9KQ2",
+      "B01BZFAF5S"
+    ],
+    "usage": {
+      "input_tokens": 2154,
+      "output_tokens": 234,
+      "thinking_tokens": 0,
+      "total_tokens": 2388
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.0,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.00). The box interior is completely obscured by dense elastic netting/straps, preventing any product identification.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00IXHC0JG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IXHC0JG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : 0 clearly counted, some units may be stacked or hidden; 4 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00OGS9KQ2",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00OGS9KQ2",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01E5ZC0PS",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01E5ZC0PS",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00YQ9PHE0",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00YQ9PHE0",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4562,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:54:34Z",
+    "reasons": [
+      "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : 0 clearly counted, some units may be stacked or hidden; 4 ordered.",
+      "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with : not seen, but items may be hidden.",
+      "Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S: not seen, but items may be hidden.",
+      "Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc.: not seen, but items may be hidden.",
+      "We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2): not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.00). The box interior is completely obscured by dense elastic netting/straps, preventing any product identification."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count 2x Faster Charger 2.0 A Male to Micro B data sync BNU-137 2000mAH USB fast charging cable type Hi-Speed Compatible with  by hand: there should be 4.",
+      "Count Mens MLB Dustin Pedroia #15 Boston Red Sox Cool Base Jersey, Alternate Scarlet S by hand: there should be 1.",
+      "Count Dwelling Place® Stroller Hooks | 2 Pack | Adjustable and Holds 30 lbs | For Diaper Bags, Groceries, etc. by hand: there should be 1.",
+      "Count We R Memory Keepers 12 x 12 inch (6- 4 x 6-Inch pockets) 3-Ring Album Photo Sleeve Protectors, 10 PK (2) by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:47d8b2de7b6fa6d256d4cb27ef36cad94416b423c3207f9612dcdcce399e5c88"
+}

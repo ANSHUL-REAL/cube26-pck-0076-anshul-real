@@ -4,6 +4,12 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 
 ## Wed 30 Sep
 
+- **Held-out eval run, on a public dataset.** No products or labellers were available for a home shoot, so the eval uses 70 real warehouse photos from the Amazon Bin Image Dataset (CC BY-NC-SA 3.0 US). The orders were written from a fixed seed before any model run; ground truth is Amazon's record of each bin.
+  - **Free-tier quota:** the Gemini key allows 20 `gemini-2.5-flash` calls a day, and 2.5-flash-lite is closed to new users. The app and the eval moved to `gemini-3.5-flash-lite`.
+  - **Dev:** the lite model called strapped, cluttered bins "fully visible" and stopped good boxes. Prompt `pack-v3` asks for strict visibility answers, and false STOPs halved on dev.
+  - **Held-out (50 boxes, frozen first):** false SEAL 2/26 (8%), false STOP 12/24 (50%), UNCERTAIN 18/50, no model failures. The false-STOP kill condition tripped, so on these photos the agent records evidence and a person decides. With perfect perception the rules made no errors; every error was the model's.
+  - Contract examples are now real records from that run.
+
 - **Box plan before the shoot.** `eval/plan_boxes.py` plans all 70 boxes from the catalogue and writes the manifest (the answer key) before any photo exists, plus a phone checklist to pack from. It checks its own plan: every box can be packed with what's at home (a new `on_hand` column in `products.csv`), and every kind of box has the truth it's meant to have. Kinds are shuffled, so a box number doesn't give its answer away.
 - **Test set cut from 60 to 50 boxes** to match the brief's "50 units", before any photo was taken. 24 should seal and 26 should stop.
 - The photo import takes the whole shoot (practice and test boxes) in one go.

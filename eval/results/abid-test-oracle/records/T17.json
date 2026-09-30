@@ -1,0 +1,288 @@
+{
+  "record_id": "PCK-7BA0B470C04E",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T17",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000NZT6KM",
+        "qty": 1
+      },
+      {
+        "sku": "B000TM8RAE",
+        "qty": 1
+      },
+      {
+        "sku": "B004M15U12",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "804e3fe5-0b34-4015-83b4-bae9559bd7ca",
+      "role": "top_down",
+      "sha256": "1bf33fc48530af932c06508446e9ea551e185d526c022926499420e10342aa97",
+      "original_sha256": "8af044a87544b0421d9bac5ef5eccc4bf39f721d09065acc843e5811a5e2834a",
+      "mime": "image/jpeg",
+      "width": 526,
+      "height": 313,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 526,
+        "height": 313,
+        "blur_var": 35.8,
+        "mean_luma": 109.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B000NZT6KM",
+        "title": "Archipelago Botanicals Soy Lotion (18 oz.)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B000TM8RAE",
+        "title": "Dove Cream Oil Nourishing Body Lotion - 13.5 oz",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B004M15U12",
+        "title": "Planters Deluxe Whole Cashew, 18.25 Ounce",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000NZT6KM",
+        "classification": "CANDIDATE",
+        "sku": "B000NZT6KM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Archipelago Botanicals Soy Lotion (18 oz.)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000TM8RAE",
+        "classification": "CANDIDATE",
+        "sku": "B000TM8RAE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dove Cream Oil Nourishing Body Lotion - 13.5 oz"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004M15U12",
+        "classification": "CANDIDATE",
+        "sku": "B004M15U12",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Planters Deluxe Whole Cashew, 18.25 Ounce"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B004M15U12",
+        "title": "Planters Deluxe Whole Cashew, 18.25 Ounce",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B003FO2B5U",
+      "B000TM8RAE",
+      "B000NZT6KM",
+      "B004M15U12",
+      "SKU-SERUM-30"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000NZT6KM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Archipelago Botanicals Soy Lotion (18 oz.): found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000NZT6KM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Archipelago Botanicals Soy Lotion (18 oz.): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B000TM8RAE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dove Cream Oil Nourishing Body Lotion - 13.5 oz: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000TM8RAE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dove Cream Oil Nourishing Body Lotion - 13.5 oz: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B004M15U12",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Planters Deluxe Whole Cashew, 18.25 Ounce: found (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B004M15U12",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Planters Deluxe Whole Cashew, 18.25 Ounce: 1 in the box, 2 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Planters Deluxe Whole Cashew, 18.25 Ounce: 1 in the box, 2 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Planters Deluxe Whole Cashew, 18.25 Ounce."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:576cb39d6e68704202243de03acdd9bd8c4722d4af8da40a2c6ab6b8cbba1476"
+}

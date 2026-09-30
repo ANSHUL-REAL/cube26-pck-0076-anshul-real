@@ -1,0 +1,309 @@
+{
+  "record_id": "PCK-FB5F3E00C868",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T12",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B012W2LOJ4",
+        "qty": 1
+      },
+      {
+        "sku": "B00BP3PSZ8",
+        "qty": 2
+      },
+      {
+        "sku": "B01GX5IZUM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "39a5c201-e67c-4cd2-9c3f-504b84eb40bc",
+      "role": "top_down",
+      "sha256": "86f2dadd6824abd028acf779cb3d890cd188f992ef2c1b725e88f51b1bc4da6f",
+      "original_sha256": "46b4533b29806104869cad70e8960d1f354deef7334229b4d738671d76a85e07",
+      "mime": "image/jpeg",
+      "width": 655,
+      "height": 484,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 655,
+        "height": 484,
+        "blur_var": 30.9,
+        "mean_luma": 112.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B012W2LOJ4",
+        "title": "Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow ",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00BP3PSZ8",
+        "title": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01GX5IZUM",
+        "title": "Fixed star Bicycle Cycling Basket Handlebar Bag with Grey ，Outdoor Pouch MTB Road Handlebar Bag Cycling Bike Front Tube ",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0015TTXTY",
+        "classification": "CANDIDATE",
+        "sku": "B0015TTXTY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Raybestos MC544 Professional Grade Brake Master Cylinder"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00BP3PSZ8",
+        "classification": "CANDIDATE",
+        "sku": "B00BP3PSZ8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00BP3PSZ8",
+        "classification": "CANDIDATE",
+        "sku": "B00BP3PSZ8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01GX5IZUM",
+        "classification": "CANDIDATE",
+        "sku": "B01GX5IZUM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Fixed star Bicycle Cycling Basket Handlebar Bag with Grey ，Outdoor Pouch MTB Road Handlebar Bag Cycling Bike Front Tube "
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B012W2LOJ4",
+        "expected_title": "Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow ",
+        "found_sku": "B0015TTXTY",
+        "found_title": "Raybestos MC544 Professional Grade Brake Master Cylinder",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B003QCYXXY",
+      "B01GX5IZUM",
+      "B00PR70HUY",
+      "B012W2LOJ4",
+      "B00BP3PSZ8"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B012W2LOJ4",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow : not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B012W2LOJ4",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow : 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00BP3PSZ8",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin: found (#2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00BP3PSZ8",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01GX5IZUM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Fixed star Bicycle Cycling Basket Handlebar Bag with Grey ，Outdoor Pouch MTB Road Handlebar Bag Cycling Bike Front Tube : found (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01GX5IZUM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Fixed star Bicycle Cycling Basket Handlebar Bag with Grey ，Outdoor Pouch MTB Road Handlebar Bag Cycling Bike Front Tube : 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow , found Raybestos MC544 Professional Grade Brake Master Cylinder (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B012W2LOJ4",
+            "found_sku": "B0015TTXTY",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Expected Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow , found Raybestos MC544 Professional Grade Brake Master Cylinder (#1).",
+      "Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow : 0 in the box, 1 ordered.",
+      "Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow : not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Raybestos MC544 Professional Grade Brake Master Cylinder (#1) with Story@Home Elegant Comfort Softest Bedding set, 3 Pcs set, Fancy Collection Flat (Full) Double Bed sheets With 2 Pillow ."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:356703597de1218b29666e1ad7892a9936cdaba8dccbe4b085083c55c067dd4e"
+}

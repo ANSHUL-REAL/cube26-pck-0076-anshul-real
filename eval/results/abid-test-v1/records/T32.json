@@ -1,0 +1,212 @@
+{
+  "record_id": "PCK-5C7F93827355",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T32",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B01HNFKG5S",
+        "qty": 5
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:55:33Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e4592ba9-110d-4ed9-8b65-dd6c82129903",
+      "role": "top_down",
+      "sha256": "45b27a0a61077b18a0d0dbbd97c8fb69f45d08a67d57343996f02012e52f4fa3",
+      "original_sha256": "7be9b3d703bc3734d10ec5c25bac5cb320a0f21e3e2875759804c614762b522d",
+      "mime": "image/jpeg",
+      "width": 616,
+      "height": 596,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 616,
+        "height": 596,
+        "blur_var": 21.7,
+        "mean_luma": 144.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B01HNFKG5S",
+        "title": "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa",
+        "ordered": 5,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          29,
+          0,
+          943,
+          387
+        ],
+        "description": "HUMANCENTRIC VESA Mount Adapter Bracket box",
+        "classification": "CANDIDATE",
+        "sku": "B01HNFKG5S",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "HUMANCENTRIC branding and warranty label with model indicators",
+        "partially_hidden": false,
+        "title": "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          43,
+          330,
+          950,
+          727
+        ],
+        "description": "HUMANCENTRIC VESA Mount Adapter Bracket box",
+        "classification": "CANDIDATE",
+        "sku": "B01HNFKG5S",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "HUMANCENTRIC branding and warranty label with model indicators",
+        "partially_hidden": false,
+        "title": "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B01HNFKG5S",
+        "title": "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa",
+        "units": 3
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Two bracket boxes are visible, held by strapping across the box."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B011BWCT72",
+      "B01HNFKG5S",
+      "B00ZVICXSI"
+    ],
+    "usage": {
+      "input_tokens": 2018,
+      "output_tokens": 456,
+      "thinking_tokens": 0,
+      "total_tokens": 2474
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5250,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B01HNFKG5S",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5250,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01HNFKG5S",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa: 2 in the box, 5 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5250,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5250,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5250,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:55:38Z",
+    "reasons": [
+      "VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa: 2 in the box, 5 ordered."
+    ],
+    "fix_instructions": [
+      "Add 3 × VESA Mount Adapter Bracket for Samsung Monitors - fits many models including PX2370, S23C350H, S24B300EL, and more (2-pa."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:6ba2fba414f92351a501d380ec4593443b83e6b78edb3034b5118c573711f943"
+}

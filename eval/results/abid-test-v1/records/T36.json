@@ -1,0 +1,243 @@
+{
+  "record_id": "PCK-6235DE9A7EA3",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T36",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B007DW6DYU",
+        "qty": 4
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:06Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "30b1cc49-f2ed-4895-8fd7-caaa21f2bbdf",
+      "role": "top_down",
+      "sha256": "3c609b7c9f47bd7e666228da09ed252d7fb9ff503fc2f2606d31169a107853f7",
+      "original_sha256": "fe0170d013cc4754d5fa223a65daf188c19488f694f4f4046df913552e962b07",
+      "mime": "image/jpeg",
+      "width": 525,
+      "height": 312,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 525,
+        "height": 312,
+        "blur_var": 81.3,
+        "mean_luma": 134.6,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B007DW6DYU",
+        "title": "Minnie Mouse Matching Game",
+        "ordered": 4,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          38,
+          150,
+          273,
+          946
+        ],
+        "description": "Minnie Mouse Matching Game box",
+        "classification": "CANDIDATE",
+        "sku": "B007DW6DYU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible product title Minnie Matching",
+        "partially_hidden": false,
+        "title": "Minnie Mouse Matching Game"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          267,
+          211,
+          497,
+          946
+        ],
+        "description": "Minnie Mouse Matching Game box",
+        "classification": "CANDIDATE",
+        "sku": "B007DW6DYU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible product title Minnie Matching",
+        "partially_hidden": false,
+        "title": "Minnie Mouse Matching Game"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          471,
+          203,
+          715,
+          949
+        ],
+        "description": "Minnie Mouse Matching Game box",
+        "classification": "CANDIDATE",
+        "sku": "B007DW6DYU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible product title Minnie Matching",
+        "partially_hidden": false,
+        "title": "Minnie Mouse Matching Game"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          712,
+          140,
+          866,
+          880
+        ],
+        "description": "Minnie Mouse Matching Game box",
+        "classification": "CANDIDATE",
+        "sku": "B007DW6DYU",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "Barcode and red box packaging style matching others",
+        "partially_hidden": true,
+        "title": "Minnie Mouse Matching Game"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "Netting or straps cross over the top of the box, but all four items are clearly visible underneath."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0199ELGWI",
+      "B008RNGVZ0",
+      "B007DW6DYU"
+    ],
+    "usage": {
+      "input_tokens": 1988,
+      "output_tokens": 704,
+      "thinking_tokens": 0,
+      "total_tokens": 2692
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4218,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B007DW6DYU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Minnie Mouse Matching Game: found (#1, #2, #3, #4).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4218,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B007DW6DYU",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Minnie Mouse Matching Game: 4 of 4.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4218,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4218,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4218,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:10Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:4d967d489c847e0121b39d9336493fd04bf311b2befcbb2f8a4da866d39743d6"
+}

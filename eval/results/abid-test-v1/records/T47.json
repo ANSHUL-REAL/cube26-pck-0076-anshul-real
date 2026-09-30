@@ -1,0 +1,234 @@
+{
+  "record_id": "PCK-5460FF8DF23C",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T47",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000DZH3XO",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ea9bf5ea-c06d-47d5-8622-f6e6b7ae85db",
+      "role": "top_down",
+      "sha256": "e67f72064b3a2d460bdf01e09424259d63eeb8b2d7015b9372d2f3ff91eb240f",
+      "original_sha256": "eeb3a0b4d4ce8cbd99029368da16e4d011a15aa6644bbeae6f54677a7abfcf24",
+      "mime": "image/jpeg",
+      "width": 713,
+      "height": 639,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 713,
+        "height": 639,
+        "blur_var": 33.0,
+        "mean_luma": 100.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: White rectangular box with text PORTABLE CD BOOMBOX (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Fiskars 3 Piece Softouch Garden Tool Set (7067): 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+        "Fiskars 3 Piece Softouch Garden Tool Set (7067): not seen, but items may be hidden.",
+        "Items may be stacked or hidden; low visibility confidence (0.50). The box contains a portable CD boombox and bubble wrap. None of the candidate products (garden tool set, surface bolt, flaxseed) are visible in the box."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Fiskars 3 Piece Softouch Garden Tool Set (7067) is in the box.",
+        "A count of Fiskars 3 Piece Softouch Garden Tool Set (7067) with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B000DZH3XO",
+        "title": "Fiskars 3 Piece Softouch Garden Tool Set (7067)",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          170,
+          120,
+          485,
+          691
+        ],
+        "description": "White rectangular box with text PORTABLE CD BOOMBOX",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Text on box indicates portable CD boombox, which does not match any candidate",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          233,
+          29,
+          965,
+          946
+        ],
+        "description": "Bubble wrap packing material",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Transparent plastic bubble wrap used as protective packaging",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "White rectangular box with text PORTABLE CD BOOMBOX",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "Bubble wrap packing material"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.5,
+      "notes": "The box contains a portable CD boombox and bubble wrap. None of the candidate products (garden tool set, surface bolt, flaxseed) are visible in the box."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B000DZH3XO",
+      "B009ZLYQ50",
+      "B000VDX6TI"
+    ],
+    "usage": {
+      "input_tokens": 1981,
+      "output_tokens": 393,
+      "thinking_tokens": 0,
+      "total_tokens": 2374
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Items may be stacked or hidden; low visibility confidence (0.50). The box contains a portable CD boombox and bubble wrap. None of the candidate products (garden tool set, surface bolt, flaxseed) are visible in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3119,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000DZH3XO",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Fiskars 3 Piece Softouch Garden Tool Set (7067): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3119,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B000DZH3XO",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Fiskars 3 Piece Softouch Garden Tool Set (7067): 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3119,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3119,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: White rectangular box with text PORTABLE CD BOOMBOX (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3119,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:41Z",
+    "reasons": [
+      "Not in the order: White rectangular box with text PORTABLE CD BOOMBOX (#1)."
+    ],
+    "fix_instructions": [
+      "Remove White rectangular box with text PORTABLE CD BOOMBOX (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Fiskars 3 Piece Softouch Garden Tool Set (7067) by hand: there should be 3."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:3d9bf1d2774b34bf742115e7e250fe46800e012462064695662f3a3e7f106a08"
+}

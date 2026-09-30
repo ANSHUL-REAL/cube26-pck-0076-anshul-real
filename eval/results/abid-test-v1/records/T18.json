@@ -1,0 +1,227 @@
+{
+  "record_id": "PCK-33CFB29F7C5C",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T18",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00HIWWAXS",
+        "qty": 1
+      },
+      {
+        "sku": "B00WO0AJ96",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:53:13Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0ba83674-1243-48f3-9e61-988282f0bc91",
+      "role": "top_down",
+      "sha256": "d436595b4be7e4c14bd2bab0769634550c7a44904604f31be0f9642551c687ff",
+      "original_sha256": "32a3ea9100c19bdbe89976d294ab98bd11e889f698f5742693a55b97ebfb5284",
+      "mime": "image/jpeg",
+      "width": 522,
+      "height": 310,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 522,
+        "height": 310,
+        "blur_var": 43.1,
+        "mean_luma": 139.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00HIWWAXS",
+        "title": "Intex Fun Goals Game",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00WO0AJ96",
+        "title": "Marvel Titan Hero Series Ant-Man",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          386,
+          0,
+          888,
+          835
+        ],
+        "description": "Intex Fun Goals Game box",
+        "classification": "CANDIDATE",
+        "sku": "B00HIWWAXS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "product branding and text visible on box",
+        "partially_hidden": false,
+        "title": "Intex Fun Goals Game"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00WO0AJ96",
+        "title": "Marvel Titan Hero Series Ant-Man",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Strips across the box slightly obscure some details but the item is identifiable."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00R8ZV1IK",
+      "B00NDIFKQU",
+      "B00WO0AJ96",
+      "B00HIWWAXS"
+    ],
+    "usage": {
+      "input_tokens": 1974,
+      "output_tokens": 281,
+      "thinking_tokens": 0,
+      "total_tokens": 2255
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00HIWWAXS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Intex Fun Goals Game: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HIWWAXS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Intex Fun Goals Game: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00WO0AJ96",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Marvel Titan Hero Series Ant-Man: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00WO0AJ96",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Marvel Titan Hero Series Ant-Man: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3397,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:53:17Z",
+    "reasons": [
+      "Marvel Titan Hero Series Ant-Man: 0 in the box, 1 ordered.",
+      "Marvel Titan Hero Series Ant-Man: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Marvel Titan Hero Series Ant-Man."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a2fec7c8bd116823a796ff078dcfc4908e4a3d27cf0352edbb5e381c1e403a0b"
+}

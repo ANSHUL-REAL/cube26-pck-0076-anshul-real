@@ -1,48 +1,48 @@
 {
-  "record_id": "PCK-33C53D0B6E26",
+  "record_id": "PCK-DE6B25E17EB8",
   "schema_version": "cube.evidence.v1",
-  "organization_id": "org_demo_alpha",
-  "client_id": "client_seller_01",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
   "agent": {
     "name": "pack-manager",
     "version": "0.1.0",
-    "prompt_version": "pack-v2",
-    "model_version": "gemini-2.5-flash"
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
   },
   "subject": {
     "type": "outbound_box",
-    "unit_id": "UNIT-0012",
-    "order_id": "ORD-DUMMY-50012",
-    "channel": "shopify",
+    "unit_id": null,
+    "order_id": "EVAL-T01",
+    "channel": null,
     "expected_lines": [
       {
-        "sku": "SKU-MUG-11",
+        "sku": "B00GM60NL2",
         "qty": 1
       },
       {
-        "sku": "SKU-LEASH-6FT",
+        "sku": "B00PQ7N1RQ",
         "qty": 1
       }
     ]
   },
-  "captured_at": "2026-09-28T10:30:00Z",
-  "operator_label": "op_alpha",
+  "captured_at": "2026-09-30T14:50:00Z",
+  "operator_label": "eval",
   "images": [
     {
-      "image_id": "16f9a6d4-7374-4f44-8676-40e1e3fefd50",
+      "image_id": "d458703e-37d0-448b-ba79-719cff1efaf2",
       "role": "top_down",
-      "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
-      "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
+      "sha256": "1f75b6cc4a28395ad10cfdb58a55e33d848abf45bf46fac2ca2774c4a76d3684",
+      "original_sha256": "3035e33e65b351f0027b6f1d342aaf10f3932aa25518ed547bd1b9ab2bf8e779",
       "mime": "image/jpeg",
-      "width": 1600,
-      "height": 1200,
+      "width": 627,
+      "height": 465,
       "quality": {
         "gate": "PASS",
         "reasons": [],
-        "width": 1600,
-        "height": 1200,
-        "blur_var": 571.3,
-        "mean_luma": 152.0,
+        "width": 627,
+        "height": 465,
+        "blur_var": 35.8,
+        "mean_luma": 108.2,
         "clipped_pct": 0.0,
         "dark_pct": 0.0
       }
@@ -52,8 +52,8 @@
     "uncertainty": null,
     "expected_vs_observed": [
       {
-        "sku": "SKU-MUG-11",
-        "title": "Ceramic Mug 11oz, set of 2",
+        "sku": "B00GM60NL2",
+        "title": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-",
         "ordered": 1,
         "found": 1,
         "unclear": 0,
@@ -61,8 +61,8 @@
         "quantity": "PASS"
       },
       {
-        "sku": "SKU-LEASH-6FT",
-        "title": "Nylon Dog Leash",
+        "sku": "B00PQ7N1RQ",
+        "title": "Jurassic World Velociraptor Claws",
         "ordered": 1,
         "found": 1,
         "unclear": 0,
@@ -75,53 +75,53 @@
         "object_id": "o1",
         "photo": 1,
         "box_2d": [
-          120,
-          90,
-          610,
-          480
+          136,
+          11,
+          735,
+          545
         ],
-        "description": "white box printed with two mugs",
+        "description": "Rechargeable LED flashlight packaging box",
         "classification": "CANDIDATE",
-        "sku": "SKU-MUG-11",
-        "confidence": 0.94,
+        "sku": "B00GM60NL2",
+        "confidence": 0.95,
         "alternative_skus": [],
-        "deciding_feature": "",
-        "partially_hidden": false,
-        "title": "Ceramic Mug 11oz, set of 2"
+        "deciding_feature": "Product packaging design and text reading LED flashlight",
+        "partially_hidden": true,
+        "title": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-"
       },
       {
         "object_id": "o2",
         "photo": 1,
         "box_2d": [
-          300,
-          520,
-          760,
-          900
+          56,
+          312,
+          513,
+          915
         ],
-        "description": "coiled red nylon leash",
+        "description": "Jurassic World Velociraptor Claws packaging box",
         "classification": "CANDIDATE",
-        "sku": "SKU-LEASH-6FT",
-        "confidence": 0.91,
+        "sku": "B00PQ7N1RQ",
+        "confidence": 0.98,
         "alternative_skus": [],
-        "deciding_feature": "",
+        "deciding_feature": "Branding and packaging artwork of Velociraptor claws",
         "partially_hidden": false,
-        "title": "Nylon Dog Leash"
+        "title": "Jurassic World Velociraptor Claws"
       },
       {
         "object_id": "o3",
         "photo": 1,
         "box_2d": [
-          650,
-          80,
-          940,
-          430
+          419,
+          679,
+          853,
+          999
         ],
-        "description": "printed packing slip",
+        "description": "Jurassic World promotional insert card",
         "classification": "NON_PRODUCT",
         "sku": null,
-        "confidence": 0.97,
+        "confidence": 0.95,
         "alternative_skus": [],
-        "deciding_feature": "",
+        "deciding_feature": "Promotional product insert",
         "partially_hidden": false,
         "title": null
       }
@@ -134,29 +134,29 @@
     "non_product_items": [
       {
         "object_id": "o3",
-        "description": "printed packing slip"
+        "description": "Jurassic World promotional insert card"
       }
     ],
     "scene": {
       "box_interior_fully_visible": true,
       "items_may_be_hidden": false,
       "visibility_confidence": 0.95,
-      "notes": ""
+      "notes": "The box contains two candidate products and a promotional insert."
     },
     "image_issues": [],
     "candidates_shown": [
-      "SKU-MUG-11",
-      "SKU-CANDLE-3",
-      "SKU-LEASH-6FT",
-      "SKU-PUZZLE-500"
+      "B00PQ7N1RQ",
+      "B00GM60NL2",
+      "B001F0QS5A",
+      "B000IBPD0S"
     ],
     "usage": {
-      "input_tokens": 5210,
-      "output_tokens": 412,
+      "input_tokens": 1994,
+      "output_tokens": 609,
       "thinking_tokens": 0,
-      "total_tokens": 5622
+      "total_tokens": 2603
     },
-    "cost_usd": 0.002593,
+    "cost_usd": null,
     "cached_response": false
   },
   "checks": [
@@ -174,17 +174,17 @@
       "verdict": "PASS",
       "confidence": 0.95,
       "detail": "The whole inside of the box is visible and nothing appears hidden.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {}
     },
     {
-      "check_key": "line_present:SKU-MUG-11",
+      "check_key": "line_present:B00GM60NL2",
       "verdict": "PASS",
-      "confidence": 0.94,
-      "detail": "Ceramic Mug 11oz, set of 2: found (#1).",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.95,
+      "detail": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {
         "object_ids": [
           "o1"
@@ -192,12 +192,12 @@
       }
     },
     {
-      "check_key": "line_quantity:SKU-MUG-11",
+      "check_key": "line_quantity:B00GM60NL2",
       "verdict": "PASS",
-      "confidence": 0.94,
-      "detail": "Ceramic Mug 11oz, set of 2: 1 of 1.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.95,
+      "detail": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {
         "object_ids": [
           "o1"
@@ -205,12 +205,12 @@
       }
     },
     {
-      "check_key": "line_present:SKU-LEASH-6FT",
+      "check_key": "line_present:B00PQ7N1RQ",
       "verdict": "PASS",
-      "confidence": 0.91,
-      "detail": "Nylon Dog Leash: found (#2).",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.98,
+      "detail": "Jurassic World Velociraptor Claws: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {
         "object_ids": [
           "o2"
@@ -218,12 +218,12 @@
       }
     },
     {
-      "check_key": "line_quantity:SKU-LEASH-6FT",
+      "check_key": "line_quantity:B00PQ7N1RQ",
       "verdict": "PASS",
-      "confidence": 0.91,
-      "detail": "Nylon Dog Leash: 1 of 1.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.98,
+      "detail": "Jurassic World Velociraptor Claws: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {
         "object_ids": [
           "o2"
@@ -233,26 +233,26 @@
     {
       "check_key": "wrong_item",
       "verdict": "PASS",
-      "confidence": 0.91,
+      "confidence": 0.95,
       "detail": "No product from outside the order was found.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {}
     },
     {
       "check_key": "extra_item",
       "verdict": "PASS",
-      "confidence": 0.91,
+      "confidence": 0.95,
       "detail": "Nothing outside the order is in the box.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6404,
       "evidence": {}
     }
   ],
   "outcome": {
     "decision": "SEAL",
     "decided_by": "agent",
-    "decided_at": "2026-09-29T17:41:34Z",
+    "decided_at": "2026-09-30T14:50:07Z",
     "reasons": [
       "Every ordered item is in the box in the right quantity, and nothing else is."
     ],
@@ -260,5 +260,5 @@
   },
   "overrides": [],
   "status": "final",
-  "content_hash": "sha256:4c220dca25164ecc1f112952ca2ec343825600912e4bf48fb73c1c41553613da"
+  "content_hash": "sha256:9df76c291fb0c9a8064f597dfcc8604e52b06c2dd45a7eaac72d34cdf73f4cbf"
 }

@@ -8,7 +8,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 |---|---|
 | Live demo | _added on deployment_ |
 | Demo video | _added after recording_ |
-| Eval report | [EVAL.md](EVAL.md) _(held-out run pending)_ |
+| Eval report | [EVAL.md](EVAL.md): 50 held-out real warehouse photos (public dataset), false SEAL 8%, false STOP 50% |
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Record format for other tracks | [contract/](contract/README.md) |
 | Problems found in the brief and data | [FINDINGS.md](FINDINGS.md) |
@@ -54,7 +54,17 @@ python -m pack_manager replay-sample
 
 ## Results
 
-Measured on a held-out set of real boxes the agent never saw during tuning: two independent human labellers plus the physical packing list as ground truth. Per-check false positives and false negatives are reported separately, with false-SEAL (a mis-ship let through) as the headline error. See [EVAL.md](EVAL.md). _Numbers are added after the held-out run._
+One held-out run on **50 real warehouse bin photos** from the public Amazon Bin Image Dataset. We had no products or labellers for a home shoot; see [EVAL.md](EVAL.md) for why, and what that changes. Ground truth is Amazon's record of each bin; the orders were written before any run.
+
+| | Result (95% CI) |
+|---|---|
+| **False SEAL** (a wrong box would ship) | **2/26, 8% (2–24%)** |
+| False STOP (a good box stopped) | 12/24, 50% (31–69%) |
+| Sent to a person (UNCERTAIN) | 18/50, 36% (24–50%) |
+| Model failures | 0/50 |
+| Same boxes, perfect perception (rules alone) | 0 errors |
+
+**A kill condition tripped** (false STOP above 15%). On these photos, with `gemini-3.5-flash-lite`, the agent should record evidence and let a person decide, not gate sealing. The rules made no errors, so every error came from what the model saw. The main one: calling a strapped, cluttered bin "fully visible" and then missing a product.
 
 **Kill condition:** if the held-out false-SEAL rate is above 5% while UNCERTAIN is 25% or lower, the agent isn't fit to gate sealing. It should then run only as an evidence recorder (photo + record, no verdict).
 
@@ -174,7 +184,7 @@ Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that
 - **Can't see inside sealed retail packaging.** A missing scoop inside a sealed protein tub can't be detected, and a Pack record can't disprove that claim.
 - **Stacked identical items** are often UNCERTAIN rather than counted. This is by design, and it costs a hand check.
 - **Look-alike variants** (colour, size) are only as good as what the photo shows. When the deciding detail isn't visible, the answer is UNCERTAIN.
-- **Evaluated on household products** staged by the author, not in a real warehouse. Results show whether the approach works, not production accuracy.
+- **Evaluated on warehouse bin photos from a public dataset,** not on a packing bench and not on our own capture. No human labellers; ground truth is Amazon's record. Bench conditions (one open box, phone camera) are likely easier, but that's untested.
 - **Gemini free tier:** rate limits apply, and Google may use free-tier prompts to improve its products, so only the author's own product photos were used. Production would use a paid tier.
 - The content hash makes an edit detectable; it is **not** tamper-proof, append-only or externally anchored.
 - No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts.

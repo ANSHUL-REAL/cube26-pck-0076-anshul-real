@@ -1,0 +1,276 @@
+{
+  "record_id": "PCK-9665767C414A",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T46",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000FPN8TK",
+        "qty": 1
+      },
+      {
+        "sku": "B00LLGI2IO",
+        "qty": 1
+      },
+      {
+        "sku": "B00V2PB16O",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "6f8639e0-d25b-4f36-9eb2-76f017c8b68f",
+      "role": "top_down",
+      "sha256": "2271f28a1ddb50a7e7e7a67e7bed61db4e6d9de95cc1e510cfe9d7f1446a1f39",
+      "original_sha256": "af3fb35dc3ee5eb8e6469d34eb8e46457f3ef28668b6dff4a4d58d3f2f4cacd4",
+      "mime": "image/jpeg",
+      "width": 360,
+      "height": 331,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 360,
+        "height": 331,
+        "blur_var": 4.5,
+        "mean_luma": 68.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot: not seen, but items may be hidden.",
+        "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches: not seen, but items may be hidden.",
+        "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image is extremely dark, blurry, and covered with parallel lines or netting, making it impossible to clearly identify any items inside the box."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot is in the box.",
+        "A count of Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot with every unit visible.",
+        "Whether Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches is in the box.",
+        "A count of Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches with every unit visible.",
+        "Whether Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad is in the box.",
+        "A count of Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B000FPN8TK",
+        "title": "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00LLGI2IO",
+        "title": "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00V2PB16O",
+        "title": "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.1,
+      "notes": "The image is extremely dark, blurry, and covered with parallel lines or netting, making it impossible to clearly identify any items inside the box."
+    },
+    "image_issues": [
+      "darkness",
+      "blur",
+      "obscured"
+    ],
+    "candidates_shown": [
+      "B00JBK78V4",
+      "B00V2PB16O",
+      "B00LLGI2IO",
+      "B000FPN8TK",
+      "B01BH7JAIW"
+    ],
+    "usage": {
+      "input_tokens": 2126,
+      "output_tokens": 124,
+      "thinking_tokens": 0,
+      "total_tokens": 2250
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image is extremely dark, blurry, and covered with parallel lines or netting, making it impossible to clearly identify any items inside the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000FPN8TK",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B000FPN8TK",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00LLGI2IO",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00LLGI2IO",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00V2PB16O",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00V2PB16O",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3388,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:34Z",
+    "reasons": [
+      "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot: not seen, but items may be hidden.",
+      "Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches: not seen, but items may be hidden.",
+      "Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image is extremely dark, blurry, and covered with parallel lines or netting, making it impossible to clearly identify any items inside the box."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot by hand: there should be 1.",
+      "Count Silicone 2 Inch Cube Mold Ice Cube Tray ,Set of 2, 1 Green and 1 Orange, 6.25 X 4.35 X 2 Inches by hand: there should be 1.",
+      "Count Wireless Charger,Itian&reg;Qi Wireless Charging Pad K8 for Samsung Galaxy S7 S7 Edge S6 S6 Edge Note5 S6 Edge Plus(AC Ad by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:c2f64f43fc2da4662ba15bf9c77ce50d21639f280220d30c04cf339732d504b3"
+}

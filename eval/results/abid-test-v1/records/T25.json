@@ -1,0 +1,253 @@
+{
+  "record_id": "PCK-AB40996ECD03",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T25",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00A6ZZBDU",
+        "qty": 1
+      },
+      {
+        "sku": "B01HIZZPQS",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:54:21Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "dfc294dd-b9ea-431f-8558-2dd90865a176",
+      "role": "top_down",
+      "sha256": "906d67c231831522c2e25f6e2beb6e8f501d339a5821c9f558dcb3cd304a8066",
+      "original_sha256": "5f06311ea0df1ee6899ecad79e7d6204056a7f35d20cf6c30db663545d3cd645",
+      "mime": "image/jpeg",
+      "width": 397,
+      "height": 271,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 397,
+        "height": 271,
+        "blur_var": 69.3,
+        "mean_luma": 164.5,
+        "clipped_pct": 0.02,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: not seen, but items may be hidden.",
+        "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: not seen, but items may be hidden.",
+        "Items may be stacked or hidden; low visibility confidence (0.30). A plastic mesh security strap or net covers the top of the box, heavily obscuring the contents underneath, making it impossible to confidently identify any products."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc is in the box.",
+        "A count of Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc with every unit visible.",
+        "Whether OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo is in the box.",
+        "A count of OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00A6ZZBDU",
+        "title": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01HIZZPQS",
+        "title": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          178,
+          0,
+          856,
+          1000
+        ],
+        "description": "plastic mesh netting stretched across the open box interior",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.99,
+        "alternative_skus": [],
+        "deciding_feature": "protective plastic netting over box contents",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "plastic mesh netting stretched across the open box interior"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.3,
+      "notes": "A plastic mesh security strap or net covers the top of the box, heavily obscuring the contents underneath, making it impossible to confidently identify any products."
+    },
+    "image_issues": [
+      "obscured by netting"
+    ],
+    "candidates_shown": [
+      "SKU-LEASH-6FT",
+      "B00WRGY8DU",
+      "B01HIZZPQS",
+      "B00A6ZZBDU"
+    ],
+    "usage": {
+      "input_tokens": 2029,
+      "output_tokens": 249,
+      "thinking_tokens": 0,
+      "total_tokens": 2278
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.3,
+      "detail": "Items may be stacked or hidden; low visibility confidence (0.30). A plastic mesh security strap or net covers the top of the box, heavily obscuring the contents underneath, making it impossible to confidently identify any products.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00A6ZZBDU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00A6ZZBDU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01HIZZPQS",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01HIZZPQS",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4169,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:54:25Z",
+    "reasons": [
+      "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: not seen, but items may be hidden.",
+      "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: not seen, but items may be hidden.",
+      "Items may be stacked or hidden; low visibility confidence (0.30). A plastic mesh security strap or net covers the top of the box, heavily obscuring the contents underneath, making it impossible to confidently identify any products."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc by hand: there should be 1.",
+      "Count OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:7eaa58f39f577acaa81cc511a3b9c3d7cee2468c8ff3dc3c0eacbb96fc28572a"
+}

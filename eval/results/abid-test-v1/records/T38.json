@@ -1,0 +1,256 @@
+{
+  "record_id": "PCK-5672470315D4",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T38",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00A6CZV74",
+        "qty": 1
+      },
+      {
+        "sku": "B00XL70YKA",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:23Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "9efadd82-169f-4815-87e0-3def0876e2aa",
+      "role": "top_down",
+      "sha256": "47ac82e43bb6a44c76784bfbaf3585f521f705eaacff7f1c2f31091b2b5cb4ef",
+      "original_sha256": "31ca78438cfcb82665a27720cc573db89d849c6cd4fd16de979a1d561bc185c2",
+      "mime": "image/jpeg",
+      "width": 402,
+      "height": 274,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 402,
+        "height": 274,
+        "blur_var": 36.8,
+        "mean_luma": 140.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: Nutrition: Food, Health, and Spiritual Development (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS : 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10: not seen, but items may be hidden.",
+        "AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS : not seen, but items may be hidden.",
+        "Low visibility confidence (0.60). Stretchy elastic netting covers the opening of the box, partially obstructing the view and causing horizontal striped patterns on the image."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10 is in the box.",
+        "A count of Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10 with every unit visible.",
+        "Whether AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS  is in the box.",
+        "A count of AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS  with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00A6CZV74",
+        "title": "Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00XL70YKA",
+        "title": "AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS ",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          97,
+          539,
+          912,
+          997
+        ],
+        "description": "book titled Nutrition Food Health and Spiritual Development",
+        "classification": "CANDIDATE",
+        "sku": "1855842106",
+        "confidence": 0.85,
+        "alternative_skus": [],
+        "deciding_feature": "book cover layout and visible text",
+        "partially_hidden": true,
+        "title": "Nutrition: Food, Health, and Spiritual Development"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "1855842106",
+        "title": "Nutrition: Food, Health, and Spiritual Development",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.6,
+      "notes": "Stretchy elastic netting covers the opening of the box, partially obstructing the view and causing horizontal striped patterns on the image."
+    },
+    "image_issues": [
+      "netting obstruction",
+      "blurry"
+    ],
+    "candidates_shown": [
+      "B014ALOPYG",
+      "1855842106",
+      "B00XL70YKA",
+      "B00A6CZV74"
+    ],
+    "usage": {
+      "input_tokens": 2048,
+      "output_tokens": 325,
+      "thinking_tokens": 0,
+      "total_tokens": 2373
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Low visibility confidence (0.60). Stretchy elastic netting covers the opening of the box, partially obstructing the view and causing horizontal striped patterns on the image.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00A6CZV74",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00A6CZV74",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00XL70YKA",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS : not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00XL70YKA",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS : 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.85,
+      "detail": "Not in the order: Nutrition: Food, Health, and Spiritual Development (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4825,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:27Z",
+    "reasons": [
+      "Not in the order: Nutrition: Food, Health, and Spiritual Development (#1)."
+    ],
+    "fix_instructions": [
+      "Remove Nutrition: Food, Health, and Spiritual Development (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Brady  86569 5 3/4\" Height x 3\" Width, Economy Polyester (B-851), Black on Orange Inspection & Material Control Tags (10 by hand: there should be 1.",
+      "Also check: Count AUTVIVID 2pcs Auto 18W Flood LED Work Light Bar Off Road Driving Waterproof for Jeep Cabin Boat Ship SUV Truck Car ATVS  by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:efbd14afd80d49e3c39a3834eef148c3c0c846b7244b21640377aa267c6c7a00"
+}

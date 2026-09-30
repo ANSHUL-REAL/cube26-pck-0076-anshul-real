@@ -1,0 +1,309 @@
+{
+  "record_id": "PCK-8B56F2DD8D83",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T19",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "0374403619",
+        "qty": 1
+      },
+      {
+        "sku": "B00HS5ERWC",
+        "qty": 3
+      },
+      {
+        "sku": "B00XDAR6RE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "51d60fee-b784-43f8-b290-b45f89dc5a2a",
+      "role": "top_down",
+      "sha256": "9f4a3da6231cb935f10b73b65e642f5fbec97ee748c04f8093b49b2067e93aff",
+      "original_sha256": "8194fe03d283bc63e6f289ba72eee8313a1cd022bf1890f6095b0dcd6ebc16c3",
+      "mime": "image/jpeg",
+      "width": 543,
+      "height": 706,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 543,
+        "height": 706,
+        "blur_var": 30.6,
+        "mean_luma": 86.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "0374403619",
+        "title": "Amos y Boris (Spanish Edition)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00HS5ERWC",
+        "title": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast ",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00XDAR6RE",
+        "title": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "0374403619",
+        "classification": "CANDIDATE",
+        "sku": "0374403619",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Amos y Boris (Spanish Edition)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00HS5ERWC",
+        "classification": "CANDIDATE",
+        "sku": "B00HS5ERWC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast "
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00HS5ERWC",
+        "classification": "CANDIDATE",
+        "sku": "B00HS5ERWC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast "
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00HS5ERWC",
+        "classification": "CANDIDATE",
+        "sku": "B00HS5ERWC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast "
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00XDAR6RE",
+        "classification": "CANDIDATE",
+        "sku": "B00XDAR6RE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00XDAR6RE",
+      "B01EK51BVC",
+      "0374403619",
+      "B00HS5ERWC",
+      "B01GX5IZUM"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:0374403619",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Amos y Boris (Spanish Edition): found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:0374403619",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Amos y Boris (Spanish Edition): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00HS5ERWC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast : found (#2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HS5ERWC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast : 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00XDAR6RE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2): found (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00XDAR6RE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:b72ceb7cb9b73aba649785d2f8faa7a99326aa1fceb0408b59b15e4dada8db0e"
+}

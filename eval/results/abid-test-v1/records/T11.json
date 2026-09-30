@@ -1,0 +1,231 @@
+{
+  "record_id": "PCK-7034D1A6F41F",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T11",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B005CSTIHG",
+        "qty": 4
+      },
+      {
+        "sku": "B00B9LDX8K",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:52:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "c72b167a-c9df-4758-a5ac-9e2a90806a8f",
+      "role": "top_down",
+      "sha256": "8174c5ebbe2f2231253a06f3f02c71b4d1408b9b60c7c59ac2e361c260442971",
+      "original_sha256": "12f9febb6d96a00f9732cd6b65056308fba50398c4d10f7ef485b06eff5f2292",
+      "mime": "image/jpeg",
+      "width": 418,
+      "height": 285,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 418,
+        "height": 285,
+        "blur_var": 66.2,
+        "mean_luma": 126.6,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "S Super Stupid Soft Voodoo 165-170g: 0 clearly counted, some units may be stacked or hidden; 4 ordered.",
+        "plate 6.75 inches rd cool dots brdr: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "S Super Stupid Soft Voodoo 165-170g: not seen, but items may be hidden.",
+        "plate 6.75 inches rd cool dots brdr: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.00). The box interior is obscured by mesh strapping and blurry view, making it impossible to identify any products clearly."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether S Super Stupid Soft Voodoo 165-170g is in the box.",
+        "A count of S Super Stupid Soft Voodoo 165-170g with every unit visible.",
+        "Whether plate 6.75 inches rd cool dots brdr is in the box.",
+        "A count of plate 6.75 inches rd cool dots brdr with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B005CSTIHG",
+        "title": "S Super Stupid Soft Voodoo 165-170g",
+        "ordered": 4,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00B9LDX8K",
+        "title": "plate 6.75 inches rd cool dots brdr",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.0,
+      "notes": "The box interior is obscured by mesh strapping and blurry view, making it impossible to identify any products clearly."
+    },
+    "image_issues": [
+      "blur",
+      "obscured by mesh straps"
+    ],
+    "candidates_shown": [
+      "B00B9LDX8K",
+      "B005CSTIHG",
+      "B000IBPD0S",
+      "B003BKWLAS"
+    ],
+    "usage": {
+      "input_tokens": 1997,
+      "output_tokens": 114,
+      "thinking_tokens": 0,
+      "total_tokens": 2111
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.0,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.00). The box interior is obscured by mesh strapping and blurry view, making it impossible to identify any products clearly.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B005CSTIHG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "S Super Stupid Soft Voodoo 165-170g: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B005CSTIHG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "S Super Stupid Soft Voodoo 165-170g: 0 clearly counted, some units may be stacked or hidden; 4 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00B9LDX8K",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "plate 6.75 inches rd cool dots brdr: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00B9LDX8K",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "plate 6.75 inches rd cool dots brdr: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7875,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:52:10Z",
+    "reasons": [
+      "S Super Stupid Soft Voodoo 165-170g: 0 clearly counted, some units may be stacked or hidden; 4 ordered.",
+      "plate 6.75 inches rd cool dots brdr: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "S Super Stupid Soft Voodoo 165-170g: not seen, but items may be hidden.",
+      "plate 6.75 inches rd cool dots brdr: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.00). The box interior is obscured by mesh strapping and blurry view, making it impossible to identify any products clearly."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count S Super Stupid Soft Voodoo 165-170g by hand: there should be 4.",
+      "Count plate 6.75 inches rd cool dots brdr by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:df54a50ca8fbf8cd38edd3ec4d71d7d8b3a61cda5e39fe64c8ba04b7d14e5dd2"
+}

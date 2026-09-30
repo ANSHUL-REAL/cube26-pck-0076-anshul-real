@@ -1,0 +1,300 @@
+{
+  "record_id": "PCK-F99519CB8227",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T21",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00D901B4W",
+        "qty": 4
+      },
+      {
+        "sku": "B00SS1DJRE",
+        "qty": 1
+      },
+      {
+        "sku": "B014ALOPYG",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:53:45Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "bc112938-cdd7-423b-8268-536e7f641fbe",
+      "role": "top_down",
+      "sha256": "ed49a63d0eae5e7bec20d06a8791baed80f51bd53038bc93af453194181c11ad",
+      "original_sha256": "42e62b3e2bf32728209078188c290e72145b3973e1a0a479e039349a8854218e",
+      "mime": "image/jpeg",
+      "width": 394,
+      "height": 268,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 394,
+        "height": 268,
+        "blur_var": 48.5,
+        "mean_luma": 120.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00D901B4W",
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black",
+        "ordered": 4,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00SS1DJRE",
+        "title": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B014ALOPYG",
+        "title": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          330,
+          107,
+          680,
+          429
+        ],
+        "description": "orange and white box for smartphone car mount",
+        "classification": "CANDIDATE",
+        "sku": "B00D901B4W",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "orange KENU brand box packaging",
+        "partially_hidden": false,
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          265,
+          545,
+          535,
+          959
+        ],
+        "description": "orange and white box for smartphone car mount",
+        "classification": "CANDIDATE",
+        "sku": "B00D901B4W",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "orange KENU brand box packaging",
+        "partially_hidden": false,
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00D901B4W",
+        "title": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black",
+        "units": 2
+      },
+      {
+        "sku": "B00SS1DJRE",
+        "title": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85",
+        "units": 1
+      },
+      {
+        "sku": "B014ALOPYG",
+        "title": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black)",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.85,
+      "notes": "Items viewed through storage bin mesh."
+    },
+    "image_issues": [
+      "mesh overlay"
+    ],
+    "candidates_shown": [
+      "B007PP26RI",
+      "B00SS1DJRE",
+      "B014ALOPYG",
+      "B00A6CZV74",
+      "B00D901B4W"
+    ],
+    "usage": {
+      "input_tokens": 2104,
+      "output_tokens": 442,
+      "thinking_tokens": 0,
+      "total_tokens": 2546
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00D901B4W",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00D901B4W",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black: 2 in the box, 4 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00SS1DJRE",
+      "verdict": "FAIL",
+      "confidence": 0.85,
+      "detail": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00SS1DJRE",
+      "verdict": "FAIL",
+      "confidence": 0.85,
+      "detail": "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B014ALOPYG",
+      "verdict": "FAIL",
+      "confidence": 0.85,
+      "detail": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black): not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B014ALOPYG",
+      "verdict": "FAIL",
+      "confidence": 0.85,
+      "detail": "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black): 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5864,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:53:51Z",
+    "reasons": [
+      "Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black: 2 in the box, 4 ordered.",
+      "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85: 0 in the box, 1 ordered.",
+      "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black): 0 in the box, 1 ordered.",
+      "6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85: not in the box, and the whole box is visible.",
+      "MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black): not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 2 × Kenu Airframe | Car Mount for Smartphones (Non Phablets) | Black.",
+      "Add 1 × 6-pack High-performance Filter Replacement + 3 Side Brushes for All Neato Botvac Series Models, 70e 75 80 85.",
+      "Add 1 × MrStarGuy QHA12404Y 2\" H-Alpha FWHM12nm Filter (Black)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:82206e013e9675f656342237f3bc5bf3fdb2007f6b1e007f6e8a21ff08dcca2f"
+}

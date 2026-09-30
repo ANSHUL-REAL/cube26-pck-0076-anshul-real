@@ -1,0 +1,267 @@
+{
+  "record_id": "PCK-48BD84D58D42",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T49",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "1119049105",
+        "qty": 3
+      },
+      {
+        "sku": "B00JNJPS4W",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:52Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b9de4a4c-1811-4a40-bec3-a9fa54f15ea6",
+      "role": "top_down",
+      "sha256": "f8451cbd5b0edfb2a9aaa6266836acf9455cad7302f72a241b8a908e188744e9",
+      "original_sha256": "9c9f6ddb0de2c844b51dfcc43d0622a2ea31caaa9e73864f1af39158a684f656",
+      "mime": "image/jpeg",
+      "width": 430,
+      "height": 551,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 430,
+        "height": 551,
+        "blur_var": 66.3,
+        "mean_luma": 124.4,
+        "clipped_pct": 0.39,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "1119049105",
+        "title": "Starting a Business All-In-One For Dummies",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00JNJPS4W",
+        "title": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          272,
+          381,
+          715,
+          755
+        ],
+        "description": "Starting a Business All-In-One For Dummies book",
+        "classification": "CANDIDATE",
+        "sku": "1119049105",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible title text Starting a Business All-In-One For Dummies",
+        "partially_hidden": false,
+        "title": "Starting a Business All-In-One For Dummies"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          267,
+          542,
+          694,
+          915
+        ],
+        "description": "Starting a Business All-In-One For Dummies book",
+        "classification": "CANDIDATE",
+        "sku": "1119049105",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible title text Starting a Business All-In-One For Dummies",
+        "partially_hidden": false,
+        "title": "Starting a Business All-In-One For Dummies"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          261,
+          683,
+          712,
+          1000
+        ],
+        "description": "Starting a Business All-In-One For Dummies book",
+        "classification": "CANDIDATE",
+        "sku": "1119049105",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible title text Starting a Business All-In-One For Dummies",
+        "partially_hidden": false,
+        "title": "Starting a Business All-In-One For Dummies"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00JNJPS4W",
+        "title": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "The container holds three identical books standing upright, clearly visible through a mesh side."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00S05KTOO",
+      "B016I0J2Z4",
+      "1119049105",
+      "B00JNJPS4W"
+    ],
+    "usage": {
+      "input_tokens": 2019,
+      "output_tokens": 620,
+      "thinking_tokens": 0,
+      "total_tokens": 2639
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:1119049105",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Starting a Business All-In-One For Dummies: found (#1, #2, #3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:1119049105",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Starting a Business All-In-One For Dummies: 3 of 3.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00JNJPS4W",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00JNJPS4W",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3382,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:55Z",
+    "reasons": [
+      "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla: 0 in the box, 1 ordered.",
+      "Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Koomus Air Vent Universal Smartphone Car Mount Holder Cradle for all iPhone and Android devices - Retail Packaging - Bla."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a40dfbcf96948a388dbebf10cf0e7ec632dc797b22846ea96ced87d0053f2e0f"
+}

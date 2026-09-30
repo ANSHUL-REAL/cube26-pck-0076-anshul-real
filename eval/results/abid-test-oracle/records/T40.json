@@ -1,0 +1,353 @@
+{
+  "record_id": "PCK-25BC80FF8373",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T40",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B013FHAOC8",
+        "qty": 2
+      },
+      {
+        "sku": "B01BLDWSOA",
+        "qty": 1
+      },
+      {
+        "sku": "B01CDGDLN6",
+        "qty": 2
+      },
+      {
+        "sku": "B01DDC0VFU",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7370dacf-68f4-4137-bbdf-1553793cb084",
+      "role": "top_down",
+      "sha256": "d1bee4a4e03d46cfbcec8ed98b5abcc3c8630190a7ee003be10706e61dffc812",
+      "original_sha256": "1a071866c2d4561ee7199d4a3ebb07686edc76ce58bd9b3ab718b26bb83e01fe",
+      "mime": "image/jpeg",
+      "width": 467,
+      "height": 357,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 467,
+        "height": 357,
+        "blur_var": 26.2,
+        "mean_luma": 101.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B013FHAOC8",
+        "title": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, ",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01BLDWSOA",
+        "title": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01CDGDLN6",
+        "title": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01DDC0VFU",
+        "title": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B013FHAOC8",
+        "classification": "CANDIDATE",
+        "sku": "B013FHAOC8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, "
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B013FHAOC8",
+        "classification": "CANDIDATE",
+        "sku": "B013FHAOC8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, "
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01BLDWSOA",
+        "classification": "CANDIDATE",
+        "sku": "B01BLDWSOA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01CDGDLN6",
+        "classification": "CANDIDATE",
+        "sku": "B01CDGDLN6",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01CDGDLN6",
+        "classification": "CANDIDATE",
+        "sku": "B01CDGDLN6",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B01DDC0VFU",
+        "title": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black)",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00957YQ36",
+      "B00JBK78V4",
+      "B01CDGDLN6",
+      "B01BLDWSOA",
+      "B01DDC0VFU",
+      "B013FHAOC8"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B013FHAOC8",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : found (#1, #2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B013FHAOC8",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01BLDWSOA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: found (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01BLDWSOA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01CDGDLN6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: found (#4, #5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01CDGDLN6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01DDC0VFU",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B01DDC0VFU",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): 0 in the box, 1 ordered.",
+      "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:62207674162615eecb2c32d2d49ee609a6df3a0b4b87dd9c577818d5b33337f2"
+}

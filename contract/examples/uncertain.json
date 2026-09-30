@@ -1,44 +1,48 @@
 {
-  "record_id": "PCK-CB9DC7A1860B",
+  "record_id": "PCK-5EF21D5C6D25",
   "schema_version": "cube.evidence.v1",
-  "organization_id": "org_demo_alpha",
-  "client_id": "client_seller_01",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
   "agent": {
     "name": "pack-manager",
     "version": "0.1.0",
-    "prompt_version": "pack-v2",
-    "model_version": "gemini-2.5-flash"
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
   },
   "subject": {
     "type": "outbound_box",
-    "unit_id": "UNIT-0016",
-    "order_id": "ORD-DUMMY-50016",
-    "channel": "shopify",
+    "unit_id": null,
+    "order_id": "EVAL-T02",
+    "channel": null,
     "expected_lines": [
       {
-        "sku": "SKU-TOWEL-BLU",
-        "qty": 2
+        "sku": "B00H9HJSFU",
+        "qty": 6
+      },
+      {
+        "sku": "B005FEGYCO",
+        "qty": 1
       }
     ]
   },
-  "captured_at": "2026-09-28T10:30:00Z",
-  "operator_label": "op_alpha",
+  "captured_at": "2026-09-30T14:50:11Z",
+  "operator_label": "eval",
   "images": [
     {
-      "image_id": "16f9a6d4-7374-4f44-8676-40e1e3fefd50",
+      "image_id": "f52acf7d-c8cc-43eb-b7b0-096a51d44c94",
       "role": "top_down",
-      "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
-      "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
+      "sha256": "ed2c2d3bf05bdef79a0d565105161079ebcc52c5b4a739116e981b5b51e92807",
+      "original_sha256": "114d3ff3836baecb056cf2e602edb43e6d51dd1ce26be10e0a436b688f09d258",
       "mime": "image/jpeg",
-      "width": 1600,
-      "height": 1200,
+      "width": 395,
+      "height": 269,
       "quality": {
         "gate": "PASS",
         "reasons": [],
-        "width": 1600,
-        "height": 1200,
-        "blur_var": 571.3,
-        "mean_luma": 152.0,
+        "width": 395,
+        "height": 269,
+        "blur_var": 63.3,
+        "mean_luma": 116.9,
         "clipped_pct": 0.0,
         "dark_pct": 0.0
       }
@@ -49,27 +53,40 @@
       "known": [
         "No product from outside the order was found.",
         "Nothing outside the order is in the box.",
-        "Cotton Bath Towel: found (#1).",
+        "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : found (#1).",
         "1 photo(s) passed the blur, exposure, glare and resolution checks."
       ],
       "unknown": [
-        "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
-        "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked"
+        "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
+        "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden.",
+        "Items may be stacked or hidden. Safety netting covers the view of the box interior."
       ],
       "missing_evidence": [
         "A view of stacked or covered items: spread them out, or add a photo from an angle.",
-        "A count of Cotton Bath Towel with every unit visible."
+        "A count of ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast  with every unit visible.",
+        "Whether LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights is in the box.",
+        "A count of LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights with every unit visible."
       ],
       "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
     },
     "expected_vs_observed": [
       {
-        "sku": "SKU-TOWEL-BLU",
-        "title": "Cotton Bath Towel",
-        "ordered": 2,
+        "sku": "B00H9HJSFU",
+        "title": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast ",
+        "ordered": 6,
         "found": 1,
-        "unclear": 1,
+        "unclear": 0,
         "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B005FEGYCO",
+        "title": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
         "quantity": "UNCERTAIN"
       }
     ],
@@ -78,71 +95,49 @@
         "object_id": "o1",
         "photo": 1,
         "box_2d": [
-          200,
-          150,
-          780,
-          850
+          217,
+          156,
+          838,
+          881
         ],
-        "description": "folded blue towel on top",
+        "description": "Robertson fluorescent eballast",
         "classification": "CANDIDATE",
-        "sku": "SKU-TOWEL-BLU",
-        "confidence": 0.92,
+        "sku": "B00H9HJSFU",
+        "confidence": 0.9,
         "alternative_skus": [],
-        "deciding_feature": "",
-        "partially_hidden": false,
-        "title": "Cotton Bath Towel"
-      },
-      {
-        "object_id": "o2",
-        "photo": 1,
-        "box_2d": [
-          720,
-          160,
-          800,
-          840
-        ],
-        "description": "edge of blue fabric under it",
-        "classification": "CANDIDATE",
-        "sku": "SKU-TOWEL-BLU",
-        "confidence": 0.55,
-        "alternative_skus": [],
-        "deciding_feature": "",
+        "deciding_feature": "metal rectangular ballast shape and label visible through netting",
         "partially_hidden": true,
-        "title": "Cotton Bath Towel"
+        "title": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast "
       }
     ],
     "missing": [],
     "wrong": [],
     "extra": [],
     "over_quantity": [],
-    "unclear": [
-      {
-        "object_id": "o2",
-        "guess_sku": "SKU-TOWEL-BLU",
-        "confidence": 0.55,
-        "description": "edge of blue fabric under it"
-      }
-    ],
+    "unclear": [],
     "non_product_items": [],
     "scene": {
       "box_interior_fully_visible": true,
       "items_may_be_hidden": true,
-      "visibility_confidence": 0.6,
-      "notes": "Towels are stacked"
+      "visibility_confidence": 0.7,
+      "notes": "Safety netting covers the view of the box interior."
     },
-    "image_issues": [],
+    "image_issues": [
+      "netting obstruction"
+    ],
     "candidates_shown": [
-      "SKU-SERUM-30",
-      "SKU-TOWEL-BLU",
-      "SKU-LAMP-LED"
+      "B00H9HJSFU",
+      "B005FEGYCO",
+      "B019UJ3IS2",
+      "0321772601"
     ],
     "usage": {
-      "input_tokens": 5210,
-      "output_tokens": 412,
+      "input_tokens": 2059,
+      "output_tokens": 303,
       "thinking_tokens": 0,
-      "total_tokens": 5622
+      "total_tokens": 2362
     },
-    "cost_usd": 0.002593,
+    "cost_usd": null,
     "cached_response": false
   },
   "checks": [
@@ -158,19 +153,19 @@
     {
       "check_key": "scene_coverage",
       "verdict": "UNCERTAIN",
-      "confidence": 0.6,
-      "detail": "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.7,
+      "detail": "Items may be stacked or hidden. Safety netting covers the view of the box interior.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
       "evidence": {}
     },
     {
-      "check_key": "line_present:SKU-TOWEL-BLU",
+      "check_key": "line_present:B00H9HJSFU",
       "verdict": "PASS",
-      "confidence": 0.92,
-      "detail": "Cotton Bath Towel: found (#1).",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.9,
+      "detail": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
       "evidence": {
         "object_ids": [
           "o1"
@@ -178,55 +173,78 @@
       }
     },
     {
-      "check_key": "line_quantity:SKU-TOWEL-BLU",
+      "check_key": "line_quantity:B00H9HJSFU",
       "verdict": "UNCERTAIN",
-      "confidence": 0.92,
-      "detail": "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "confidence": 0.9,
+      "detail": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
       "evidence": {
         "object_ids": [
           "o1"
         ],
-        "possible_object_ids": [
-          "o2"
-        ]
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B005FEGYCO",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B005FEGYCO",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
       }
     },
     {
       "check_key": "wrong_item",
       "verdict": "PASS",
-      "confidence": 0.6,
+      "confidence": 0.7,
       "detail": "No product from outside the order was found.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
       "evidence": {}
     },
     {
       "check_key": "extra_item",
       "verdict": "PASS",
-      "confidence": 0.6,
+      "confidence": 0.7,
       "detail": "Nothing outside the order is in the box.",
-      "model_version": "gemini-2.5-flash",
-      "latency_ms": 3180,
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080,
       "evidence": {}
     }
   ],
   "outcome": {
     "decision": "UNCERTAIN",
     "decided_by": "agent",
-    "decided_at": "2026-09-29T17:41:34Z",
+    "decided_at": "2026-09-30T14:50:18Z",
     "reasons": [
-      "Cotton Bath Towel: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 2 ordered.",
-      "Items may be stacked or hidden; low visibility confidence (0.60). Towels are stacked"
+      "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
+      "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden.",
+      "Items may be stacked or hidden. Safety netting covers the view of the box interior."
     ],
     "fix_instructions": [
       "Take a photo that shows the whole inside of the box, with stacked items spread out.",
-      "Count Cotton Bath Towel by hand: there should be 2.",
-      "Check #2 by hand: it looks like Cotton Bath Towel."
+      "Count ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast  by hand: there should be 6.",
+      "Count LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights by hand: there should be 1."
     ]
   },
   "overrides": [],
   "status": "pending_review",
-  "content_hash": "sha256:423bd8a75694f8c68c67a99c1d94a9bda8ac34920116d581aa21d3efec80edcd"
+  "content_hash": "sha256:2ee48d92c872a52cf7e6debd4f32ddc41c6e4afe3a6a28b91da34484350c4396"
 }

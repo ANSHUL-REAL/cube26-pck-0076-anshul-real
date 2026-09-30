@@ -1,0 +1,250 @@
+{
+  "record_id": "PCK-DE4ACCFEBCB0",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T16",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B001EW3C1W",
+        "qty": 1
+      },
+      {
+        "sku": "B019UXTD8C",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:52:53Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "3354a657-21ba-4095-9f10-0039fee4c2e8",
+      "role": "top_down",
+      "sha256": "36bef8d8d6ef44a69757eb3bf26bf09406cbab7a51c249564fbdc76fdc63115e",
+      "original_sha256": "ee9f5d51f4d1279c8729a0d714aa8763beb4ab935c6637b836e9d912da532780",
+      "mime": "image/jpeg",
+      "width": 369,
+      "height": 252,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 369,
+        "height": 252,
+        "blur_var": 78.2,
+        "mean_luma": 117.8,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable: not seen, but items may be hidden.",
+        "Items may be stacked or hidden. Box is covered by security straps or netting which slightly distorts the view."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X with every unit visible.",
+        "Whether LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable is in the box.",
+        "A count of LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B001EW3C1W",
+        "title": "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B019UXTD8C",
+        "title": "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          256,
+          392,
+          838,
+          861
+        ],
+        "description": "Black and purple striped nylon tights packaging",
+        "classification": "CANDIDATE",
+        "sku": "B001EW3C1W",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "Visible striped pattern and packaging matching Leg Avenue tights",
+        "partially_hidden": true,
+        "title": "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.7,
+      "notes": "Box is covered by security straps or netting which slightly distorts the view."
+    },
+    "image_issues": [
+      "netting obscuring the view"
+    ],
+    "candidates_shown": [
+      "B019UXTD8C",
+      "B0199ELGWI",
+      "B001EW3C1W",
+      "B01DXUTSLA"
+    ],
+    "usage": {
+      "input_tokens": 2060,
+      "output_tokens": 315,
+      "thinking_tokens": 0,
+      "total_tokens": 2375
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "Items may be stacked or hidden. Box is covered by security straps or netting which slightly distorts the view.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B001EW3C1W",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B001EW3C1W",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.95,
+      "detail": "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B019UXTD8C",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B019UXTD8C",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4497,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:52:58Z",
+    "reasons": [
+      "Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable: not seen, but items may be hidden.",
+      "Items may be stacked or hidden. Box is covered by security straps or netting which slightly distorts the view."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Leg Avenue Women's Plus-Size Nylon Striped Tights, Black/Purple, 3X-4X by hand: there should be 1.",
+      "Count LIGHTSTORY A19 2W LED Starry Light Bulb, E26 Base, 2400K - Vintage Decorative LED Bulbs, Dimmable by hand: there should be 2."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:be4022caf16f16f215867dd2228dd1f9e70ea208e4fdfdb74c3628ff05b5ed8b"
+}

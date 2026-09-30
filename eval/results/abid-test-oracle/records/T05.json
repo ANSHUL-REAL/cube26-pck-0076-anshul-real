@@ -1,0 +1,338 @@
+{
+  "record_id": "PCK-E5D874A1E3D0",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T05",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00CWEB7VI",
+        "qty": 1
+      },
+      {
+        "sku": "B00NDIFKQU",
+        "qty": 1
+      },
+      {
+        "sku": "B0183JF0FE",
+        "qty": 2
+      },
+      {
+        "sku": "B018EAZ94E",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "4a1cc1bc-2f31-40e0-9329-f01f4975365e",
+      "role": "top_down",
+      "sha256": "8628c3965c7e0507bf045a18ca10511b050f1ca0ed64c472f741101e85d1c0d3",
+      "original_sha256": "52036154a05d1b1223554c4ceb7be23d0e8470c4531ae62168db24527627dc01",
+      "mime": "image/jpeg",
+      "width": 565,
+      "height": 505,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 565,
+        "height": 505,
+        "blur_var": 28.7,
+        "mean_luma": 99.8,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00CWEB7VI",
+        "title": "Everyone Body Lotion, Unscented, 32 Ounce",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00NDIFKQU",
+        "title": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B0183JF0FE",
+        "title": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B018EAZ94E",
+        "title": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00CWEB7VI",
+        "classification": "CANDIDATE",
+        "sku": "B00CWEB7VI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Everyone Body Lotion, Unscented, 32 Ounce"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00NDIFKQU",
+        "classification": "CANDIDATE",
+        "sku": "B00NDIFKQU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0183JF0FE",
+        "classification": "CANDIDATE",
+        "sku": "B0183JF0FE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0183JF0FE",
+        "classification": "CANDIDATE",
+        "sku": "B0183JF0FE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B018EAZ94E",
+        "title": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B011KW8EUY",
+      "B00957YQ36",
+      "B0183JF0FE",
+      "B00NDIFKQU",
+      "B018EAZ94E",
+      "B00CWEB7VI"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00CWEB7VI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Everyone Body Lotion, Unscented, 32 Ounce: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00CWEB7VI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Everyone Body Lotion, Unscented, 32 Ounce: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00NDIFKQU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00NDIFKQU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B0183JF0FE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches: found (#3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0183JF0FE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B018EAZ94E",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B018EAZ94E",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: 0 in the box, 1 ordered.",
+      "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:4e4ef8becde728706ee93c6baa47bb750e4f1742af9ce206d2bdb12fe873c5ec"
+}

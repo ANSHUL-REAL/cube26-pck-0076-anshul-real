@@ -178,7 +178,16 @@ def from_run(run: str) -> None:
             continue
         (HERE / "examples" / f"{name}.json").write_text(record.model_dump_json(indent=2) + "\n", encoding="utf-8")
         print(f"{name:13} real record {record.record_id} ({record.subject.get('order_id')})")
-    print("overridden    kept the scripted example (eval runs have no hand decisions)")
+    if "UNCERTAIN" not in found:
+        print("overridden    kept the scripted example (eval runs have no hand decisions)")
+        return
+    # Eval runs have no hand decisions: apply the scripted one to the real UNCERTAIN record,
+    # so the example still shows an override on top of the record it changed.
+    scripted = EvidenceRecord.model_validate_json((HERE / "examples" / "overridden.json").read_text(encoding="utf-8"))
+    o = scripted.overrides[-1]
+    record = apply_override(found["UNCERTAIN"], o.new_decision, o.reason_code, o.operator_label, note=o.note, at=o.at)
+    (HERE / "examples" / "overridden.json").write_text(record.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    print(f"overridden    the scripted hand decision, applied to real record {record.record_id}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,241 @@
+{
+  "record_id": "PCK-9BD33A8FC7FD",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T24",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0192Q4RTW",
+        "qty": 1
+      },
+      {
+        "sku": "B01BH7JAIW",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "85b59ef6-81fe-4f3d-bcb0-960207692c53",
+      "role": "top_down",
+      "sha256": "50db3acca3cd01d98a6b8dc5fceff97403b24fb45d9257ac80ffc22457d330f7",
+      "original_sha256": "238b2a7be38ffdb9e725dbce6dfe70af88d90e0d7870be82f16b65196692bbad",
+      "mime": "image/jpeg",
+      "width": 401,
+      "height": 512,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 401,
+        "height": 512,
+        "blur_var": 35.8,
+        "mean_luma": 106.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0192Q4RTW",
+        "title": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B01BH7JAIW",
+        "title": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00SJ1289I",
+        "classification": "CANDIDATE",
+        "sku": "B00SJ1289I",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "DuaFire 12x Plastic Percussion Maracas Shakers Musical Egg"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01BH7JAIW",
+        "classification": "CANDIDATE",
+        "sku": "B01BH7JAIW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder."
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B0192Q4RTW",
+        "expected_title": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and",
+        "found_sku": "B00SJ1289I",
+        "found_title": "DuaFire 12x Plastic Percussion Maracas Shakers Musical Egg",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00WSPNM8W",
+      "B01BH7JAIW",
+      "B0192Q4RTW",
+      "B0195NONM8"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0192Q4RTW",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B0192Q4RTW",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01BH7JAIW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01BH7JAIW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and, found DuaFire 12x Plastic Percussion Maracas Shakers Musical Egg (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B0192Q4RTW",
+            "found_sku": "B00SJ1289I",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Expected Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and, found DuaFire 12x Plastic Percussion Maracas Shakers Musical Egg (#1).",
+      "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: 0 in the box, 1 ordered.",
+      "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace DuaFire 12x Plastic Percussion Maracas Shakers Musical Egg (#1) with Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:3d9e70f2d2477331b118b25f9223668c60dd29f90934c01c35937c7f1e7d9778"
+}

@@ -14,7 +14,7 @@ The code lives at the **repository root**, not in this folder, because the fork 
 | Durable constraints and forbidden language | [CLAUDE.md](CLAUDE.md) |
 | Build brief | [build-brief.md](build-brief.md) |
 | Build log | [build-log.md](build-log.md) |
-| Eval report (method now, numbers after the held-out run) | [../../EVAL.md](../../EVAL.md) |
+| Eval report (held-out run done; kill condition tripped, reported plainly) | [../../EVAL.md](../../EVAL.md) |
 | Evidence contract for the other pods | [../../contract/](../../contract/README.md) |
 | Agent code (headless first: `python -m pack_manager`) | [../../pack_manager/](../../pack_manager/) |
 | Web app | [../../app/](../../app/) |
@@ -28,7 +28,7 @@ The code lives at the **repository root**, not in this folder, because the fork 
 | 1 | Customer letter, PR/FAQ, one-pager | Done: written (customer voice is a hypothesis, not an interview) |
 | 2 | CLAUDE.md | Done |
 | 3 | Headless agent on fixtures | Done: CLI + organiser-sample replay (rules stop 4/4 wrong boxes; the operator stopped 2/4) |
-| 4 | Eval report | In progress: method committed before data collection; held-out run pending |
+| 4 | Eval report | Done: 50 held-out real warehouse photos (public dataset), frozen before the run |
 | 5 | Evidence record page | Done: web app record page, JSON API, content hash |
 | 6 | Cross-pod contract | Done: JSON Schema + example records |
 

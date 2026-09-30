@@ -1,0 +1,318 @@
+{
+  "record_id": "PCK-C82340615783",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T41",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B001KYS2UA",
+        "qty": 6
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d633c09e-e8af-4fe6-a5f4-d53230e78194",
+      "role": "top_down",
+      "sha256": "6d0eb9ebccad995e57b417b5d8b02d062da982afd33d70c37ddeb69f381b4f0a",
+      "original_sha256": "e4ec765f6e97f08a3ae8a7c5b68370bea5152b00027653d000f3133c1eb28f9a",
+      "mime": "image/jpeg",
+      "width": 516,
+      "height": 307,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 516,
+        "height": 307,
+        "blur_var": 76.0,
+        "mean_luma": 122.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B001KYS2UA",
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "ordered": 6,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004YDG8RS",
+        "classification": "CANDIDATE",
+        "sku": "B004YDG8RS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004YDG8RS",
+        "classification": "CANDIDATE",
+        "sku": "B004YDG8RS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004YDG8RS",
+        "classification": "CANDIDATE",
+        "sku": "B004YDG8RS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004YDG8RS",
+        "classification": "CANDIDATE",
+        "sku": "B004YDG8RS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004YDG8RS",
+        "classification": "CANDIDATE",
+        "sku": "B004YDG8RS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004YDG8RS",
+        "classification": "CANDIDATE",
+        "sku": "B004YDG8RS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B001KYS2UA",
+        "expected_title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "found_sku": "B004YDG8RS",
+        "found_title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)",
+        "object_id": "o1"
+      },
+      {
+        "expected_sku": "B001KYS2UA",
+        "expected_title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "found_sku": "B004YDG8RS",
+        "found_title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)",
+        "object_id": "o2"
+      },
+      {
+        "expected_sku": "B001KYS2UA",
+        "expected_title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "found_sku": "B004YDG8RS",
+        "found_title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)",
+        "object_id": "o3"
+      },
+      {
+        "expected_sku": "B001KYS2UA",
+        "expected_title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "found_sku": "B004YDG8RS",
+        "found_title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)",
+        "object_id": "o4"
+      },
+      {
+        "expected_sku": "B001KYS2UA",
+        "expected_title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "found_sku": "B004YDG8RS",
+        "found_title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)",
+        "object_id": "o5"
+      },
+      {
+        "expected_sku": "B001KYS2UA",
+        "expected_title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "found_sku": "B004YDG8RS",
+        "found_title": "Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2)",
+        "object_id": "o6"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B01DAL5K3M",
+      "B00LLGI2IO",
+      "B001KYS2UA"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B001KYS2UA",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B001KYS2UA",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): 0 in the box, 6 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#1); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#2); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#3); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#4); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#5); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B001KYS2UA",
+            "found_sku": "B004YDG8RS",
+            "object_id": "o1"
+          },
+          {
+            "expected_sku": "B001KYS2UA",
+            "found_sku": "B004YDG8RS",
+            "object_id": "o2"
+          },
+          {
+            "expected_sku": "B001KYS2UA",
+            "found_sku": "B004YDG8RS",
+            "object_id": "o3"
+          },
+          {
+            "expected_sku": "B001KYS2UA",
+            "found_sku": "B004YDG8RS",
+            "object_id": "o4"
+          },
+          {
+            "expected_sku": "B001KYS2UA",
+            "found_sku": "B004YDG8RS",
+            "object_id": "o5"
+          },
+          {
+            "expected_sku": "B001KYS2UA",
+            "found_sku": "B004YDG8RS",
+            "object_id": "o6"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#1); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#2); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#3); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#4); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#5); Expected Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes), found Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#6).",
+      "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): 0 in the box, 6 ordered.",
+      "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#1) with Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes).",
+      "Replace Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#2) with Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes).",
+      "Replace Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#3) with Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes).",
+      "Replace Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#4) with Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes).",
+      "Replace Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#5) with Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes).",
+      "Replace Colgate Total Advanced Whitening Toothpaste, 7.6 Ounce (Pack of 2) (#6) with Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:9a1c40df245d0bae535b936ea09b1c02e2e09e639ff3265228baaa47bff9bb24"
+}

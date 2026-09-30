@@ -1,0 +1,361 @@
+{
+  "record_id": "PCK-8EFB88F013DF",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T13",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B001F0QS5A",
+        "qty": 1
+      },
+      {
+        "sku": "B0083WVGTG",
+        "qty": 1
+      },
+      {
+        "sku": "B009VWO4PU",
+        "qty": 1
+      },
+      {
+        "sku": "B019XRI278",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:52:21Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "4fdee618-de5d-412e-bbe4-1e6d0a0fb433",
+      "role": "top_down",
+      "sha256": "d650bd579ec56ecf0450df9ff4efee5b398daabbe108c220228e5a68b132af50",
+      "original_sha256": "9cf4b8a3e73bb55905b8c06ffe86adbdcdf42261363ee0f749e1218048dc1eff",
+      "mime": "image/jpeg",
+      "width": 645,
+      "height": 625,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 645,
+        "height": 625,
+        "blur_var": 52.4,
+        "mean_luma": 114.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: brown cardboard box labeled OPOLAR (#1).",
+        "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge: found (#2).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer): not seen, but items may be hidden.",
+        "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: not seen, but items may be hidden.",
+        "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue): not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden. Strap lines across the box partially obstruct the view, but the main items are visible."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge with every unit visible.",
+        "Whether Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer) is in the box.",
+        "A count of Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer) with every unit visible.",
+        "Whether V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20 is in the box.",
+        "A count of V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20 with every unit visible.",
+        "Whether Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue) is in the box.",
+        "A count of Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue) with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B001F0QS5A",
+        "title": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B0083WVGTG",
+        "title": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B009VWO4PU",
+        "title": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B019XRI278",
+        "title": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          127,
+          126,
+          946,
+          606
+        ],
+        "description": "brown cardboard box labeled OPOLAR",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "OPOLAR branding on brown box, not matching any candidate",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          27,
+          577,
+          954,
+          960
+        ],
+        "description": "HP LaserJet CE505X toner cartridge box",
+        "classification": "CANDIDATE",
+        "sku": "B001F0QS5A",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "B009VWO4PU"
+        ],
+        "deciding_feature": "CE505X text visible on box matching HP 05X toner",
+        "partially_hidden": false,
+        "title": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "brown cardboard box labeled OPOLAR",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.8,
+      "notes": "Strap lines across the box partially obstruct the view, but the main items are visible."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B009VWO4PU",
+      "B01BZFAF5S",
+      "B001F0QS5A",
+      "B00GM60NL2",
+      "B0083WVGTG",
+      "B019XRI278"
+    ],
+    "usage": {
+      "input_tokens": 2143,
+      "output_tokens": 452,
+      "thinking_tokens": 0,
+      "total_tokens": 2595
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.8,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden. Strap lines across the box partially obstruct the view, but the main items are visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B001F0QS5A",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B001F0QS5A",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B0083WVGTG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B0083WVGTG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B009VWO4PU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B009VWO4PU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B019XRI278",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B019XRI278",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: brown cardboard box labeled OPOLAR (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8431,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:52:29Z",
+    "reasons": [
+      "Not in the order: brown cardboard box labeled OPOLAR (#1)."
+    ],
+    "fix_instructions": [
+      "Remove brown cardboard box labeled OPOLAR (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge by hand: there should be 1.",
+      "Also check: Count Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer) by hand: there should be 1.",
+      "Also check: Count V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20 by hand: there should be 1.",
+      "Also check: Count Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue) by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:08ecb2050e73f6e9d8588293060369b07f71f1ed3db78622fecae94954d44233"
+}

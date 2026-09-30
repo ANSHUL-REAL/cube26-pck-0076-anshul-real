@@ -1,0 +1,312 @@
+{
+  "record_id": "PCK-CF0DFBEAD629",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T39",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0122MI7K8",
+        "qty": 3
+      },
+      {
+        "sku": "B01ASVDR8M",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:31Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "5aed817f-58da-4dce-ad6d-1a34fd03ca63",
+      "role": "top_down",
+      "sha256": "2a2fe7ada703430aecd0195f48444484a679e7ef18fd1cf0038a0787bf4d3bda",
+      "original_sha256": "a58280266e466ff1af726c30a78ec4f1298dc18d34e235ce148e0a3d2d0c3c53",
+      "mime": "image/jpeg",
+      "width": 520,
+      "height": 591,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 520,
+        "height": 591,
+        "blur_var": 8.8,
+        "mean_luma": 121.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Fisher-Price Thomas the Train MINIS Motorized Raceway: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "unclear product #2: black item in packaging.",
+        "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 3 ordered.",
+        "Fisher-Price Thomas the Train MINIS Motorized Raceway: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+        "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black: possible match #2 is unclear.",
+        "Items may be stacked or hidden; low visibility confidence (0.60). There are straps across the box and other items potentially hidden underneath or behind the primary box and black packaging."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black is in the box: a clear view of #2.",
+        "A count of FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black with every unit visible.",
+        "A count of Fisher-Price Thomas the Train MINIS Motorized Raceway with every unit visible.",
+        "A clear view of #2 to identify it."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B0122MI7K8",
+        "title": "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01ASVDR8M",
+        "title": "Fisher-Price Thomas the Train MINIS Motorized Raceway",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          38,
+          49,
+          882,
+          917
+        ],
+        "description": "Fisher-Price Thomas the Train MINIS Motorized Raceway box",
+        "classification": "CANDIDATE",
+        "sku": "B01ASVDR8M",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Clear text saying MINIS and Thomas & Friends branding",
+        "partially_hidden": false,
+        "title": "Fisher-Price Thomas the Train MINIS Motorized Raceway"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          44,
+          258,
+          287,
+          620
+        ],
+        "description": "black item in packaging",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "partially visible black packaged item",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          735,
+          17,
+          982,
+          880
+        ],
+        "description": "black plastic wrap and packaging material",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "black plastic film and filler material",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o2",
+        "guess_sku": null,
+        "confidence": 0.5,
+        "description": "black item in packaging"
+      }
+    ],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "black plastic wrap and packaging material"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.6,
+      "notes": "There are straps across the box and other items potentially hidden underneath or behind the primary box and black packaging."
+    },
+    "image_issues": [
+      "blur",
+      "straps obscuring view"
+    ],
+    "candidates_shown": [
+      "B0122MI7K8",
+      "B001F0QS5A",
+      "B01ASVDR8M",
+      "B000AO9PMK"
+    ],
+    "usage": {
+      "input_tokens": 2028,
+      "output_tokens": 575,
+      "thinking_tokens": 0,
+      "total_tokens": 2603
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Items may be stacked or hidden; low visibility confidence (0.60). There are straps across the box and other items potentially hidden underneath or behind the primary box and black packaging.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0122MI7K8",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black: possible match #2 is unclear.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0122MI7K8",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01ASVDR8M",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Fisher-Price Thomas the Train MINIS Motorized Raceway: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01ASVDR8M",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Fisher-Price Thomas the Train MINIS Motorized Raceway: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "unclear product #2: black item in packaging.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4327,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:36Z",
+    "reasons": [
+      "unclear product #2: black item in packaging.",
+      "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 3 ordered.",
+      "Fisher-Price Thomas the Train MINIS Motorized Raceway: 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black: possible match #2 is unclear.",
+      "Items may be stacked or hidden; low visibility confidence (0.60). There are straps across the box and other items potentially hidden underneath or behind the primary box and black packaging."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count FeelinGirl Men's Latex Steel Boned Waist Cincher Corset Vest Size 6XL Black by hand: there should be 3.",
+      "Count Fisher-Price Thomas the Train MINIS Motorized Raceway by hand: there should be 1.",
+      "Check #2 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:c1543b2f36581535f1ed100fcdb01b4b57b16a507e1b87e2338ba3bb83b894a1"
+}

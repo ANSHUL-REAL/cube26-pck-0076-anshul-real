@@ -1,0 +1,286 @@
+{
+  "record_id": "PCK-5A86B9F349E2",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T08",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00KAG34DY",
+        "qty": 3
+      },
+      {
+        "sku": "B01EL7S7A2",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "a4df0739-110f-4c66-828f-fb3ab979e383",
+      "role": "top_down",
+      "sha256": "2c8aedc364eb766961280cb8acdfc59760528c873ed9b57be6d011f6ac3bac6c",
+      "original_sha256": "e5263832bf53145007e652d14f167ac7c0c2b3510b6f3ae43129e3256cb973da",
+      "mime": "image/jpeg",
+      "width": 390,
+      "height": 266,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 390,
+        "height": 266,
+        "blur_var": 45.9,
+        "mean_luma": 106.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00KAG34DY",
+        "title": "2 Pack Battery And Charger Kit For Nikon COOLPIX P900, P610, P600, B700 Digital Camera  Includes 2 Extended Replacement ",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01EL7S7A2",
+        "title": "USITEK® 4 Pack SK68 3 Modes Handheld 7w 300lm Mini Cree Led Flashlight Torch Adjustable Focus Zoom Light Lamp",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00KAG34DY",
+        "classification": "CANDIDATE",
+        "sku": "B00KAG34DY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2 Pack Battery And Charger Kit For Nikon COOLPIX P900, P610, P600, B700 Digital Camera  Includes 2 Extended Replacement "
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00KAG34DY",
+        "classification": "CANDIDATE",
+        "sku": "B00KAG34DY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2 Pack Battery And Charger Kit For Nikon COOLPIX P900, P610, P600, B700 Digital Camera  Includes 2 Extended Replacement "
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00KAG34DY",
+        "classification": "CANDIDATE",
+        "sku": "B00KAG34DY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "2 Pack Battery And Charger Kit For Nikon COOLPIX P900, P610, P600, B700 Digital Camera  Includes 2 Extended Replacement "
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01EL7S7A2",
+        "classification": "CANDIDATE",
+        "sku": "B01EL7S7A2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "USITEK® 4 Pack SK68 3 Modes Handheld 7w 300lm Mini Cree Led Flashlight Torch Adjustable Focus Zoom Light Lamp"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01EL7S7A2",
+        "classification": "CANDIDATE",
+        "sku": "B01EL7S7A2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "USITEK® 4 Pack SK68 3 Modes Handheld 7w 300lm Mini Cree Led Flashlight Torch Adjustable Focus Zoom Light Lamp"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01EL7S7A2",
+        "classification": "CANDIDATE",
+        "sku": "B01EL7S7A2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "USITEK® 4 Pack SK68 3 Modes Handheld 7w 300lm Mini Cree Led Flashlight Torch Adjustable Focus Zoom Light Lamp"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00KAG34DY",
+      "B001TLMQHY",
+      "B01EFSR10O",
+      "B01EL7S7A2"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00KAG34DY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "2 Pack Battery And Charger Kit For Nikon COOLPIX P900, P610, P600, B700 Digital Camera  Includes 2 Extended Replacement : found (#1, #2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KAG34DY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "2 Pack Battery And Charger Kit For Nikon COOLPIX P900, P610, P600, B700 Digital Camera  Includes 2 Extended Replacement : 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01EL7S7A2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USITEK® 4 Pack SK68 3 Modes Handheld 7w 300lm Mini Cree Led Flashlight Torch Adjustable Focus Zoom Light Lamp: found (#4, #5, #6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01EL7S7A2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USITEK® 4 Pack SK68 3 Modes Handheld 7w 300lm Mini Cree Led Flashlight Torch Adjustable Focus Zoom Light Lamp: 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7cd585ecc3efa08f07b74dc35bcd777dc850cd371a02acce8fd9f92604bf132c"
+}

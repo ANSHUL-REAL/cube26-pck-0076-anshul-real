@@ -1,0 +1,198 @@
+{
+  "record_id": "PCK-91D95BDE035B",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T23",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00V8YB1QE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "08bfe49a-f3e8-4493-9da0-6ca9ff9ecfa2",
+      "role": "top_down",
+      "sha256": "c17ec13b9715501ffe11e6adbf573fce00cb6a68ddab6d2f7d91e4f90fd78ad4",
+      "original_sha256": "87f39751c2efd99ad8ad6e19ab041463c73ecfe9c115ba60543e1c01c1ee0ae2",
+      "mime": "image/jpeg",
+      "width": 528,
+      "height": 314,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 528,
+        "height": 314,
+        "blur_var": 63.5,
+        "mean_luma": 131.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00V8YB1QE",
+        "title": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00V8YB1QE",
+        "classification": "CANDIDATE",
+        "sku": "B00V8YB1QE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00WRGY8DU",
+        "classification": "CANDIDATE",
+        "sku": "B00WRGY8DU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Baby's First Beach Day Wooden Shadowbox Frame 8\" X 10\""
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00WRGY8DU",
+        "title": "Baby's First Beach Day Wooden Shadowbox Frame 8\" X 10\"",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00V8YB1QE",
+      "B000FPN8TK",
+      "B0083WVGTG"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00V8YB1QE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00V8YB1QE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Baby's First Beach Day Wooden Shadowbox Frame 8\" X 10\" (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Not in the order: Baby's First Beach Day Wooden Shadowbox Frame 8\" X 10\" (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Baby's First Beach Day Wooden Shadowbox Frame 8\" X 10\" (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:d390f6f966cee7ba69581657c2db01fb9d6d46aa951bca33a759db2e321cd860"
+}

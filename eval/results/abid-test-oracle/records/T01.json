@@ -1,0 +1,226 @@
+{
+  "record_id": "PCK-C7991A05A892",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T01",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GM60NL2",
+        "qty": 1
+      },
+      {
+        "sku": "B00PQ7N1RQ",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "804db016-315e-4faa-9f27-d8ddef9d20b5",
+      "role": "top_down",
+      "sha256": "1f75b6cc4a28395ad10cfdb58a55e33d848abf45bf46fac2ca2774c4a76d3684",
+      "original_sha256": "3035e33e65b351f0027b6f1d342aaf10f3932aa25518ed547bd1b9ab2bf8e779",
+      "mime": "image/jpeg",
+      "width": 627,
+      "height": 465,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 627,
+        "height": 465,
+        "blur_var": 35.8,
+        "mean_luma": 108.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00GM60NL2",
+        "title": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00PQ7N1RQ",
+        "title": "Jurassic World Velociraptor Claws",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00GM60NL2",
+        "classification": "CANDIDATE",
+        "sku": "B00GM60NL2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00PQ7N1RQ",
+        "classification": "CANDIDATE",
+        "sku": "B00PQ7N1RQ",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Jurassic World Velociraptor Claws"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00PQ7N1RQ",
+      "B00GM60NL2",
+      "B001F0QS5A",
+      "B000IBPD0S"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GM60NL2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GM60NL2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rechargeable LED Flashlight Torch - Telescoping Retractable Work Light w/ Magnetic Base - 36 LEDs 2 Power Supplies- RWL-: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00PQ7N1RQ",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Jurassic World Velociraptor Claws: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00PQ7N1RQ",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Jurassic World Velociraptor Claws: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:35ec46456702d72aa80dc2ff60879d2c7a1f61ec2f8de5fd7b69e32b9b4ab322"
+}

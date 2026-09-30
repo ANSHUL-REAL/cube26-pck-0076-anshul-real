@@ -1,0 +1,286 @@
+{
+  "record_id": "PCK-6C9501F17892",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T42",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GQ3IC4Q",
+        "qty": 2
+      },
+      {
+        "sku": "B00X001S4E",
+        "qty": 4
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "645a3f98-80ec-4c25-aabc-dbb95b623829",
+      "role": "top_down",
+      "sha256": "fe5640a63df08cc3ffbe6e3942850bdb6939bec05e7c3bb8e977c4c984b8a7a0",
+      "original_sha256": "ed05db151a56a38e86776f5a1eaa93b3347c59d4202a59fc929f73c87f62bc5d",
+      "mime": "image/jpeg",
+      "width": 525,
+      "height": 403,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 525,
+        "height": 403,
+        "blur_var": 46.4,
+        "mean_luma": 125.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00GQ3IC4Q",
+        "title": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00X001S4E",
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl",
+        "ordered": 4,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00GQ3IC4Q",
+        "classification": "CANDIDATE",
+        "sku": "B00GQ3IC4Q",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00GQ3IC4Q",
+        "classification": "CANDIDATE",
+        "sku": "B00GQ3IC4Q",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00X001S4E",
+        "classification": "CANDIDATE",
+        "sku": "B00X001S4E",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00X001S4E",
+        "classification": "CANDIDATE",
+        "sku": "B00X001S4E",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00X001S4E",
+        "classification": "CANDIDATE",
+        "sku": "B00X001S4E",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00X001S4E",
+        "classification": "CANDIDATE",
+        "sku": "B00X001S4E",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00GQ3IC4Q",
+      "B00NVMIQE6",
+      "B00X001S4E",
+      "B017SUW3OA"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GQ3IC4Q",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: found (#1, #2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GQ3IC4Q",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00X001S4E",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: found (#3, #4, #5, #6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3",
+          "o4",
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00X001S4E",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: 4 of 4.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3",
+          "o4",
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:2a7e568aa34bd000a4bc6e00c9d12bd8cfb810e9deef28f55e197c5cdc95924d"
+}

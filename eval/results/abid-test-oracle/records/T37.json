@@ -1,0 +1,226 @@
+{
+  "record_id": "PCK-FDFA91198696",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T37",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00IB6IAA2",
+        "qty": 1
+      },
+      {
+        "sku": "B00Y9IC0PW",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d144b079-cff4-4d82-82e3-d8180639af16",
+      "role": "top_down",
+      "sha256": "80a99ffaa02cd3b59ef661105429e7014f34514a0805086fa85624e5b4c2d838",
+      "original_sha256": "72e7d9a136f70098ffc4a1850f3db37a334ae6694fe894c997b377796c1ce185",
+      "mime": "image/jpeg",
+      "width": 596,
+      "height": 568,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 596,
+        "height": 568,
+        "blur_var": 35.8,
+        "mean_luma": 124.0,
+        "clipped_pct": 0.07,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00IB6IAA2",
+        "title": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00Y9IC0PW",
+        "title": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IB6IAA2",
+        "classification": "CANDIDATE",
+        "sku": "B00IB6IAA2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00Y9IC0PW",
+        "classification": "CANDIDATE",
+        "sku": "B00Y9IC0PW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00IB6IAA2",
+      "B01EL9TYMU",
+      "B00Y9IC0PW",
+      "B009NQ980A"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00IB6IAA2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW): found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IB6IAA2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00Y9IC0PW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants): found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00Y9IC0PW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:d41b1933d59db4eb7bd23a6747a50160714b6451add7f69c668e38813329cfa1"
+}

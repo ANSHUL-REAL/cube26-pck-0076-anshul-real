@@ -1,0 +1,286 @@
+{
+  "record_id": "PCK-AA9BACFC6CED",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T33",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00O0MRAQG",
+        "qty": 1
+      },
+      {
+        "sku": "B00RV48J1K",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:55:42Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "11633dff-49b6-4881-86bc-e1384e61d434",
+      "role": "top_down",
+      "sha256": "b7e28bbf01947324eb85d526105dc2956ddaf793a314ef9dc0b168599880d0dc",
+      "original_sha256": "11bb938bf8d715ecf8424f903e7c270a10b14d11b003b24b01979909223ddd00",
+      "mime": "image/jpeg",
+      "width": 371,
+      "height": 561,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 371,
+        "height": 561,
+        "blur_var": 26.6,
+        "mean_luma": 103.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box): found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "unclear product #2: White bagged item.",
+        "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+        "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box): 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+        "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128: possible match #2 is unclear.",
+        "Items may be stacked or hidden. There are safety/storage straps or netting across the bin interior, and a white wrapped item which obscures details."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether 2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128 is in the box: a clear view of #2.",
+        "A count of 2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128 with every unit visible.",
+        "A count of ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box) with every unit visible.",
+        "A clear view of #2 to identify it."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00O0MRAQG",
+        "title": "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00RV48J1K",
+        "title": "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          75,
+          48,
+          915,
+          305
+        ],
+        "description": "ZEGO Allergy-Friendly Energy Bars box",
+        "classification": "CANDIDATE",
+        "sku": "B00RV48J1K",
+        "confidence": 0.99,
+        "alternative_skus": [],
+        "deciding_feature": "ZEGO brand name and packaging design visible",
+        "partially_hidden": false,
+        "title": "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          116,
+          212,
+          919,
+          814
+        ],
+        "description": "White bagged item",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "generic white packaging without visible identifiers",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o2",
+        "guess_sku": null,
+        "confidence": 0.5,
+        "description": "White bagged item"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.7,
+      "notes": "There are safety/storage straps or netting across the bin interior, and a white wrapped item which obscures details."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00DMGKSI8",
+      "B0134V3VZM",
+      "B00RV48J1K",
+      "B00O0MRAQG"
+    ],
+    "usage": {
+      "input_tokens": 2048,
+      "output_tokens": 422,
+      "thinking_tokens": 0,
+      "total_tokens": 2470
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "Items may be stacked or hidden. There are safety/storage straps or netting across the bin interior, and a white wrapped item which obscures details.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00O0MRAQG",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128: possible match #2 is unclear.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00O0MRAQG",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00RV48J1K",
+      "verdict": "PASS",
+      "confidence": 0.99,
+      "detail": "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00RV48J1K",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.99,
+      "detail": "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box): 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "unclear product #2: White bagged item.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4168,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:55:46Z",
+    "reasons": [
+      "unclear product #2: White bagged item.",
+      "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box): 1 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128: possible match #2 is unclear.",
+      "Items may be stacked or hidden. There are safety/storage straps or netting across the bin interior, and a white wrapped item which obscures details."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count 2 Set of BAOFENG UV-5X Two-Way Radio with FM Function VHF 136-174MHz UHF 400-520MHz Dual Band Dual Watch Transceiver 128 by hand: there should be 1.",
+      "Count ZEGO Allergy-Friendly Energy Bars (Chocolate, 1 Box) by hand: there should be 1.",
+      "Check #2 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:bccd2da1d663ca81c80f77c013a339cac0d84957b9345ad96f833bc67de10fe0"
+}

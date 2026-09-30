@@ -1,0 +1,273 @@
+{
+  "record_id": "PCK-6098513DB07A",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T48",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0134V3VZM",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "84188d6b-b7d9-417c-b577-a41348230d75",
+      "role": "top_down",
+      "sha256": "0ea548606a338a5ed78c728984d39d589f0498c1c4a23f058e678d0f240a095f",
+      "original_sha256": "d995e0208091fb1e6996c9f29bf8da65607af5480645bbee226e69afc665a27d",
+      "mime": "image/jpeg",
+      "width": 553,
+      "height": 526,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 553,
+        "height": 526,
+        "blur_var": 36.8,
+        "mean_luma": 117.3,
+        "clipped_pct": 0.12,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0134V3VZM",
+        "title": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZRDCFN0",
+        "classification": "CANDIDATE",
+        "sku": "B00ZRDCFN0",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZRDCFN0",
+        "classification": "CANDIDATE",
+        "sku": "B00ZRDCFN0",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZRDCFN0",
+        "classification": "CANDIDATE",
+        "sku": "B00ZRDCFN0",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ZRDCFN0",
+        "classification": "CANDIDATE",
+        "sku": "B00ZRDCFN0",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0134V3VZM",
+        "classification": "CANDIDATE",
+        "sku": "B0134V3VZM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0134V3VZM",
+        "classification": "CANDIDATE",
+        "sku": "B0134V3VZM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00ZRDCFN0",
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp",
+        "object_id": "o1"
+      },
+      {
+        "sku": "B00ZRDCFN0",
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp",
+        "object_id": "o2"
+      },
+      {
+        "sku": "B00ZRDCFN0",
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp",
+        "object_id": "o3"
+      },
+      {
+        "sku": "B00ZRDCFN0",
+        "title": "[2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp",
+        "object_id": "o4"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00PQBO0JK",
+      "B00D901B4W",
+      "B0134V3VZM"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0134V3VZM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: found (#5, #6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0134V3VZM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#1); [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#2); [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#3); [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Not in the order: [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#1); [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#2); [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#3); [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#4)."
+    ],
+    "fix_instructions": [
+      "Remove [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#1); it is not in the order.",
+      "Remove [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#2); it is not in the order.",
+      "Remove [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#3); it is not in the order.",
+      "Remove [2 IN 1] Clamp on Desk Lamp - USB Rechargeable Dimmable Portable Led Gooseneck CLip Lamp (#4); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:99567d55f05dfe8ae647dbbd336a3172015c729101894785e67c2b32392615d3"
+}

@@ -1,0 +1,167 @@
+{
+  "run": "abid-test-oracle",
+  "split": "test",
+  "reveal_order": false,
+  "dataset": "Amazon Bin Image Dataset (public, CC BY-NC-SA 3.0 US)",
+  "perceiver": "oracle",
+  "model": "none (oracle)",
+  "match_threshold": 0.7,
+  "visibility_threshold": 0.7,
+  "started_at": "2026-09-30T14:59:02+00:00",
+  "frozen": {
+    "file": "eval/frozen-test.json",
+    "frozen_at": "2026-09-30T14:49:44+00:00",
+    "matches": true,
+    "changed_since": []
+  },
+  "boxes_scored": 50,
+  "box_decision": {
+    "bad_boxes": 26,
+    "good_boxes": 24,
+    "false_SEAL_rate": "0/26 (0%; 95% CI 0% to 13%)",
+    "false_STOP_rate": "0/24 (0%; 95% CI 0% to 14%)",
+    "uncertain_rate": "0/50 (0%; 95% CI 0% to 7%)",
+    "bad_boxes_among_agent_seals": "0/24 (0%; 95% CI 0% to 14%)",
+    "uncertain_on_bad_boxes": "0/26 (0%)",
+    "uncertain_on_good_boxes": "0/24 (0%)",
+    "pending_model_failures": 0,
+    "pending_rate": "0/50 (0%; 95% CI 0% to 7%)",
+    "confusion": {
+      "SEAL -> SEAL": 24,
+      "STOP_AND_FIX -> STOP_AND_FIX": 26
+    }
+  },
+  "checks": {
+    "all_items_present: line_present (per order line)": {
+      "n": 106,
+      "problems_caught": 13,
+      "problems_missed_FN": 0,
+      "false_alarms_FP": 0,
+      "correct_passes": 93,
+      "uncertain_on_problem": 0,
+      "uncertain_on_ok": 0,
+      "recall_of_problems": 1.0,
+      "precision_of_alarms": 1.0,
+      "uncertain_rate": 0.0
+    },
+    "quantities_correct: line_quantity (per order line whose item is in the box)": {
+      "n": 93,
+      "problems_caught": 7,
+      "problems_missed_FN": 0,
+      "false_alarms_FP": 0,
+      "correct_passes": 86,
+      "uncertain_on_problem": 0,
+      "uncertain_on_ok": 0,
+      "recall_of_problems": 1.0,
+      "precision_of_alarms": 1.0,
+      "uncertain_rate": 0.0
+    },
+    "unexpected_product: wrong_item or extra_item (per box)": {
+      "n": 50,
+      "problems_caught": 13,
+      "problems_missed_FN": 0,
+      "false_alarms_FP": 0,
+      "correct_passes": 37,
+      "uncertain_on_problem": 0,
+      "uncertain_on_ok": 0,
+      "recall_of_problems": 1.0,
+      "precision_of_alarms": 1.0,
+      "uncertain_rate": 0.0
+    }
+  },
+  "against_targets": [
+    {
+      "measure": "False SEAL (bad boxes sealed / bad boxes)",
+      "result": "0/26 (0%; 95% CI 0% to 13%)",
+      "target": "2% or less",
+      "kill_if": "> 5% while UNCERTAIN is 25% or lower",
+      "status": "met, not proven (upper bound 13%)"
+    },
+    {
+      "measure": "False STOP (good boxes stopped / good boxes)",
+      "result": "0/24 (0%; 95% CI 0% to 14%)",
+      "target": "5% or less",
+      "kill_if": "> 15%",
+      "status": "met, not proven (upper bound 14%)"
+    },
+    {
+      "measure": "UNCERTAIN (sent to a hand check / all boxes)",
+      "result": "0/50 (0%; 95% CI 0% to 7%)",
+      "target": "25% or less",
+      "kill_if": "> 40%",
+      "status": "met"
+    },
+    {
+      "measure": "PENDING (model didn't answer / all boxes)",
+      "result": "0/50 (0%; 95% CI 0% to 7%)",
+      "target": "2% or less",
+      "kill_if": "> 5%",
+      "status": "met, not proven (upper bound 7%)"
+    }
+  ],
+  "kill_conditions_tripped": [],
+  "per_scenario": {
+    "correct": {
+      "n": 15,
+      "correct": 15,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    },
+    "extra": {
+      "n": 6,
+      "correct": 6,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    },
+    "identical_multiples": {
+      "n": 9,
+      "correct": 9,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    },
+    "missing": {
+      "n": 6,
+      "correct": 6,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    },
+    "wrong_item": {
+      "n": 7,
+      "correct": 7,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    },
+    "wrong_qty": {
+      "n": 7,
+      "correct": 7,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    }
+  },
+  "occlusion_vs_other": {
+    "other": {
+      "n": 50,
+      "correct": 50,
+      "uncertain": 0,
+      "false_seal": 0,
+      "false_stop": 0
+    }
+  },
+  "humans": {},
+  "latency_ms": {
+    "p50": null,
+    "p95": null,
+    "note": "model call only, as recorded when first run (cached re-runs keep the original latency)"
+  },
+  "tokens_per_box_mean": null,
+  "boxes_with_token_counts": 0,
+  "cost_usd_per_box_mean": null,
+  "fresh_model_calls_this_run": 50,
+  "boxes_with_a_photo_failing_the_quality_gate": 0
+}

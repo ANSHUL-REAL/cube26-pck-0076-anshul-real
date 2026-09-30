@@ -313,7 +313,8 @@ def main() -> None:
         frozen_line = (("Held out: **yes**. " if run_info["split"] == "test" else
                         "Held out: **no**, split `all` includes the dev boxes. Its test boxes: ")
                        + f"frozen at {fz['frozen_at']} in `{fz['file']}` (settings, prompt, agent and eval code, "
-                       "manifest, box photos, catalogue files and reference photos, and both label files hashed); "
+                       "manifest, box photos, catalogue files and reference photos"
+                       + (", and both label files" if dataset().get("human_labels", True) else "") + " hashed); "
                        "the run matched it.")
     else:
         frozen_line = ("Held out: **NO**. The run did not match a freeze of the test set"
@@ -368,6 +369,8 @@ def main() -> None:
               "Boxes marked `hidden` in the manifest had an item under another item or filler when photographed.",
               "One photo can't see those, so failures there are about geometry, not recognition.", "",
               "| Group | n | Correct | Uncertain | False SEAL | False STOP |", "|---|---|---|---|---|---|"]
+    if not any(b.hidden for b in boxes.values()) and dataset():
+        lines.append("This dataset doesn't record which items were hidden, so every box is in one group.")
     for k, v in metrics["occlusion_vs_other"].items():
         name = "Items hidden (occlusion)" if k == "occlusion" else "Nothing hidden (recognition, count, photo quality)"
         lines.append(f"| {name} | {v['n']} | {v['correct']} | {v['uncertain']} | {v['false_seal']} | {v['false_stop']} |")

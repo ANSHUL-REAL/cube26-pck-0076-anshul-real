@@ -1,0 +1,228 @@
+{
+  "record_id": "PCK-B1312B7598E5",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T47",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000DZH3XO",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "1e33dd0a-f444-4a2b-aaa7-c79218988d38",
+      "role": "top_down",
+      "sha256": "e67f72064b3a2d460bdf01e09424259d63eeb8b2d7015b9372d2f3ff91eb240f",
+      "original_sha256": "eeb3a0b4d4ce8cbd99029368da16e4d011a15aa6644bbeae6f54677a7abfcf24",
+      "mime": "image/jpeg",
+      "width": 713,
+      "height": 639,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 713,
+        "height": 639,
+        "blur_var": 33.0,
+        "mean_luma": 100.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B000DZH3XO",
+        "title": "Fiskars 3 Piece Softouch Garden Tool Set (7067)",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000DZH3XO",
+        "classification": "CANDIDATE",
+        "sku": "B000DZH3XO",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Fiskars 3 Piece Softouch Garden Tool Set (7067)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000DZH3XO",
+        "classification": "CANDIDATE",
+        "sku": "B000DZH3XO",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Fiskars 3 Piece Softouch Garden Tool Set (7067)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000DZH3XO",
+        "classification": "CANDIDATE",
+        "sku": "B000DZH3XO",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Fiskars 3 Piece Softouch Garden Tool Set (7067)"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00Q6VFE2G",
+        "classification": "CANDIDATE",
+        "sku": "B00Q6VFE2G",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Sylvania Portable CD Boombox with AM/FM Radio (Purple)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00Q6VFE2G",
+        "title": "Sylvania Portable CD Boombox with AM/FM Radio (Purple)",
+        "object_id": "o4"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B000DZH3XO",
+      "B009ZLYQ50",
+      "B000VDX6TI"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000DZH3XO",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Fiskars 3 Piece Softouch Garden Tool Set (7067): found (#1, #2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000DZH3XO",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Fiskars 3 Piece Softouch Garden Tool Set (7067): 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Sylvania Portable CD Boombox with AM/FM Radio (Purple) (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Not in the order: Sylvania Portable CD Boombox with AM/FM Radio (Purple) (#4)."
+    ],
+    "fix_instructions": [
+      "Remove Sylvania Portable CD Boombox with AM/FM Radio (Purple) (#4); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:b8f53d3cdebed0fe4da2d4647f1487be06ee8b0bc1295e61d63aa3c9432cadbd"
+}

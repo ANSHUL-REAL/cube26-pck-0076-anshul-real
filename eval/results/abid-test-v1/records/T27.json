@@ -1,0 +1,269 @@
+{
+  "record_id": "PCK-5BF9205B8C53",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T27",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00BL6DN10",
+        "qty": 1
+      },
+      {
+        "sku": "B00Y1N2VMC",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:54:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7f09a026-bd64-46cf-a93d-f61d85fd435f",
+      "role": "top_down",
+      "sha256": "59f67e3e710997105518e18f8a2193a7fa92541865b1ae4a0c8892a06e298540",
+      "original_sha256": "c5dbe9fb983e732fdc226d15cedd1708634cd6d1f480cd3b60b25a94d1eb4c3c",
+      "mime": "image/jpeg",
+      "width": 583,
+      "height": 432,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 583,
+        "height": 432,
+        "blur_var": 50.2,
+        "mean_luma": 154.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00BL6DN10",
+        "title": "Medline MDS089001  Co-Flex LF2 Bandages, Latex Free, Non Sterile, 1\" x 5 yard, Tan (Pack of 30)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00Y1N2VMC",
+        "title": "Marvel Heroclix Nick Fury Agent Shield Booster Brick",
+        "ordered": 1,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          58,
+          120,
+          930,
+          480
+        ],
+        "description": "Marvel Heroclix booster brick box",
+        "classification": "CANDIDATE",
+        "sku": "B00Y1N2VMC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Marvel branding and Heroclix packaging design",
+        "partially_hidden": false,
+        "title": "Marvel Heroclix Nick Fury Agent Shield Booster Brick"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          58,
+          120,
+          930,
+          480
+        ],
+        "description": "Second Marvel Heroclix booster brick box",
+        "classification": "CANDIDATE",
+        "sku": "B00Y1N2VMC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Marvel branding and Heroclix packaging design",
+        "partially_hidden": false,
+        "title": "Marvel Heroclix Nick Fury Agent Shield Booster Brick"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          75,
+          486,
+          936,
+          1000
+        ],
+        "description": "Co-Flex LF2 Bandages box",
+        "classification": "CANDIDATE",
+        "sku": "B00BL6DN10",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Co-Flex LF text and red/white/blue flag logo",
+        "partially_hidden": false,
+        "title": "Medline MDS089001  Co-Flex LF2 Bandages, Latex Free, Non Sterile, 1\" x 5 yard, Tan (Pack of 30)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [
+      {
+        "sku": "B00Y1N2VMC",
+        "title": "Marvel Heroclix Nick Fury Agent Shield Booster Brick",
+        "units": 1
+      }
+    ],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Strap netting crosses the box horizontally, but all items are fully visible underneath."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SKU-PROT-1KG",
+      "B00R8ZV1IK",
+      "B00BL6DN10",
+      "B00Y1N2VMC"
+    ],
+    "usage": {
+      "input_tokens": 2014,
+      "output_tokens": 639,
+      "thinking_tokens": 0,
+      "total_tokens": 2653
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00BL6DN10",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Medline MDS089001  Co-Flex LF2 Bandages, Latex Free, Non Sterile, 1\" x 5 yard, Tan (Pack of 30): found (#3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00BL6DN10",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Medline MDS089001  Co-Flex LF2 Bandages, Latex Free, Non Sterile, 1\" x 5 yard, Tan (Pack of 30): 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00Y1N2VMC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Marvel Heroclix Nick Fury Agent Shield Booster Brick: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00Y1N2VMC",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Marvel Heroclix Nick Fury Agent Shield Booster Brick: 2 in the box, 1 ordered (1 too many).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4636,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:54:42Z",
+    "reasons": [
+      "Marvel Heroclix Nick Fury Agent Shield Booster Brick: 2 in the box, 1 ordered (1 too many)."
+    ],
+    "fix_instructions": [
+      "Remove 1 × Marvel Heroclix Nick Fury Agent Shield Booster Brick."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:5e17fe7db52b03f33cc4f4fcab3e3fa19e4dfbaf72154427514d3ce0428a0d75"
+}

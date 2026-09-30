@@ -1,0 +1,251 @@
+{
+  "record_id": "PCK-A3F67B3E50EF",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T28",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0006HUNYU",
+        "qty": 1
+      },
+      {
+        "sku": "B019TTJ5P8",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "9c931c2c-db54-4933-81e3-e6466cc038f2",
+      "role": "top_down",
+      "sha256": "a42d1a65d6c897aa48dc15d76d3c406db1a368f14e053fd2a5ddcef2905afa19",
+      "original_sha256": "ba97ef585898b3b479bcf90a1e99b7db9cd473ca3ce4ac46cdd117562c3891d4",
+      "mime": "image/jpeg",
+      "width": 640,
+      "height": 1061,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 640,
+        "height": 1061,
+        "blur_var": 46.9,
+        "mean_luma": 89.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0006HUNYU",
+        "title": "GBC CombBind Binding Spines, 1 1/2-Inch, 330 Sheets, Black, 100 Pk (4200010)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B019TTJ5P8",
+        "title": "Alienware  AW15R2-4624SLV 15.6 Inch Laptop (Intel Core i5, 16 GB RAM, 1 TB HDD + 256 GB SSD, Epic Silver) NVIDIA GTX 965",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0006HUNYU",
+        "classification": "CANDIDATE",
+        "sku": "B0006HUNYU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "GBC CombBind Binding Spines, 1 1/2-Inch, 330 Sheets, Black, 100 Pk (4200010)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00DQR8TXO",
+        "classification": "CANDIDATE",
+        "sku": "B00DQR8TXO",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Organix Butcher & Bushel Chopped Turkey & Chicken Dinner with Chicken Liver & Garden Fresh Peas Grain-Free Adult Dog Foo"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B019TTJ5P8",
+        "classification": "CANDIDATE",
+        "sku": "B019TTJ5P8",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Alienware  AW15R2-4624SLV 15.6 Inch Laptop (Intel Core i5, 16 GB RAM, 1 TB HDD + 256 GB SSD, Epic Silver) NVIDIA GTX 965"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00DQR8TXO",
+        "title": "Organix Butcher & Bushel Chopped Turkey & Chicken Dinner with Chicken Liver & Garden Fresh Peas Grain-Free Adult Dog Foo",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B019TTJ5P8",
+      "B018RGGUKM",
+      "B00A6ZZBDU",
+      "B0006HUNYU"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0006HUNYU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "GBC CombBind Binding Spines, 1 1/2-Inch, 330 Sheets, Black, 100 Pk (4200010): found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0006HUNYU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "GBC CombBind Binding Spines, 1 1/2-Inch, 330 Sheets, Black, 100 Pk (4200010): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B019TTJ5P8",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Alienware  AW15R2-4624SLV 15.6 Inch Laptop (Intel Core i5, 16 GB RAM, 1 TB HDD + 256 GB SSD, Epic Silver) NVIDIA GTX 965: found (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B019TTJ5P8",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Alienware  AW15R2-4624SLV 15.6 Inch Laptop (Intel Core i5, 16 GB RAM, 1 TB HDD + 256 GB SSD, Epic Silver) NVIDIA GTX 965: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Organix Butcher & Bushel Chopped Turkey & Chicken Dinner with Chicken Liver & Garden Fresh Peas Grain-Free Adult Dog Foo (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Not in the order: Organix Butcher & Bushel Chopped Turkey & Chicken Dinner with Chicken Liver & Garden Fresh Peas Grain-Free Adult Dog Foo (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Organix Butcher & Bushel Chopped Turkey & Chicken Dinner with Chicken Liver & Garden Fresh Peas Grain-Free Adult Dog Foo (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:cf827e283ba452cfca881ba60955cea3947a6eb0158f05ab5b0dac6a255617ba"
+}

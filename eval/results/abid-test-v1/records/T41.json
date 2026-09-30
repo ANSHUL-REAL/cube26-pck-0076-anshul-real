@@ -1,0 +1,274 @@
+{
+  "record_id": "PCK-06E43B5592BB",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T41",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B001KYS2UA",
+        "qty": 6
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:48Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "962500c9-b0d1-45f6-b4b4-f9229340d6e0",
+      "role": "top_down",
+      "sha256": "6d0eb9ebccad995e57b417b5d8b02d062da982afd33d70c37ddeb69f381b4f0a",
+      "original_sha256": "e4ec765f6e97f08a3ae8a7c5b68370bea5152b00027653d000f3133c1eb28f9a",
+      "mime": "image/jpeg",
+      "width": 516,
+      "height": 307,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 516,
+        "height": 307,
+        "blur_var": 76.0,
+        "mean_luma": 122.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B001KYS2UA",
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "ordered": 6,
+        "found": 5,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          36,
+          171,
+          266,
+          353
+        ],
+        "description": "Colgate Total Whitening Toothpaste Twin Pack box",
+        "classification": "CANDIDATE",
+        "sku": "B001KYS2UA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Colgate branding and twin pack packaging visible",
+        "partially_hidden": false,
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          278,
+          177,
+          563,
+          342
+        ],
+        "description": "Colgate Total Whitening Toothpaste Twin Pack box",
+        "classification": "CANDIDATE",
+        "sku": "B001KYS2UA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Colgate branding and twin pack packaging visible",
+        "partially_hidden": false,
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          276,
+          335,
+          574,
+          503
+        ],
+        "description": "Colgate Total Whitening Toothpaste Twin Pack box",
+        "classification": "CANDIDATE",
+        "sku": "B001KYS2UA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Colgate branding and twin pack packaging visible",
+        "partially_hidden": false,
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          243,
+          622,
+          706,
+          949
+        ],
+        "description": "Colgate Total Whitening Toothpaste Twin Pack box",
+        "classification": "CANDIDATE",
+        "sku": "B001KYS2UA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Colgate branding and twin pack packaging visible",
+        "partially_hidden": false,
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": [
+          574,
+          808,
+          856,
+          949
+        ],
+        "description": "Colgate Total Whitening Toothpaste Twin Pack box",
+        "classification": "CANDIDATE",
+        "sku": "B001KYS2UA",
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "Colgate branding visible",
+        "partially_hidden": true,
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B001KYS2UA",
+        "title": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "Box is covered with a security netting/strapping, but all items are fully visible through it."
+    },
+    "image_issues": [
+      "netting across image"
+    ],
+    "candidates_shown": [
+      "B01DAL5K3M",
+      "B00LLGI2IO",
+      "B001KYS2UA"
+    ],
+    "usage": {
+      "input_tokens": 1977,
+      "output_tokens": 877,
+      "thinking_tokens": 0,
+      "total_tokens": 2854
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4739,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B001KYS2UA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): found (#1, #2, #3, #4, #5).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4739,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B001KYS2UA",
+      "verdict": "FAIL",
+      "confidence": 0.8,
+      "detail": "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): 5 in the box, 6 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4739,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4739,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4739,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:52Z",
+    "reasons": [
+      "Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes): 5 in the box, 6 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Colgate Total Whitening Toothpaste Twin Pack (two 6oz tubes)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a6f3aeb9404617e60b664abe4047890ed23c15fd9ee9f06977b0709455e81f28"
+}

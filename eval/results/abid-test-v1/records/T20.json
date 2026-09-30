@@ -1,0 +1,206 @@
+{
+  "record_id": "PCK-76DD588938E0",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T20",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000BRP65G",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:53:35Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "54915b25-c831-49f6-8483-1e80ecb0abe6",
+      "role": "top_down",
+      "sha256": "d0fe022b6bffc292e3dbf7e21a0b3d9fabcf61cb120b96beca017dfef1253005",
+      "original_sha256": "99c18bb08c76ad45bc18366ad476e6230dc8ef9966d21ee49b29de3c9b0c9eef",
+      "mime": "image/jpeg",
+      "width": 507,
+      "height": 671,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 507,
+        "height": 671,
+        "blur_var": 61.6,
+        "mean_luma": 92.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B000BRP65G",
+        "title": "Royal Purple 04311 HP 2-C High Performance Synthetic 2-Cycle Oil - 1 gal.",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          92,
+          138,
+          771,
+          500
+        ],
+        "description": "purple plastic oil container",
+        "classification": "CANDIDATE",
+        "sku": "B000BRP65G",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "purple plastic jug shape matching Royal Purple oil",
+        "partially_hidden": true,
+        "title": "Royal Purple 04311 HP 2-C High Performance Synthetic 2-Cycle Oil - 1 gal."
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          89,
+          513,
+          768,
+          913
+        ],
+        "description": "purple plastic oil container",
+        "classification": "CANDIDATE",
+        "sku": "B000BRP65G",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "purple plastic jug shape matching Royal Purple oil",
+        "partially_hidden": true,
+        "title": "Royal Purple 04311 HP 2-C High Performance Synthetic 2-Cycle Oil - 1 gal."
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.8,
+      "notes": "Stretchy straps cross the box interior, partially obscuring the view of the items."
+    },
+    "image_issues": [
+      "straps crossing the image",
+      "slight blur"
+    ],
+    "candidates_shown": [
+      "B000BRP65G",
+      "B015NHY582",
+      "B01FGBOJMC"
+    ],
+    "usage": {
+      "input_tokens": 2021,
+      "output_tokens": 461,
+      "thinking_tokens": 0,
+      "total_tokens": 2482
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6455,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000BRP65G",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Royal Purple 04311 HP 2-C High Performance Synthetic 2-Cycle Oil - 1 gal.: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6455,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000BRP65G",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Royal Purple 04311 HP 2-C High Performance Synthetic 2-Cycle Oil - 1 gal.: 2 of 2.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6455,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6455,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6455,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:53:41Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:049245d5d0fdc9cb48a359f99a522deb13231c1f25fa1657353df934a850ddcb"
+}

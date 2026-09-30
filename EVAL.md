@@ -1,12 +1,56 @@
 # Evaluation
 
-> **Status:** this method was written and committed **before** the held-out set was photographed or run. Results are added below after one run on a frozen configuration. Anything changed after seeing held-out results will be reported separately and labelled "tuned on the eval set, not held-out".
+> **Status:** this method was written and committed **before** any eval data existed. The held-out run is done: results are below, from one run on a frozen configuration. **The data changed from the plan**, as explained under "What changed". Nothing was changed after seeing held-out results.
+
+## Results (held-out, 50 boxes)
+
+One run of `gemini-3.5-flash-lite` with prompt `pack-v3`, frozen in [`eval/frozen-test.json`](eval/frozen-test.json) (commit "Freeze the test set" comes before the results). Full report: [`eval/results/abid-test-v1/report.md`](eval/results/abid-test-v1/report.md).
+
+| Measure | Result | Target | Kill if |
+|---|---|---|---|
+| **False SEAL** (a wrong box would ship) | **2/26 (8%; 95% CI 2–24%)** | ≤ 2% | > 5% while UNCERTAIN ≤ 25% |
+| False STOP (a good box stopped) | 12/24 (50%; 95% CI 31–69%) | ≤ 5% | **> 15%: tripped** |
+| UNCERTAIN (sent to a person) | 18/50 (36%; 95% CI 24–50%) | ≤ 25% | > 40% |
+| PENDING (model didn't answer) | 0/50 (0%; 95% CI 0–7%) | ≤ 2% | > 5% |
+| Bad boxes among the agent's SEALs | 2/7 | | |
+| Latency p50 / p95 | 4.6 s / 10.4 s | p95 ≤ 5 s | |
+| Tokens per box | 2,439 | | |
+
+| Truth \ Agent | SEAL | STOP_AND_FIX | UNCERTAIN |
+|---|---|---|---|
+| SEAL (24) | 5 | 12 | 7 |
+| STOP_AND_FIX (26) | 2 | 13 | 11 |
+
+**Verdict: a kill condition tripped.** On these photos Pack Manager must not gate sealing. It should run as an evidence recorder with a person deciding, which is what the one-pager says to do in this case. 24 of 26 bad boxes were stopped or sent to a person. But half the good boxes were stopped too, which no packing bench would put up with.
+
+**Rules alone** (`--oracle`, the same 50 boxes with perfect perception): 0 false SEAL, 0 false STOP, 0 UNCERTAIN. Every error above comes from what the model saw, not from the rules.
+
+**Why good boxes were stopped** (12):
+- 7: the model said the bin was fully visible (confidence 0.8–0.95) but missed an ordered product under the straps or other items, so the line read "missing". Overconfident visibility is the main failure. The dev split showed it first, and prompt `pack-v3` halved it there but didn't remove it.
+- 3: a real product in the bin was taken for one of the two decoy products that are shown next to the ordered ones, so it read as "extra".
+- 2: a miscount.
+
+**The two false SEALs:**
+- T06: a similar-name swap the model didn't catch. It matched the product in the bin to the ordered look-alike.
+- T10: an extra product it didn't see.
+
+Cost per box isn't reported: we haven't checked this model's list price, and won't guess it. The key used is on Gemini's free tier.
+
+## What changed from the plan, and why
+
+- **The data.** The plan below was a home shoot of 70 packed boxes and two human labellers. The author had no products to photograph and no labellers, so the eval uses **70 real warehouse photos from the public Amazon Bin Image Dataset** (CC BY-NC-SA 3.0 US; see [`eval/abid/README.md`](eval/abid/README.md)). Each bin's contents as recorded by Amazon stand in for "what was physically packed". The order for each box was written by [`eval/abid/build_abid.py`](eval/abid/build_abid.py) from a fixed seed, before any model run: exactly the bin (must seal), or one planned difference (must stop). The mix is 24 must-seal and 26 must-stop boxes, as planned.
+- **No human labellers,** so no kappa and no "how hard is this for a person" row. Amazon's records have errors of their own, which count against the agent here.
+- **No reference photos:** the catalogue has product names only.
+- **Settings for this camera,** set from the dev photos alone before any model run and hashed in the freeze: photo minimum side 200 px (the photos are 252–677 px on their short side) and blur score 3.0 (phone setting: 60).
+- **Model:** the plan was `gemini-2.5-flash`. The key is on Gemini's free tier, which allows 20 of its calls a day. `gemini-2.5-flash-lite` is closed to new users, so both the app and the eval use `gemini-3.5-flash-lite`. 13 dev boxes did run on 2.5-flash: no false SEAL, but most good boxes went to UNCERTAIN (it was honest about poor visibility).
+- **Prompt `pack-v3`,** tuned on dev only: stricter visibility answers, and "a 2-pack is one unit". Dev false STOP went from 4 to 2 of 8, and false SEAL from 1 to 2 of 12. Dev runs are kept in `eval/results/abid-dev-*`.
+- **What this set can't show:** packing-bench conditions. Bins are photographed through elastic straps, small and cluttered. A seller's bench photo (one open box, phone camera, good light) is easier. That's a hypothesis until a real bench set is run, and the home-shoot tooling for it is ready (`eval/plan_boxes.py`, `docs/PHOTO-GUIDE.md`).
 
 ## Question
 
 Can a general vision model, given reference photos but no per-product training, check an open box against its order well enough to **gate sealing** for a small seller or 3PL? And when it can't tell, does it say so instead of guessing?
 
-## Data
+## Data (as planned; see "What changed" for the data actually used)
 
 | Split | Size | Used for |
 |---|---|---|
@@ -92,4 +136,4 @@ Model answers are cached by photo, prompt and model, so re-running the metrics o
 
 ## Results
 
-_Added after the held-out run._
+See the top of this page.

@@ -1,0 +1,173 @@
+{
+  "record_id": "PCK-DF12095CD5D6",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T45",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00JBK78V4",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "847e0a21-16dc-45d7-bc60-8aff243b6a45",
+      "role": "top_down",
+      "sha256": "05b64649d6bac68d7f1dfbbb5e4f005bed0e0eb9446d98295e4a316691dbf2f8",
+      "original_sha256": "578b8b0ab560e1b57ee3290960c3c8fe74f7d626bc1bc6dcdaf78b019f8345fc",
+      "mime": "image/jpeg",
+      "width": 508,
+      "height": 660,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 508,
+        "height": 660,
+        "blur_var": 25.6,
+        "mean_luma": 90.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00JBK78V4",
+        "title": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00JBK78V4",
+        "classification": "CANDIDATE",
+        "sku": "B00JBK78V4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SKU-CABLE-USBC",
+      "B0001VTZ86",
+      "B00JBK78V4"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00JBK78V4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP): found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00JBK78V4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Mead 3 Ring Binder, Durable, Customizable, 1 Inch D Ring, 4 Pack, Assorted Colors (W465-14APP): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:1a01b9e5a43c148ebd7af01ac2888cc1359f5b1de96b7fb417c4df67c02c35bc"
+}

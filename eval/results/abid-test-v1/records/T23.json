@@ -1,0 +1,213 @@
+{
+  "record_id": "PCK-89E83554B34A",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T23",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00V8YB1QE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:54:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "1dd1bdda-020b-4cce-a99a-1edc756b091b",
+      "role": "top_down",
+      "sha256": "c17ec13b9715501ffe11e6adbf573fce00cb6a68ddab6d2f7d91e4f90fd78ad4",
+      "original_sha256": "87f39751c2efd99ad8ad6e19ab041463c73ecfe9c115ba60543e1c01c1ee0ae2",
+      "mime": "image/jpeg",
+      "width": 528,
+      "height": 314,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 528,
+        "height": 314,
+        "blur_var": 63.5,
+        "mean_luma": 131.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00V8YB1QE",
+        "title": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          44,
+          43,
+          395,
+          959
+        ],
+        "description": "brown cardboard product box",
+        "classification": "CANDIDATE",
+        "sku": "B000FPN8TK",
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "brown box shape and size matching teapot packaging",
+        "partially_hidden": false,
+        "title": "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          395,
+          87,
+          853,
+          915
+        ],
+        "description": "green rectangular yoga block shrink-wrapped",
+        "classification": "CANDIDATE",
+        "sku": "B00V8YB1QE",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "green block color and shape",
+        "partially_hidden": false,
+        "title": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B000FPN8TK",
+        "title": "Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "Strap overlay is present across the image but items are fully visible underneath."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00V8YB1QE",
+      "B000FPN8TK",
+      "B0083WVGTG"
+    ],
+    "usage": {
+      "input_tokens": 1972,
+      "output_tokens": 470,
+      "thinking_tokens": 0,
+      "total_tokens": 2442
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4063,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00V8YB1QE",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4063,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00V8YB1QE",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nu-Source 9\" x 6\" x 4\" Yoga Block, Green, 2-Pack: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4063,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4063,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.8,
+      "detail": "Not in the order: Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4063,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:54:07Z",
+    "reasons": [
+      "Not in the order: Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot (#1)."
+    ],
+    "fix_instructions": [
+      "Remove Adagio Teas 16 oz. ingenuiTEA Bottom-Dispensing Teapot (#1); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:f44f9d0c5d7519b762a7b43277ec99c91d071b36bbc15cf5d34ba2ff8e2a1071"
+}

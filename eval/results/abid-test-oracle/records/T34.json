@@ -1,0 +1,226 @@
+{
+  "record_id": "PCK-151394048A57",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T34",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0013A01DW",
+        "qty": 1
+      },
+      {
+        "sku": "B00U58U5IE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "68aac7d7-e471-4c07-83bf-4459dd3c311d",
+      "role": "top_down",
+      "sha256": "cd136e054cba957cf75e3402a41f4d3d0cb7a15e788272eeb03e8c210650dd6f",
+      "original_sha256": "f9f123bd94478688f9a7e0ff78e340608d10bd8631f2728c5182e44ebba54950",
+      "mime": "image/jpeg",
+      "width": 414,
+      "height": 380,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 414,
+        "height": 380,
+        "blur_var": 37.2,
+        "mean_luma": 125.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0013A01DW",
+        "title": "GLS Audio 2ft Patch Cable Cords - XLR Male To RCA Color Cables - 2' Home Series Cord - 6 PACK",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00U58U5IE",
+        "title": "Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0013A01DW",
+        "classification": "CANDIDATE",
+        "sku": "B0013A01DW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "GLS Audio 2ft Patch Cable Cords - XLR Male To RCA Color Cables - 2' Home Series Cord - 6 PACK"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00U58U5IE",
+        "classification": "CANDIDATE",
+        "sku": "B00U58U5IE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00U58U5IE",
+      "B0013A01DW",
+      "B003FP6N9Y",
+      "B0126MYH1C"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0013A01DW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "GLS Audio 2ft Patch Cable Cords - XLR Male To RCA Color Cables - 2' Home Series Cord - 6 PACK: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0013A01DW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "GLS Audio 2ft Patch Cable Cords - XLR Male To RCA Color Cables - 2' Home Series Cord - 6 PACK: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00U58U5IE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack): found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00U58U5IE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:29606c266ed7d0c6d166524b41a0f99122b2608621577d593e430296a4e3a8b7"
+}

@@ -1,0 +1,227 @@
+{
+  "record_id": "PCK-3CC33D922986",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T37",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00IB6IAA2",
+        "qty": 1
+      },
+      {
+        "sku": "B00Y9IC0PW",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:14Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "299d100c-40bd-4356-ab9a-b829b9bdf3d9",
+      "role": "top_down",
+      "sha256": "80a99ffaa02cd3b59ef661105429e7014f34514a0805086fa85624e5b4c2d838",
+      "original_sha256": "72e7d9a136f70098ffc4a1850f3db37a334ae6694fe894c997b377796c1ce185",
+      "mime": "image/jpeg",
+      "width": 596,
+      "height": 568,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 596,
+        "height": 568,
+        "blur_var": 35.8,
+        "mean_luma": 124.0,
+        "clipped_pct": 0.07,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00IB6IAA2",
+        "title": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00Y9IC0PW",
+        "title": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          363,
+          6,
+          610,
+          467
+        ],
+        "description": "blue D-Link router box",
+        "classification": "CANDIDATE",
+        "sku": "B00IB6IAA2",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "brand and router packaging design visible",
+        "partially_hidden": false,
+        "title": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW)"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00Y9IC0PW",
+        "title": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants)",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "The D-Link router box is fully visible, alongside some packaged items partially visible behind netting."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00IB6IAA2",
+      "B01EL9TYMU",
+      "B00Y9IC0PW",
+      "B009NQ980A"
+    ],
+    "usage": {
+      "input_tokens": 2031,
+      "output_tokens": 297,
+      "thinking_tokens": 0,
+      "total_tokens": 2328
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00IB6IAA2",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IB6IAA2",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "D-Link Wireless AC 750 Mbps Home Cloud App-Enabled Dual-Band Broadband Router (DIR-817LW): 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00Y9IC0PW",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants): not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00Y9IC0PW",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants): 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4471,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:19Z",
+    "reasons": [
+      "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants): 0 in the box, 1 ordered.",
+      "Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants): not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Three Color Mix Cycling Bicycle Suit Bike Customized Ourdoor Wear For Men XXL Blue Yellow White (Jersey + Pants)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:babc02d978a0c4c1b03da50a4b11c89d854b916ee502afb33ee577a517bc1108"
+}

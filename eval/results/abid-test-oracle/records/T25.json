@@ -1,0 +1,241 @@
+{
+  "record_id": "PCK-2E77D732DA12",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T25",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00A6ZZBDU",
+        "qty": 1
+      },
+      {
+        "sku": "B01HIZZPQS",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "c6459bc2-4945-40e9-9018-7c5c92a9386b",
+      "role": "top_down",
+      "sha256": "906d67c231831522c2e25f6e2beb6e8f501d339a5821c9f558dcb3cd304a8066",
+      "original_sha256": "5f06311ea0df1ee6899ecad79e7d6204056a7f35d20cf6c30db663545d3cd645",
+      "mime": "image/jpeg",
+      "width": 397,
+      "height": 271,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 397,
+        "height": 271,
+        "blur_var": 69.3,
+        "mean_luma": 164.5,
+        "clipped_pct": 0.02,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00A6ZZBDU",
+        "title": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B01HIZZPQS",
+        "title": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00G1373PK",
+        "classification": "CANDIDATE",
+        "sku": "B00G1373PK",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Lillian Rose Burlap and Lace Flower Basket, 7.5-Inch"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01HIZZPQS",
+        "classification": "CANDIDATE",
+        "sku": "B01HIZZPQS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B00A6ZZBDU",
+        "expected_title": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc",
+        "found_sku": "B00G1373PK",
+        "found_title": "Lillian Rose Burlap and Lace Flower Basket, 7.5-Inch",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SKU-LEASH-6FT",
+      "B00WRGY8DU",
+      "B01HIZZPQS",
+      "B00A6ZZBDU"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00A6ZZBDU",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00A6ZZBDU",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01HIZZPQS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01HIZZPQS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "OnePlus 3 Case, Cellto PU Leather Wallet Cover with Sliding Camera [Adhesive] Function [Lifetime Warranty] Flip Cover fo: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc, found Lillian Rose Burlap and Lace Flower Basket, 7.5-Inch (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B00A6ZZBDU",
+            "found_sku": "B00G1373PK",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Expected Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc, found Lillian Rose Burlap and Lace Flower Basket, 7.5-Inch (#1).",
+      "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: 0 in the box, 1 ordered.",
+      "Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Lillian Rose Burlap and Lace Flower Basket, 7.5-Inch (#1) with Ted Baker London iPhone 5 iPhone 5S Leather Style Flip Case Cover Brown - Telegraph with Magnetic Closure - Lifetime Exc."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:f496692626fe0db32a56f692523fc1805f2192b0112392fc19b1926e0b720e7a"
+}

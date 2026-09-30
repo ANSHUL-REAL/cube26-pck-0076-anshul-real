@@ -1,0 +1,226 @@
+{
+  "record_id": "PCK-7777F0C3EDF9",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T18",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00HIWWAXS",
+        "qty": 1
+      },
+      {
+        "sku": "B00WO0AJ96",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b38a6ab5-f7ea-48b4-a61f-c77d9f561a4a",
+      "role": "top_down",
+      "sha256": "d436595b4be7e4c14bd2bab0769634550c7a44904604f31be0f9642551c687ff",
+      "original_sha256": "32a3ea9100c19bdbe89976d294ab98bd11e889f698f5742693a55b97ebfb5284",
+      "mime": "image/jpeg",
+      "width": 522,
+      "height": 310,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 522,
+        "height": 310,
+        "blur_var": 43.1,
+        "mean_luma": 139.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00HIWWAXS",
+        "title": "Intex Fun Goals Game",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00WO0AJ96",
+        "title": "Marvel Titan Hero Series Ant-Man",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00HIWWAXS",
+        "classification": "CANDIDATE",
+        "sku": "B00HIWWAXS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Intex Fun Goals Game"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00WO0AJ96",
+        "classification": "CANDIDATE",
+        "sku": "B00WO0AJ96",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Marvel Titan Hero Series Ant-Man"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00R8ZV1IK",
+      "B00NDIFKQU",
+      "B00WO0AJ96",
+      "B00HIWWAXS"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00HIWWAXS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Intex Fun Goals Game: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HIWWAXS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Intex Fun Goals Game: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00WO0AJ96",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Marvel Titan Hero Series Ant-Man: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00WO0AJ96",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Marvel Titan Hero Series Ant-Man: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7319085a70e2af798f1d3d52dcbec20be1d901a8a17e85572a5a9840b86c13fc"
+}

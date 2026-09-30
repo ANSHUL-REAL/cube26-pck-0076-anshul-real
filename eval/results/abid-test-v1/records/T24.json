@@ -1,0 +1,255 @@
+{
+  "record_id": "PCK-EDA84D48908B",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T24",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0192Q4RTW",
+        "qty": 1
+      },
+      {
+        "sku": "B01BH7JAIW",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:54:11Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "08f366f4-5700-4a3c-ba32-76533b195598",
+      "role": "top_down",
+      "sha256": "50db3acca3cd01d98a6b8dc5fceff97403b24fb45d9257ac80ffc22457d330f7",
+      "original_sha256": "238b2a7be38ffdb9e725dbce6dfe70af88d90e0d7870be82f16b65196692bbad",
+      "mime": "image/jpeg",
+      "width": 401,
+      "height": 512,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 401,
+        "height": 512,
+        "blur_var": 35.8,
+        "mean_luma": 106.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: not seen, but items may be hidden.",
+        "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: not seen, but items may be hidden.",
+        "Items may be stacked or hidden; low visibility confidence (0.30). The photo is covered by horizontal lines/glare and plastic mesh, making it difficult to clearly identify products inside."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and is in the box.",
+        "A count of Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and with every unit visible.",
+        "Whether BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder. is in the box.",
+        "A count of BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder. with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B0192Q4RTW",
+        "title": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01BH7JAIW",
+        "title": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          268,
+          0,
+          760,
+          518
+        ],
+        "description": "brown cardboard box inside the shipping box",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "cardboard packaging box",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "brown cardboard box inside the shipping box"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.3,
+      "notes": "The photo is covered by horizontal lines/glare and plastic mesh, making it difficult to clearly identify products inside."
+    },
+    "image_issues": [
+      "glare",
+      "blur",
+      "obscuring lines"
+    ],
+    "candidates_shown": [
+      "B00WSPNM8W",
+      "B01BH7JAIW",
+      "B0192Q4RTW",
+      "B0195NONM8"
+    ],
+    "usage": {
+      "input_tokens": 2064,
+      "output_tokens": 253,
+      "thinking_tokens": 0,
+      "total_tokens": 2317
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.3,
+      "detail": "Items may be stacked or hidden; low visibility confidence (0.30). The photo is covered by horizontal lines/glare and plastic mesh, making it difficult to clearly identify products inside.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0192Q4RTW",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B0192Q4RTW",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01BH7JAIW",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01BH7JAIW",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5562,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:54:17Z",
+    "reasons": [
+      "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and: not seen, but items may be hidden.",
+      "BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder.: not seen, but items may be hidden.",
+      "Items may be stacked or hidden; low visibility confidence (0.30). The photo is covered by horizontal lines/glare and plastic mesh, making it difficult to clearly identify products inside."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Artempo DIY Guitar Pick Punch –Perfect Kit to Create Guitar Picks - Made of Heavy Duty Steel, 2 Plastic sheets Black and by hand: there should be 1.",
+      "Count BambooMN Brand - Matcha Green Tea Whisk Set - Set of 4 Items. Whisk + Scoop + Tea Spoon + RED w/BLACK Whisk Holder. by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:4f7a96a390213efa2d43a83773379ee65e692679acb8ca47c727f7ede3f64868"
+}

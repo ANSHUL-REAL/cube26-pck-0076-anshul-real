@@ -1,0 +1,400 @@
+{
+  "record_id": "PCK-6A8F9360F5FF",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T44",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00HNTVJAG",
+        "qty": 1
+      },
+      {
+        "sku": "B00IXZAH9S",
+        "qty": 2
+      },
+      {
+        "sku": "B00SD8IC5Q",
+        "qty": 2
+      },
+      {
+        "sku": "B01AQO0PQI",
+        "qty": 1
+      },
+      {
+        "sku": "B00WR23VRI",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:16Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7b24ffe4-f2ec-4e61-817d-1c312757f27c",
+      "role": "top_down",
+      "sha256": "d22b732d595c493019c137e09686e325d3518c414a3b8dcd9b5b41788cf57f7c",
+      "original_sha256": "94e2cc33bdb61cb90f82c77259fdd26a2f289c1775552fd4f7862459467c76bf",
+      "mime": "image/jpeg",
+      "width": 699,
+      "height": 517,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 699,
+        "height": 517,
+        "blur_var": 41.9,
+        "mean_luma": 98.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "M80 Groove Massage Roller 15\" (Black/Yellow): found (#2).",
+        "Star Wars The Force Awakens 12-inch Chewbacca: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "M80 Groove Massage Roller 15\" (Black/Yellow): 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US): 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Star Wars The Force Awakens 12-inch Chewbacca: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US): not seen, but items may be hidden.",
+        "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug): not seen, but items may be hidden.",
+        "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN): not seen, but items may be hidden.",
+        "Items may be stacked or hidden. Strap bands are crossing over the box, and other items might be beneath the visible objects."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of M80 Groove Massage Roller 15\" (Black/Yellow) with every unit visible.",
+        "Whether Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US) is in the box.",
+        "A count of Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US) with every unit visible.",
+        "A count of Star Wars The Force Awakens 12-inch Chewbacca with every unit visible.",
+        "Whether Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug) is in the box.",
+        "A count of Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug) with every unit visible.",
+        "Whether HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN) is in the box.",
+        "A count of HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN) with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00HNTVJAG",
+        "title": "M80 Groove Massage Roller 15\" (Black/Yellow)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00IXZAH9S",
+        "title": "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US)",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00SD8IC5Q",
+        "title": "Star Wars The Force Awakens 12-inch Chewbacca",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01AQO0PQI",
+        "title": "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00WR23VRI",
+        "title": "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          33,
+          62,
+          497,
+          547
+        ],
+        "description": "Star Wars The Force Awakens 12-inch Chewbacca box",
+        "classification": "CANDIDATE",
+        "sku": "B00SD8IC5Q",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Visible Star Wars logo and Chewbacca packaging text",
+        "partially_hidden": false,
+        "title": "Star Wars The Force Awakens 12-inch Chewbacca"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          471,
+          0,
+          920,
+          365
+        ],
+        "description": "M80 Groove Massage Roller black and yellow",
+        "classification": "CANDIDATE",
+        "sku": "B00HNTVJAG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Black and yellow grooved cylinder shape",
+        "partially_hidden": true,
+        "title": "M80 Groove Massage Roller 15\" (Black/Yellow)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.8,
+      "notes": "Strap bands are crossing over the box, and other items might be beneath the visible objects."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0183JF0FE",
+      "B00HNTVJAG",
+      "B00IXZAH9S",
+      "B01DDT2VR4",
+      "B01AQO0PQI",
+      "B00WR23VRI",
+      "B00SD8IC5Q"
+    ],
+    "usage": {
+      "input_tokens": 2124,
+      "output_tokens": 490,
+      "thinking_tokens": 0,
+      "total_tokens": 2614
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.8,
+      "detail": "Items may be stacked or hidden. Strap bands are crossing over the box, and other items might be beneath the visible objects.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00HNTVJAG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "M80 Groove Massage Roller 15\" (Black/Yellow): found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HNTVJAG",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "M80 Groove Massage Roller 15\" (Black/Yellow): 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00IXZAH9S",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IXZAH9S",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US): 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00SD8IC5Q",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Star Wars The Force Awakens 12-inch Chewbacca: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00SD8IC5Q",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Star Wars The Force Awakens 12-inch Chewbacca: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01AQO0PQI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01AQO0PQI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00WR23VRI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00WR23VRI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3860,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:20Z",
+    "reasons": [
+      "M80 Groove Massage Roller 15\" (Black/Yellow): 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US): 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Star Wars The Force Awakens 12-inch Chewbacca: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US): not seen, but items may be hidden.",
+      "Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug): not seen, but items may be hidden.",
+      "HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN): not seen, but items may be hidden.",
+      "Items may be stacked or hidden. Strap bands are crossing over the box, and other items might be beneath the visible objects."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count M80 Groove Massage Roller 15\" (Black/Yellow) by hand: there should be 1.",
+      "Count Targus Trax Sleeve for Laptops up to 15.6\" (TSS677US) by hand: there should be 2.",
+      "Count Star Wars The Force Awakens 12-inch Chewbacca by hand: there should be 2.",
+      "Count Holiday Pet Mugs Featuring the Artwork of John Bartlett, Holds 16 Ounces (Paw Sweater Mug) by hand: there should be 1.",
+      "Count HP 63 Black & Tri-color Original Ink Cartridges, 2 pack (L0R46AN) by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:5ad5014681bd51c33ba3c502a949737643787c223a21118d3889a1f525edb0cd"
+}

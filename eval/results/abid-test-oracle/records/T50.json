@@ -1,0 +1,279 @@
+{
+  "record_id": "PCK-C047985677E3",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T50",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000AO9PMK",
+        "qty": 1
+      },
+      {
+        "sku": "B00ND00XZG",
+        "qty": 1
+      },
+      {
+        "sku": "B01EXNVWBK",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b318ab21-fcc7-458f-9dd9-578cfc6781d3",
+      "role": "top_down",
+      "sha256": "a778d6e120ebecab296ca3e226f586a9e6078b899b19e3f2cb3208f5b9eab5e4",
+      "original_sha256": "a671e0c3378349adfecb47b5c8de32adb2e3a072cc328b25e702057f87fd54c9",
+      "mime": "image/jpeg",
+      "width": 471,
+      "height": 493,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 471,
+        "height": 493,
+        "blur_var": 25.0,
+        "mean_luma": 106.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B000AO9PMK",
+        "title": "Sunlite Thorn Resistant Schrader Valve Tube, 12-1/2 x 2-1/4\" / 32mm, Black",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00ND00XZG",
+        "title": "My Little Pony Cutie Mark Magic Fashion Style Coco Pommel Figure",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01EXNVWBK",
+        "title": "iPhone 6/6s PRO Line Underwater Camera Housing by Watershot w/ Lanyard & Free Moisture Absorbers (Limpet Shell)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000AO9PMK",
+        "classification": "CANDIDATE",
+        "sku": "B000AO9PMK",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Sunlite Thorn Resistant Schrader Valve Tube, 12-1/2 x 2-1/4\" / 32mm, Black"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00ND00XZG",
+        "classification": "CANDIDATE",
+        "sku": "B00ND00XZG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "My Little Pony Cutie Mark Magic Fashion Style Coco Pommel Figure"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01EXNVWBK",
+        "classification": "CANDIDATE",
+        "sku": "B01EXNVWBK",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "iPhone 6/6s PRO Line Underwater Camera Housing by Watershot w/ Lanyard & Free Moisture Absorbers (Limpet Shell)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B01EXNVWBK",
+      "B001T6VM88",
+      "B00ND00XZG",
+      "B015FMTGSE",
+      "B000AO9PMK"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000AO9PMK",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Sunlite Thorn Resistant Schrader Valve Tube, 12-1/2 x 2-1/4\" / 32mm, Black: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000AO9PMK",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Sunlite Thorn Resistant Schrader Valve Tube, 12-1/2 x 2-1/4\" / 32mm, Black: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00ND00XZG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "My Little Pony Cutie Mark Magic Fashion Style Coco Pommel Figure: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00ND00XZG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "My Little Pony Cutie Mark Magic Fashion Style Coco Pommel Figure: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01EXNVWBK",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "iPhone 6/6s PRO Line Underwater Camera Housing by Watershot w/ Lanyard & Free Moisture Absorbers (Limpet Shell): found (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01EXNVWBK",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "iPhone 6/6s PRO Line Underwater Camera Housing by Watershot w/ Lanyard & Free Moisture Absorbers (Limpet Shell): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:1d7ac3728ff20760c79532f8fd76e9852d0814279e348191a3d9bb290aba14b5"
+}

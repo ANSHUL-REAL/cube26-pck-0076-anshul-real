@@ -1,0 +1,301 @@
+{
+  "record_id": "PCK-50B431DFC791",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T07",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00KBLCQ96",
+        "qty": 1
+      },
+      {
+        "sku": "B00U1Q9X74",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:51:23Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "780c22d6-b1cd-4c78-91ac-5862ea7e4851",
+      "role": "top_down",
+      "sha256": "21610f199684c4c3caf9de33573fe268472fc3a281311552853ed06423c90db8",
+      "original_sha256": "34d49c43e71a72635ac4754ddd330c5e72e3a0fc4d147557b1ea86cb73a7cc4b",
+      "mime": "image/jpeg",
+      "width": 403,
+      "height": 275,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 403,
+        "height": 275,
+        "blur_var": 54.9,
+        "mean_luma": 123.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Mënaji Deluxe Kabuki Brush: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Mënaji Deluxe Kabuki Brush: not seen, but items may be hidden.",
+        "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The box is covered by security netting making some details harder to see."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Mënaji Deluxe Kabuki Brush is in the box.",
+        "A count of Mënaji Deluxe Kabuki Brush with every unit visible.",
+        "Whether May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings is in the box.",
+        "A count of May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00KBLCQ96",
+        "title": "Mënaji Deluxe Kabuki Brush",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00U1Q9X74",
+        "title": "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          182,
+          321,
+          755,
+          694
+        ],
+        "description": "black backpack",
+        "classification": "CANDIDATE",
+        "sku": "B01DDC0VFU",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "black backpack shape visible under netting",
+        "partially_hidden": true,
+        "title": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          278,
+          626,
+          751,
+          881
+        ],
+        "description": "white paper insert",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "paper document or slip",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          278,
+          142,
+          771,
+          382
+        ],
+        "description": "white paper insert",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "paper document or slip",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B01DDC0VFU",
+        "title": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black)",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "white paper insert"
+      },
+      {
+        "object_id": "o3",
+        "description": "white paper insert"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.6,
+      "notes": "The box is covered by security netting making some details harder to see."
+    },
+    "image_issues": [
+      "netting"
+    ],
+    "candidates_shown": [
+      "B00U1Q9X74",
+      "B00KBLCQ96",
+      "B01DDC0VFU",
+      "B00CWEB7VI"
+    ],
+    "usage": {
+      "input_tokens": 2000,
+      "output_tokens": 536,
+      "thinking_tokens": 0,
+      "total_tokens": 2536
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The box is covered by security netting making some details harder to see.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00KBLCQ96",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Mënaji Deluxe Kabuki Brush: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KBLCQ96",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Mënaji Deluxe Kabuki Brush: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00U1Q9X74",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00U1Q9X74",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Not in the order: Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6210,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:51:29Z",
+    "reasons": [
+      "Not in the order: Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) (#1)."
+    ],
+    "fix_instructions": [
+      "Remove Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Mënaji Deluxe Kabuki Brush by hand: there should be 1.",
+      "Also check: Count May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:27dfa9227b947561143acbe8bcd44bb3a0530f20d775e9b943a73925ee2a228c"
+}

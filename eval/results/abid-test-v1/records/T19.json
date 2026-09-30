@@ -1,0 +1,272 @@
+{
+  "record_id": "PCK-05386349D76B",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T19",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "0374403619",
+        "qty": 1
+      },
+      {
+        "sku": "B00HS5ERWC",
+        "qty": 3
+      },
+      {
+        "sku": "B00XDAR6RE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:53:21Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "963b85bc-32a7-4fbd-a5ed-0abe90a07cd1",
+      "role": "top_down",
+      "sha256": "9f4a3da6231cb935f10b73b65e642f5fbec97ee748c04f8093b49b2067e93aff",
+      "original_sha256": "8194fe03d283bc63e6f289ba72eee8313a1cd022bf1890f6095b0dcd6ebc16c3",
+      "mime": "image/jpeg",
+      "width": 543,
+      "height": 706,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 543,
+        "height": 706,
+        "blur_var": 30.6,
+        "mean_luma": 86.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "0374403619",
+        "title": "Amos y Boris (Spanish Edition)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00HS5ERWC",
+        "title": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast ",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00XDAR6RE",
+        "title": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          38,
+          143,
+          715,
+          878
+        ],
+        "description": "large brown rectangular box",
+        "classification": "CANDIDATE",
+        "sku": "B00XDAR6RE",
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "Matches box size and shape for Tymphany woofer pair",
+        "partially_hidden": false,
+        "title": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2)"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "0374403619",
+        "title": "Amos y Boris (Spanish Edition)",
+        "units": 1
+      },
+      {
+        "sku": "B00HS5ERWC",
+        "title": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast ",
+        "units": 3
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "Strap overlays the view but the box is clearly visible."
+    },
+    "image_issues": [
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B00XDAR6RE",
+      "B01EK51BVC",
+      "0374403619",
+      "B00HS5ERWC",
+      "B01GX5IZUM"
+    ],
+    "usage": {
+      "input_tokens": 2114,
+      "output_tokens": 289,
+      "thinking_tokens": 0,
+      "total_tokens": 2403
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:0374403619",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Amos y Boris (Spanish Edition): not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:0374403619",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Amos y Boris (Spanish Edition): 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00HS5ERWC",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast : not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00HS5ERWC",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast : 0 in the box, 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00XDAR6RE",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00XDAR6RE",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "6.5\" Tymphany/Peerless 830657 Paper Cone SDS 60W Woofer- Pair (2): 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9675,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:53:31Z",
+    "reasons": [
+      "Amos y Boris (Spanish Edition): 0 in the box, 1 ordered.",
+      "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast : 0 in the box, 3 ordered.",
+      "Amos y Boris (Spanish Edition): not in the box, and the whole box is visible.",
+      "ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast : not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Amos y Boris (Spanish Edition).",
+      "Add 3 × ROBERTSON 3P20159 Fluorescent eBallast for 2 F96T12/HO Linear Lamps, Program Start, 120-277Vac, 50-60Hz, Normal Ballast ."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:f41649d539e5af9381bf4a195505625ed30617d2ecc8b795fd0e086c56670ab5"
+}

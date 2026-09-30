@@ -1,0 +1,270 @@
+{
+  "record_id": "PCK-2C6BC8BED97E",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T29",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00XBBVINI",
+        "qty": 1
+      },
+      {
+        "sku": "B01AZMIBE4",
+        "qty": 1
+      },
+      {
+        "sku": "B000VDX6TI",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f681c69d-059d-401b-b674-414265e94ceb",
+      "role": "top_down",
+      "sha256": "b7d896ea00bc7df30baab0947a8a5a7c740ed1b5ce3c8616481a2fceda9eb91e",
+      "original_sha256": "8d8259d0872592528c7f3c2d4b706a98dd4a1ae43531e779e8f3b577323ab186",
+      "mime": "image/jpeg",
+      "width": 365,
+      "height": 552,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 365,
+        "height": 552,
+        "blur_var": 39.3,
+        "mean_luma": 124.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00XBBVINI",
+        "title": "Inspired By the Frozen Wands Icecles Wands Double Sided",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01AZMIBE4",
+        "title": "Jasmine Blossom Green Tea Bulk Pack, 16-ounce (Makes 180-230 Cups), Premium Chinese Green Tea Infused with Fresh Yin Hao",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B000VDX6TI",
+        "title": "Bob's Red Mill Whole Flaxseed, 24 oz",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00XBBVINI",
+        "classification": "CANDIDATE",
+        "sku": "B00XBBVINI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Inspired By the Frozen Wands Icecles Wands Double Sided"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01AZMIBE4",
+        "classification": "CANDIDATE",
+        "sku": "B01AZMIBE4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Jasmine Blossom Green Tea Bulk Pack, 16-ounce (Makes 180-230 Cups), Premium Chinese Green Tea Infused with Fresh Yin Hao"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B000VDX6TI",
+        "title": "Bob's Red Mill Whole Flaxseed, 24 oz",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B01AZMIBE4",
+      "B00795W9KI",
+      "B00XL70YKA",
+      "B000VDX6TI",
+      "B00XBBVINI"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00XBBVINI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Inspired By the Frozen Wands Icecles Wands Double Sided: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00XBBVINI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Inspired By the Frozen Wands Icecles Wands Double Sided: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01AZMIBE4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Jasmine Blossom Green Tea Bulk Pack, 16-ounce (Makes 180-230 Cups), Premium Chinese Green Tea Infused with Fresh Yin Hao: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01AZMIBE4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Jasmine Blossom Green Tea Bulk Pack, 16-ounce (Makes 180-230 Cups), Premium Chinese Green Tea Infused with Fresh Yin Hao: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B000VDX6TI",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Bob's Red Mill Whole Flaxseed, 24 oz: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B000VDX6TI",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Bob's Red Mill Whole Flaxseed, 24 oz: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Bob's Red Mill Whole Flaxseed, 24 oz: 0 in the box, 1 ordered.",
+      "Bob's Red Mill Whole Flaxseed, 24 oz: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Bob's Red Mill Whole Flaxseed, 24 oz."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:67d0a86a9f7a92563083764efe5ad2e937703cc9fa60665051be700e15d3d870"
+}

@@ -1,0 +1,251 @@
+{
+  "record_id": "PCK-F9CF2EA9BE93",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T09",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00QML0LV4",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:51:40Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "940ace15-eacb-428b-92d1-e7e0b6126add",
+      "role": "top_down",
+      "sha256": "e44eca9ea0389ef30ccdb7b39d439af8dc865125fa49166dc566ddf6fc8f8518",
+      "original_sha256": "cd7055d9440d31b34c42300db43db250eb494977dd6b215f98eb3269b5a70683",
+      "mime": "image/jpeg",
+      "width": 500,
+      "height": 650,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 500,
+        "height": 650,
+        "blur_var": 29.5,
+        "mean_luma": 126.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00QML0LV4",
+        "title": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl",
+        "ordered": 3,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          139,
+          93,
+          876,
+          314
+        ],
+        "description": "OKRA Headrest Mount box",
+        "classification": "CANDIDATE",
+        "sku": "B00QML0LV4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "OKRA Headrest Mount text visible on box",
+        "partially_hidden": false,
+        "title": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          132,
+          298,
+          870,
+          529
+        ],
+        "description": "OKRA Headrest Mount box",
+        "classification": "CANDIDATE",
+        "sku": "B00QML0LV4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "OKRA Headrest Mount text visible on box",
+        "partially_hidden": false,
+        "title": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          128,
+          497,
+          860,
+          747
+        ],
+        "description": "OKRA Headrest Mount box",
+        "classification": "CANDIDATE",
+        "sku": "B00QML0LV4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "OKRA Headrest Mount text visible on box",
+        "partially_hidden": false,
+        "title": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          126,
+          696,
+          836,
+          963
+        ],
+        "description": "OKRA Headrest Mount box",
+        "classification": "CANDIDATE",
+        "sku": "B00QML0LV4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "OKRA Headrest Mount text visible on box",
+        "partially_hidden": false,
+        "title": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [
+      {
+        "sku": "B00QML0LV4",
+        "title": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl",
+        "units": 1
+      }
+    ],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Four boxes are arranged vertically with straps across them, but all items are clearly identifiable."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00QML0LV4",
+      "SKU-TOWEL-BLU",
+      "128542817X"
+    ],
+    "usage": {
+      "input_tokens": 2010,
+      "output_tokens": 718,
+      "thinking_tokens": 0,
+      "total_tokens": 2728
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10040,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00QML0LV4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl: found (#1, #2, #3, #4).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10040,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00QML0LV4",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl: 4 in the box, 3 ordered (1 too many).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10040,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10040,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10040,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:51:50Z",
+    "reasons": [
+      "Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl: 4 in the box, 3 ordered (1 too many)."
+    ],
+    "fix_instructions": [
+      "Remove 1 × Okra 360° Degree Adjustable Rotating Headrest Car Seat Mount Holder For iPad, Samsung Galaxy,Motorola Xoom, And all Tabl."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:c76513089fa866e29c4c416b35d208241c0f9c444d444aa9ccd6881fdd94b967"
+}

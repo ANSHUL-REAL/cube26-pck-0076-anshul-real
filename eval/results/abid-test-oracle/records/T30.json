@@ -1,0 +1,286 @@
+{
+  "record_id": "PCK-C2047A3AC42A",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T30",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00CAO41GI",
+        "qty": 5
+      },
+      {
+        "sku": "B00NJ31VT4",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f5a69c69-1314-4e2a-af8a-d567b2bb5f1c",
+      "role": "top_down",
+      "sha256": "306ab43c9fdb51da2deabcbeb3ff1d3203f6775c3bbe13a1a91e9172d759ade8",
+      "original_sha256": "c2d6ff5334a98cb4cb173f77caba44e71794315e56c5936828f0a464e67f334c",
+      "mime": "image/jpeg",
+      "width": 346,
+      "height": 318,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 346,
+        "height": 318,
+        "blur_var": 7.9,
+        "mean_luma": 111.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00CAO41GI",
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock",
+        "ordered": 5,
+        "found": 5,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00NJ31VT4",
+        "title": "Neon Fanny Pack (White)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00CAO41GI",
+        "classification": "CANDIDATE",
+        "sku": "B00CAO41GI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00CAO41GI",
+        "classification": "CANDIDATE",
+        "sku": "B00CAO41GI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00CAO41GI",
+        "classification": "CANDIDATE",
+        "sku": "B00CAO41GI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00CAO41GI",
+        "classification": "CANDIDATE",
+        "sku": "B00CAO41GI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00CAO41GI",
+        "classification": "CANDIDATE",
+        "sku": "B00CAO41GI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00NJ31VT4",
+        "classification": "CANDIDATE",
+        "sku": "B00NJ31VT4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Neon Fanny Pack (White)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B019UJ3IS2",
+      "B0178J2CCY",
+      "B00CAO41GI",
+      "B00NJ31VT4"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00CAO41GI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock: found (#1, #2, #3, #4, #5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00CAO41GI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Master Lock Co.   M515XTLJHC Magnum 2 Pack 2\" Covered Padlock: 5 of 5.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00NJ31VT4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Neon Fanny Pack (White): found (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00NJ31VT4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Neon Fanny Pack (White): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:013aefd8aabb8ec187d2f7679b41e2eae04ef46842552474f392c8f26e44ffd8"
+}

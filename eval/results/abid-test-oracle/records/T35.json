@@ -1,0 +1,182 @@
+{
+  "record_id": "PCK-47D3456254D2",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T35",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00S05KTOO",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "69aae945-b455-4f91-8716-d443414486c9",
+      "role": "top_down",
+      "sha256": "a20cffffbef6de38e4b85a775ff43ec94159bc44f6713c3cf634dc1742c3f4fd",
+      "original_sha256": "7c2c4cf1512429aa5150d3d8acd25d4b4a912fa93ccdf390e966aadb960619e3",
+      "mime": "image/jpeg",
+      "width": 606,
+      "height": 449,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 606,
+        "height": 449,
+        "blur_var": 10.5,
+        "mean_luma": 110.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00S05KTOO",
+        "title": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00S05KTOO",
+        "classification": "CANDIDATE",
+        "sku": "B00S05KTOO",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00S05KTOO",
+        "title": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00SD8IC5Q",
+      "B00S05KTOO",
+      "B01CDGDLN6"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00S05KTOO",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00S05KTOO",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: 1 in the box, 2 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: 1 in the box, 2 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:19979cf06988abf0ebf2095ef556eecc5cd9e6bda689c94c382b74f0a3885462"
+}

@@ -1,0 +1,186 @@
+{
+  "record_id": "PCK-DA4A520EBB2A",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T48",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0134V3VZM",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:45Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7163f886-27d1-43a7-abff-fb03880d2176",
+      "role": "top_down",
+      "sha256": "0ea548606a338a5ed78c728984d39d589f0498c1c4a23f058e678d0f240a095f",
+      "original_sha256": "d995e0208091fb1e6996c9f29bf8da65607af5480645bbee226e69afc665a27d",
+      "mime": "image/jpeg",
+      "width": 553,
+      "height": 526,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 553,
+        "height": 526,
+        "blur_var": 36.8,
+        "mean_luma": 117.3,
+        "clipped_pct": 0.12,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image shows shelves or storage compartments with white boxes labeled 'Fashion Wind Clip Lamp', which do not match any of the provided candidate SKUs."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet is in the box.",
+        "A count of AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B0134V3VZM",
+        "title": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.1,
+      "notes": "The image shows shelves or storage compartments with white boxes labeled 'Fashion Wind Clip Lamp', which do not match any of the provided candidate SKUs."
+    },
+    "image_issues": [
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B00PQBO0JK",
+      "B00D901B4W",
+      "B0134V3VZM"
+    ],
+    "usage": {
+      "input_tokens": 1983,
+      "output_tokens": 114,
+      "thinking_tokens": 0,
+      "total_tokens": 2097
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image shows shelves or storage compartments with white boxes labeled 'Fashion Wind Clip Lamp', which do not match any of the provided candidate SKUs.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2605,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0134V3VZM",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2605,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B0134V3VZM",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2605,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2605,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2605,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:48Z",
+    "reasons": [
+      "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image shows shelves or storage compartments with white boxes labeled 'Fashion Wind Clip Lamp', which do not match any of the provided candidate SKUs."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count AmazonBasics Mini DisplayPort to HDMI Cable - 10 Feet by hand: there should be 2."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:7f720c6e4f5c8742236362fe8eefcff855c21a1bc3894c7b55641c07952a0d7e"
+}

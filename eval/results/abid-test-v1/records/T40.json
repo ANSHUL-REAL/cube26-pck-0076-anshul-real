@@ -1,0 +1,339 @@
+{
+  "record_id": "PCK-79EA5B2F5FE7",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T40",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B013FHAOC8",
+        "qty": 2
+      },
+      {
+        "sku": "B01BLDWSOA",
+        "qty": 1
+      },
+      {
+        "sku": "B01CDGDLN6",
+        "qty": 2
+      },
+      {
+        "sku": "B01DDC0VFU",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:40Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ed2b2dac-61dc-4c29-840a-65bfd4e42152",
+      "role": "top_down",
+      "sha256": "d1bee4a4e03d46cfbcec8ed98b5abcc3c8630190a7ee003be10706e61dffc812",
+      "original_sha256": "1a071866c2d4561ee7199d4a3ebb07686edc76ce58bd9b3ab718b26bb83e01fe",
+      "mime": "image/jpeg",
+      "width": 467,
+      "height": 357,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 467,
+        "height": 357,
+        "blur_var": 26.2,
+        "mean_luma": 101.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : not seen, but items may be hidden.",
+        "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: not seen, but items may be hidden.",
+        "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). Image is heavily obstructed by elastic cords of the packing bench and angle."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden,  is in the box.",
+        "A count of Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden,  with every unit visible.",
+        "Whether Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B is in the box.",
+        "A count of Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B with every unit visible.",
+        "A count of Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce with every unit visible.",
+        "Whether Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) is in the box.",
+        "A count of Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B013FHAOC8",
+        "title": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, ",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01BLDWSOA",
+        "title": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01CDGDLN6",
+        "title": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01DDC0VFU",
+        "title": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          21,
+          356,
+          790,
+          756
+        ],
+        "description": "large white jar with white lid",
+        "classification": "CANDIDATE",
+        "sku": "B01CDGDLN6",
+        "confidence": 0.85,
+        "alternative_skus": [],
+        "deciding_feature": "shape and size match coconut oil tub",
+        "partially_hidden": true,
+        "title": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.4,
+      "notes": "Image is heavily obstructed by elastic cords of the packing bench and angle."
+    },
+    "image_issues": [
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B00957YQ36",
+      "B00JBK78V4",
+      "B01CDGDLN6",
+      "B01BLDWSOA",
+      "B01DDC0VFU",
+      "B013FHAOC8"
+    ],
+    "usage": {
+      "input_tokens": 2153,
+      "output_tokens": 302,
+      "thinking_tokens": 0,
+      "total_tokens": 2455
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.4,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). Image is heavily obstructed by elastic cords of the packing bench and angle.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B013FHAOC8",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B013FHAOC8",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01BLDWSOA",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01BLDWSOA",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01CDGDLN6",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01CDGDLN6",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.85,
+      "detail": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01DDC0VFU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01DDC0VFU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3891,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:44Z",
+    "reasons": [
+      "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden, : not seen, but items may be hidden.",
+      "Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B: not seen, but items may be hidden.",
+      "Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black): not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). Image is heavily obstructed by elastic cords of the packing bench and angle."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Outdoor Solar String Lights with dragonflies by Icicle, 16ft 20 LED 8 Modes Fairy Lighting for Christmas Trees, Garden,  by hand: there should be 2.",
+      "Count Galaxy S7 Case, [Armorbox] i-Blason built in [Screen Protector] [Full body] [Heavy Duty Protection ] Shock Reduction / B by hand: there should be 1.",
+      "Count Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce by hand: there should be 2.",
+      "Count Lalawow PU Leather Backpack Fashion Daypack 14 inch Laptop Bags for College Boys Girls (Black) by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:01bb7112e085c59ed79075721c18dbe9131977b0304935a2b633ea516cd1c32d"
+}

@@ -1,0 +1,291 @@
+{
+  "record_id": "PCK-99C898FEF381",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T42",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GQ3IC4Q",
+        "qty": 2
+      },
+      {
+        "sku": "B00X001S4E",
+        "qty": 4
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:56:56Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "6058ba0f-5031-43e5-8232-54b1fb9140c9",
+      "role": "top_down",
+      "sha256": "fe5640a63df08cc3ffbe6e3942850bdb6939bec05e7c3bb8e977c4c984b8a7a0",
+      "original_sha256": "ed05db151a56a38e86776f5a1eaa93b3347c59d4202a59fc929f73c87f62bc5d",
+      "mime": "image/jpeg",
+      "width": 525,
+      "height": 403,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 525,
+        "height": 403,
+        "blur_var": 46.4,
+        "mean_luma": 125.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "Nothing outside the order is in the box.",
+        "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "#2 may be YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa (confidence 0.60).",
+        "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 4 ordered.",
+        "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: possible match #2 is unclear.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.30). Stretchy elastic cords and netting over the box obscure the view and create strong visual distortion."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long with every unit visible.",
+        "Whether Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl is in the box: a clear view of #2.",
+        "A count of Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl with every unit visible.",
+        "A close-up of #2 showing its label or colour, to tell whether it is YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00GQ3IC4Q",
+        "title": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00X001S4E",
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl",
+        "ordered": 4,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          181,
+          237,
+          303,
+          893
+        ],
+        "description": "Coiled rubber adhesive strip",
+        "classification": "CANDIDATE",
+        "sku": "B00GQ3IC4Q",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "Rolled dark foam strip shape and texture",
+        "partially_hidden": false,
+        "title": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          423,
+          269,
+          831,
+          785
+        ],
+        "description": "Plastic bottle with white pump dispenser",
+        "classification": "CANDIDATE",
+        "sku": "B00X001S4E",
+        "confidence": 0.6,
+        "alternative_skus": [
+          "B00NVMIQE6"
+        ],
+        "deciding_feature": "Plastic container shape seen through netting, though obscured",
+        "partially_hidden": true,
+        "title": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o2",
+        "guess_sku": "B00X001S4E",
+        "confidence": 0.6,
+        "description": "Plastic bottle with white pump dispenser"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.3,
+      "notes": "Stretchy elastic cords and netting over the box obscure the view and create strong visual distortion."
+    },
+    "image_issues": [
+      "blur",
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B00GQ3IC4Q",
+      "B00NVMIQE6",
+      "B00X001S4E",
+      "B017SUW3OA"
+    ],
+    "usage": {
+      "input_tokens": 2076,
+      "output_tokens": 521,
+      "thinking_tokens": 0,
+      "total_tokens": 2597
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.3,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.30). Stretchy elastic cords and netting over the box obscure the view and create strong visual distortion.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GQ3IC4Q",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GQ3IC4Q",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.9,
+      "detail": "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00X001S4E",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: possible match #2 is unclear.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00X001S4E",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 4 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "#2 may be YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa (confidence 0.60).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5345,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:02Z",
+    "reasons": [
+      "#2 may be YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa (confidence 0.60).",
+      "Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long: 1 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 4 ordered.",
+      "Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl: possible match #2 is unclear.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.30). Stretchy elastic cords and netting over the box obscure the view and create strong visual distortion."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Neoprene Rubber self adhesive strip 3/8\" wide x 3/8\" thick x 16 feet long by hand: there should be 2.",
+      "Count Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl by hand: there should be 4.",
+      "Check #2 by hand: it looks like Zesty Paws Pet Stain & Odor Remover, Carpet Spot Cleaner & Odor Eliminator for Dogs & Cats, Works On Carpet, Hardwood Fl.",
+      "Check #2 by hand: is it YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa?"
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:80b0672ef380b07f10dea90e8ff062ea66e23eac2a628f1c0e12437157031b43"
+}

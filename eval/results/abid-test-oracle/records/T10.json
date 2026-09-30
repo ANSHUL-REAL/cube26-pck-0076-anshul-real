@@ -1,0 +1,198 @@
+{
+  "record_id": "PCK-A895BC6BB603",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T10",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0061G4B6G",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "fa0a76c6-d21d-4a97-91fa-5464c0949782",
+      "role": "top_down",
+      "sha256": "279f4988bf3fdc410487588c2aac9b4777b731d5a483c88ce9fea6558e5eb91b",
+      "original_sha256": "96ff78e541feae18f946ec06e8681c54836e311f72e5a18d38b4b2a7d4cdc36b",
+      "mime": "image/jpeg",
+      "width": 393,
+      "height": 268,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 393,
+        "height": 268,
+        "blur_var": 9.5,
+        "mean_luma": 150.5,
+        "clipped_pct": 0.01,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0061G4B6G",
+        "title": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000IBPD0S",
+        "classification": "CANDIDATE",
+        "sku": "B000IBPD0S",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Canon CLI-8 8-Color Multipack Ink Tanks"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0061G4B6G",
+        "classification": "CANDIDATE",
+        "sku": "B0061G4B6G",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B000IBPD0S",
+        "title": "Canon CLI-8 8-Color Multipack Ink Tanks",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0061G4B6G",
+      "B008O7Z1F0",
+      "B015EMXVMW"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0061G4B6G",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0061G4B6G",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Canon CLI-8 8-Color Multipack Ink Tanks (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Not in the order: Canon CLI-8 8-Color Multipack Ink Tanks (#1)."
+    ],
+    "fix_instructions": [
+      "Remove Canon CLI-8 8-Color Multipack Ink Tanks (#1); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7f72eab004377001f09f2ee6779fc3825b341605bdfce8d176bbeb68c115671a"
+}

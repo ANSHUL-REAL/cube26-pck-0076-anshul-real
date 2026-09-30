@@ -1,0 +1,183 @@
+{
+  "record_id": "PCK-F717C6E87D4F",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T15",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00ZC9OZVY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:52:43Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "74fb21af-326d-472a-81b3-2c9a33c82d81",
+      "role": "top_down",
+      "sha256": "2451d0f8dee1ba9deda9dd35d7e10b6c2772b516b903b88c9114e05dcaf4116d",
+      "original_sha256": "9fbc8ed4c4100b9ba080ef892562999adfe94f5847152f74fbe05f0bcfd8c985",
+      "mime": "image/jpeg",
+      "width": 375,
+      "height": 256,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 375,
+        "height": 256,
+        "blur_var": 82.1,
+        "mean_luma": 117.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00ZC9OZVY",
+        "title": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          138,
+          0,
+          912,
+          988
+        ],
+        "description": "Mini Ocean Projector box with Aurora Master text",
+        "classification": "CANDIDATE",
+        "sku": "B00ZC9OZVY",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "Aurora Master ocean projector packaging visible",
+        "partially_hidden": false,
+        "title": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "The projector box fills the interior under some netting."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00U58U5IE",
+      "B007DW6DYU",
+      "B00ZC9OZVY"
+    ],
+    "usage": {
+      "input_tokens": 1966,
+      "output_tokens": 288,
+      "thinking_tokens": 0,
+      "total_tokens": 2254
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5937,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00ZC9OZVY",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5937,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00ZC9OZVY",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Goldenwide® New Mini Ocean Projector Wave Projection Lamps with Speaker LED Night Light for Home Room Bedroom ¨C Multico: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5937,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5937,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5937,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:52:49Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:e81f0f510a9580a3535a78c505988863a343fbe655592b09de82235baac6afa5"
+}

@@ -1,0 +1,215 @@
+{
+  "record_id": "PCK-B4A2AB9DAAA6",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T35",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00S05KTOO",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:55:58Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "af585311-3e61-467d-a4eb-d15c8b79dfac",
+      "role": "top_down",
+      "sha256": "a20cffffbef6de38e4b85a775ff43ec94159bc44f6713c3cf634dc1742c3f4fd",
+      "original_sha256": "7c2c4cf1512429aa5150d3d8acd25d4b4a912fa93ccdf390e966aadb960619e3",
+      "mime": "image/jpeg",
+      "width": 606,
+      "height": 449,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 606,
+        "height": 449,
+        "blur_var": 10.5,
+        "mean_luma": 110.3,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "Nothing outside the order is in the box.",
+        "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: 0 in the box, 2 ordered.",
+        "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: not in the box, and the whole box is visible.",
+        "The whole inside of the box is visible and nothing appears hidden.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "#1 may be Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce (confidence 0.65)."
+      ],
+      "missing_evidence": [
+        "A close-up of #1 showing its label or colour, to tell whether it is Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00S05KTOO",
+        "title": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          66,
+          59,
+          617,
+          479
+        ],
+        "description": "square jar or box wrapped in bubble wrap",
+        "classification": "CANDIDATE",
+        "sku": "B01CDGDLN6",
+        "confidence": 0.65,
+        "alternative_skus": [],
+        "deciding_feature": "square shaped jar or box wrapped in bubble wrap fitting coconut oil dimensions",
+        "partially_hidden": false,
+        "title": "Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00S05KTOO",
+        "title": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6",
+        "units": 2
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o1",
+        "guess_sku": "B01CDGDLN6",
+        "confidence": 0.65,
+        "description": "square jar or box wrapped in bubble wrap"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "The box interior is visible through the elastic straps, containing a single wrapped item."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00SD8IC5Q",
+      "B00S05KTOO",
+      "B01CDGDLN6"
+    ],
+    "usage": {
+      "input_tokens": 1958,
+      "output_tokens": 301,
+      "thinking_tokens": 0,
+      "total_tokens": 2259
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4235,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00S05KTOO",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4235,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00S05KTOO",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: 0 in the box, 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4235,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.65,
+      "detail": "#1 may be Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce (confidence 0.65).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4235,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4235,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:56:02Z",
+    "reasons": [
+      "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: 0 in the box, 2 ordered.",
+      "Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 2 × Vibrant Splash Water/Beverage Highball Glasses, 13.25 Ounce - Set of 6.",
+      "Also check: Check #1 by hand: it looks like Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce.",
+      "Also check: Check #1 by hand: is it Island’s Miracle 100% Pure Organic Extra Virgin Coconut Oil, 32 Ounce?"
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7865aa0796fa86d9af25eb62b24033166c78826f6fe7ed2b4075e147a70a1077"
+}

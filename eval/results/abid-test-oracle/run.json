@@ -1,0 +1,16 @@
+{
+  "split": "test",
+  "reveal_order": false,
+  "dataset": "Amazon Bin Image Dataset (public, CC BY-NC-SA 3.0 US)",
+  "perceiver": "oracle",
+  "model": "none (oracle)",
+  "match_threshold": 0.7,
+  "visibility_threshold": 0.7,
+  "started_at": "2026-09-30T14:59:02+00:00",
+  "frozen": {
+    "file": "eval/frozen-test.json",
+    "frozen_at": "2026-09-30T14:49:44+00:00",
+    "matches": true,
+    "changed_since": []
+  }
+}

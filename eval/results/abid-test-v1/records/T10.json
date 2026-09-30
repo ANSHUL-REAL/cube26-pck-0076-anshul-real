@@ -1,0 +1,185 @@
+{
+  "record_id": "PCK-23D53F48B706",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T10",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0061G4B6G",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:51:54Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ea5d953c-a51b-4b02-8cc2-cd0162df2348",
+      "role": "top_down",
+      "sha256": "279f4988bf3fdc410487588c2aac9b4777b731d5a483c88ce9fea6558e5eb91b",
+      "original_sha256": "96ff78e541feae18f946ec06e8681c54836e311f72e5a18d38b4b2a7d4cdc36b",
+      "mime": "image/jpeg",
+      "width": 393,
+      "height": 268,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 393,
+        "height": 268,
+        "blur_var": 9.5,
+        "mean_luma": 150.5,
+        "clipped_pct": 0.01,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0061G4B6G",
+        "title": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          75,
+          41,
+          874,
+          999
+        ],
+        "description": "Canon ink cartridge and photo paper box",
+        "classification": "CANDIDATE",
+        "sku": "B0061G4B6G",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "Red packaging layout matching Canon PG-240XL/CL-241XL box",
+        "partially_hidden": false,
+        "title": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.8,
+      "notes": "The image is slightly blurry and shows a shelf-like view of the box containing the Canon product."
+    },
+    "image_issues": [
+      "blur"
+    ],
+    "candidates_shown": [
+      "B0061G4B6G",
+      "B008O7Z1F0",
+      "B015EMXVMW"
+    ],
+    "usage": {
+      "input_tokens": 1966,
+      "output_tokens": 318,
+      "thinking_tokens": 0,
+      "total_tokens": 2284
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3367,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0061G4B6G",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3367,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0061G4B6G",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Canon Office Products PG-240XL/CL-241XL with Canon GP601 Glossy Photo Paper: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3367,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3367,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3367,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:51:58Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:5663f2fc00a9b774727ce0001489cb40ebdfeb63f73c9f312cd754606a156c7a"
+}

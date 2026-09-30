@@ -1,0 +1,248 @@
+{
+  "record_id": "PCK-9954D9DE66B6",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T43",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GCAXW70",
+        "qty": 3
+      },
+      {
+        "sku": "B011BWCT72",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:57:06Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "cbb4f47c-99a5-4220-b4f9-d512b6450887",
+      "role": "top_down",
+      "sha256": "a87d0defb0b5362c8fac3e1d72a00960ceae86d86828e36594f792d8289def32",
+      "original_sha256": "c6e83c139f86db6b9a492477ea616bcc0bea74454df0ca5dfe84da93e7d03c76",
+      "mime": "image/jpeg",
+      "width": 492,
+      "height": 292,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 492,
+        "height": 292,
+        "blur_var": 41.4,
+        "mean_luma": 89.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00GCAXW70",
+        "title": "Lenovo 135W AC Adapter (PA-1131-72)",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B011BWCT72",
+        "title": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          37,
+          421,
+          849,
+          960
+        ],
+        "description": "dark wood grain jewelry music box",
+        "classification": "CANDIDATE",
+        "sku": "B00U1Q9X74",
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "wood grain pattern and box shape",
+        "partially_hidden": false,
+        "title": "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00GCAXW70",
+        "title": "Lenovo 135W AC Adapter (PA-1131-72)",
+        "units": 2
+      },
+      {
+        "sku": "B011BWCT72",
+        "title": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red",
+        "units": 2
+      }
+    ],
+    "wrong": [
+      {
+        "expected_sku": "B00GCAXW70",
+        "expected_title": "Lenovo 135W AC Adapter (PA-1131-72)",
+        "found_sku": "B00U1Q9X74",
+        "found_title": "May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "box has straps across it but contents are visible"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00U1Q9X74",
+      "B00KBLCQ96",
+      "B011BWCT72",
+      "B00GCAXW70"
+    ],
+    "usage": {
+      "input_tokens": 2003,
+      "output_tokens": 288,
+      "thinking_tokens": 0,
+      "total_tokens": 2291
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GCAXW70",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Lenovo 135W AC Adapter (PA-1131-72): not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00GCAXW70",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Lenovo 135W AC Adapter (PA-1131-72): 0 in the box, 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B011BWCT72",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B011BWCT72",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red: 0 in the box, 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 0.8,
+      "detail": "Expected Lenovo 135W AC Adapter (PA-1131-72), found May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B00GCAXW70",
+            "found_sku": "B00U1Q9X74",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5819,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:57:12Z",
+    "reasons": [
+      "Expected Lenovo 135W AC Adapter (PA-1131-72), found May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings (#1).",
+      "Lenovo 135W AC Adapter (PA-1131-72): 0 in the box, 3 ordered.",
+      "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red: 0 in the box, 2 ordered.",
+      "Lenovo 135W AC Adapter (PA-1131-72): not in the box, and the whole box is visible.",
+      "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace May You Find The Courage Jeweled Woodgrain Jewelry Music Box - Plays Tune Wind Beneath My Wings (#1) with Lenovo 135W AC Adapter (PA-1131-72).",
+      "Add 2 × Lenovo 135W AC Adapter (PA-1131-72).",
+      "Add 2 × MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:6332569cc9b42426e58954a56162b37382c2470481b073d3492a7e76c8badb02"
+}

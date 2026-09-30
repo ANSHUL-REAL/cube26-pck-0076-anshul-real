@@ -1,0 +1,314 @@
+{
+  "record_id": "PCK-7C427104BC5E",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T14",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B009VWO4PU",
+        "qty": 1
+      },
+      {
+        "sku": "B019UJ3IS2",
+        "qty": 1
+      },
+      {
+        "sku": "B015FMTGSE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:52:33Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "1807cd6e-b80f-4fb8-872a-9c30e5270f90",
+      "role": "top_down",
+      "sha256": "ba80249cab023d43d7cfd11b3bf713899472621efdacd6c3448d97990fc27fe9",
+      "original_sha256": "06e8b5d879b8460accfb7555088393a58113643822a0e20dcf4be9227dd4dffb",
+      "mime": "image/jpeg",
+      "width": 630,
+      "height": 611,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 630,
+        "height": 611,
+        "blur_var": 31.6,
+        "mean_luma": 138.8,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B009VWO4PU",
+        "title": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B019UJ3IS2",
+        "title": "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B015FMTGSE",
+        "title": "LCL(TM) Remanufactured HP CE255X 55X (1-Pack Black) Toner Cartridge Compatible for HP LaserJet Enterprise 500-MFP Pro-MF",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          33,
+          21,
+          545,
+          604
+        ],
+        "description": "V4INK toner cartridge box",
+        "classification": "CANDIDATE",
+        "sku": "B009VWO4PU",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "V4INK branding visible on the box",
+        "partially_hidden": false,
+        "title": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          392,
+          102,
+          959,
+          994
+        ],
+        "description": "LCL toner cartridge box",
+        "classification": "CANDIDATE",
+        "sku": "B015FMTGSE",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "LCL branding visible on the box",
+        "partially_hidden": false,
+        "title": "LCL(TM) Remanufactured HP CE255X 55X (1-Pack Black) Toner Cartridge Compatible for HP LaserJet Enterprise 500-MFP Pro-MF"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          44,
+          577,
+          362,
+          959
+        ],
+        "description": "Qball Reaction Training Ball in packaging",
+        "classification": "CANDIDATE",
+        "sku": "B015EMXVMW",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "distinct shape and packaging of Qball",
+        "partially_hidden": false,
+        "title": "Qball Reaction Training Ball"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B019UJ3IS2",
+        "expected_title": "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges",
+        "found_sku": "B015EMXVMW",
+        "found_title": "Qball Reaction Training Ball",
+        "object_id": "o3"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Strap lines are crossing the scene but all items are clearly visible."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B019UJ3IS2",
+      "B009ZLYQ50",
+      "B015EMXVMW",
+      "B009VWO4PU",
+      "B015FMTGSE"
+    ],
+    "usage": {
+      "input_tokens": 2110,
+      "output_tokens": 671,
+      "thinking_tokens": 0,
+      "total_tokens": 2781
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B009VWO4PU",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B009VWO4PU",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B019UJ3IS2",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B019UJ3IS2",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B015FMTGSE",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "LCL(TM) Remanufactured HP CE255X 55X (1-Pack Black) Toner Cartridge Compatible for HP LaserJet Enterprise 500-MFP Pro-MF: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B015FMTGSE",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "LCL(TM) Remanufactured HP CE255X 55X (1-Pack Black) Toner Cartridge Compatible for HP LaserJet Enterprise 500-MFP Pro-MF: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Expected KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges, found Qball Reaction Training Ball (#3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B019UJ3IS2",
+            "found_sku": "B015EMXVMW",
+            "object_id": "o3"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5663,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:52:39Z",
+    "reasons": [
+      "Expected KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges, found Qball Reaction Training Ball (#3).",
+      "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges: 0 in the box, 1 ordered.",
+      "KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Qball Reaction Training Ball (#3) with KODAK Remanufactured Ink Cartridge Combo Pack Compatible With Canon PGI-220 (2945B004) High-Yield 3 Black Cartridges."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:14e298f83c075d6bc32079010e9b4212dd6d36b68d86ec4d22d536b176bf0909"
+}

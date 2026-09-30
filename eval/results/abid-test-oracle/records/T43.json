@@ -1,0 +1,265 @@
+{
+  "record_id": "PCK-FE2DF616EEBF",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T43",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GCAXW70",
+        "qty": 3
+      },
+      {
+        "sku": "B011BWCT72",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d624ca81-a92e-4584-8ea1-fd98bdd27934",
+      "role": "top_down",
+      "sha256": "a87d0defb0b5362c8fac3e1d72a00960ceae86d86828e36594f792d8289def32",
+      "original_sha256": "c6e83c139f86db6b9a492477ea616bcc0bea74454df0ca5dfe84da93e7d03c76",
+      "mime": "image/jpeg",
+      "width": 492,
+      "height": 292,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 492,
+        "height": 292,
+        "blur_var": 41.4,
+        "mean_luma": 89.1,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00GCAXW70",
+        "title": "Lenovo 135W AC Adapter (PA-1131-72)",
+        "ordered": 3,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B011BWCT72",
+        "title": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00GCAXW70",
+        "classification": "CANDIDATE",
+        "sku": "B00GCAXW70",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Lenovo 135W AC Adapter (PA-1131-72)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00GCAXW70",
+        "classification": "CANDIDATE",
+        "sku": "B00GCAXW70",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Lenovo 135W AC Adapter (PA-1131-72)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B011BWCT72",
+        "classification": "CANDIDATE",
+        "sku": "B011BWCT72",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B011BWCT72",
+        "classification": "CANDIDATE",
+        "sku": "B011BWCT72",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00GCAXW70",
+        "title": "Lenovo 135W AC Adapter (PA-1131-72)",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00U1Q9X74",
+      "B00KBLCQ96",
+      "B011BWCT72",
+      "B00GCAXW70"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GCAXW70",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Lenovo 135W AC Adapter (PA-1131-72): found (#1, #2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GCAXW70",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Lenovo 135W AC Adapter (PA-1131-72): 2 in the box, 3 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B011BWCT72",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red: found (#3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B011BWCT72",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "MDS 10 Wedding 12 x 108 inch Satin Table Runner Wedding Banquet Decoration- Red: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:03Z",
+    "reasons": [
+      "Lenovo 135W AC Adapter (PA-1131-72): 2 in the box, 3 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Lenovo 135W AC Adapter (PA-1131-72)."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:8dd174187e461f3fcb9b7d165ab082a6365a11a8b88685a469f8d9e5038434ef"
+}

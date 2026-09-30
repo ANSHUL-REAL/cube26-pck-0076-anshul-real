@@ -1,0 +1,347 @@
+{
+  "record_id": "PCK-FD25B7641BD3",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T13",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B001F0QS5A",
+        "qty": 1
+      },
+      {
+        "sku": "B0083WVGTG",
+        "qty": 1
+      },
+      {
+        "sku": "B009VWO4PU",
+        "qty": 1
+      },
+      {
+        "sku": "B019XRI278",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "165d8646-f5e4-4001-8af4-ffbd86d471db",
+      "role": "top_down",
+      "sha256": "d650bd579ec56ecf0450df9ff4efee5b398daabbe108c220228e5a68b132af50",
+      "original_sha256": "9cf4b8a3e73bb55905b8c06ffe86adbdcdf42261363ee0f749e1218048dc1eff",
+      "mime": "image/jpeg",
+      "width": 645,
+      "height": 625,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 645,
+        "height": 625,
+        "blur_var": 52.4,
+        "mean_luma": 114.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B001F0QS5A",
+        "title": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B0083WVGTG",
+        "title": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B009VWO4PU",
+        "title": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B019XRI278",
+        "title": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B001F0QS5A",
+        "classification": "CANDIDATE",
+        "sku": "B001F0QS5A",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0083WVGTG",
+        "classification": "CANDIDATE",
+        "sku": "B0083WVGTG",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015Z3PV4Q",
+        "classification": "CANDIDATE",
+        "sku": "B015Z3PV4Q",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Opolar F60 Desktop USB Fan, Mini Table Fan for Home and Office (USB Powered, 2 Fan Speeds, Large Airflow, Personal Cooli"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B019XRI278",
+        "classification": "CANDIDATE",
+        "sku": "B019XRI278",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue)"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B009VWO4PU",
+        "expected_title": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20",
+        "found_sku": "B015Z3PV4Q",
+        "found_title": "Opolar F60 Desktop USB Fan, Mini Table Fan for Home and Office (USB Powered, 2 Fan Speeds, Large Airflow, Personal Cooli",
+        "object_id": "o3"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B009VWO4PU",
+      "B01BZFAF5S",
+      "B001F0QS5A",
+      "B00GM60NL2",
+      "B0083WVGTG",
+      "B019XRI278"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B001F0QS5A",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B001F0QS5A",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "HP 05X (CE505X) Black High Yield Original LaserJet Toner Cartridge: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B0083WVGTG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer): found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0083WVGTG",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Kalencom Potette Plus At Home Reusable Liners, Pink (Discontinued by Manufacturer): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B009VWO4PU",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B009VWO4PU",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B019XRI278",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue): found (#4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B019XRI278",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Domiray New Cinderella Dress Princess Costume Blue Butterfly Girl Dress (4T-4, Blue): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20, found Opolar F60 Desktop USB Fan, Mini Table Fan for Home and Office (USB Powered, 2 Fan Speeds, Large Airflow, Personal Cooli (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B009VWO4PU",
+            "found_sku": "B015Z3PV4Q",
+            "object_id": "o3"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Expected V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20, found Opolar F60 Desktop USB Fan, Mini Table Fan for Home and Office (USB Powered, 2 Fan Speeds, Large Airflow, Personal Cooli (#3).",
+      "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: 0 in the box, 1 ordered.",
+      "V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Opolar F60 Desktop USB Fan, Mini Table Fan for Home and Office (USB Powered, 2 Fan Speeds, Large Airflow, Personal Cooli (#3) with V4INK &#174; New Compatible Black Q7553X 53X Q5949X High Yield Toner Cartridge for LaserJet P2010 P2014 P2015 P2015d P20."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ff3023ee65542c59554d8a55a066065cbb07f20813a30990d10f97d47f0d3a05"
+}

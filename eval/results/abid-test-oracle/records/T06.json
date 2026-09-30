@@ -1,0 +1,188 @@
+{
+  "record_id": "PCK-CDBF1ED5F9BD",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T06",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00VVC6TTW",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:59:02Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b1d154b9-e814-4b99-96ce-9391f671be0e",
+      "role": "top_down",
+      "sha256": "9543a495e83bc9561c3389e0f68328fef3b53802762c1bdec662bcf2fe161a14",
+      "original_sha256": "a45cf504c955527161bb14038f20fb32d994a7554f93ca1ca1b2db3dd0280136",
+      "mime": "image/jpeg",
+      "width": 487,
+      "height": 289,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 487,
+        "height": 289,
+        "blur_var": 69.8,
+        "mean_luma": 117.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00VVC6TTW",
+        "title": "Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0037NZ5ES",
+        "classification": "CANDIDATE",
+        "sku": "B0037NZ5ES",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Lipper International 826 Set of 6 Bamboo Kitchen Tools, in Mesh Bag"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B00VVC6TTW",
+        "expected_title": "Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen",
+        "found_sku": "B0037NZ5ES",
+        "found_title": "Lipper International 826 Set of 6 Bamboo Kitchen Tools, in Mesh Bag",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B01EB40GJU",
+      "B00VVC6TTW",
+      "B00X001S4E"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00VVC6TTW",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00VVC6TTW",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen, found Lipper International 826 Set of 6 Bamboo Kitchen Tools, in Mesh Bag (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B00VVC6TTW",
+            "found_sku": "B0037NZ5ES",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:59:02Z",
+    "reasons": [
+      "Expected Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen, found Lipper International 826 Set of 6 Bamboo Kitchen Tools, in Mesh Bag (#1).",
+      "Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen: 0 in the box, 1 ordered.",
+      "Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Lipper International 826 Set of 6 Bamboo Kitchen Tools, in Mesh Bag (#1) with Brooklyn Bamboo Kitchen Dish Hand Towels SOFT, Absorbent More Durable Than Cotton Beautiful 3Pc Set Unique, Hypoallergen."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:1331d028c623880a832ab71e7535d8923d7944b8e6296fb7126d18d60fc40e0e"
+}
