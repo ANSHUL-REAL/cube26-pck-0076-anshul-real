@@ -1,0 +1,198 @@
+{
+  "record_id": "PCK-406734E12819",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D02",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00KWCTNLI",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f8f2eb63-058a-4412-9ce8-ddd244071421",
+      "role": "top_down",
+      "sha256": "f747c3673b90bf69e8cf499125456deafd80038394b632f096c64124f6a1f15f",
+      "original_sha256": "b3a47dd9185645e4486a58f8c8daa8bdffac72bb79ca6e1ab28fda3119fd6b99",
+      "mime": "image/jpeg",
+      "width": 498,
+      "height": 646,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 498,
+        "height": 646,
+        "blur_var": 31.7,
+        "mean_luma": 94.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00KWCTNLI",
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00KWCTNLI",
+        "classification": "CANDIDATE",
+        "sku": "B00KWCTNLI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00XNYJYPM",
+        "classification": "CANDIDATE",
+        "sku": "B00XNYJYPM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Paper Magic All Occasion Handmade Greeting Card Assortment in Pink Keepsake Organizer Box, 25 Cards"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00XNYJYPM",
+        "title": "Paper Magic All Occasion Handmade Greeting Card Assortment in Pink Keepsake Organizer Box, 25 Cards",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0037NZ5ES",
+      "B00KWCTNLI",
+      "B0126MYH1C"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00KWCTNLI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KWCTNLI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Paper Magic All Occasion Handmade Greeting Card Assortment in Pink Keepsake Organizer Box, 25 Cards (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Not in the order: Paper Magic All Occasion Handmade Greeting Card Assortment in Pink Keepsake Organizer Box, 25 Cards (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Paper Magic All Occasion Handmade Greeting Card Assortment in Pink Keepsake Organizer Box, 25 Cards (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:803232fea88499addfcc008044cd17224bec73ac9e23ef3b77b9164cd447251d"
+}

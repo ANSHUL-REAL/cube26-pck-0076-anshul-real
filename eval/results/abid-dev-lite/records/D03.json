@@ -1,0 +1,321 @@
+{
+  "record_id": "PCK-FA54E5D3B305",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D03",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0001VTZ86",
+        "qty": 1
+      },
+      {
+        "sku": "B005BFL0RQ",
+        "qty": 2
+      },
+      {
+        "sku": "B017SUW3OA",
+        "qty": 2
+      },
+      {
+        "sku": "B01DXUTSLA",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:44Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "db2bd9ad-7348-4a5d-b0cb-4c3470efe541",
+      "role": "top_down",
+      "sha256": "4cca5848c800e105937c6bdeac9478776cb5b819c2dac4fc22f28ef1e9455cb0",
+      "original_sha256": "a1eaa9dbe7aa815e463dc69851c48a2f21a0d8060f29aaca393748549186e9b3",
+      "mime": "image/jpeg",
+      "width": 414,
+      "height": 282,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 414,
+        "height": 282,
+        "blur_var": 45.6,
+        "mean_luma": 138.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0001VTZ86",
+        "title": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B005BFL0RQ",
+        "title": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200)",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B017SUW3OA",
+        "title": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B01DXUTSLA",
+        "title": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          273,
+          375,
+          875,
+          626
+        ],
+        "description": "white box with red and blue text, Dynarex alcohol prep pad",
+        "classification": "CANDIDATE",
+        "sku": "B005BFL0RQ",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "box design and text matching Dynarex alcohol prep pads",
+        "partially_hidden": false,
+        "title": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200)"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B0001VTZ86",
+        "title": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count",
+        "units": 1
+      },
+      {
+        "sku": "B005BFL0RQ",
+        "title": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200)",
+        "units": 1
+      },
+      {
+        "sku": "B017SUW3OA",
+        "title": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie",
+        "units": 2
+      },
+      {
+        "sku": "B01DXUTSLA",
+        "title": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "There is a mesh or string pattern over the box opening, but contents are visible."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00XBBVINI",
+      "B0001VTZ86",
+      "B005BFL0RQ",
+      "B01DXUTSLA",
+      "B017SUW3OA",
+      "SKU-LAMP-LED"
+    ],
+    "usage": {
+      "input_tokens": 1977,
+      "output_tokens": 304,
+      "thinking_tokens": 0,
+      "total_tokens": 2281
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0001VTZ86",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B0001VTZ86",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B005BFL0RQ",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B005BFL0RQ",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200): 1 in the box, 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B017SUW3OA",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B017SUW3OA",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie: 0 in the box, 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01DXUTSLA",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B01DXUTSLA",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5482,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:44Z",
+    "reasons": [
+      "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count: 0 in the box, 1 ordered.",
+      "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200): 1 in the box, 2 ordered.",
+      "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie: 0 in the box, 2 ordered.",
+      "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots: 0 in the box, 1 ordered.",
+      "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count: not in the box, and the whole box is visible.",
+      "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie: not in the box, and the whole box is visible.",
+      "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Nature's Way Vitamin B-50 Complex, Capsules, 100-Count.",
+      "Add 1 × Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200).",
+      "Add 2 × CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie.",
+      "Add 1 × Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:caaf7568f0cddf3cf5661a3b0d42c0d5ef3e809463e7e5f4fa18a2bcb5190609"
+}

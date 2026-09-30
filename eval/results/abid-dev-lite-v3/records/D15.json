@@ -1,0 +1,374 @@
+{
+  "record_id": "PCK-E36C92459FB0",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D15",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00380DYOS",
+        "qty": 1
+      },
+      {
+        "sku": "B00GPV68MW",
+        "qty": 2
+      },
+      {
+        "sku": "B00KD6YW6O",
+        "qty": 1
+      },
+      {
+        "sku": "B01BZFAF5S",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:47:35Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "5b68fbc4-82e9-48e8-8aa0-096d283da6e0",
+      "role": "top_down",
+      "sha256": "dbf3cd3751878c035bd50a1697c2e7fe0603fbd6793fc59f602f0c6c66cc9cbe",
+      "original_sha256": "4289650134a5ddefe57be462732f3616a9624bf68f0555851116573e541863cb",
+      "mime": "image/jpeg",
+      "width": 405,
+      "height": 276,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 405,
+        "height": 276,
+        "blur_var": 39.4,
+        "mean_luma": 138.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+        "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly): 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Aleene's Fabric Fusion Peel and Stick Tape: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count: possible match #2 is unclear.",
+        "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly): not seen, but items may be hidden.",
+        "Aleene's Fabric Fusion Peel and Stick Tape: not seen, but items may be hidden.",
+        "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.30). the box is covered by a rigid white net or webbing and paperwork is laid over the top, severely obscuring visibility of internal contents."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count is in the box: a clear view of #2.",
+        "A count of Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count with every unit visible.",
+        "Whether Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly) is in the box.",
+        "A count of Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly) with every unit visible.",
+        "Whether Aleene's Fabric Fusion Peel and Stick Tape is in the box.",
+        "A count of Aleene's Fabric Fusion Peel and Stick Tape with every unit visible.",
+        "Whether Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI is in the box.",
+        "A count of Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00380DYOS",
+        "title": "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00GPV68MW",
+        "title": "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly)",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00KD6YW6O",
+        "title": "Aleene's Fabric Fusion Peel and Stick Tape",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01BZFAF5S",
+        "title": "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          182,
+          237,
+          881,
+          843
+        ],
+        "description": "white paper document or packing slip",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "printed text and barcode layout resembling a packing slip or document",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          638,
+          276,
+          881,
+          516
+        ],
+        "description": "white plastic container or bottle",
+        "classification": "CANDIDATE",
+        "sku": "B00380DYOS",
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "white pill bottle shape partially visible under document",
+        "partially_hidden": true,
+        "title": "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o2",
+        "guess_sku": "B00380DYOS",
+        "confidence": 0.5,
+        "description": "white plastic container or bottle"
+      }
+    ],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "white paper document or packing slip"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.3,
+      "notes": "the box is covered by a rigid white net or webbing and paperwork is laid over the top, severely obscuring visibility of internal contents."
+    },
+    "image_issues": [
+      "netting obscuring the box interior",
+      "paperwork covering contents",
+      "blur"
+    ],
+    "candidates_shown": [
+      "B003V1DN3G",
+      "B00GPV68MW",
+      "B01BZFAF5S",
+      "B00KD6YW6O",
+      "B00380DYOS",
+      "B000VDX6TI"
+    ],
+    "usage": {
+      "input_tokens": 2100,
+      "output_tokens": 471,
+      "thinking_tokens": 0,
+      "total_tokens": 2571
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.3,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.30). the box is covered by a rigid white net or webbing and paperwork is laid over the top, severely obscuring visibility of internal contents.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00380DYOS",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count: possible match #2 is unclear.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00380DYOS",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00GPV68MW",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly): not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GPV68MW",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly): 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00KD6YW6O",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Aleene's Fabric Fusion Peel and Stick Tape: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KD6YW6O",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Aleene's Fabric Fusion Peel and Stick Tape: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01BZFAF5S",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01BZFAF5S",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.3,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2727,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:47:38Z",
+    "reasons": [
+      "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count: 0 clearly counted, 1 unclear (#2), some units may be stacked or hidden; 1 ordered.",
+      "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly): 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Aleene's Fabric Fusion Peel and Stick Tape: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count: possible match #2 is unclear.",
+      "Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly): not seen, but items may be hidden.",
+      "Aleene's Fabric Fusion Peel and Stick Tape: not seen, but items may be hidden.",
+      "Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.30). the box is covered by a rigid white net or webbing and paperwork is laid over the top, severely obscuring visibility of internal contents."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count by hand: there should be 1.",
+      "Count Ocean Aquatic Animal Plip Clip Accessory Holder with Suction Cup- 1 Plip Clip Only (1 of 6 Animals Shipped Randomly) by hand: there should be 2.",
+      "Count Aleene's Fabric Fusion Peel and Stick Tape by hand: there should be 1.",
+      "Count Best in USA 1.5\" Air Pressure Gauge Center Back Mount 1/8\" NPT 1-1/2\" Dial - 0 to 160 PSI by hand: there should be 1.",
+      "Check #2 by hand: it looks like Diurex Ultra Water Weight Loss Formula Water Pills, 80 Count."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:acaec539b0428af8590a79a0633edd7a7e1288066900ad730a67a51f4c7d4e14"
+}

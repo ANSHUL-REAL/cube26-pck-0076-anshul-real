@@ -1,0 +1,368 @@
+{
+  "record_id": "PCK-938420087159",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D18",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00AQ6OS60",
+        "qty": 3
+      },
+      {
+        "sku": "B01CIQCA9W",
+        "qty": 2
+      },
+      {
+        "sku": "B01FGBOJMC",
+        "qty": 1
+      },
+      {
+        "sku": "B00930URLA",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0ae0e2ea-b1b1-483e-9ce6-81f030723352",
+      "role": "top_down",
+      "sha256": "c2e78de077d44f27b2dfa36c9c7e1094b6bf59345336f7da0bb3e60e198f3821",
+      "original_sha256": "1f3f695a9b6b8e400048f830d4a1f32e2781c3a788fddaeac2ccc5f5c003e36b",
+      "mime": "image/jpeg",
+      "width": 445,
+      "height": 303,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 445,
+        "height": 303,
+        "blur_var": 66.0,
+        "mean_luma": 129.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00AQ6OS60",
+        "title": "Dritz 350-Piece Ball Point Pins, 1-1/16-Inch",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01CIQCA9W",
+        "title": "Women's MLB Team \"Splash\" Burnout T-Shirt Top (Tampa Bay Rays, Small)",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01FGBOJMC",
+        "title": "12 Count Boxed Cards w/ Scriptures - Sympathy - Bulk Greeting Cards w/ KJV Scriptures. Envelopes Included",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00930URLA",
+        "title": "Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00AQ6OS60",
+        "classification": "CANDIDATE",
+        "sku": "B00AQ6OS60",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dritz 350-Piece Ball Point Pins, 1-1/16-Inch"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00AQ6OS60",
+        "classification": "CANDIDATE",
+        "sku": "B00AQ6OS60",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dritz 350-Piece Ball Point Pins, 1-1/16-Inch"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00AQ6OS60",
+        "classification": "CANDIDATE",
+        "sku": "B00AQ6OS60",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dritz 350-Piece Ball Point Pins, 1-1/16-Inch"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01CIQCA9W",
+        "classification": "CANDIDATE",
+        "sku": "B01CIQCA9W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Women's MLB Team \"Splash\" Burnout T-Shirt Top (Tampa Bay Rays, Small)"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01CIQCA9W",
+        "classification": "CANDIDATE",
+        "sku": "B01CIQCA9W",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Women's MLB Team \"Splash\" Burnout T-Shirt Top (Tampa Bay Rays, Small)"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01FGBOJMC",
+        "classification": "CANDIDATE",
+        "sku": "B01FGBOJMC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "12 Count Boxed Cards w/ Scriptures - Sympathy - Bulk Greeting Cards w/ KJV Scriptures. Envelopes Included"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00930URLA",
+        "title": "Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B01CIQCA9W",
+      "B00930URLA",
+      "SKU-BOTTLE-750",
+      "B00Y9IC0PW",
+      "B01FGBOJMC",
+      "B00AQ6OS60"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00AQ6OS60",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dritz 350-Piece Ball Point Pins, 1-1/16-Inch: found (#1, #2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00AQ6OS60",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dritz 350-Piece Ball Point Pins, 1-1/16-Inch: 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01CIQCA9W",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Women's MLB Team \"Splash\" Burnout T-Shirt Top (Tampa Bay Rays, Small): found (#4, #5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01CIQCA9W",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Women's MLB Team \"Splash\" Burnout T-Shirt Top (Tampa Bay Rays, Small): 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01FGBOJMC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "12 Count Boxed Cards w/ Scriptures - Sympathy - Bulk Greeting Cards w/ KJV Scriptures. Envelopes Included: found (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01FGBOJMC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "12 Count Boxed Cards w/ Scriptures - Sympathy - Bulk Greeting Cards w/ KJV Scriptures. Envelopes Included: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00930URLA",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00930URLA",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case: 0 in the box, 1 ordered.",
+      "Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Forever Collectibles Philadelphia Phillies Retro Hard Snap-On Apple iPhone 4 & 4S Case."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:e4567e458767ab546e0d50fda68ecc7aa0a4c8c238c15e04be00d6ff6125e3c7"
+}

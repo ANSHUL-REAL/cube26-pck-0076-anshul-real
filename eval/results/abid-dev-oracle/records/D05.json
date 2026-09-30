@@ -1,0 +1,241 @@
+{
+  "record_id": "PCK-95798C275E39",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D05",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B005PK0ISE",
+        "qty": 1
+      },
+      {
+        "sku": "B00MSGYGYU",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "828ba160-f865-4eec-9471-06be03f977cc",
+      "role": "top_down",
+      "sha256": "a9e9dd14c32b7b7379be21ce426e8799cd550ff6381b0fabda66c730c6857b51",
+      "original_sha256": "9e60b13322c629371d7a4e27e91a7ea0ee63b506fb9feaf66cec673f86c3593e",
+      "mime": "image/jpeg",
+      "width": 322,
+      "height": 296,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 322,
+        "height": 296,
+        "blur_var": 32.7,
+        "mean_luma": 121.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B005PK0ISE",
+        "title": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00MSGYGYU",
+        "title": "LED Light Up Snap Bracelet-Green",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005PK0ISE",
+        "classification": "CANDIDATE",
+        "sku": "B005PK0ISE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00MSGYGYU",
+        "classification": "CANDIDATE",
+        "sku": "B00MSGYGYU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "LED Light Up Snap Bracelet-Green"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00MSGYGYU",
+        "classification": "CANDIDATE",
+        "sku": "B00MSGYGYU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "LED Light Up Snap Bracelet-Green"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B005PK0ISE",
+      "B008RNGVZ0",
+      "B00U58U5IE",
+      "B00MSGYGYU"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B005PK0ISE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B005PK0ISE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00MSGYGYU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "LED Light Up Snap Bracelet-Green: found (#2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00MSGYGYU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "LED Light Up Snap Bracelet-Green: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:6b16ba10e2c59ee3db4a045b3313f8eb459db795c610294848a078e9c5dcf312"
+}

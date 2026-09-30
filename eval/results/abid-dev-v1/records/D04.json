@@ -1,0 +1,84 @@
+{
+  "record_id": "PCK-657014463243",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D04",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000LKTMLM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:21:05Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d4565719-bcd3-4287-a167-c9cc5ab562bd",
+      "role": "top_down",
+      "sha256": "13471d5a8c6f31249c0c6086abf2fb6218584b39524e6e8a70008c173cbe12fc",
+      "original_sha256": "d883810ab69bc12cf2698b3e9be8dd33210720eb3e207ef985133f3c2ebc5834",
+      "mime": "image/jpeg",
+      "width": 633,
+      "height": 469,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 633,
+        "height": 469,
+        "blur_var": 42.2,
+        "mean_luma": 127.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "error": "Vision model call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": null,
+      "detail": "Local photo checks ran.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "vision",
+      "verdict": "NOT_CHECKED",
+      "confidence": null,
+      "detail": "Vision model unavailable: Vision model call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": null,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "PENDING",
+    "decided_by": null,
+    "decided_at": null,
+    "reasons": [
+      "The vision model did not answer. The photos are saved.",
+      "Cause: Vision model call failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    ],
+    "fix_instructions": [
+      "Check the box by hand against the order, then record your decision."
+    ]
+  },
+  "overrides": [],
+  "status": "pending",
+  "content_hash": "sha256:8a744cac98cee50377a4f3bce3479e3b26a121eefcef49f901e144cbefc5b723"
+}

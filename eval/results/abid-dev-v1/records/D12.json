@@ -1,0 +1,296 @@
+{
+  "record_id": "PCK-D2200BA573EF",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D12",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000MK2PZ6",
+        "qty": 1
+      },
+      {
+        "sku": "B00NVMIQE6",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:24:50Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ad2ddf45-cedb-434d-befc-ae3a074ba4e5",
+      "role": "top_down",
+      "sha256": "c9c0ad2dc4698bd0b926ba0ab73d6c074e8e5ea6519c55a54d5f55d72883e2d4",
+      "original_sha256": "7c776600f67b6fa00be01e74f7125b19b6294512db26e469e13b8d66b3f901a1",
+      "mime": "image/jpeg",
+      "width": 467,
+      "height": 358,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 467,
+        "height": 358,
+        "blur_var": 17.6,
+        "mean_luma": 120.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: found (#1, #2).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: 2 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image is very blurry and has strong horizontal lines, making it difficult to discern details and be certain about the full contents of the box."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors is in the box.",
+        "A count of Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors with every unit visible.",
+        "A count of YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B000MK2PZ6",
+        "title": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00NVMIQE6",
+        "title": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          200,
+          200,
+          700,
+          500
+        ],
+        "description": "white box with \"Organic Bee Farms\" text",
+        "classification": "CANDIDATE",
+        "sku": "B00NVMIQE6",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "visible text \"Organic Bee Farms\"",
+        "partially_hidden": false,
+        "title": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          200,
+          500,
+          700,
+          800
+        ],
+        "description": "white box with illegible text",
+        "classification": "CANDIDATE",
+        "sku": "B00NVMIQE6",
+        "confidence": 0.7,
+        "alternative_skus": [],
+        "deciding_feature": "similar shape and size to identified honey box",
+        "partially_hidden": false,
+        "title": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          400,
+          800,
+          700,
+          950
+        ],
+        "description": "white air pillows",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "characteristic shape and texture of air pillows",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "white air pillows"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.5,
+      "notes": "The image is very blurry and has strong horizontal lines, making it difficult to discern details and be certain about the full contents of the box."
+    },
+    "image_issues": [
+      "Blur",
+      "Horizontal lines obscuring view",
+      "Low resolution"
+    ],
+    "candidates_shown": [
+      "B00NVMIQE6",
+      "B00XDAR6RE",
+      "B000MK2PZ6",
+      "B01FGBOJMC"
+    ],
+    "usage": {
+      "input_tokens": 1089,
+      "output_tokens": 610,
+      "thinking_tokens": 1742,
+      "total_tokens": 3441
+    },
+    "cost_usd": 0.006207,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image is very blurry and has strong horizontal lines, making it difficult to discern details and be certain about the full contents of the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000MK2PZ6",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B000MK2PZ6",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00NVMIQE6",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: found (#1, #2).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00NVMIQE6",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: 2 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12911,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:25:03Z",
+    "reasons": [
+      "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: 2 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image is very blurry and has strong horizontal lines, making it difficult to discern details and be certain about the full contents of the box."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors by hand: there should be 1.",
+      "Count YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa by hand: there should be 2."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:b61c6461393fafad0b25502a39d272765d5f7353e009fd3a597b6160141d2ed7"
+}

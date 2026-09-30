@@ -1,0 +1,362 @@
+{
+  "record_id": "PCK-0B6E0AE2286A",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D06",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B004ISKODS",
+        "qty": 1
+      },
+      {
+        "sku": "B015NHY582",
+        "qty": 3
+      },
+      {
+        "sku": "B01DDT2VR4",
+        "qty": 1
+      },
+      {
+        "sku": "B01EK51BVC",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "dc1b247e-063a-4886-abfd-f3f37d8dd595",
+      "role": "top_down",
+      "sha256": "366725e5aafaa30d2cef7aade48141fd76732e845ea838a355842a73c680566d",
+      "original_sha256": "cd3aa40d1260eea49344f81191bfe6e2dbf91d79fed2c841a6c59211e7a07af0",
+      "mime": "image/jpeg",
+      "width": 524,
+      "height": 311,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 524,
+        "height": 311,
+        "blur_var": 53.4,
+        "mean_luma": 139.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B004ISKODS",
+        "title": "Elegance Hammered 48-Ounce Stainless Steel Pitcher",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B015NHY582",
+        "title": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01DDT2VR4",
+        "title": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01EK51BVC",
+        "title": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004ISKODS",
+        "classification": "CANDIDATE",
+        "sku": "B004ISKODS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Elegance Hammered 48-Ounce Stainless Steel Pitcher"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015NHY582",
+        "classification": "CANDIDATE",
+        "sku": "B015NHY582",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015NHY582",
+        "classification": "CANDIDATE",
+        "sku": "B015NHY582",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015NHY582",
+        "classification": "CANDIDATE",
+        "sku": "B015NHY582",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01DDT2VR4",
+        "classification": "CANDIDATE",
+        "sku": "B01DDT2VR4",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading)"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01EK51BVC",
+        "classification": "CANDIDATE",
+        "sku": "B01EK51BVC",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B004ISKODS",
+      "B019UXTD8C",
+      "B015NHY582",
+      "B01EK51BVC",
+      "B00ZWLDGK8",
+      "B01DDT2VR4"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B004ISKODS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Elegance Hammered 48-Ounce Stainless Steel Pitcher: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B004ISKODS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Elegance Hammered 48-Ounce Stainless Steel Pitcher: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B015NHY582",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: found (#2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B015NHY582",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01DDT2VR4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): found (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01DDT2VR4",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01EK51BVC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: found (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01EK51BVC",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:42422d8680c88ae4a1915a4935ec2b3280fd386e7556e71f406c83c95f75b247"
+}

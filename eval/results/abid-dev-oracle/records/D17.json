@@ -1,0 +1,196 @@
+{
+  "record_id": "PCK-557F8C497D68",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D17",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00LMJSGMM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f50c1a40-e81a-4eeb-92c6-6132dba336eb",
+      "role": "top_down",
+      "sha256": "60805e71d9e0d70cce045575ca64285116fa6f5d14b443936a9ecfd6203a2b36",
+      "original_sha256": "94d1f16bb0d5576e2831136b72d72653870cc17841a88c5a81351eaf1a277d29",
+      "mime": "image/jpeg",
+      "width": 423,
+      "height": 288,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 423,
+        "height": 288,
+        "blur_var": 56.1,
+        "mean_luma": 163.5,
+        "clipped_pct": 0.07,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00LMJSGMM",
+        "title": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack",
+        "ordered": 1,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00LMJSGMM",
+        "classification": "CANDIDATE",
+        "sku": "B00LMJSGMM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00LMJSGMM",
+        "classification": "CANDIDATE",
+        "sku": "B00LMJSGMM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [
+      {
+        "sku": "B00LMJSGMM",
+        "title": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack",
+        "units": 1
+      }
+    ],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00VVC6TTW",
+      "B00LMJSGMM",
+      "SKU-BOTTLE-750"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00LMJSGMM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack: found (#1, #2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00LMJSGMM",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack: 2 in the box, 1 ordered (1 too many).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack: 2 in the box, 1 ordered (1 too many)."
+    ],
+    "fix_instructions": [
+      "Remove 1 × Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:9126d4d434357a63decdb31dede9445b909915fa7faeca1cd50a3aceff44207d"
+}

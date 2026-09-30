@@ -1,0 +1,271 @@
+{
+  "record_id": "PCK-DD3902D64C0D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D13",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B01A5LAW4C",
+        "qty": 1
+      },
+      {
+        "sku": "B00U8IR15G",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "05f7c440-a35c-40b0-9dc8-f6efe25472a6",
+      "role": "top_down",
+      "sha256": "e1d4c1949f74ca3ef33c060214170f0479926a369bf26047959d6a11bcf7f59b",
+      "original_sha256": "a4155dad65dbd7c7695f61457a167308b286a4627f0a26eb7877f5ac809a779f",
+      "mime": "image/jpeg",
+      "width": 621,
+      "height": 1028,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 621,
+        "height": 1028,
+        "blur_var": 3.6,
+        "mean_luma": 109.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B01A5LAW4C",
+        "title": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00U8IR15G",
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with ",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00BCRZN6G",
+        "classification": "CANDIDATE",
+        "sku": "B00BCRZN6G",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Axess 15.6-Inch LED Full HDTV, Includes AC/DC TV, DVD Player, HDMI/SD/USB Inputs, TVD1801-15"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00U8IR15G",
+        "classification": "CANDIDATE",
+        "sku": "B00U8IR15G",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with "
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00U8IR15G",
+        "classification": "CANDIDATE",
+        "sku": "B00U8IR15G",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with "
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00U8IR15G",
+        "classification": "CANDIDATE",
+        "sku": "B00U8IR15G",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with "
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B01A5LAW4C",
+        "expected_title": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por",
+        "found_sku": "B00BCRZN6G",
+        "found_title": "Axess 15.6-Inch LED Full HDTV, Includes AC/DC TV, DVD Player, HDMI/SD/USB Inputs, TVD1801-15",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00KLLOS5Q",
+      "B01A5LAW4C",
+      "1259284263",
+      "B00U8IR15G"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B01A5LAW4C",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B01A5LAW4C",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00U8IR15G",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with : found (#2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00U8IR15G",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with : 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por, found Axess 15.6-Inch LED Full HDTV, Includes AC/DC TV, DVD Player, HDMI/SD/USB Inputs, TVD1801-15 (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B01A5LAW4C",
+            "found_sku": "B00BCRZN6G",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Expected NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por, found Axess 15.6-Inch LED Full HDTV, Includes AC/DC TV, DVD Player, HDMI/SD/USB Inputs, TVD1801-15 (#1).",
+      "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: 0 in the box, 1 ordered.",
+      "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Axess 15.6-Inch LED Full HDTV, Includes AC/DC TV, DVD Player, HDMI/SD/USB Inputs, TVD1801-15 (#1) with NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:3ef3b42abfc326680742db15938698ed3be9d1435d14ab51a7bd08c999a290cf"
+}

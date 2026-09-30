@@ -1,0 +1,11 @@
+{
+  "split": "dev",
+  "reveal_order": false,
+  "dataset": "Amazon Bin Image Dataset (public, CC BY-NC-SA 3.0 US)",
+  "perceiver": "oracle",
+  "model": "none (oracle)",
+  "match_threshold": 0.7,
+  "visibility_threshold": 0.7,
+  "started_at": "2026-09-30T14:19:24+00:00",
+  "frozen": null
+}

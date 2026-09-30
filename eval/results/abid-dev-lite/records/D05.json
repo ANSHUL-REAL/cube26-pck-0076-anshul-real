@@ -1,0 +1,279 @@
+{
+  "record_id": "PCK-3373859DE963",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D05",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B005PK0ISE",
+        "qty": 1
+      },
+      {
+        "sku": "B00MSGYGYU",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:44Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d3b967db-e2c3-4a5d-bb5a-911916238d84",
+      "role": "top_down",
+      "sha256": "a9e9dd14c32b7b7379be21ce426e8799cd550ff6381b0fabda66c730c6857b51",
+      "original_sha256": "9e60b13322c629371d7a4e27e91a7ea0ee63b506fb9feaf66cec673f86c3593e",
+      "mime": "image/jpeg",
+      "width": 322,
+      "height": 296,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 322,
+        "height": 296,
+        "blur_var": 32.7,
+        "mean_luma": 121.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack) (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "LED Light Up Snap Bracelet-Green: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: not seen, but items may be hidden.",
+        "LED Light Up Snap Bracelet-Green: not seen, but items may be hidden.",
+        "Items may be stacked or hidden. Stripe overlay pattern on photo and obscuring packaging materials make detailed item identification challenging."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether uxcell Pair Black Elastic Sleeve Style Wrist Support Protector is in the box.",
+        "A count of uxcell Pair Black Elastic Sleeve Style Wrist Support Protector with every unit visible.",
+        "Whether LED Light Up Snap Bracelet-Green is in the box.",
+        "A count of LED Light Up Snap Bracelet-Green with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B005PK0ISE",
+        "title": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00MSGYGYU",
+        "title": "LED Light Up Snap Bracelet-Green",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          33,
+          375,
+          439,
+          937
+        ],
+        "description": "Quality of Life Kinoko Platinum Ahcc bottles",
+        "classification": "CANDIDATE",
+        "sku": "B00U58U5IE",
+        "confidence": 0.85,
+        "alternative_skus": [],
+        "deciding_feature": "bottle packaging and label style match Quality of Life Kinoko Platinum Ahcc",
+        "partially_hidden": true,
+        "title": "Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          390,
+          89,
+          878,
+          650
+        ],
+        "description": "white plastic bag",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "appears to be protective packaging material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00U58U5IE",
+        "title": "Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack)",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "white plastic bag"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.7,
+      "notes": "Stripe overlay pattern on photo and obscuring packaging materials make detailed item identification challenging."
+    },
+    "image_issues": [
+      "blur",
+      "overlay lines obscuring view"
+    ],
+    "candidates_shown": [
+      "B005PK0ISE",
+      "B008RNGVZ0",
+      "B00U58U5IE",
+      "B00MSGYGYU"
+    ],
+    "usage": {
+      "input_tokens": 1881,
+      "output_tokens": 446,
+      "thinking_tokens": 0,
+      "total_tokens": 2327
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "Items may be stacked or hidden. Stripe overlay pattern on photo and obscuring packaging materials make detailed item identification challenging.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B005PK0ISE",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B005PK0ISE",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00MSGYGYU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LED Light Up Snap Bracelet-Green: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00MSGYGYU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LED Light Up Snap Bracelet-Green: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.85,
+      "detail": "Not in the order: Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack) (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2606,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:47Z",
+    "reasons": [
+      "Not in the order: Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack) (#1)."
+    ],
+    "fix_instructions": [
+      "Remove Quality of Life Kinoko Platinum Ahcc 750 Mg 60 Ct (2 Pack) (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count uxcell Pair Black Elastic Sleeve Style Wrist Support Protector by hand: there should be 1.",
+      "Also check: Count LED Light Up Snap Bracelet-Green by hand: there should be 2."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:41e1082d48b5b6387a1cf2cef57c424c2fff39871f0c5059b836087fdb32e4ab"
+}

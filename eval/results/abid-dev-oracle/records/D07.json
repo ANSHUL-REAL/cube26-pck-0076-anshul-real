@@ -1,0 +1,362 @@
+{
+  "record_id": "PCK-ED3E5269CD0E",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D07",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GM028SY",
+        "qty": 1
+      },
+      {
+        "sku": "B00PR70HUY",
+        "qty": 1
+      },
+      {
+        "sku": "B00U11SPO6",
+        "qty": 1
+      },
+      {
+        "sku": "B01ER2SMHY",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "5eddf4fa-81a4-4843-810e-61b44fb4a041",
+      "role": "top_down",
+      "sha256": "069e4ff02330bdc41f0cf9cd91657935a921a8f6b23a503a243d188a35f38d29",
+      "original_sha256": "9eb044c00b0ac87a04dca313eaf1883c3f260a7e1c13ed0c0f85d0702c7ec9f3",
+      "mime": "image/jpeg",
+      "width": 404,
+      "height": 276,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 404,
+        "height": 276,
+        "blur_var": 108.2,
+        "mean_luma": 139.6,
+        "clipped_pct": 0.01,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00GM028SY",
+        "title": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00PR70HUY",
+        "title": "Flip Top Stopper: Creates Airtight Seal, 12-Pack",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00U11SPO6",
+        "title": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01ER2SMHY",
+        "title": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00GM028SY",
+        "classification": "CANDIDATE",
+        "sku": "B00GM028SY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00PR70HUY",
+        "classification": "CANDIDATE",
+        "sku": "B00PR70HUY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Flip Top Stopper: Creates Airtight Seal, 12-Pack"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00U11SPO6",
+        "classification": "CANDIDATE",
+        "sku": "B00U11SPO6",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8)"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01ER2SMHY",
+        "classification": "CANDIDATE",
+        "sku": "B01ER2SMHY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01ER2SMHY",
+        "classification": "CANDIDATE",
+        "sku": "B01ER2SMHY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01ER2SMHY",
+        "classification": "CANDIDATE",
+        "sku": "B01ER2SMHY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00GM028SY",
+      "B00PR70HUY",
+      "B0013FU0SI",
+      "B01ER2SMHY",
+      "B00U11SPO6",
+      "B01DDT2VR4"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GM028SY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GM028SY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00PR70HUY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Flip Top Stopper: Creates Airtight Seal, 12-Pack: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00PR70HUY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Flip Top Stopper: Creates Airtight Seal, 12-Pack: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00U11SPO6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): found (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00U11SPO6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01ER2SMHY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: found (#4, #5, #6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01ER2SMHY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: 3 of 3.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5",
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a34b50d997383f0f6c45481f54aa9851a996ebcda1d176b7f0101301a81035dc"
+}

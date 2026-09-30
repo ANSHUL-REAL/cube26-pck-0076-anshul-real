@@ -1,0 +1,205 @@
+{
+  "record_id": "PCK-D339548BC03C",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D20",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B015EMXVMW",
+        "qty": 5
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:51Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b96dfbca-30b9-457d-aa83-7ba975784b0a",
+      "role": "top_down",
+      "sha256": "4aa1a4a3bd7319e6e0f82cd4c22d543f7bbf7efb4e757e68136bc3471cbe914d",
+      "original_sha256": "568297a19f4aa067ee8d7d52f739fb28c24a3fd5a765c619b5903e7f353b1502",
+      "mime": "image/jpeg",
+      "width": 417,
+      "height": 285,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 417,
+        "height": 285,
+        "blur_var": 37.0,
+        "mean_luma": 116.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B015EMXVMW",
+        "title": "Qball Reaction Training Ball",
+        "ordered": 5,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          163,
+          138,
+          815,
+          715
+        ],
+        "description": "Clear plastic MacBook Air hard case",
+        "classification": "CANDIDATE",
+        "sku": "B016I0J2Z4",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "Clear plastic shell shape and cutouts matching a laptop case",
+        "partially_hidden": false,
+        "title": "Matte Hard Case for 13-inch MacBook Air, LENTION Clear Plastic Hard Shell for Apple Mac Book Laptop, Matte Finish Case w"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B015EMXVMW",
+        "title": "Qball Reaction Training Ball",
+        "units": 4
+      }
+    ],
+    "wrong": [
+      {
+        "expected_sku": "B015EMXVMW",
+        "expected_title": "Qball Reaction Training Ball",
+        "found_sku": "B016I0J2Z4",
+        "found_title": "Matte Hard Case for 13-inch MacBook Air, LENTION Clear Plastic Hard Shell for Apple Mac Book Laptop, Matte Finish Case w",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "Safety strings cover the box opening slightly, but the contents are fully visible underneath."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B016I0J2Z4",
+      "B015EMXVMW",
+      "B00KD6YW6O"
+    ],
+    "usage": {
+      "input_tokens": 1821,
+      "output_tokens": 307,
+      "thinking_tokens": 0,
+      "total_tokens": 2128
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3714,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B015EMXVMW",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Qball Reaction Training Ball: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3714,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B015EMXVMW",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Qball Reaction Training Ball: 0 in the box, 5 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3714,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Expected Qball Reaction Training Ball, found Matte Hard Case for 13-inch MacBook Air, LENTION Clear Plastic Hard Shell for Apple Mac Book Laptop, Matte Finish Case w (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3714,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B015EMXVMW",
+            "found_sku": "B016I0J2Z4",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3714,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:51Z",
+    "reasons": [
+      "Expected Qball Reaction Training Ball, found Matte Hard Case for 13-inch MacBook Air, LENTION Clear Plastic Hard Shell for Apple Mac Book Laptop, Matte Finish Case w (#1).",
+      "Qball Reaction Training Ball: 0 in the box, 5 ordered.",
+      "Qball Reaction Training Ball: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Matte Hard Case for 13-inch MacBook Air, LENTION Clear Plastic Hard Shell for Apple Mac Book Laptop, Matte Finish Case w (#1) with Qball Reaction Training Ball.",
+      "Add 4 × Qball Reaction Training Ball."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:aa8cb0fda4a0ccad21d79c4bf3a3e6f19d905537fd7d3bf61706012a38d35122"
+}

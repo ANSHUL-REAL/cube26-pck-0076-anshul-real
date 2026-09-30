@@ -1,0 +1,249 @@
+{
+  "record_id": "PCK-70FCC7DE4BD1",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D16",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B004JRMIDM",
+        "qty": 1
+      },
+      {
+        "sku": "B00IYYX3G2",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "df05b15c-6137-4b0f-9173-a2052fd747e0",
+      "role": "top_down",
+      "sha256": "d0d88b72ea75c9755ed7342b7dd5a896ef724818a426aa2979decfc7dda00886",
+      "original_sha256": "d105d0ed84416752826e4561362a07105debc4092588cc2d3c4f7d0109e72fef",
+      "mime": "image/jpeg",
+      "width": 425,
+      "height": 290,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 425,
+        "height": 290,
+        "blur_var": 45.7,
+        "mean_luma": 109.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B004JRMIDM",
+        "title": "Aurora World 12\" \"Chester\" Flopsie",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00IYYX3G2",
+        "title": "Nautical Sailboat Cupcake Picks - Set of 24",
+        "ordered": 1,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B004JRMIDM",
+        "classification": "CANDIDATE",
+        "sku": "B004JRMIDM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Aurora World 12\" \"Chester\" Flopsie"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IYYX3G2",
+        "classification": "CANDIDATE",
+        "sku": "B00IYYX3G2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Nautical Sailboat Cupcake Picks - Set of 24"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00IYYX3G2",
+        "classification": "CANDIDATE",
+        "sku": "B00IYYX3G2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Nautical Sailboat Cupcake Picks - Set of 24"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [
+      {
+        "sku": "B00IYYX3G2",
+        "title": "Nautical Sailboat Cupcake Picks - Set of 24",
+        "units": 1
+      }
+    ],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0010KK01S",
+      "B000TM8RAE",
+      "B004JRMIDM",
+      "B00IYYX3G2"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B004JRMIDM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Aurora World 12\" \"Chester\" Flopsie: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B004JRMIDM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Aurora World 12\" \"Chester\" Flopsie: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00IYYX3G2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nautical Sailboat Cupcake Picks - Set of 24: found (#2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IYYX3G2",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Nautical Sailboat Cupcake Picks - Set of 24: 2 in the box, 1 ordered (1 too many).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Nautical Sailboat Cupcake Picks - Set of 24: 2 in the box, 1 ordered (1 too many)."
+    ],
+    "fix_instructions": [
+      "Remove 1 × Nautical Sailboat Cupcake Picks - Set of 24."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:9817d53880c4721cb4a39ea77f6a88da6924c54f094b90ab58bf589d057ee0b5"
+}

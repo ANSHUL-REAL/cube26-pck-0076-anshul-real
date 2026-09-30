@@ -1,0 +1,265 @@
+{
+  "record_id": "PCK-B0A5D68293BE",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D11",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B011OONHE6",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:24:34Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "9ce3d80f-47f2-406f-8f60-16453adbe514",
+      "role": "top_down",
+      "sha256": "a67ff50785061c0985bd2b927a4ee93e45bf89d5235f8fe5f7496d63bc52cb71",
+      "original_sha256": "68d8250a7d947dcf16f5a0f518e1809614495400283e91780bc60db51501b818",
+      "mime": "image/jpeg",
+      "width": 677,
+      "height": 917,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 677,
+        "height": 917,
+        "blur_var": 47.0,
+        "mean_luma": 115.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: boxed Happy Cooking Game with clear window (#1); red box labeled Happy Cooking Game (#2); white box labeled Happy Cooking Game (#3).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+        "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden. Horizontal lines obscure parts of the items. Items are stacked."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G is in the box.",
+        "A count of Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B011OONHE6",
+        "title": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          290,
+          240,
+          620,
+          760
+        ],
+        "description": "boxed Happy Cooking Game with clear window",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "product type and visible text 'Happy Cooking Game'",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          620,
+          240,
+          800,
+          900
+        ],
+        "description": "red box labeled Happy Cooking Game",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "product type and visible text 'Happy Cooking Game'",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          780,
+          0,
+          1000,
+          900
+        ],
+        "description": "white box labeled Happy Cooking Game",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "product type and visible text 'Happy Cooking Game'",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "boxed Happy Cooking Game with clear window",
+        "object_id": "o1"
+      },
+      {
+        "sku": null,
+        "title": "red box labeled Happy Cooking Game",
+        "object_id": "o2"
+      },
+      {
+        "sku": null,
+        "title": "white box labeled Happy Cooking Game",
+        "object_id": "o3"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.7,
+      "notes": "Horizontal lines obscure parts of the items. Items are stacked."
+    },
+    "image_issues": [
+      "Horizontal lines obscuring view",
+      "Slight blur"
+    ],
+    "candidates_shown": [
+      "B00ZVICXSI",
+      "B011OONHE6",
+      "B016I0J2Z4"
+    ],
+    "usage": {
+      "input_tokens": 1037,
+      "output_tokens": 497,
+      "thinking_tokens": 1759,
+      "total_tokens": 3293
+    },
+    "cost_usd": 0.005951,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden. Horizontal lines obscure parts of the items. Items are stacked.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12413,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B011OONHE6",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12413,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B011OONHE6",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12413,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12413,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: boxed Happy Cooking Game with clear window (#1); red box labeled Happy Cooking Game (#2); white box labeled Happy Cooking Game (#3).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12413,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:24:46Z",
+    "reasons": [
+      "Not in the order: boxed Happy Cooking Game with clear window (#1); red box labeled Happy Cooking Game (#2); white box labeled Happy Cooking Game (#3)."
+    ],
+    "fix_instructions": [
+      "Remove boxed Happy Cooking Game with clear window (#1); it is not in the order.",
+      "Remove red box labeled Happy Cooking Game (#2); it is not in the order.",
+      "Remove white box labeled Happy Cooking Game (#3); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G by hand: there should be 3."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:e196c94cead668f9921d08d5c4aeefe8ba78ada3c49196eaabb42b6f1a2b192d"
+}

@@ -1,0 +1,286 @@
+{
+  "record_id": "PCK-FBA6E49C0EF6",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D12",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000MK2PZ6",
+        "qty": 1
+      },
+      {
+        "sku": "B00NVMIQE6",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e034c2f6-2559-410c-8165-a6d3e941aeb4",
+      "role": "top_down",
+      "sha256": "c9c0ad2dc4698bd0b926ba0ab73d6c074e8e5ea6519c55a54d5f55d72883e2d4",
+      "original_sha256": "7c776600f67b6fa00be01e74f7125b19b6294512db26e469e13b8d66b3f901a1",
+      "mime": "image/jpeg",
+      "width": 467,
+      "height": 358,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 467,
+        "height": 358,
+        "blur_var": 17.6,
+        "mean_luma": 120.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B000MK2PZ6",
+        "title": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B00NVMIQE6",
+        "title": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B000MK2PZ6",
+        "classification": "CANDIDATE",
+        "sku": "B000MK2PZ6",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00NVMIQE6",
+        "classification": "CANDIDATE",
+        "sku": "B00NVMIQE6",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00NVMIQE6",
+        "classification": "CANDIDATE",
+        "sku": "B00NVMIQE6",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00PQBO0JK",
+        "classification": "CANDIDATE",
+        "sku": "B00PQBO0JK",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00PQBO0JK",
+        "classification": "CANDIDATE",
+        "sku": "B00PQBO0JK",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00PQBO0JK",
+        "title": "Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F",
+        "object_id": "o4"
+      },
+      {
+        "sku": "B00PQBO0JK",
+        "title": "Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F",
+        "object_id": "o5"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00NVMIQE6",
+      "B00XDAR6RE",
+      "B000MK2PZ6",
+      "B01FGBOJMC"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000MK2PZ6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000MK2PZ6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Expo Low-Odor Dry Erase Set, Chisel Tip, 6-Piece, Assorted Colors: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00NVMIQE6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: found (#2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00NVMIQE6",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "YS Organic Bee Farms Certified Organic Raw Honey 100% Unprocessed, Unpasteurized - Kosher 32oz 2 Lbs Frustration Free Pa: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F (#4); Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Not in the order: Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F (#4); Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F (#5)."
+    ],
+    "fix_instructions": [
+      "Remove Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F (#4); it is not in the order.",
+      "Remove Rycom Portable Non-contact Infrared Thermometer Forhead Fever Baby Medical Clinical Home Healthcare Products 100% Safe F (#5); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:553a58d84dfa17c82e92ada7ba1db63ee81b2713b664e8e87f136b3a10ac3664"
+}

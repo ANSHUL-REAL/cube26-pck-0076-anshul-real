@@ -45,6 +45,7 @@ def eval_dir(tmp_path, monkeypatch):
     (d / "labels").mkdir(parents=True)
     for mod in (common, metrics, freeze, run_eval, make_label_sheet, import_photos):
         monkeypatch.setattr(mod, "EVAL_DIR", d)
+    monkeypatch.setattr(freeze, "CODE_DIR", d)
     monkeypatch.setattr(metrics, "LABEL_TIMES", {})
     return d
 

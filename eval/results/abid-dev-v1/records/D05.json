@@ -1,0 +1,300 @@
+{
+  "record_id": "PCK-688862BC945F",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D05",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B005PK0ISE",
+        "qty": 1
+      },
+      {
+        "sku": "B00MSGYGYU",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:22:12Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f18fd2b6-1248-4a2f-9c2a-43bcd1ffc93c",
+      "role": "top_down",
+      "sha256": "a9e9dd14c32b7b7379be21ce426e8799cd550ff6381b0fabda66c730c6857b51",
+      "original_sha256": "9e60b13322c629371d7a4e27e91a7ea0ee63b506fb9feaf66cec673f86c3593e",
+      "mime": "image/jpeg",
+      "width": 322,
+      "height": 296,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 322,
+        "height": 296,
+        "blur_var": 32.7,
+        "mean_luma": 121.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: found (#2).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "LED Light Up Snap Bracelet-Green: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+        "LED Light Up Snap Bracelet-Green: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The image quality is poor, with horizontal lines and blur, making identification difficult. Items are partially obscured by other items."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of uxcell Pair Black Elastic Sleeve Style Wrist Support Protector with every unit visible.",
+        "Whether LED Light Up Snap Bracelet-Green is in the box.",
+        "A count of LED Light Up Snap Bracelet-Green with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B005PK0ISE",
+        "title": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00MSGYGYU",
+        "title": "LED Light Up Snap Bracelet-Green",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          290,
+          170,
+          700,
+          580
+        ],
+        "description": "crumpled white plastic bag",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible material and form",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          180,
+          440,
+          600,
+          800
+        ],
+        "description": "dark patterned fabric item",
+        "classification": "CANDIDATE",
+        "sku": "B005PK0ISE",
+        "confidence": 0.7,
+        "alternative_skus": [
+          "B00MSGYGYU"
+        ],
+        "deciding_feature": "dark color, soft fabric appearance, general shape",
+        "partially_hidden": true,
+        "title": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          540,
+          590,
+          750,
+          860
+        ],
+        "description": "white piece of paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible paper material and shape",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "crumpled white plastic bag"
+      },
+      {
+        "object_id": "o3",
+        "description": "white piece of paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.6,
+      "notes": "The image quality is poor, with horizontal lines and blur, making identification difficult. Items are partially obscured by other items."
+    },
+    "image_issues": [
+      "Blur",
+      "Horizontal lines/artifacts",
+      "Low resolution"
+    ],
+    "candidates_shown": [
+      "B005PK0ISE",
+      "B008RNGVZ0",
+      "B00U58U5IE",
+      "B00MSGYGYU"
+    ],
+    "usage": {
+      "input_tokens": 1051,
+      "output_tokens": 592,
+      "thinking_tokens": 1662,
+      "total_tokens": 3305
+    },
+    "cost_usd": 0.00595,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The image quality is poor, with horizontal lines and blur, making identification difficult. Items are partially obscured by other items.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B005PK0ISE",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: found (#2).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B005PK0ISE",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00MSGYGYU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LED Light Up Snap Bracelet-Green: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00MSGYGYU",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "LED Light Up Snap Bracelet-Green: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 12572,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:22:52Z",
+    "reasons": [
+      "uxcell Pair Black Elastic Sleeve Style Wrist Support Protector: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "LED Light Up Snap Bracelet-Green: 0 clearly counted, some units may be stacked or hidden; 2 ordered.",
+      "LED Light Up Snap Bracelet-Green: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The image quality is poor, with horizontal lines and blur, making identification difficult. Items are partially obscured by other items."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count uxcell Pair Black Elastic Sleeve Style Wrist Support Protector by hand: there should be 1.",
+      "Count LED Light Up Snap Bracelet-Green by hand: there should be 2."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:f7b1985f23f1852a52af80547fb2750fb0ce45b8f30ffbf281517fc7929bd7ae"
+}

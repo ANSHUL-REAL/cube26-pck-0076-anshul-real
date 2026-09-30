@@ -16,7 +16,7 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 
 from ..models import CatalogueItem, DetectedObject, Scene, SkuCount
 
-PROMPT_VERSION = "pack-v2"
+PROMPT_VERSION = "pack-v3"
 
 SYSTEM_INSTRUCTION = """You are the vision component of a pack-verification system at an e-commerce packing bench.
 A packer has put products into an open shipping box. Report exactly what is physically visible in the box photos.
@@ -35,8 +35,8 @@ TASK = """TASK
    - NON_PRODUCT: packaging, filler, paperwork or an insert. Leave "sku" empty.
    Count sellable units the way each candidate describes one unit (a boxed set of 2 mugs is ONE object).
    "confidence" is how sure you are of the classification, from 0.0 to 1.0. If the object could also be another candidate (for example the colour or size that separates them is not visible), put that sku in "alternative_skus" and lower the confidence. "deciding_feature" is the visible detail that decided it.
-3. "counts": for every candidate sku you found at least once, the number of sellable units in the box. Set "count_certain" to false if units may be stacked, overlapping or hidden.
-4. "scene": whether the whole inside of the box is visible, whether items could be hidden under other items or filler, and your confidence from 0.0 to 1.0 that every item in the box is visible in the photos.
+3. "counts": for every candidate sku you found at least once, the number of sellable units in the box. One sellable unit is one product as the catalogue sells it: a "2-pack" or "box of 12" is ONE unit, so count the separate packages. Set "count_certain" to false if units may be stacked, overlapping or hidden.
+4. "scene": whether the whole inside of the box is visible, whether items could be hidden under other items or filler, and your confidence from 0.0 to 1.0 that every item in the box is visible in the photos. Be strict. Set "items_may_be_hidden" to true if anything covers part of the box (straps, netting, film, bubble wrap, packing paper, a flap), if items overlap or are stacked, or if the photo is too blurry, dark or small to make out every item. Set "box_interior_fully_visible" to false if any part of the inside is out of frame or covered. A cluttered or partly covered box gets a visibility confidence below 0.5.
 5. "image_issues": blur, glare, darkness, cropping or anything else that limits what you can see. Use an empty list if there are none."""
 
 

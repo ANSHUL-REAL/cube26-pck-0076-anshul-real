@@ -1,0 +1,230 @@
+{
+  "record_id": "PCK-22AB8DD648AB",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D16",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B004JRMIDM",
+        "qty": 1
+      },
+      {
+        "sku": "B00IYYX3G2",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:51Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b8b97e4d-e709-4380-9d9a-7e5f05b9c7d2",
+      "role": "top_down",
+      "sha256": "d0d88b72ea75c9755ed7342b7dd5a896ef724818a426aa2979decfc7dda00886",
+      "original_sha256": "d105d0ed84416752826e4561362a07105debc4092588cc2d3c4f7d0109e72fef",
+      "mime": "image/jpeg",
+      "width": 425,
+      "height": 290,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 425,
+        "height": 290,
+        "blur_var": 45.7,
+        "mean_luma": 109.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Aurora World 12\" \"Chester\" Flopsie: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Nautical Sailboat Cupcake Picks - Set of 24: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Aurora World 12\" \"Chester\" Flopsie: not seen, but items may be hidden.",
+        "Nautical Sailboat Cupcake Picks - Set of 24: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The view of the box interior is heavily obstructed by security netting or strings."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Aurora World 12\" \"Chester\" Flopsie is in the box.",
+        "A count of Aurora World 12\" \"Chester\" Flopsie with every unit visible.",
+        "Whether Nautical Sailboat Cupcake Picks - Set of 24 is in the box.",
+        "A count of Nautical Sailboat Cupcake Picks - Set of 24 with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B004JRMIDM",
+        "title": "Aurora World 12\" \"Chester\" Flopsie",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00IYYX3G2",
+        "title": "Nautical Sailboat Cupcake Picks - Set of 24",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.1,
+      "notes": "The view of the box interior is heavily obstructed by security netting or strings."
+    },
+    "image_issues": [
+      "heavy obstruction by netting"
+    ],
+    "candidates_shown": [
+      "B0010KK01S",
+      "B000TM8RAE",
+      "B004JRMIDM",
+      "B00IYYX3G2"
+    ],
+    "usage": {
+      "input_tokens": 1846,
+      "output_tokens": 102,
+      "thinking_tokens": 0,
+      "total_tokens": 1948
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The view of the box interior is heavily obstructed by security netting or strings.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B004JRMIDM",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Aurora World 12\" \"Chester\" Flopsie: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B004JRMIDM",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Aurora World 12\" \"Chester\" Flopsie: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00IYYX3G2",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Nautical Sailboat Cupcake Picks - Set of 24: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00IYYX3G2",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Nautical Sailboat Cupcake Picks - Set of 24: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7535,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:51Z",
+    "reasons": [
+      "Aurora World 12\" \"Chester\" Flopsie: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Nautical Sailboat Cupcake Picks - Set of 24: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Aurora World 12\" \"Chester\" Flopsie: not seen, but items may be hidden.",
+      "Nautical Sailboat Cupcake Picks - Set of 24: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The view of the box interior is heavily obstructed by security netting or strings."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Aurora World 12\" \"Chester\" Flopsie by hand: there should be 1.",
+      "Count Nautical Sailboat Cupcake Picks - Set of 24 by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:6dab77a528ae63734863b9cd1315979b119b3934b54ec80b4a1ec5cb8bf87c9c"
+}

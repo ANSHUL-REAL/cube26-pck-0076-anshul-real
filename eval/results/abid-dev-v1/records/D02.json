@@ -1,0 +1,265 @@
+{
+  "record_id": "PCK-2EC540315EF2",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D02",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00KWCTNLI",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:20:36Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b00a981e-d997-4a68-abd4-d49f787ee5a0",
+      "role": "top_down",
+      "sha256": "f747c3673b90bf69e8cf499125456deafd80038394b632f096c64124f6a1f15f",
+      "original_sha256": "b3a47dd9185645e4486a58f8c8daa8bdffac72bb79ca6e1ab28fda3119fd6b99",
+      "mime": "image/jpeg",
+      "width": 498,
+      "height": 646,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 498,
+        "height": 646,
+        "blur_var": 31.7,
+        "mean_luma": 94.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: box with pink, blue, green, white, yellow chevron pattern (#2).",
+        "Set of 5 Deluxe Microwave And Freezer Bowls: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Set of 5 Deluxe Microwave And Freezer Bowls: 1 clearly counted, 1 unclear (#3), some units may be stacked or hidden; 1 ordered.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The bottom right corner of the box is not fully visible. Items may be hidden under the chevron patterned box and in the obscured bottom right area."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Set of 5 Deluxe Microwave And Freezer Bowls with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00KWCTNLI",
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          1,
+          1,
+          400,
+          999
+        ],
+        "description": "black box with \"5 PIECE MICROWAVE TO FREEZER STORAGE BOWLS\" text",
+        "classification": "CANDIDATE",
+        "sku": "B00KWCTNLI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible product name on box",
+        "partially_hidden": false,
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          340,
+          1,
+          800,
+          600
+        ],
+        "description": "box with pink, blue, green, white, yellow chevron pattern",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "visible chevron pattern, no text",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          700,
+          1,
+          999,
+          400
+        ],
+        "description": "partially visible green and white object",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "too little visible to identify",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "box with pink, blue, green, white, yellow chevron pattern",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o3",
+        "guess_sku": null,
+        "confidence": 0.5,
+        "description": "partially visible green and white object"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.6,
+      "notes": "The bottom right corner of the box is not fully visible. Items may be hidden under the chevron patterned box and in the obscured bottom right area."
+    },
+    "image_issues": [
+      "Horizontal lines/banding across the entire image",
+      "Partial obscuring of items",
+      "Darkness in some areas"
+    ],
+    "candidates_shown": [
+      "B0037NZ5ES",
+      "B00KWCTNLI",
+      "B0126MYH1C"
+    ],
+    "usage": {
+      "input_tokens": 1019,
+      "output_tokens": 590,
+      "thinking_tokens": 1884,
+      "total_tokens": 3493
+    },
+    "cost_usd": 0.006491,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). The bottom right corner of the box is not fully visible. Items may be hidden under the chevron patterned box and in the obscured bottom right area.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14905,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00KWCTNLI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: found (#1).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14905,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KWCTNLI",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: 1 clearly counted, 1 unclear (#3), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14905,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14905,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.8,
+      "detail": "Not in the order: box with pink, blue, green, white, yellow chevron pattern (#2).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14905,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:20:51Z",
+    "reasons": [
+      "Not in the order: box with pink, blue, green, white, yellow chevron pattern (#2)."
+    ],
+    "fix_instructions": [
+      "Remove box with pink, blue, green, white, yellow chevron pattern (#2); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Set of 5 Deluxe Microwave And Freezer Bowls by hand: there should be 1.",
+      "Also check: Check #3 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:03562a4009570d52c7bf1ea1225a78abdc6bc0376a66842a0c85b2710c551666"
+}

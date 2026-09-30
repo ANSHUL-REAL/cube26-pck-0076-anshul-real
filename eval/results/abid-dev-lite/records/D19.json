@@ -1,0 +1,201 @@
+{
+  "record_id": "PCK-A1E08F4B3B67",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D19",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B003FP6N9Y",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:51Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "cbd4f896-0305-4737-80be-f663b9d8f747",
+      "role": "top_down",
+      "sha256": "8d85908e16a2b3b33031f34fefcffe3b39743d02d9b855a60bad32ba7ecf2ac6",
+      "original_sha256": "22d2dbf5f8cd5eed97665658adc9bf27d664fcda6c19f80d3b80b79965b8f508",
+      "mime": "image/jpeg",
+      "width": 417,
+      "height": 369,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 417,
+        "height": 369,
+        "blur_var": 27.7,
+        "mean_luma": 132.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "XyloBurst Mint Jar Lemon 300 count (6.35oz): found (#1).",
+        "The whole inside of the box is visible and nothing appears hidden.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "XyloBurst Mint Jar Lemon 300 count (6.35oz): 1 clearly counted, the model's own count (3) disagrees with the objects it listed; 3 ordered."
+      ],
+      "missing_evidence": [
+        "A count of XyloBurst Mint Jar Lemon 300 count (6.35oz) with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Count XyloBurst Mint Jar Lemon 300 count (6.35oz) by hand: there should be 3. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B003FP6N9Y",
+        "title": "XyloBurst Mint Jar Lemon 300 count (6.35oz)",
+        "ordered": 3,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          334,
+          73,
+          879,
+          997
+        ],
+        "description": "three jars in plastic bags",
+        "classification": "CANDIDATE",
+        "sku": "B003FP6N9Y",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "white jars in clear bags matching xyloburst jars",
+        "partially_hidden": false,
+        "title": "XyloBurst Mint Jar Lemon 300 count (6.35oz)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Three jars are neatly packed side by side in the box."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B003FP6N9Y",
+      "B003QCYXXY",
+      "B004JRMIDM"
+    ],
+    "usage": {
+      "input_tokens": 1832,
+      "output_tokens": 289,
+      "thinking_tokens": 0,
+      "total_tokens": 2121
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4968,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B003FP6N9Y",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "XyloBurst Mint Jar Lemon 300 count (6.35oz): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4968,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B003FP6N9Y",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.9,
+      "detail": "XyloBurst Mint Jar Lemon 300 count (6.35oz): 1 clearly counted, the model's own count (3) disagrees with the objects it listed; 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4968,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4968,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4968,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:51Z",
+    "reasons": [
+      "XyloBurst Mint Jar Lemon 300 count (6.35oz): 1 clearly counted, the model's own count (3) disagrees with the objects it listed; 3 ordered."
+    ],
+    "fix_instructions": [
+      "Count XyloBurst Mint Jar Lemon 300 count (6.35oz) by hand: there should be 3."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:858c3b70970249807866138e7f7410980ad9663ff74c00641b8aed1b85e37ef6"
+}

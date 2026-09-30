@@ -1,0 +1,235 @@
+{
+  "record_id": "PCK-BBB4A577007D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D08",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00HNL8A74",
+        "qty": 3
+      },
+      {
+        "sku": "B0045V36PQ",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:51Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0895749e-4529-4514-904c-3efd862dc5c7",
+      "role": "top_down",
+      "sha256": "28f00058969e3c6ae8f3bc1dca2fc5652d06564836487dbdf8433435b6daa869",
+      "original_sha256": "17ac1b17edcf94f66614f67e7e510ed31759068b4d80e34513c1b5d69762336f",
+      "mime": "image/jpeg",
+      "width": 492,
+      "height": 293,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 492,
+        "height": 293,
+        "blur_var": 66.8,
+        "mean_luma": 118.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00HNL8A74",
+        "title": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit",
+        "ordered": 3,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B0045V36PQ",
+        "title": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          78,
+          381,
+          608,
+          977
+        ],
+        "description": "16.4ft Flexible RGB Color Changing Waterproof LED Strip Light Kit",
+        "classification": "CANDIDATE",
+        "sku": "B00HNL8A74",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "Rolled LED light strip and associated packaging graphics visible",
+        "partially_hidden": true,
+        "title": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00HNL8A74",
+        "title": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit",
+        "units": 2
+      },
+      {
+        "sku": "B0045V36PQ",
+        "title": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "The box contains the LED strip light kit visible through strapping tape."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00V8YB1QE",
+      "B00BP3PSZ8",
+      "B0045V36PQ",
+      "B00HNL8A74"
+    ],
+    "usage": {
+      "input_tokens": 1919,
+      "output_tokens": 301,
+      "thinking_tokens": 0,
+      "total_tokens": 2220
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00HNL8A74",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HNL8A74",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 1 in the box, 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B0045V36PQ",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B0045V36PQ",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5175,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:51Z",
+    "reasons": [
+      "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 1 in the box, 3 ordered.",
+      "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 in the box, 1 ordered.",
+      "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 2 × 16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit.",
+      "Add 1 × Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:93dcd8873ea8823edeca4423de311b206e83d16925302d74f067e09ee1e98c70"
+}

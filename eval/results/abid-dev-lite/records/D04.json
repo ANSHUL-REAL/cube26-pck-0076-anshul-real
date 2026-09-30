@@ -1,0 +1,211 @@
+{
+  "record_id": "PCK-07D0C3B6F96E",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D04",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000LKTMLM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:44Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "65be2301-a2de-4294-ade0-05a915146a1d",
+      "role": "top_down",
+      "sha256": "13471d5a8c6f31249c0c6086abf2fb6218584b39524e6e8a70008c173cbe12fc",
+      "original_sha256": "d883810ab69bc12cf2698b3e9be8dd33210720eb3e207ef985133f3c2ebc5834",
+      "mime": "image/jpeg",
+      "width": 633,
+      "height": 469,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 633,
+        "height": 469,
+        "blur_var": 42.2,
+        "mean_luma": 127.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "The whole inside of the box is visible and nothing appears hidden.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): 0 clearly counted, 1 unclear (#1), some units may be stacked or hidden; 1 ordered.",
+        "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): possible match #1 is unclear."
+      ],
+      "missing_evidence": [
+        "Whether Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6) is in the box: a clear view of #1.",
+        "A count of Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6) with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Count Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6) by hand: there should be 1. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B000LKTMLM",
+        "title": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          336,
+          307,
+          856,
+          966
+        ],
+        "description": "brown cardboard box",
+        "classification": "CANDIDATE",
+        "sku": "B000LKTMLM",
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "brown box shape matching cereal packaging size",
+        "partially_hidden": false,
+        "title": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6)"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o1",
+        "guess_sku": "B000LKTMLM",
+        "confidence": 0.5,
+        "description": "brown cardboard box"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "the box contains a brown cardboard box and a white plastic bag with green designs"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B000LKTMLM",
+      "SKU-PROT-1KG",
+      "B017SUW3OA"
+    ],
+    "usage": {
+      "input_tokens": 1844,
+      "output_tokens": 293,
+      "thinking_tokens": 0,
+      "total_tokens": 2137
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4983,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000LKTMLM",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): possible match #1 is unclear.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4983,
+      "evidence": {
+        "possible_object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000LKTMLM",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): 0 clearly counted, 1 unclear (#1), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4983,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4983,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4983,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:44Z",
+    "reasons": [
+      "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): 0 clearly counted, 1 unclear (#1), some units may be stacked or hidden; 1 ordered.",
+      "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): possible match #1 is unclear."
+    ],
+    "fix_instructions": [
+      "Count Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6) by hand: there should be 1.",
+      "Check #1 by hand: it looks like Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6)."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:703f11bd2647137831fbeda2b949c1e681aecbacbe16f7fa7e24704e380dcdc2"
+}

@@ -1,0 +1,96 @@
+{
+  "record_id": "PCK-EED0BB87F3EC",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D18",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00AQ6OS60",
+        "qty": 3
+      },
+      {
+        "sku": "B01CIQCA9W",
+        "qty": 2
+      },
+      {
+        "sku": "B01FGBOJMC",
+        "qty": 1
+      },
+      {
+        "sku": "B00930URLA",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:26:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "aad7bea5-329f-4c52-93f2-2c68ab169b94",
+      "role": "top_down",
+      "sha256": "c2e78de077d44f27b2dfa36c9c7e1094b6bf59345336f7da0bb3e60e198f3821",
+      "original_sha256": "1f3f695a9b6b8e400048f830d4a1f32e2781c3a788fddaeac2ccc5f5c003e36b",
+      "mime": "image/jpeg",
+      "width": 445,
+      "height": 303,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 445,
+        "height": 303,
+        "blur_var": 66.0,
+        "mean_luma": 129.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "error": "Vision model call failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 9.195387255s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '9s'}]}}"
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": null,
+      "detail": "Local photo checks ran.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "vision",
+      "verdict": "NOT_CHECKED",
+      "confidence": null,
+      "detail": "Vision model unavailable: Vision model call failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 9.195387255s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '9s'}]}}",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": null,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "PENDING",
+    "decided_by": null,
+    "decided_at": null,
+    "reasons": [
+      "The vision model did not answer. The photos are saved.",
+      "Cause: Vision model call failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 9.195387255s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '9s'}]}}"
+    ],
+    "fix_instructions": [
+      "Check the box by hand against the order, then record your decision."
+    ]
+  },
+  "overrides": [],
+  "status": "pending",
+  "content_hash": "sha256:ccd0a5a4b977daf7593c6b872ad1a68fada2a7db48216eb1441d97c2a3369f30"
+}

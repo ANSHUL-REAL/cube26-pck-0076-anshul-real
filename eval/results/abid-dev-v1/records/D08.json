@@ -1,0 +1,329 @@
+{
+  "record_id": "PCK-64853AC73318",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D08",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00HNL8A74",
+        "qty": 3
+      },
+      {
+        "sku": "B0045V36PQ",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:23:37Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "29ced66b-a5b1-4515-8919-6f108c2bf46b",
+      "role": "top_down",
+      "sha256": "28f00058969e3c6ae8f3bc1dca2fc5652d06564836487dbdf8433435b6daa869",
+      "original_sha256": "17ac1b17edcf94f66614f67e7e510ed31759068b4d80e34513c1b5d69762336f",
+      "mime": "image/jpeg",
+      "width": 492,
+      "height": 293,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 492,
+        "height": 293,
+        "blur_var": 66.8,
+        "mean_luma": 118.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "unclear product #2: dark rectangular object; unclear product #3: light-colored curved flexible item.",
+        "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 0 clearly counted, 2 unclear (#2, #3), some units may be stacked or hidden; 3 ordered.",
+        "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 clearly counted, 2 unclear (#2, #3), some units may be stacked or hidden; 1 ordered.",
+        "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: possible match #2, #3 is unclear.",
+        "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: possible match #2, #3 is unclear.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image is extremely blurry and obscured by prominent horizontal lines, making it impossible to clearly identify objects or determine the full contents of the box."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether 16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit is in the box: a clear view of #2, #3.",
+        "A count of 16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit with every unit visible.",
+        "Whether Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall is in the box: a clear view of #2, #3.",
+        "A count of Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall with every unit visible.",
+        "A clear view of #2 to identify it.",
+        "A clear view of #3 to identify it."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00HNL8A74",
+        "title": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 2,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B0045V36PQ",
+        "title": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 2,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          200,
+          100,
+          500,
+          400
+        ],
+        "description": "white rectangular paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.7,
+        "alternative_skus": [],
+        "deciding_feature": "flat, white, rectangular shape consistent with paper",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          300,
+          450,
+          600,
+          800
+        ],
+        "description": "dark rectangular object",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.2,
+        "alternative_skus": [],
+        "deciding_feature": "rectangular shape and dark color; no distinguishing features visible to link to a specific product",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          500,
+          200,
+          800,
+          700
+        ],
+        "description": "light-colored curved flexible item",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.1,
+        "alternative_skus": [
+          "B0045V36PQ",
+          "B00HNL8A74"
+        ],
+        "deciding_feature": "curved, flexible appearance; lack of detail prevents specific identification as tubing or LED strip",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o2",
+        "guess_sku": null,
+        "confidence": 0.2,
+        "description": "dark rectangular object"
+      },
+      {
+        "object_id": "o3",
+        "guess_sku": null,
+        "confidence": 0.1,
+        "description": "light-colored curved flexible item"
+      }
+    ],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "white rectangular paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.1,
+      "notes": "The image is extremely blurry and obscured by prominent horizontal lines, making it impossible to clearly identify objects or determine the full contents of the box."
+    },
+    "image_issues": [
+      "Extreme blur",
+      "Prominent horizontal lines obscuring view"
+    ],
+    "candidates_shown": [
+      "B00V8YB1QE",
+      "B00BP3PSZ8",
+      "B0045V36PQ",
+      "B00HNL8A74"
+    ],
+    "usage": {
+      "input_tokens": 1102,
+      "output_tokens": 544,
+      "thinking_tokens": 2509,
+      "total_tokens": 4155
+    },
+    "cost_usd": 0.007963,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image is extremely blurry and obscured by prominent horizontal lines, making it impossible to clearly identify objects or determine the full contents of the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00HNL8A74",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.2,
+      "detail": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: possible match #2, #3 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {
+        "possible_object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HNL8A74",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 0 clearly counted, 2 unclear (#2, #3), some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B0045V36PQ",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.2,
+      "detail": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: possible match #2, #3 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {
+        "possible_object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0045V36PQ",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 clearly counted, 2 unclear (#2, #3), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "unclear product #2: dark rectangular object; unclear product #3: light-colored curved flexible item.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17422,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:23:54Z",
+    "reasons": [
+      "unclear product #2: dark rectangular object; unclear product #3: light-colored curved flexible item.",
+      "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 0 clearly counted, 2 unclear (#2, #3), some units may be stacked or hidden; 3 ordered.",
+      "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 clearly counted, 2 unclear (#2, #3), some units may be stacked or hidden; 1 ordered.",
+      "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: possible match #2, #3 is unclear.",
+      "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: possible match #2, #3 is unclear.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The image is extremely blurry and obscured by prominent horizontal lines, making it impossible to clearly identify objects or determine the full contents of the box."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count 16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit by hand: there should be 3.",
+      "Count Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall by hand: there should be 1.",
+      "Check #2 by hand: it looks like a product.",
+      "Check #3 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:c29c45cf1973bc508a3a2f64e247ed153968876c7c349d64608e5a942d6475fe"
+}

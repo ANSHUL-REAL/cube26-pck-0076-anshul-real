@@ -1,0 +1,286 @@
+{
+  "record_id": "PCK-143CB147FA18",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D10",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "1932543244",
+        "qty": 4
+      },
+      {
+        "sku": "B009NQ980A",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7f6b9387-db8c-452b-ba9b-02f1d105e056",
+      "role": "top_down",
+      "sha256": "4775a0dde467d4445133d2f0a9c53ab57d8238b9583f89078d4943cdcfc1f69d",
+      "original_sha256": "397657caf56d1e0f293ba2dda0364587a4393651a28be77f9080ea89603d5d01",
+      "mime": "image/jpeg",
+      "width": 479,
+      "height": 621,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 479,
+        "height": 621,
+        "blur_var": 31.3,
+        "mean_luma": 89.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "1932543244",
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment",
+        "ordered": 4,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B009NQ980A",
+        "title": "Beck Arnley 104-1999 Engine Mount",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1932543244",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1932543244",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1932543244",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "1932543244",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00HFJEZBO",
+        "classification": "CANDIDATE",
+        "sku": "B00HFJEZBO",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Beck Arnley 085-1641 Premium ASM Brake Pad"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B009NQ980A",
+        "expected_title": "Beck Arnley 104-1999 Engine Mount",
+        "found_sku": "B00HFJEZBO",
+        "found_title": "Beck Arnley 085-1641 Premium ASM Brake Pad",
+        "object_id": "o5"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "1932543244",
+      "B01AD10Q9K",
+      "B009NQ980A",
+      "B00CML0MVW"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:1932543244",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Houdon at the Louvre: Masterworks of the Enlightenment: found (#1, #2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:1932543244",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Houdon at the Louvre: Masterworks of the Enlightenment: 4 of 4.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B009NQ980A",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Beck Arnley 104-1999 Engine Mount: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B009NQ980A",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Beck Arnley 104-1999 Engine Mount: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Beck Arnley 104-1999 Engine Mount, found Beck Arnley 085-1641 Premium ASM Brake Pad (#5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B009NQ980A",
+            "found_sku": "B00HFJEZBO",
+            "object_id": "o5"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Expected Beck Arnley 104-1999 Engine Mount, found Beck Arnley 085-1641 Premium ASM Brake Pad (#5).",
+      "Beck Arnley 104-1999 Engine Mount: 0 in the box, 1 ordered.",
+      "Beck Arnley 104-1999 Engine Mount: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Beck Arnley 085-1641 Premium ASM Brake Pad (#5) with Beck Arnley 104-1999 Engine Mount."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:238f0a0906ecdb22bb3e502491bc0da7b0a84b104309aa56d13b540663f83bda"
+}

@@ -1,0 +1,362 @@
+{
+  "record_id": "PCK-F1B1F59310B4",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D03",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B0001VTZ86",
+        "qty": 1
+      },
+      {
+        "sku": "B005BFL0RQ",
+        "qty": 2
+      },
+      {
+        "sku": "B017SUW3OA",
+        "qty": 2
+      },
+      {
+        "sku": "B01DXUTSLA",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f0bd767b-2852-4a87-9d09-ae354a281b92",
+      "role": "top_down",
+      "sha256": "4cca5848c800e105937c6bdeac9478776cb5b819c2dac4fc22f28ef1e9455cb0",
+      "original_sha256": "a1eaa9dbe7aa815e463dc69851c48a2f21a0d8060f29aaca393748549186e9b3",
+      "mime": "image/jpeg",
+      "width": 414,
+      "height": 282,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 414,
+        "height": 282,
+        "blur_var": 45.6,
+        "mean_luma": 138.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B0001VTZ86",
+        "title": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B005BFL0RQ",
+        "title": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200)",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B017SUW3OA",
+        "title": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "B01DXUTSLA",
+        "title": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B0001VTZ86",
+        "classification": "CANDIDATE",
+        "sku": "B0001VTZ86",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005BFL0RQ",
+        "classification": "CANDIDATE",
+        "sku": "B005BFL0RQ",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200)"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005BFL0RQ",
+        "classification": "CANDIDATE",
+        "sku": "B005BFL0RQ",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200)"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B017SUW3OA",
+        "classification": "CANDIDATE",
+        "sku": "B017SUW3OA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B017SUW3OA",
+        "classification": "CANDIDATE",
+        "sku": "B017SUW3OA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie"
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B01DXUTSLA",
+        "classification": "CANDIDATE",
+        "sku": "B01DXUTSLA",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00XBBVINI",
+      "B0001VTZ86",
+      "B005BFL0RQ",
+      "B01DXUTSLA",
+      "B017SUW3OA",
+      "SKU-LAMP-LED"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B0001VTZ86",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0001VTZ86",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nature's Way Vitamin B-50 Complex, Capsules, 100-Count: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B005BFL0RQ",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200): found (#2, #3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B005BFL0RQ",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Dynarex 1113 Latex Free Sterile Alcohol Prep Pad (Box of 200): 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B017SUW3OA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie: found (#4, #5).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B017SUW3OA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "CLOHO 2pcs Women's Sexy Nipple Cover Heart Shape Rose Tassel Pasties Bra Lingerie: 2 of 2.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B01DXUTSLA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots: found (#6).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01DXUTSLA",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Xperia XA Case - Terrapin Sony Xperia XA Leather Case - GENUINE LEATHER - Executive Folio Wallet Cover Flip - Card Slots: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o6"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:6f6add9a09300653afd5cb4b4406b27a2521290b366bfb7bed218c394780b52f"
+}

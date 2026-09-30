@@ -1,0 +1,208 @@
+{
+  "record_id": "PCK-2C39D8BCA644",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D09",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00PKRM6PU",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:23:58Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "99c6a789-b59e-435c-b7b4-ec7402698fef",
+      "role": "top_down",
+      "sha256": "f05627a893b86f8895937483c8d5c3113ac6a3263b03a78a4085f7d9cccc1e92",
+      "original_sha256": "033e6147a7bc604516ec5f195013bc1c941bbc370dc518c78e504e293b0109ef",
+      "mime": "image/jpeg",
+      "width": 450,
+      "height": 346,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 450,
+        "height": 346,
+        "blur_var": 28.2,
+        "mean_luma": 108.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image has horizontal line artifacts that obscure details. The full interior of the box is not visible."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00PKRM6PU",
+        "title": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          230,
+          100,
+          700,
+          900
+        ],
+        "description": "red and white SuperSliders Painter's Furniture Moving Kit",
+        "classification": "CANDIDATE",
+        "sku": "B00PKRM6PU",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "visible product name 'SuperSliders Painter's Furniture Moving Kit' and '20 Piece Kit'",
+        "partially_hidden": true,
+        "title": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.5,
+      "notes": "The image has horizontal line artifacts that obscure details. The full interior of the box is not visible."
+    },
+    "image_issues": [
+      "Horizontal line artifacts obscuring details",
+      "Partial view of box interior"
+    ],
+    "candidates_shown": [
+      "B0006HUNYU",
+      "B00PKRM6PU",
+      "B000FPN8TK"
+    ],
+    "usage": {
+      "input_tokens": 1034,
+      "output_tokens": 343,
+      "thinking_tokens": 1162,
+      "total_tokens": 2539
+    },
+    "cost_usd": 0.004073,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image has horizontal line artifacts that obscure details. The full interior of the box is not visible.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 9844,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00PKRM6PU",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: found (#1).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 9844,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00PKRM6PU",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.9,
+      "detail": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 9844,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 9844,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 9844,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:24:08Z",
+    "reasons": [
+      "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image has horizontal line artifacts that obscure details. The full interior of the box is not visible."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:240f4bdd2d84413a3516262486ca3fbf74fb2bf73384062f34e9e225cbab3e96"
+}

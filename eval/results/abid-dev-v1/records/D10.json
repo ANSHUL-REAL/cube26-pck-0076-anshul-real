@@ -1,0 +1,335 @@
+{
+  "record_id": "PCK-FB28FC292C6D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D10",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "1932543244",
+        "qty": 4
+      },
+      {
+        "sku": "B009NQ980A",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:24:12Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "f8a2a8aa-0c8c-484f-9041-0dafab923817",
+      "role": "top_down",
+      "sha256": "4775a0dde467d4445133d2f0a9c53ab57d8238b9583f89078d4943cdcfc1f69d",
+      "original_sha256": "397657caf56d1e0f293ba2dda0364587a4393651a28be77f9080ea89603d5d01",
+      "mime": "image/jpeg",
+      "width": 479,
+      "height": 621,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 479,
+        "height": 621,
+        "blur_var": 31.3,
+        "mean_luma": 89.2,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Houdon at the Louvre: Masterworks of the Enlightenment: found (#1, #2, #3, #4).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Houdon at the Louvre: Masterworks of the Enlightenment: 4 clearly counted, some units may be stacked or hidden; 4 ordered.",
+        "Beck Arnley 104-1999 Engine Mount: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Beck Arnley 104-1999 Engine Mount: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). Horizontal lines obscure visibility. Items may be stacked or hidden."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Houdon at the Louvre: Masterworks of the Enlightenment with every unit visible.",
+        "Whether Beck Arnley 104-1999 Engine Mount is in the box.",
+        "A count of Beck Arnley 104-1999 Engine Mount with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "1932543244",
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment",
+        "ordered": 4,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B009NQ980A",
+        "title": "Beck Arnley 104-1999 Engine Mount",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          300,
+          280,
+          400,
+          700
+        ],
+        "description": "book titled Houdon at the Louvre",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible title 'Houdon at the Louvre' on spine",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          400,
+          280,
+          500,
+          700
+        ],
+        "description": "book titled Houdon at the Louvre",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible title 'Houdon at the Louvre' on spine",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          500,
+          280,
+          600,
+          700
+        ],
+        "description": "book titled Houdon at the Louvre",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible title 'Houdon at the Louvre' on spine",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          600,
+          280,
+          700,
+          700
+        ],
+        "description": "book titled Houdon at the Louvre",
+        "classification": "CANDIDATE",
+        "sku": "1932543244",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible title 'Houdon at the Louvre' on spine",
+        "partially_hidden": false,
+        "title": "Houdon at the Louvre: Masterworks of the Enlightenment"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": [
+          650,
+          100,
+          800,
+          400
+        ],
+        "description": "white paper with 'BECK' text",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "visible text 'BECK' and paper material",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o5",
+        "description": "white paper with 'BECK' text"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.6,
+      "notes": "Horizontal lines obscure visibility. Items may be stacked or hidden."
+    },
+    "image_issues": [
+      "Horizontal lines obscuring content",
+      "Image is somewhat dark"
+    ],
+    "candidates_shown": [
+      "1932543244",
+      "B01AD10Q9K",
+      "B009NQ980A",
+      "B00CML0MVW"
+    ],
+    "usage": {
+      "input_tokens": 1043,
+      "output_tokens": 881,
+      "thinking_tokens": 2569,
+      "total_tokens": 4493
+    },
+    "cost_usd": 0.008938,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). Horizontal lines obscure visibility. Items may be stacked or hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:1932543244",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Houdon at the Louvre: Masterworks of the Enlightenment: found (#1, #2, #3, #4).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:1932543244",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Houdon at the Louvre: Masterworks of the Enlightenment: 4 clearly counted, some units may be stacked or hidden; 4 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B009NQ980A",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Beck Arnley 104-1999 Engine Mount: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B009NQ980A",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Beck Arnley 104-1999 Engine Mount: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.6,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17988,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:24:30Z",
+    "reasons": [
+      "Houdon at the Louvre: Masterworks of the Enlightenment: 4 clearly counted, some units may be stacked or hidden; 4 ordered.",
+      "Beck Arnley 104-1999 Engine Mount: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Beck Arnley 104-1999 Engine Mount: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.60). Horizontal lines obscure visibility. Items may be stacked or hidden."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Houdon at the Louvre: Masterworks of the Enlightenment by hand: there should be 4.",
+      "Count Beck Arnley 104-1999 Engine Mount by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:3b36b9217b75839dcc31b38953e721d8b1c23add6ebd68ea4918d36916212047"
+}

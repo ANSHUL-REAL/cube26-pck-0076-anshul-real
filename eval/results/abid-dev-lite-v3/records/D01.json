@@ -1,0 +1,292 @@
+{
+  "record_id": "PCK-349B92FDD18E",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D01",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "1855842106",
+        "qty": 1
+      },
+      {
+        "sku": "B00006IFHD",
+        "qty": 2
+      },
+      {
+        "sku": "B00025K0VC",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:45:59Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "681ab201-2e5c-406e-a0d5-eb2d9050ed59",
+      "role": "top_down",
+      "sha256": "0cc89dca12a8aa61106e5bfc5ce85cafc1dd1ecd228832764a64b2004f17888a",
+      "original_sha256": "1d825dff257e21f78d31ad2df21ef043872150ed90cbe00cfc7f9e425ca0be17",
+      "mime": "image/jpeg",
+      "width": 412,
+      "height": 281,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 412,
+        "height": 281,
+        "blur_var": 13.5,
+        "mean_luma": 136.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "1855842106",
+        "title": "Nutrition: Food, Health, and Spiritual Development",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00006IFHD",
+        "title": "Sharpie Permanent Markers, Fine Point, Black, Box of 12",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00025K0VC",
+        "title": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter",
+        "ordered": 2,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          390,
+          89,
+          876,
+          381
+        ],
+        "description": "round container with red lid",
+        "classification": "CANDIDATE",
+        "sku": "B00025K0VC",
+        "confidence": 0.85,
+        "alternative_skus": [],
+        "deciding_feature": "Red lid and container shape matching Tetra tropical flakes",
+        "partially_hidden": false,
+        "title": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          344,
+          532,
+          907,
+          955
+        ],
+        "description": "round container with red lid",
+        "classification": "CANDIDATE",
+        "sku": "B00025K0VC",
+        "confidence": 0.85,
+        "alternative_skus": [],
+        "deciding_feature": "Red lid and container shape matching Tetra tropical flakes",
+        "partially_hidden": false,
+        "title": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "1855842106",
+        "title": "Nutrition: Food, Health, and Spiritual Development",
+        "units": 1
+      },
+      {
+        "sku": "B00006IFHD",
+        "title": "Sharpie Permanent Markers, Fine Point, Black, Box of 12",
+        "units": 2
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "The box is secured with tight plastic bands, but the items are clearly visible underneath."
+    },
+    "image_issues": [
+      "blur"
+    ],
+    "candidates_shown": [
+      "B017D8015K",
+      "B00006IFHD",
+      "B00YQ9PHE0",
+      "B00025K0VC",
+      "1855842106"
+    ],
+    "usage": {
+      "input_tokens": 2095,
+      "output_tokens": 445,
+      "thinking_tokens": 0,
+      "total_tokens": 2540
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:1855842106",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Nutrition: Food, Health, and Spiritual Development: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:1855842106",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Nutrition: Food, Health, and Spiritual Development: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00006IFHD",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Sharpie Permanent Markers, Fine Point, Black, Box of 12: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B00006IFHD",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Sharpie Permanent Markers, Fine Point, Black, Box of 12: 0 in the box, 2 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00025K0VC",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00025K0VC",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: 2 of 2.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5473,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:46:05Z",
+    "reasons": [
+      "Nutrition: Food, Health, and Spiritual Development: 0 in the box, 1 ordered.",
+      "Sharpie Permanent Markers, Fine Point, Black, Box of 12: 0 in the box, 2 ordered.",
+      "Nutrition: Food, Health, and Spiritual Development: not in the box, and the whole box is visible.",
+      "Sharpie Permanent Markers, Fine Point, Black, Box of 12: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Nutrition: Food, Health, and Spiritual Development.",
+      "Add 2 × Sharpie Permanent Markers, Fine Point, Black, Box of 12."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:b80f1ae5b023720d40302e782919636de1b433779e47d327bbd171088376db14"
+}

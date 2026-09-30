@@ -1,0 +1,183 @@
+{
+  "record_id": "PCK-4291F4B87B16",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D17",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00LMJSGMM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:47:48Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "99278ea1-8bf7-4138-b6ee-0a21a8b0b3de",
+      "role": "top_down",
+      "sha256": "60805e71d9e0d70cce045575ca64285116fa6f5d14b443936a9ecfd6203a2b36",
+      "original_sha256": "94d1f16bb0d5576e2831136b72d72653870cc17841a88c5a81351eaf1a277d29",
+      "mime": "image/jpeg",
+      "width": 423,
+      "height": 288,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 423,
+        "height": 288,
+        "blur_var": 56.1,
+        "mean_luma": 163.5,
+        "clipped_pct": 0.07,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00LMJSGMM",
+        "title": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          138,
+          34,
+          818,
+          747
+        ],
+        "description": "Dr. Brown's pink wide neck baby bottle 2-pack box",
+        "classification": "CANDIDATE",
+        "sku": "B00LMJSGMM",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "pink packaging with Dr. Brown's branding and text Simply the best baby bottle",
+        "partially_hidden": false,
+        "title": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "Strips of webbing or straps cross horizontally over the box opening but the product box beneath is clearly visible."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00VVC6TTW",
+      "B00LMJSGMM",
+      "SKU-BOTTLE-750"
+    ],
+    "usage": {
+      "input_tokens": 1992,
+      "output_tokens": 321,
+      "thinking_tokens": 0,
+      "total_tokens": 2313
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7814,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00LMJSGMM",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7814,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00LMJSGMM",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Dr. Brown's 4oz. Wide Neck Bottles in Pink, 2-pack: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7814,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7814,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7814,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:47:56Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:b154a4c753d80dd8ed06bf3e6612c01c5291bfd85ef9320330f67283bef0b4b5"
+}

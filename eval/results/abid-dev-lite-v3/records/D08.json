@@ -1,0 +1,310 @@
+{
+  "record_id": "PCK-D611550B4DAC",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D08",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00HNL8A74",
+        "qty": 3
+      },
+      {
+        "sku": "B0045V36PQ",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:46:48Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7e193639-f76c-42f7-83fe-52c0850691ed",
+      "role": "top_down",
+      "sha256": "28f00058969e3c6ae8f3bc1dca2fc5652d06564836487dbdf8433435b6daa869",
+      "original_sha256": "17ac1b17edcf94f66614f67e7e510ed31759068b4d80e34513c1b5d69762336f",
+      "mime": "image/jpeg",
+      "width": 492,
+      "height": 293,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 492,
+        "height": 293,
+        "blur_var": 66.8,
+        "mean_luma": 118.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin (#2).",
+        "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 1 clearly counted, 1 unclear (#3), some units may be stacked or hidden; 3 ordered.",
+        "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 clearly counted, 1 unclear (#3), some units may be stacked or hidden; 1 ordered.",
+        "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: possible match #3 is unclear.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). The view of the box is obstructed by strapping bands and the image is blurry."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of 16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit with every unit visible.",
+        "Whether Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall is in the box: a clear view of #3.",
+        "A count of Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00HNL8A74",
+        "title": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit",
+        "ordered": 3,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B0045V36PQ",
+        "title": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          75,
+          414,
+          521,
+          936
+        ],
+        "description": "Led strip light kit rolled up in box",
+        "classification": "CANDIDATE",
+        "sku": "B00HNL8A74",
+        "confidence": 0.85,
+        "alternative_skus": [],
+        "deciding_feature": "circular packaging with visible LED strip imagery",
+        "partially_hidden": true,
+        "title": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          63,
+          201,
+          584,
+          495
+        ],
+        "description": "Clear plastic neck exerciser packaging",
+        "classification": "CANDIDATE",
+        "sku": "B00BP3PSZ8",
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "transparent elongated plastic packaging",
+        "partially_hidden": true,
+        "title": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          556,
+          323,
+          792,
+          933
+        ],
+        "description": "Clear plastic wrapped item",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "oblong wrapped object partially visible",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "B00BP3PSZ8",
+        "title": "TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o3",
+        "guess_sku": null,
+        "confidence": 0.5,
+        "description": "Clear plastic wrapped item"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.4,
+      "notes": "The view of the box is obstructed by strapping bands and the image is blurry."
+    },
+    "image_issues": [
+      "blur",
+      "straps obscuring view"
+    ],
+    "candidates_shown": [
+      "B00V8YB1QE",
+      "B00BP3PSZ8",
+      "B0045V36PQ",
+      "B00HNL8A74"
+    ],
+    "usage": {
+      "input_tokens": 2060,
+      "output_tokens": 635,
+      "thinking_tokens": 0,
+      "total_tokens": 2695
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.4,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). The view of the box is obstructed by strapping bands and the image is blurry.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00HNL8A74",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00HNL8A74",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.85,
+      "detail": "16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit: 1 clearly counted, 1 unclear (#3), some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B0045V36PQ",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: possible match #3 is unclear.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {
+        "possible_object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0045V36PQ",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall: 0 clearly counted, 1 unclear (#3), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.8,
+      "detail": "Not in the order: TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 3524,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:46:52Z",
+    "reasons": [
+      "Not in the order: TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin (#2)."
+    ],
+    "fix_instructions": [
+      "Remove TOMTOP Portable Neckline Slimmer Neck Exerciser Chin Massager Thin Jaw Reduce Double Thin (#2); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count 16.4ft Flexible RGB Color Changing Waterproof (IP65) LED Strip Light Kit, 150LEDs Dreamy RGB Chasing LED Light Strip wit by hand: there should be 3.",
+      "Also check: Count Graham-Field 3932 132 Latex Tubing, 50', 1/4\"I.D. x 5/16\" O.D. x 1/32\" Wall by hand: there should be 1.",
+      "Also check: Check #3 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:d474d0c7f968a1f8006d33df209e31608f0c21b9c3c04c42c3603d0bfdb9163b"
+}

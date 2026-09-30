@@ -1,0 +1,206 @@
+{
+  "record_id": "PCK-F8C07DA647EF",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D02",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00KWCTNLI",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:46:09Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ec6d4d8c-fe10-4714-8758-912127ebadfa",
+      "role": "top_down",
+      "sha256": "f747c3673b90bf69e8cf499125456deafd80038394b632f096c64124f6a1f15f",
+      "original_sha256": "b3a47dd9185645e4486a58f8c8daa8bdffac72bb79ca6e1ab28fda3119fd6b99",
+      "mime": "image/jpeg",
+      "width": 498,
+      "height": 646,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 498,
+        "height": 646,
+        "blur_var": 31.7,
+        "mean_luma": 94.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Set of 5 Deluxe Microwave And Freezer Bowls: found (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Set of 5 Deluxe Microwave And Freezer Bowls: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Items may be stacked or hidden. Strips across the front of the shelf partially obstruct the view, and another box is partially visible underneath."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Set of 5 Deluxe Microwave And Freezer Bowls with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00KWCTNLI",
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          0,
+          31,
+          399,
+          749
+        ],
+        "description": "5 piece microwave to freezer storage bowls box",
+        "classification": "CANDIDATE",
+        "sku": "B00KWCTNLI",
+        "confidence": 0.99,
+        "alternative_skus": [],
+        "deciding_feature": "Product name and image on the box matches candidate",
+        "partially_hidden": false,
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.7,
+      "notes": "Strips across the front of the shelf partially obstruct the view, and another box is partially visible underneath."
+    },
+    "image_issues": [
+      "obstruction"
+    ],
+    "candidates_shown": [
+      "B0037NZ5ES",
+      "B00KWCTNLI",
+      "B0126MYH1C"
+    ],
+    "usage": {
+      "input_tokens": 2004,
+      "output_tokens": 305,
+      "thinking_tokens": 0,
+      "total_tokens": 2309
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.7,
+      "detail": "Items may be stacked or hidden. Strips across the front of the shelf partially obstruct the view, and another box is partially visible underneath.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2978,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00KWCTNLI",
+      "verdict": "PASS",
+      "confidence": 0.99,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2978,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KWCTNLI",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.99,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2978,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2978,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2978,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:46:12Z",
+    "reasons": [
+      "Set of 5 Deluxe Microwave And Freezer Bowls: 1 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Items may be stacked or hidden. Strips across the front of the shelf partially obstruct the view, and another box is partially visible underneath."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Set of 5 Deluxe Microwave And Freezer Bowls by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:f4c756e745b19c435db8ada289e863a700418d9c4b31f9dc433caaa1f965bfac"
+}

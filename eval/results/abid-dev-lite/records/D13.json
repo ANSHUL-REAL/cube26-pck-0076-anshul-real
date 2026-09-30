@@ -1,0 +1,268 @@
+{
+  "record_id": "PCK-6FE44C9FECC4",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D13",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B01A5LAW4C",
+        "qty": 1
+      },
+      {
+        "sku": "B00U8IR15G",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:51Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "66404593-2561-46f5-8826-4c4f2de341e2",
+      "role": "top_down",
+      "sha256": "e1d4c1949f74ca3ef33c060214170f0479926a369bf26047959d6a11bcf7f59b",
+      "original_sha256": "a4155dad65dbd7c7695f61457a167308b286a4627f0a26eb7877f5ac809a779f",
+      "mime": "image/jpeg",
+      "width": 621,
+      "height": 1028,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 621,
+        "height": 1028,
+        "blur_var": 3.6,
+        "mean_luma": 109.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B01A5LAW4C",
+        "title": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "B00U8IR15G",
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with ",
+        "ordered": 3,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          127,
+          4,
+          953,
+          458
+        ],
+        "description": "tall rectangular box with Axess branding",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Axess brand name and specifications text visible on the box front",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          381,
+          442,
+          953,
+          1000
+        ],
+        "description": "blue box depicting automatic fuel nozzle",
+        "classification": "CANDIDATE",
+        "sku": "B00U8IR15G",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "picture of red automatic fuel nozzle on packaging matching 9milelake product",
+        "partially_hidden": false,
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with "
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B00U8IR15G",
+        "title": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with ",
+        "units": 2
+      }
+    ],
+    "wrong": [
+      {
+        "expected_sku": "B01A5LAW4C",
+        "expected_title": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por",
+        "found_sku": null,
+        "found_title": "tall rectangular box with Axess branding",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.9,
+      "notes": "There are tape reflections across the box, and one unknown product (Axess) alongside one candidate product (fuel nozzle)."
+    },
+    "image_issues": [
+      "blur",
+      "glare"
+    ],
+    "candidates_shown": [
+      "B00KLLOS5Q",
+      "B01A5LAW4C",
+      "1259284263",
+      "B00U8IR15G"
+    ],
+    "usage": {
+      "input_tokens": 1942,
+      "output_tokens": 457,
+      "thinking_tokens": 0,
+      "total_tokens": 2399
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B01A5LAW4C",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B01A5LAW4C",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00U8IR15G",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with : found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00U8IR15G",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with : 1 in the box, 3 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por, found tall rectangular box with Axess branding (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B01A5LAW4C",
+            "found_sku": null,
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7912,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:51Z",
+    "reasons": [
+      "Expected NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por, found tall rectangular box with Axess branding (#1).",
+      "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: 0 in the box, 1 ordered.",
+      "9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with : 1 in the box, 3 ordered.",
+      "NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace tall rectangular box with Axess branding (#1) with NAVISKAUTO Upgraded 10.1 Inch HD 1080P Digital TFT LCD Screen Car Headrest DVD Player Raspberry Pi Monitor with HDMI Por.",
+      "Add 2 × 9milelake Automatic Fuel Nozzle Auto Shut Off Fueling Nozzle , 1\" Female Pipe Thread Connection and 1-1/4\" Adapter with ."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:8669f80848428870b47de0ab1f545bcc71e5dcfb3cfebcc0eaa1968507f01ee5"
+}

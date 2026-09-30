@@ -1,0 +1,240 @@
+{
+  "record_id": "PCK-BC95B8CB073D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D11",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B011OONHE6",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "4671a90f-1944-401a-894d-3bf4634d968b",
+      "role": "top_down",
+      "sha256": "a67ff50785061c0985bd2b927a4ee93e45bf89d5235f8fe5f7496d63bc52cb71",
+      "original_sha256": "68d8250a7d947dcf16f5a0f518e1809614495400283e91780bc60db51501b818",
+      "mime": "image/jpeg",
+      "width": 677,
+      "height": 917,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 677,
+        "height": 917,
+        "blur_var": 47.0,
+        "mean_luma": 115.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B011OONHE6",
+        "title": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005R2HRZ2",
+        "classification": "CANDIDATE",
+        "sku": "B005R2HRZ2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Cutting Fruits Cooking Playset for Kids with Cutting Board"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005R2HRZ2",
+        "classification": "CANDIDATE",
+        "sku": "B005R2HRZ2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Cutting Fruits Cooking Playset for Kids with Cutting Board"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B005R2HRZ2",
+        "classification": "CANDIDATE",
+        "sku": "B005R2HRZ2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Cutting Fruits Cooking Playset for Kids with Cutting Board"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "B011OONHE6",
+        "expected_title": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G",
+        "found_sku": "B005R2HRZ2",
+        "found_title": "Cutting Fruits Cooking Playset for Kids with Cutting Board",
+        "object_id": "o1"
+      },
+      {
+        "expected_sku": "B011OONHE6",
+        "expected_title": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G",
+        "found_sku": "B005R2HRZ2",
+        "found_title": "Cutting Fruits Cooking Playset for Kids with Cutting Board",
+        "object_id": "o2"
+      },
+      {
+        "expected_sku": "B011OONHE6",
+        "expected_title": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G",
+        "found_sku": "B005R2HRZ2",
+        "found_title": "Cutting Fruits Cooking Playset for Kids with Cutting Board",
+        "object_id": "o3"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B00ZVICXSI",
+      "B011OONHE6",
+      "B016I0J2Z4"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B011OONHE6",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:B011OONHE6",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: 0 in the box, 3 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G, found Cutting Fruits Cooking Playset for Kids with Cutting Board (#1); Expected Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G, found Cutting Fruits Cooking Playset for Kids with Cutting Board (#2); Expected Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G, found Cutting Fruits Cooking Playset for Kids with Cutting Board (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "B011OONHE6",
+            "found_sku": "B005R2HRZ2",
+            "object_id": "o1"
+          },
+          {
+            "expected_sku": "B011OONHE6",
+            "found_sku": "B005R2HRZ2",
+            "object_id": "o2"
+          },
+          {
+            "expected_sku": "B011OONHE6",
+            "found_sku": "B005R2HRZ2",
+            "object_id": "o3"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Expected Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G, found Cutting Fruits Cooking Playset for Kids with Cutting Board (#1); Expected Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G, found Cutting Fruits Cooking Playset for Kids with Cutting Board (#2); Expected Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G, found Cutting Fruits Cooking Playset for Kids with Cutting Board (#3).",
+      "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: 0 in the box, 3 ordered.",
+      "Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Cutting Fruits Cooking Playset for Kids with Cutting Board (#1) with Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G.",
+      "Replace Cutting Fruits Cooking Playset for Kids with Cutting Board (#2) with Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G.",
+      "Replace Cutting Fruits Cooking Playset for Kids with Cutting Board (#3) with Greens SuperFood Powder Drink Mix with Chia Seeds and over 15 Super Foods. Delicious Berry Flavor and Loaded with Dark G."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a13bac8d30bf3b696aeef2bf671e6afc6cd698fa7cbf950d52fcc22a1cffa877"
+}

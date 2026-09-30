@@ -1,0 +1,173 @@
+{
+  "record_id": "PCK-02655835CD78",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D09",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00PKRM6PU",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "eb3cb157-9ad9-4f30-a47d-b8448fc77e29",
+      "role": "top_down",
+      "sha256": "f05627a893b86f8895937483c8d5c3113ac6a3263b03a78a4085f7d9cccc1e92",
+      "original_sha256": "033e6147a7bc604516ec5f195013bc1c941bbc370dc518c78e504e293b0109ef",
+      "mime": "image/jpeg",
+      "width": 450,
+      "height": 346,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 450,
+        "height": 346,
+        "blur_var": 28.2,
+        "mean_luma": 108.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00PKRM6PU",
+        "title": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B00PKRM6PU",
+        "classification": "CANDIDATE",
+        "sku": "B00PKRM6PU",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0006HUNYU",
+      "B00PKRM6PU",
+      "B000FPN8TK"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00PKRM6PU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00PKRM6PU",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "SuperSliders Painter's Furniture Moving Kit for Hard floor and Carpeted Surfaces (20 pieces) Reusable Sliders: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:092f641efae09d316e0e9a2849826d8eb483c3baddb49162e0724211289b4418"
+}

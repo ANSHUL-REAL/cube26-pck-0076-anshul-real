@@ -1,0 +1,227 @@
+{
+  "record_id": "PCK-76D27A01694C",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D20",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B015EMXVMW",
+        "qty": 5
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:30Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "5d1920e9-6eb1-48fc-902d-500e48788742",
+      "role": "top_down",
+      "sha256": "4aa1a4a3bd7319e6e0f82cd4c22d543f7bbf7efb4e757e68136bc3471cbe914d",
+      "original_sha256": "568297a19f4aa067ee8d7d52f739fb28c24a3fd5a765c619b5903e7f353b1502",
+      "mime": "image/jpeg",
+      "width": 417,
+      "height": 285,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 417,
+        "height": 285,
+        "blur_var": 37.0,
+        "mean_luma": 116.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B015EMXVMW",
+        "title": "Qball Reaction Training Ball",
+        "ordered": 5,
+        "found": 4,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015EMXVMW",
+        "classification": "CANDIDATE",
+        "sku": "B015EMXVMW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Qball Reaction Training Ball"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015EMXVMW",
+        "classification": "CANDIDATE",
+        "sku": "B015EMXVMW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Qball Reaction Training Ball"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015EMXVMW",
+        "classification": "CANDIDATE",
+        "sku": "B015EMXVMW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Qball Reaction Training Ball"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": null,
+        "description": "B015EMXVMW",
+        "classification": "CANDIDATE",
+        "sku": "B015EMXVMW",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Qball Reaction Training Ball"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "B015EMXVMW",
+        "title": "Qball Reaction Training Ball",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B016I0J2Z4",
+      "B015EMXVMW",
+      "B00KD6YW6O"
+    ],
+    "usage": {},
+    "cost_usd": 0.0,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B015EMXVMW",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Qball Reaction Training Ball: found (#1, #2, #3, #4).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B015EMXVMW",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Qball Reaction Training Ball: 4 in the box, 5 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:19:30Z",
+    "reasons": [
+      "Qball Reaction Training Ball: 4 in the box, 5 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Qball Reaction Training Ball."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:af04a3f36f3b14460f256a993b85a119f4df1d1ca02ce76119b4b88efe739b81"
+}

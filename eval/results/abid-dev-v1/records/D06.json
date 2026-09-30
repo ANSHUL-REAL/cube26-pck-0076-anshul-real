@@ -1,0 +1,373 @@
+{
+  "record_id": "PCK-1F1551D7DEDE",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D06",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B004ISKODS",
+        "qty": 1
+      },
+      {
+        "sku": "B015NHY582",
+        "qty": 3
+      },
+      {
+        "sku": "B01DDT2VR4",
+        "qty": 1
+      },
+      {
+        "sku": "B01EK51BVC",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:22:56Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "03c6f860-a102-4301-ad52-c63bc01fbe36",
+      "role": "top_down",
+      "sha256": "366725e5aafaa30d2cef7aade48141fd76732e845ea838a355842a73c680566d",
+      "original_sha256": "cd3aa40d1260eea49344f81191bfe6e2dbf91d79fed2c841a6c59211e7a07af0",
+      "mime": "image/jpeg",
+      "width": 524,
+      "height": 311,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 524,
+        "height": 311,
+        "blur_var": 53.4,
+        "mean_luma": 139.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Elegance Hammered 48-Ounce Stainless Steel Pitcher: 0 clearly counted, 1 unclear (#1), some units may be stacked or hidden; 1 ordered.",
+        "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+        "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Elegance Hammered 48-Ounce Stainless Steel Pitcher: possible match #1 is unclear.",
+        "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: not seen, but items may be hidden.",
+        "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): not seen, but items may be hidden.",
+        "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). White translucent packing material covers most of the box interior, obscuring items underneath."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Elegance Hammered 48-Ounce Stainless Steel Pitcher is in the box: a clear view of #1.",
+        "A count of Elegance Hammered 48-Ounce Stainless Steel Pitcher with every unit visible.",
+        "Whether JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms is in the box.",
+        "A count of JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms with every unit visible.",
+        "Whether Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading) is in the box.",
+        "A count of Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading) with every unit visible.",
+        "Whether 5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk is in the box.",
+        "A count of 5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B004ISKODS",
+        "title": "Elegance Hammered 48-Ounce Stainless Steel Pitcher",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B015NHY582",
+        "title": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01DDT2VR4",
+        "title": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01EK51BVC",
+        "title": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          300,
+          200,
+          700,
+          500
+        ],
+        "description": "dark metallic object under white wrapping",
+        "classification": "CANDIDATE",
+        "sku": "B004ISKODS",
+        "confidence": 0.6,
+        "alternative_skus": [],
+        "deciding_feature": "metallic appearance and general shape, but hammered texture not visible",
+        "partially_hidden": true,
+        "title": "Elegance Hammered 48-Ounce Stainless Steel Pitcher"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          100,
+          100,
+          900,
+          900
+        ],
+        "description": "white translucent packing material",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "soft, translucent texture covering other items",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o1",
+        "guess_sku": "B004ISKODS",
+        "confidence": 0.6,
+        "description": "dark metallic object under white wrapping"
+      }
+    ],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "white translucent packing material"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.4,
+      "notes": "White translucent packing material covers most of the box interior, obscuring items underneath."
+    },
+    "image_issues": [
+      "Obscured by packing material",
+      "Glare on metallic object"
+    ],
+    "candidates_shown": [
+      "B004ISKODS",
+      "B019UXTD8C",
+      "B015NHY582",
+      "B01EK51BVC",
+      "B00ZWLDGK8",
+      "B01DDT2VR4"
+    ],
+    "usage": {
+      "input_tokens": 1165,
+      "output_tokens": 455,
+      "thinking_tokens": 2652,
+      "total_tokens": 4272
+    },
+    "cost_usd": 0.008117,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.4,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). White translucent packing material covers most of the box interior, obscuring items underneath.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B004ISKODS",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.6,
+      "detail": "Elegance Hammered 48-Ounce Stainless Steel Pitcher: possible match #1 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "possible_object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B004ISKODS",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Elegance Hammered 48-Ounce Stainless Steel Pitcher: 0 clearly counted, 1 unclear (#1), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B015NHY582",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B015NHY582",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01DDT2VR4",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01DDT2VR4",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01EK51BVC",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B01EK51BVC",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17463,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:23:14Z",
+    "reasons": [
+      "Elegance Hammered 48-Ounce Stainless Steel Pitcher: 0 clearly counted, 1 unclear (#1), some units may be stacked or hidden; 1 ordered.",
+      "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: 0 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Elegance Hammered 48-Ounce Stainless Steel Pitcher: possible match #1 is unclear.",
+      "JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms: not seen, but items may be hidden.",
+      "Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading): not seen, but items may be hidden.",
+      "5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk: not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). White translucent packing material covers most of the box interior, obscuring items underneath."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Elegance Hammered 48-Ounce Stainless Steel Pitcher by hand: there should be 1.",
+      "Count JGFinds 20 Sets Silver Tone 3 Piece Spoon Fork Knife Pendant - Findings, DIY Crafts, Jewelry Making, Kitchen Charms by hand: there should be 3.",
+      "Count Cheerleading - Cheer and School Spirit Silver Tone Charms (20 Pc Cheerleading) by hand: there should be 1.",
+      "Count 5 Pc Antiqued Heart with Gears Charm Pendants, Jewelry Making, Steampunk by hand: there should be 1.",
+      "Check #1 by hand: it looks like Elegance Hammered 48-Ounce Stainless Steel Pitcher."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:2990ef96dd8aa9933113f22f683ed1ce2b35fe45cdcf98a3c367917403c3d9a7"
+}

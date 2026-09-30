@@ -1,0 +1,213 @@
+{
+  "record_id": "PCK-B5ED6A0E3DBB",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D02",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00KWCTNLI",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:44:44Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "475ccdeb-424a-4630-af85-b4d7324ea628",
+      "role": "top_down",
+      "sha256": "f747c3673b90bf69e8cf499125456deafd80038394b632f096c64124f6a1f15f",
+      "original_sha256": "b3a47dd9185645e4486a58f8c8daa8bdffac72bb79ca6e1ab28fda3119fd6b99",
+      "mime": "image/jpeg",
+      "width": 498,
+      "height": 646,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 498,
+        "height": 646,
+        "blur_var": 31.7,
+        "mean_luma": 94.9,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B00KWCTNLI",
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          38,
+          41,
+          403,
+          745
+        ],
+        "description": "5 piece microwave to freezer storage bowls box",
+        "classification": "CANDIDATE",
+        "sku": "B00KWCTNLI",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Box text says 5 piece microwave to freezer storage bowls",
+        "partially_hidden": false,
+        "title": "Set of 5 Deluxe Microwave And Freezer Bowls"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          347,
+          43,
+          893,
+          560
+        ],
+        "description": "box with colorful chevron pattern",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Chevron pattern box not matching candidate list",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "box with colorful chevron pattern",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "There are some grid lines or strings across the view, but the items are clearly visible."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B0037NZ5ES",
+      "B00KWCTNLI",
+      "B0126MYH1C"
+    ],
+    "usage": {
+      "input_tokens": 1863,
+      "output_tokens": 420,
+      "thinking_tokens": 0,
+      "total_tokens": 2283
+    },
+    "cost_usd": null,
+    "cached_response": true
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4773,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00KWCTNLI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4773,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00KWCTNLI",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Set of 5 Deluxe Microwave And Freezer Bowls: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4773,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4773,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: box with colorful chevron pattern (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4773,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:44:44Z",
+    "reasons": [
+      "Not in the order: box with colorful chevron pattern (#2)."
+    ],
+    "fix_instructions": [
+      "Remove box with colorful chevron pattern (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:b0375b2bdd2883d2671a15937b2dceaba6876209745451673b11aa9db88d195a"
+}

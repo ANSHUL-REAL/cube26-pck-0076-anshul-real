@@ -1,0 +1,399 @@
+{
+  "record_id": "PCK-26A265EFF8B5",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D01",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "1855842106",
+        "qty": 1
+      },
+      {
+        "sku": "B00006IFHD",
+        "qty": 2
+      },
+      {
+        "sku": "B00025K0VC",
+        "qty": 2
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:19:47Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "3d358ec4-76d8-411b-932f-17d24ab44562",
+      "role": "top_down",
+      "sha256": "0cc89dca12a8aa61106e5bfc5ce85cafc1dd1ecd228832764a64b2004f17888a",
+      "original_sha256": "1d825dff257e21f78d31ad2df21ef043872150ed90cbe00cfc7f9e425ca0be17",
+      "mime": "image/jpeg",
+      "width": 412,
+      "height": 281,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 412,
+        "height": 281,
+        "blur_var": 13.5,
+        "mean_luma": 136.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "unclear product #1: extremely blurry large round reddish object; unclear product #2: extremely blurry large round reddish object.",
+        "Nutrition: Food, Health, and Spiritual Development: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 1 ordered.",
+        "Sharpie Permanent Markers, Fine Point, Black, Box of 12: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 2 ordered.",
+        "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 2 ordered.",
+        "Nutrition: Food, Health, and Spiritual Development: possible match #1, #2 is unclear.",
+        "Sharpie Permanent Markers, Fine Point, Black, Box of 12: possible match #1, #2 is unclear.",
+        "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: possible match #1, #2 is unclear.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The extreme blur and horizontal lines across the image severely limit visibility. The box interior is not fully visible."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Nutrition: Food, Health, and Spiritual Development is in the box: a clear view of #1, #2.",
+        "A count of Nutrition: Food, Health, and Spiritual Development with every unit visible.",
+        "Whether Sharpie Permanent Markers, Fine Point, Black, Box of 12 is in the box: a clear view of #1, #2.",
+        "A count of Sharpie Permanent Markers, Fine Point, Black, Box of 12 with every unit visible.",
+        "Whether Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter is in the box: a clear view of #1, #2.",
+        "A count of Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter with every unit visible.",
+        "A clear view of #1 to identify it.",
+        "A clear view of #2 to identify it."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "1855842106",
+        "title": "Nutrition: Food, Health, and Spiritual Development",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 2,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00006IFHD",
+        "title": "Sharpie Permanent Markers, Fine Point, Black, Box of 12",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 2,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00025K0VC",
+        "title": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter",
+        "ordered": 2,
+        "found": 0,
+        "unclear": 2,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          400,
+          100,
+          800,
+          450
+        ],
+        "description": "extremely blurry large round reddish object",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.1,
+        "alternative_skus": [],
+        "deciding_feature": "extreme blur prevents identification of any specific features or product type",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          400,
+          550,
+          800,
+          900
+        ],
+        "description": "extremely blurry large round reddish object",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.1,
+        "alternative_skus": [],
+        "deciding_feature": "extreme blur prevents identification of any specific features or product type",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          150,
+          350,
+          400,
+          650
+        ],
+        "description": "white rectangular paper with barcode",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "rectangular paper shape and visible barcode pattern",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          100,
+          700,
+          300,
+          900
+        ],
+        "description": "white rectangular paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "rectangular paper shape",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o1",
+        "guess_sku": null,
+        "confidence": 0.1,
+        "description": "extremely blurry large round reddish object"
+      },
+      {
+        "object_id": "o2",
+        "guess_sku": null,
+        "confidence": 0.1,
+        "description": "extremely blurry large round reddish object"
+      }
+    ],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "white rectangular paper with barcode"
+      },
+      {
+        "object_id": "o4",
+        "description": "white rectangular paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.1,
+      "notes": "The extreme blur and horizontal lines across the image severely limit visibility. The box interior is not fully visible."
+    },
+    "image_issues": [
+      "Extreme blur",
+      "Horizontal lines obscuring view",
+      "Cropped image"
+    ],
+    "candidates_shown": [
+      "B017D8015K",
+      "B00006IFHD",
+      "B00YQ9PHE0",
+      "B00025K0VC",
+      "1855842106"
+    ],
+    "usage": {
+      "input_tokens": 1132,
+      "output_tokens": 633,
+      "thinking_tokens": 3357,
+      "total_tokens": 5122
+    },
+    "cost_usd": 0.010315,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The extreme blur and horizontal lines across the image severely limit visibility. The box interior is not fully visible.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:1855842106",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Nutrition: Food, Health, and Spiritual Development: possible match #1, #2 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "possible_object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:1855842106",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Nutrition: Food, Health, and Spiritual Development: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00006IFHD",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Sharpie Permanent Markers, Fine Point, Black, Box of 12: possible match #1, #2 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "possible_object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00006IFHD",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Sharpie Permanent Markers, Fine Point, Black, Box of 12: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00025K0VC",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.1,
+      "detail": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: possible match #1, #2 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "possible_object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00025K0VC",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 2 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.1,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "unclear product #1: extremely blurry large round reddish object; unclear product #2: extremely blurry large round reddish object.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 18734,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:20:32Z",
+    "reasons": [
+      "unclear product #1: extremely blurry large round reddish object; unclear product #2: extremely blurry large round reddish object.",
+      "Nutrition: Food, Health, and Spiritual Development: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 1 ordered.",
+      "Sharpie Permanent Markers, Fine Point, Black, Box of 12: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 2 ordered.",
+      "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: 0 clearly counted, 2 unclear (#1, #2), some units may be stacked or hidden; 2 ordered.",
+      "Nutrition: Food, Health, and Spiritual Development: possible match #1, #2 is unclear.",
+      "Sharpie Permanent Markers, Fine Point, Black, Box of 12: possible match #1, #2 is unclear.",
+      "Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter: possible match #1, #2 is unclear.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.10). The extreme blur and horizontal lines across the image severely limit visibility. The box interior is not fully visible."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Nutrition: Food, Health, and Spiritual Development by hand: there should be 1.",
+      "Count Sharpie Permanent Markers, Fine Point, Black, Box of 12 by hand: there should be 2.",
+      "Count Tetra 16162 TetraColor Tropical Flakes, 7.06-Ounce, 1-Liter by hand: there should be 2.",
+      "Check #1 by hand: it looks like a product.",
+      "Check #2 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:352850fc7d5554e3d09cb1c130d7ad5fa283d4061ee62d7fe276988d02fdea6f"
+}

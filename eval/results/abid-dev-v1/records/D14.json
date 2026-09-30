@@ -1,0 +1,487 @@
+{
+  "record_id": "PCK-050D4D6CEE28",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D14",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "128542817X",
+        "qty": 1
+      },
+      {
+        "sku": "1285454316",
+        "qty": 1
+      },
+      {
+        "sku": "B00LBZUA30",
+        "qty": 1
+      },
+      {
+        "sku": "B0199ELGWI",
+        "qty": 3
+      },
+      {
+        "sku": "B011KW8EUY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:25:24Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e37c2193-465c-4e2e-8671-7af58b3fa454",
+      "role": "top_down",
+      "sha256": "b71d14079058333563df6a588fe34a8a65d3a677bda2a44f533f5b9a59f56c7c",
+      "original_sha256": "bc6643de6c5e1299cffc385d4c9481f84884ad73011872cccb129a682396ae6f",
+      "mime": "image/jpeg",
+      "width": 483,
+      "height": 627,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 483,
+        "height": 627,
+        "blur_var": 18.0,
+        "mean_luma": 82.8,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: white box with \"GE\" logo (#4).",
+        "Creative Activities and Curriculum for Young Children (Creative Activities for Young Children): found (#1).",
+        "Life-Span Human Development: found (#2).",
+        "Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure: found (#3).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Creative Activities and Curriculum for Young Children (Creative Activities for Young Children): 1 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+        "Life-Span Human Development: 1 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+        "Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure: 1 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+        "Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R: 0 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 3 ordered.",
+        "Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove: 0 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+        "Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R: possible match #5 is unclear.",
+        "Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove: possible match #5 is unclear.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). Horizontal lines obscure much of the box interior and items. Items are overlapping."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "A count of Creative Activities and Curriculum for Young Children (Creative Activities for Young Children) with every unit visible.",
+        "A count of Life-Span Human Development with every unit visible.",
+        "A count of Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure with every unit visible.",
+        "Whether Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R is in the box: a clear view of #5.",
+        "A count of Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R with every unit visible.",
+        "Whether Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove is in the box: a clear view of #5.",
+        "A count of Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "128542817X",
+        "title": "Creative Activities and Curriculum for Young Children (Creative Activities for Young Children)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "1285454316",
+        "title": "Life-Span Human Development",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00LBZUA30",
+        "title": "Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 1,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B0199ELGWI",
+        "title": "Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R",
+        "ordered": 3,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B011KW8EUY",
+        "title": "Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 1,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          300,
+          100,
+          800,
+          400
+        ],
+        "description": "white book with \"CREATIVE ACTIVITIES & CURRICULUM\" on spine",
+        "classification": "CANDIDATE",
+        "sku": "128542817X",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible title on the spine",
+        "partially_hidden": true,
+        "title": "Creative Activities and Curriculum for Young Children (Creative Activities for Young Children)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          200,
+          350,
+          600,
+          500
+        ],
+        "description": "blue book with \"Life-Span Human Development\" on spine",
+        "classification": "CANDIDATE",
+        "sku": "1285454316",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "visible title on the spine",
+        "partially_hidden": true,
+        "title": "Life-Span Human Development"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          350,
+          500,
+          700,
+          800
+        ],
+        "description": "white and red box with \"ROBOT\" text",
+        "classification": "CANDIDATE",
+        "sku": "B00LBZUA30",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "\"ROBOT\" text visible on the box",
+        "partially_hidden": true,
+        "title": "Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          100,
+          750,
+          300,
+          900
+        ],
+        "description": "white box with \"GE\" logo",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "\"GE\" logo and generic box appearance",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": [
+          100,
+          0,
+          400,
+          200
+        ],
+        "description": "blue packaged item",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.5,
+        "alternative_skus": [],
+        "deciding_feature": "blue color and general shape",
+        "partially_hidden": true,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "white box with \"GE\" logo",
+        "object_id": "o4"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [
+      {
+        "object_id": "o5",
+        "guess_sku": null,
+        "confidence": 0.5,
+        "description": "blue packaged item"
+      }
+    ],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.4,
+      "notes": "Horizontal lines obscure much of the box interior and items. Items are overlapping."
+    },
+    "image_issues": [
+      "Horizontal lines obscuring view",
+      "Low light conditions",
+      "Partial view of box interior"
+    ],
+    "candidates_shown": [
+      "B00LBZUA30",
+      "1285454316",
+      "B0015TTXTY",
+      "128542817X",
+      "B00Y1N2VMC",
+      "B011KW8EUY",
+      "B0199ELGWI"
+    ],
+    "usage": {
+      "input_tokens": 1164,
+      "output_tokens": 961,
+      "thinking_tokens": 2277,
+      "total_tokens": 4402
+    },
+    "cost_usd": 0.008444,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.4,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.40). Horizontal lines obscure much of the box interior and items. Items are overlapping.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:128542817X",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Creative Activities and Curriculum for Young Children (Creative Activities for Young Children): found (#1).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:128542817X",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Creative Activities and Curriculum for Young Children (Creative Activities for Young Children): 1 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:1285454316",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Life-Span Human Development: found (#2).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:1285454316",
+      "verdict": "UNCERTAIN",
+      "confidence": 1.0,
+      "detail": "Life-Span Human Development: 1 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ],
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B00LBZUA30",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure: found (#3).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B00LBZUA30",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.9,
+      "detail": "Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure: 1 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ],
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B0199ELGWI",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R: possible match #5 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B0199ELGWI",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R: 0 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:B011KW8EUY",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove: possible match #5 is unclear.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B011KW8EUY",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove: 0 clearly counted, 1 unclear (#5), some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": [
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.4,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.8,
+      "detail": "Not in the order: white box with \"GE\" logo (#4).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 17055,
+      "evidence": {
+        "object_ids": [
+          "o4"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:25:41Z",
+    "reasons": [
+      "Not in the order: white box with \"GE\" logo (#4)."
+    ],
+    "fix_instructions": [
+      "Remove white box with \"GE\" logo (#4); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Creative Activities and Curriculum for Young Children (Creative Activities for Young Children) by hand: there should be 1.",
+      "Also check: Count Life-Span Human Development by hand: there should be 1.",
+      "Also check: Count Bandai Tamashii Nations Robot Spirits Kuujinmaru \"Mashin Hero Wataru\" Action Figure by hand: there should be 1.",
+      "Also check: Count Mosiso MacBook 12\" with Retina Display 2 in 1 Soft-Touch Plastic Hard Case and Keyboard Cover for MacBook 12 Inch with R by hand: there should be 3.",
+      "Also check: Count Best Activated Charcoal Odor Absorber and Air Purifier By Sagano - Effective Refrigerator and Closet Deodorizer - Remove by hand: there should be 1.",
+      "Also check: Check #5 by hand: it looks like a product."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:3cbe56461d4b21180922563fb1c0cc6233863d639c8e2731a50fe56fd3b83a3d"
+}

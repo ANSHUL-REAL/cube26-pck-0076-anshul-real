@@ -1,0 +1,213 @@
+{
+  "record_id": "PCK-27DB830AB8FA",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D04",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B000LKTMLM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:46:22Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "24dbc05f-f317-4a2a-abfe-6edccca6a5a7",
+      "role": "top_down",
+      "sha256": "13471d5a8c6f31249c0c6086abf2fb6218584b39524e6e8a70008c173cbe12fc",
+      "original_sha256": "d883810ab69bc12cf2698b3e9be8dd33210720eb3e207ef985133f3c2ebc5834",
+      "mime": "image/jpeg",
+      "width": 633,
+      "height": 469,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 633,
+        "height": 469,
+        "blur_var": 42.2,
+        "mean_luma": 127.5,
+        "clipped_pct": 0.0,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "B000LKTMLM",
+        "title": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6)",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          336,
+          310,
+          847,
+          966
+        ],
+        "description": "brown cardboard box",
+        "classification": "CANDIDATE",
+        "sku": "B000LKTMLM",
+        "confidence": 0.8,
+        "alternative_skus": [],
+        "deciding_feature": "brown box appearance matching cereal multi-pack size",
+        "partially_hidden": false,
+        "title": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6)"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          63,
+          172,
+          383,
+          977
+        ],
+        "description": "white padded mailer bag with green polka dots",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "bubble mailer bag with decorative pattern, does not match candidate descriptions",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "white padded mailer bag with green polka dots",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.85,
+      "notes": "Strips of tape cross the photo but the items are fully visible underneath."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "B000LKTMLM",
+      "SKU-PROT-1KG",
+      "B017SUW3OA"
+    ],
+    "usage": {
+      "input_tokens": 1985,
+      "output_tokens": 427,
+      "thinking_tokens": 0,
+      "total_tokens": 2412
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2582,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B000LKTMLM",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2582,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B000LKTMLM",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Food For Life Ezekiel 4:9 Organic Sprouted Whole Grain Cereal, Original, 16-Ounce Boxes (Pack of 6): 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2582,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2582,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 0.9,
+      "detail": "Not in the order: white padded mailer bag with green polka dots (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 2582,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:46:25Z",
+    "reasons": [
+      "Not in the order: white padded mailer bag with green polka dots (#2)."
+    ],
+    "fix_instructions": [
+      "Remove white padded mailer bag with green polka dots (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:dc86f1eff71d717aff384b5143f0dfef65a1c2925695c0a8ffe00a81c200ff39"
+}

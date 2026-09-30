@@ -1,0 +1,363 @@
+{
+  "record_id": "PCK-E42B34E6253D",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_bench_abid",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v2",
+    "model_version": "gemini-2.5-flash"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D07",
+    "channel": null,
+    "expected_lines": [
+      {
+        "sku": "B00GM028SY",
+        "qty": 1
+      },
+      {
+        "sku": "B00PR70HUY",
+        "qty": 1
+      },
+      {
+        "sku": "B00U11SPO6",
+        "qty": 1
+      },
+      {
+        "sku": "B01ER2SMHY",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T14:23:18Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "1b374155-8bbe-4040-b09e-24d83a527ed1",
+      "role": "top_down",
+      "sha256": "069e4ff02330bdc41f0cf9cd91657935a921a8f6b23a503a243d188a35f38d29",
+      "original_sha256": "9eb044c00b0ac87a04dca313eaf1883c3f260a7e1c13ed0c0f85d0702c7ec9f3",
+      "mime": "image/jpeg",
+      "width": 404,
+      "height": 276,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 404,
+        "height": 276,
+        "blur_var": 108.2,
+        "mean_luma": 139.6,
+        "clipped_pct": 0.01,
+        "dark_pct": 0.0
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: found (#2).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Flip Top Stopper: Creates Airtight Seal, 12-Pack: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: 1 clearly counted, some units may be stacked or hidden; 3 ordered.",
+        "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: not seen, but items may be hidden.",
+        "Flip Top Stopper: Creates Airtight Seal, 12-Pack: not seen, but items may be hidden.",
+        "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): not seen, but items may be hidden.",
+        "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image has strong horizontal line artifacts that significantly obscure details and the full interior of the box is not visible."
+      ],
+      "missing_evidence": [
+        "A photo with the whole inside of the box in the frame.",
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce is in the box.",
+        "A count of Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce with every unit visible.",
+        "Whether Flip Top Stopper: Creates Airtight Seal, 12-Pack is in the box.",
+        "A count of Flip Top Stopper: Creates Airtight Seal, 12-Pack with every unit visible.",
+        "Whether Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8) is in the box.",
+        "A count of Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8) with every unit visible.",
+        "A count of Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30 with every unit visible."
+      ],
+      "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "B00GM028SY",
+        "title": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00PR70HUY",
+        "title": "Flip Top Stopper: Creates Airtight Seal, 12-Pack",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B00U11SPO6",
+        "title": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8)",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      },
+      {
+        "sku": "B01ER2SMHY",
+        "title": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30",
+        "ordered": 3,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          100,
+          0,
+          900,
+          500
+        ],
+        "description": "stack of white rectangular papers",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "white, rectangular, flat, stacked appearance",
+        "partially_hidden": true,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          100,
+          400,
+          900,
+          1000
+        ],
+        "description": "product box with red and green circular pattern",
+        "classification": "CANDIDATE",
+        "sku": "B01ER2SMHY",
+        "confidence": 0.9,
+        "alternative_skus": [],
+        "deciding_feature": "distinctive red and green circular pattern resembling Raspberry Pi logo",
+        "partially_hidden": true,
+        "title": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o1",
+        "description": "stack of white rectangular papers"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": false,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.5,
+      "notes": "The image has strong horizontal line artifacts that significantly obscure details and the full interior of the box is not visible."
+    },
+    "image_issues": [
+      "Strong horizontal line artifacts obscuring details",
+      "Partial view of the box interior"
+    ],
+    "candidates_shown": [
+      "B00GM028SY",
+      "B00PR70HUY",
+      "B0013FU0SI",
+      "B01ER2SMHY",
+      "B00U11SPO6",
+      "B01DDT2VR4"
+    ],
+    "usage": {
+      "input_tokens": 1131,
+      "output_tokens": 444,
+      "thinking_tokens": 1249,
+      "total_tokens": 2824
+    },
+    "cost_usd": 0.004572,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.5,
+      "detail": "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image has strong horizontal line artifacts that significantly obscure details and the full interior of the box is not visible.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:B00GM028SY",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00GM028SY",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00PR70HUY",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Flip Top Stopper: Creates Airtight Seal, 12-Pack: not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00PR70HUY",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Flip Top Stopper: Creates Airtight Seal, 12-Pack: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B00U11SPO6",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): not seen, but items may be hidden.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:B00U11SPO6",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:B01ER2SMHY",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: found (#2).",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:B01ER2SMHY",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.9,
+      "detail": "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: 1 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.5,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 14709,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:23:33Z",
+    "reasons": [
+      "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Flip Top Stopper: Creates Airtight Seal, 12-Pack: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30: 1 clearly counted, some units may be stacked or hidden; 3 ordered.",
+      "Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce: not seen, but items may be hidden.",
+      "Flip Top Stopper: Creates Airtight Seal, 12-Pack: not seen, but items may be hidden.",
+      "Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8): not seen, but items may be hidden.",
+      "Part of the box is out of frame; items may be stacked or hidden; low visibility confidence (0.50). The image has strong horizontal line artifacts that significantly obscure details and the full interior of the box is not visible."
+    ],
+    "fix_instructions": [
+      "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Count Funny Guy Mugs I Love Me Ceramic Coffee Mug, White, 11-Ounce by hand: there should be 1.",
+      "Count Flip Top Stopper: Creates Airtight Seal, 12-Pack by hand: there should be 1.",
+      "Count Helix 16115 Stainless Steel Combo Line Clamp, 12 Pack (3/16 and 3/8) by hand: there should be 1.",
+      "Count Raspberry Pi NoIR Camera Module V2 - 8MP 1080P30 by hand: there should be 3."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:c34a191a8a9f5e6388c916fa72971f13c2a3765261abdea22d90002e1780cf5c"
+}
