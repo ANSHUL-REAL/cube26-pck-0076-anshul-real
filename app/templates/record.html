@@ -8,12 +8,18 @@
 {% set needs_human = r.status.value in ("pending", "pending_review") %}
 {% set state_word = {"ok": "matches the order", "problem": "wrong or extra", "unsure": "unclear", "insert": "packaging or insert"} %}
 {% set products = obs.get("detected_items", []) | rejectattr("classification", "equalto", "NON_PRODUCT") | list %}
+{# pub: the read-only page behind a share link. No sign-in, no forms, no links into the app. #}
+{% set pub = public | default(false) %}
 
+{% if pub %}
+<p class="muted small public-note">A read-only copy of a Pack Manager evidence record{% if org_name %}, shared by {{ org_name }}{% endif %}.</p>
+{% else %}
 <a class="back" href="/orders/{{ order_id | urlpart }}">{{ icon("arrow-left", 16) }}{{ order_id }}</a>
+{% endif %}
 
 <div class="print-only print-head">
-  <div><b>Pack evidence</b> · {{ user.org_name }}</div>
-  <span>{{ request.base_url }}records/{{ r.record_id | urlpart }} · printed <span data-print-time></span></span>
+  <div><b>Pack evidence</b> · {{ org_name }}</div>
+  <span>{{ links.share_abs }} · printed <span data-print-time></span></span>
 </div>
 
 <div class="page-head">
@@ -31,9 +37,9 @@
     </p>
   </div>
   <div class="actions">
-    <button class="btn secondary" type="button" data-copy-link="/records/{{ r.record_id | urlpart }}">Copy link</button>
+    <button class="btn secondary" type="button" data-copy-link="{{ links.share }}" title="Anyone with this link can view this record, without signing in">Copy share link</button>
     <button class="btn secondary hide-sm" type="button" data-print>Print evidence</button>
-    <a class="btn secondary hide-sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a>
+    <a class="btn secondary hide-sm" href="{{ links.download }}" download>Download record</a>
   </div>
 </div>
 
@@ -42,12 +48,12 @@
 {% endif %}
 {% if retry %}
 <div class="callout info" style="margin-bottom:14px">
-  The AI checked these photos again in <a href="/records/{{ retry | urlpart }}">{{ retry }}</a>. Record any decision on that newer record.
+  The AI checked these photos again in {% if pub %}record {{ retry }}{% else %}<a href="/records/{{ retry | urlpart }}">{{ retry }}</a>{% endif %}. Record any decision on that newer record.
 </div>
 {% endif %}
 {% if obs.get("retry_of") %}
 <div class="callout info" style="margin-bottom:14px">
-  This is a second AI check of the photos from <a href="/records/{{ obs.retry_of }}">{{ obs.retry_of }}</a>, taken {{ obs.photos_taken_at | when }}. {{ obs.retried_by }} ran it again because the AI didn't answer the first time.
+  This is a second AI check of the photos from {% if pub %}record {{ obs.retry_of }}{% else %}<a href="/records/{{ obs.retry_of }}">{{ obs.retry_of }}</a>{% endif %}, taken {{ obs.photos_taken_at | when }}. {{ obs.retried_by }} ran it again because the AI didn't answer the first time.
 </div>
 {% endif %}
 {% set dis = obs.get("disagreement") %}
@@ -68,7 +74,7 @@
   {% elif decision == "SEAL" %}
     <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
   {% elif decision == "PENDING" %}
-    <p>The AI check didn't finish.{% if retry %} The same photos were checked again in a newer record.{% else %} The photos are saved, so check the box by hand and record your decision below.{% endif %}</p>
+    <p>The AI check didn't finish.{% if retry %} The same photos were checked again in a newer record.{% elif pub %} The photos are saved, and a person decides.{% else %} The photos are saved, so check the box by hand and record your decision below.{% endif %}</p>
     {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
   {% elif r.outcome.reasons %}
     <p>{{ r.outcome.reasons[0] }}</p>
@@ -94,7 +100,7 @@
   {% endif %}
 </section>
 
-{% if needs_human and not retry %}
+{% if needs_human and not retry and not pub %}
 <section class="card card-pad decide-card" style="margin-bottom:var(--gap)">
   <h2>Record your decision</h2>
   <p class="muted" style="margin-top:4px">Check the box by hand, then choose. Your decision is saved next to the agent's result, which stays on the record.</p>
@@ -124,7 +130,7 @@
         {% for img in r.images %}
           {% set pic = loop.index %}
           <figure class="photo">
-            <img src="/images/{{ img.image_id }}" alt="Photo {{ pic }} of the open box">
+            <img src="{{ links.images }}{{ img.image_id }}" alt="Photo {{ pic }} of the open box">
             {% for o in obs.get("detected_items", []) if o.photo == pic and o.box_2d %}
               {% set b = o.box_2d %}
               <div class="box {{ states.get(o.object_id, 'ok') }}"
@@ -150,7 +156,7 @@
       </div>
     </section>
 
-    {% if not needs_human and not retry %}
+    {% if not needs_human and not retry and not pub %}
     <details class="fold no-print"{% if error %} open{% endif %}>
       <summary>Disagree with this result?{{ icon("chevron-down", 18, "chev") }}</summary>
       <div class="inner">
@@ -224,7 +230,7 @@
     <section class="card">
       <div class="card-head"><h2>Evidence</h2></div>
       <div class="card-body">
-        <p class="hash {{ 'ok' if hash_ok else 'bad' }}"><span class="dot"></span>{% if hash_ok %}Content hash matches record{% else %}Content hash does not match: this record was changed after it was saved{% endif %}</p>
+        <p class="hash {{ 'ok' if hash_ok else 'bad' }}"><span class="dot"></span>{% if hash_ok %}Content hash matches record{% else %}Content hash doesn't match this record's contents{% endif %}</p>
         {% if history_check %}<p class="hash {{ history_check[0] }}"><span class="dot"></span>{{ history_check[1] }}</p>{% endif %}
         <dl class="kv">
           <dt>Record</dt><dd>{{ r.record_id }}</dd>
@@ -233,8 +239,8 @@
           <dt>Company</dt><dd>{{ r.organization_id }}{% if r.client_id %} · {{ r.client_id }}{% endif %}</dd>
         </dl>
         <div class="btn-row">
-          <a class="btn secondary sm" href="/api/records/{{ r.record_id }}">View JSON</a>
-          <a class="btn secondary sm" href="/api/records/{{ r.record_id }}?download=1" download>Download record</a>
+          <a class="btn secondary sm" href="{{ links.contract }}" title="The record in the organisers' Evidence Contract 1.1 shape">Contract JSON</a>
+          <a class="btn secondary sm" href="{{ links.download }}" download>Download record</a>
         </div>
       </div>
     </section>
@@ -249,7 +255,7 @@
           <li><b>{{ o.operator_label }}: {{ DECISION_UI[o.new_decision.value][0] }}</b> · {{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}<span>{{ o.at | when }}</span></li>
           {% endfor %}
           {% for l in later | reverse %}
-          <li><b>Checked again: <a href="/records/{{ l.record_id }}">{{ DECISION_UI[l.decision][0] }}</a></b><span>{{ l.captured_at | when }} · {{ l.record_id }}</span></li>
+          <li><b>Checked again: <a href="/records/{{ l.record_id | urlpart }}">{{ DECISION_UI[l.decision][0] }}</a></b><span>{{ l.captured_at | when }} · {{ l.record_id }}</span></li>
           {% endfor %}
         </ol>
       </div>
@@ -262,7 +268,8 @@
   <p>Download the record ({{ r.record_id }}.json) from its page, then run:</p>
   <code class="mono cmd">python -m pack_manager check-record {{ r.record_id }}.json --photo photo.jpg</code>
   <p>It recomputes the content hash (SHA-256 of the record's canonical JSON) and each earlier version's hash,
-    and says whether a photo is one of this record's. The hash shows whether the record was edited after it
-    was saved. It doesn't prove when the record was made, or what was outside the photo.</p>
+    and says whether a photo is one of this record's. A matching hash means the file and photos are the ones
+    the hash was computed from. It is not tamper-proof: whoever can change a record can recompute its hash.
+    It doesn't prove when the record was made, or what was outside the photo.</p>
 </section>
 {% endblock %}

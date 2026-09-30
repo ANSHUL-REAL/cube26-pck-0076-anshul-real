@@ -229,9 +229,9 @@
     }
   ],
   "outcome": {
-    "decision": "SEAL",
+    "decision": "STOP_AND_FIX",
     "decided_by": "operator:op_alpha",
-    "decided_at": "2026-09-28T10:31:12Z",
+    "decided_at": "2026-09-30T14:52:11Z",
     "reasons": [
       "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
       "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
@@ -247,11 +247,11 @@
   "overrides": [
     {
       "original_decision": "UNCERTAIN",
-      "new_decision": "SEAL",
+      "new_decision": "STOP_AND_FIX",
       "reason_code": "hidden_item_verified",
-      "note": "Lifted the top towel; two towels in the box.",
+      "note": "Checked under the netting: Order also asks for B005FEGYCO, which isn't in the bin.",
       "operator_label": "op_alpha",
-      "at": "2026-09-28T10:31:12Z",
+      "at": "2026-09-30T14:52:11Z",
       "prior_content_hash": "sha256:2ee48d92c872a52cf7e6debd4f32ddc41c6e4afe3a6a28b91da34484350c4396",
       "prior_outcome": {
         "decision": "UNCERTAIN",
@@ -273,5 +273,5 @@
     }
   ],
   "status": "overridden",
-  "content_hash": "sha256:96f60e042ebe764a3d24872420f29dff613b75c94d5df0ab2fb99b507f7cd6f9"
+  "content_hash": "sha256:acf7f776f0c983a299742930c21ef35de34000dbf5b23c3831537767b87419e4"
 }

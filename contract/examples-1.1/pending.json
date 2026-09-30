@@ -1,0 +1,189 @@
+{
+  "record_id": "cc500670-7f35-4f67-8bc8-b0335353781a",
+  "schema_version": "1.1",
+  "organization_id": "9d0135ac-73f5-5695-b3df-5c54da0dbb9e",
+  "client_id": "80f770ed-befe-5d48-bced-0b9c92c05d28",
+  "agent": "pack",
+  "subject": {
+    "type": "order",
+    "asin": "B0DUMMY729",
+    "sku": "SKU-PUZZLE-500",
+    "order_id": "ORD-DUMMY-50021",
+    "po_line_id": null,
+    "shipment_id": null,
+    "quantity_expected": 1,
+    "quantity_observed": null
+  },
+  "captured_at": "2026-09-28T10:30:00Z",
+  "operator_label": "op_alpha",
+  "images": [
+    {
+      "key": "d8bfbb5f-8625-4d7f-ab58-aec2c2d2892b",
+      "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
+      "bytes": 500893,
+      "taken_at": "2026-09-28T10:30:00Z"
+    }
+  ],
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "pass",
+      "confidence": null,
+      "detail": {
+        "summary": "Local photo checks ran.",
+        "source_checks": [
+          {
+            "check_key": "image_quality",
+            "verdict": "PASS",
+            "confidence": null,
+            "detail": "Local photo checks ran.",
+            "model_version": "local-quality-gate/1",
+            "latency_ms": null,
+            "evidence": {}
+          }
+        ],
+        "images": [
+          {
+            "key": "d8bfbb5f-8625-4d7f-ab58-aec2c2d2892b",
+            "role": "top_down",
+            "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
+            "mime": "image/jpeg",
+            "width": 1600,
+            "height": 1200,
+            "quality": {
+              "gate": "PASS",
+              "reasons": [],
+              "width": 1600,
+              "height": 1200,
+              "blur_var": 571.3,
+              "mean_luma": 152.0,
+              "clipped_pct": 0.0,
+              "dark_pct": 0.0
+            }
+          }
+        ]
+      },
+      "model_version": "local-quality-gate/1",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "photo_reuse",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "Not checked: no earlier photos were looked up.",
+        "source_checks": []
+      },
+      "model_version": "local-quality-gate/1",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "Not checked.",
+        "source_checks": [],
+        "not_checked": "The vision model didn't answer, so this wasn't checked."
+      },
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "all_items_present",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "0 ordered product(s) looked for.",
+        "source_checks": [],
+        "not_checked": "The vision model didn't answer, so this wasn't checked.",
+        "lines": [],
+        "missing": []
+      },
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "quantities_correct",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "0 ordered product(s) counted.",
+        "source_checks": [],
+        "not_checked": "The vision model didn't answer, so this wasn't checked.",
+        "expected_vs_observed": [],
+        "over_quantity": []
+      },
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "no_extra_items",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "Wrong products (a look-alike instead of the ordered one) and products outside the order.",
+        "source_checks": [],
+        "not_checked": "The vision model didn't answer, so this wasn't checked.",
+        "wrong": [],
+        "extra": []
+      },
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "order_matches_manifest",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "decision": "PENDING",
+        "reasons": [
+          "The vision model did not answer. The photos are saved.",
+          "Cause: timed out after 25 s"
+        ],
+        "fix_instructions": [
+          "Check the box by hand against the order, then record your decision."
+        ],
+        "decided_by": "rules over the model's object list (the model never sees the order)",
+        "subject": {
+          "type": "outbound_box",
+          "unit_id": "UNIT-0021",
+          "channel": "shopify",
+          "expected_lines": [
+            {
+              "sku": "SKU-PUZZLE-500",
+              "qty": 1
+            }
+          ]
+        },
+        "asins": {
+          "SKU-PUZZLE-500": "B0DUMMY729"
+        },
+        "detected_items": [],
+        "unclear": [],
+        "non_product_items": [],
+        "agent": {
+          "name": "pack-manager",
+          "version": "0.1.0",
+          "prompt_version": "pack-v3"
+        },
+        "error": "timed out after 25 s",
+        "internal_record": {
+          "record_id": "cc500670-7f35-4f67-8bc8-b0335353781a",
+          "schema_version": "cube.evidence.v1",
+          "content_hash": "sha256:f27ba49ad96f3982f9a2ee5c7bf7f2dcb52dfaf9303588d06ac05bd5c836e98d"
+        }
+      },
+      "model_version": "gemini-2.5-flash",
+      "latency_ms": 0
+    }
+  ],
+  "outcome": {
+    "decision": "PENDING",
+    "decided_by": "agent",
+    "decided_at": "2026-09-28T10:30:00Z"
+  },
+  "overrides": [],
+  "status": "pending",
+  "content_hash": "399c8e5eb4bfbcfbc58931d72466043b657aedcebfd4d7f8ab1e50d44102150d"
+}

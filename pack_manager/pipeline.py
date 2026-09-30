@@ -104,6 +104,7 @@ def verify_box(
         "unit_id": order.unit_id,
         "order_id": order.order_id,
         "channel": order.channel,
+        "shipment_id": order.shipment_id,
         "expected_lines": [line.model_dump() for line in order.lines],
     }
     agent = {"name": AGENT_NAME, "version": __version__, "prompt_version": PROMPT_VERSION}

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence Contract 1.1 record (as written by Pack Manager)",
+  "description": "The organisers' Evidence Contract 1.1, section 2, written as a JSON Schema. Strict: no field may be added anywhere except inside checks[].detail. Pack Manager's own values are narrowed where it always writes one value (agent = pack, subject.type = order).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_id", "schema_version", "organization_id", "client_id", "agent", "subject", "captured_at",
+               "operator_label", "images", "checks", "outcome", "overrides", "status", "content_hash"],
+  "$defs": {
+    "uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "utc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"},
+    "hex": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "verdict": {"enum": ["pass", "fail", "uncertain"]},
+    "check_key": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+  },
+  "properties": {
+    "record_id": {"$ref": "#/$defs/uuid"},
+    "schema_version": {"const": "1.1"},
+    "organization_id": {"$ref": "#/$defs/uuid"},
+    "client_id": {"oneOf": [{"$ref": "#/$defs/uuid"}, {"type": "null"}]},
+    "agent": {"const": "pack"},
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "asin", "sku", "order_id", "po_line_id", "shipment_id", "quantity_expected",
+                   "quantity_observed"],
+      "properties": {
+        "type": {"const": "order"},
+        "asin": {"type": ["string", "null"]},
+        "sku": {"type": ["string", "null"]},
+        "order_id": {"type": ["string", "null"]},
+        "po_line_id": {"type": ["string", "null"]},
+        "shipment_id": {"type": ["string", "null"]},
+        "quantity_expected": {"type": ["integer", "null"], "minimum": 0},
+        "quantity_observed": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "captured_at": {"$ref": "#/$defs/utc"},
+    "operator_label": {"type": "string"},
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "sha256", "bytes", "taken_at"],
+        "properties": {
+          "key": {"type": "string"},
+          "sha256": {"$ref": "#/$defs/hex"},
+          "bytes": {"type": "integer", "minimum": 0},
+          "taken_at": {"$ref": "#/$defs/utc"}
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["check_key", "verdict", "confidence", "detail", "model_version", "latency_ms"],
+        "properties": {
+          "check_key": {"$ref": "#/$defs/check_key"},
+          "verdict": {"$ref": "#/$defs/verdict"},
+          "confidence": {"oneOf": [{"type": "number", "minimum": 0, "maximum": 1}, {"type": "null"}]},
+          "detail": {"type": "object"},
+          "model_version": {"type": "string"},
+          "latency_ms": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "decided_by", "decided_at"],
+      "properties": {
+        "decision": {"type": "string"},
+        "decided_by": {"enum": ["agent", "operator"]},
+        "decided_at": {"$ref": "#/$defs/utc"}
+      }
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["check_key", "from_verdict", "to_verdict", "reason", "by", "at"],
+        "properties": {
+          "check_key": {"$ref": "#/$defs/check_key"},
+          "from_verdict": {"$ref": "#/$defs/verdict"},
+          "to_verdict": {"$ref": "#/$defs/verdict"},
+          "reason": {"type": "string", "minLength": 1},
+          "by": {"type": "string"},
+          "at": {"$ref": "#/$defs/utc"}
+        }
+      }
+    },
+    "status": {"enum": ["complete", "pending", "failed"]},
+    "content_hash": {"$ref": "#/$defs/hex"}
+  }
+}

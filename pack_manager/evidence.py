@@ -21,7 +21,7 @@ def utcnow() -> datetime:
 
 
 def new_record_id() -> str:
-    return "PCK-" + uuid.uuid4().hex[:12].upper()
+    return str(uuid.uuid4())
 
 
 def canonical_json(data: dict) -> str:

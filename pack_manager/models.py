@@ -114,6 +114,9 @@ class Order(BaseModel):
     client_id: str | None = None
     unit_id: str | None = None
     channel: str | None = None
+    # The outbound shipment this box leaves in, when the warehouse system has one at packing
+    # time. Recovery joins charges to evidence on it (Evidence Contract 1.1, subject.shipment_id).
+    shipment_id: str | None = None
     lines: list[OrderLine]
 
     def expected(self) -> dict[str, int]:

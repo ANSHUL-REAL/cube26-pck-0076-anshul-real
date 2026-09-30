@@ -9,14 +9,18 @@ The examples are produced by the real pipeline (quality gate, decision engine, h
 override) with a scripted perception instead of the vision model, on a synthetic photo.
 They show the record's shape, not real model output. After the held-out run, --from-run replaces
 each of them with a real record of the same outcome from that run (the hash is checked first).
+
+Each example is also written in the organisers' Evidence Contract 1.1 shape to examples-1.1/, the
+shape the /v1 API returns (pack_manager/contract.py).
 """
 
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import numpy as np
@@ -27,6 +31,7 @@ sys.path.insert(0, str(ROOT))
 
 from pack_manager.catalogue import load_catalogue  # noqa: E402
 from pack_manager.config import Settings  # noqa: E402
+from pack_manager.contract import to_contract  # noqa: E402
 from pack_manager.evidence import apply_override, verify  # noqa: E402
 from pack_manager.models import (  # noqa: E402
     Decision,
@@ -181,13 +186,58 @@ def from_run(run: str) -> None:
     if "UNCERTAIN" not in found:
         print("overridden    kept the scripted example (eval runs have no hand decisions)")
         return
-    # Eval runs have no hand decisions: apply the scripted one to the real UNCERTAIN record,
-    # so the example still shows an override on top of the record it changed.
-    scripted = EvidenceRecord.model_validate_json((HERE / "examples" / "overridden.json").read_text(encoding="utf-8"))
-    o = scripted.overrides[-1]
-    record = apply_override(found["UNCERTAIN"], o.new_decision, o.reason_code, o.operator_label, note=o.note, at=o.at)
+    # Eval runs have no hand decisions, so the example applies one to the real UNCERTAIN record.
+    # It is the decision the box's ground truth calls for (the manifest), written the way a
+    # packer would record it: an illustration of the override, not a real person's check.
+    uncertain = found["UNCERTAIN"]
+    box = uncertain.subject.get("order_id", "").removeprefix("EVAL-")
+    with (ROOT / "eval" / "manifest.csv").open(encoding="utf-8") as f:
+        truth = {row["box_id"]: row for row in csv.DictReader(f)}.get(box)
+    if truth and truth["scenario"] == "correct":
+        new, note = Decision.SEAL, "Checked under the netting: every ordered item is there."
+    else:
+        new, note = Decision.STOP_AND_FIX, "Checked under the netting: " + (
+            truth["notes"].split(". ", 1)[-1] if truth else "the box doesn't match the order.")
+    record = apply_override(uncertain, new, "hidden_item_verified", "op_alpha", note=note,
+                            at=uncertain.captured_at + timedelta(minutes=2))
     (HERE / "examples" / "overridden.json").write_text(record.model_dump_json(indent=2) + "\n", encoding="utf-8")
-    print(f"overridden    the scripted hand decision, applied to real record {record.record_id}")
+    print(f"overridden    a {new.value} hand decision (as the manifest says), on real record {record.record_id}")
+
+
+def _stored_sizes(record: EvidenceRecord) -> dict[str, int]:
+    """Bytes of each stored photo, found by preparing the photos the example was made from
+    (the eval box's photos, or the synthetic one) and matching their hashes."""
+    box = record.subject.get("order_id", "").removeprefix("EVAL-")
+    sources = [photo()] + [f.read_bytes() for f in sorted((ROOT / "eval" / "boxes" / box).glob("*.jpg"))]
+    runs = [Settings(_env_file=None, gemini_api_key=None),
+            Settings(_env_file=None, gemini_api_key=None, min_side_px=200, blur_min_var=3.0)]
+    by_hash = {}
+    for data in sources:
+        for settings in runs:
+            try:
+                for p in prepare_photos([Photo(data)], settings):
+                    by_hash[p.sha256] = len(p.jpeg)
+            except Exception:  # noqa: BLE001 - a source that doesn't prepare just isn't a match
+                pass
+    return {i.image_id: by_hash[i.sha256] for i in record.images if i.sha256 in by_hash}
+
+
+def write_contract_examples() -> None:
+    """Every example in the Evidence Contract 1.1 shape."""
+    out = HERE / "examples-1.1"
+    out.mkdir(exist_ok=True)
+    catalogues = [load_catalogue(d) for d in (ROOT / "catalogue" / "org_bench_abid", ROOT / "catalogue" / "sample")]
+    for path in sorted((HERE / "examples").glob("*.json")):
+        record = EvidenceRecord.model_validate_json(path.read_text(encoding="utf-8"))
+        skus = [line["sku"] for line in record.subject["expected_lines"]]
+        catalogue = next((c for c in catalogues if all(c.get(s) for s in skus)), None)
+        sizes = _stored_sizes(record)
+        missing = [i.image_id for i in record.images if i.image_id not in sizes]
+        if missing:
+            raise SystemExit(f"{path.name}: can't find the photo for image {missing[0]}, so its size is unknown.")
+        contract = to_contract(record, image_bytes=sizes, catalogue=catalogue)
+        (out / path.name).write_text(json.dumps(contract, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Wrote the examples in Evidence Contract 1.1 shape to {out.name}/.")
 
 
 if __name__ == "__main__":
@@ -198,3 +248,4 @@ if __name__ == "__main__":
     main()
     if args.from_run:
         from_run(args.from_run)
+    write_contract_examples()

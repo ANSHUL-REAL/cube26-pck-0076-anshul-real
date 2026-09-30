@@ -30,7 +30,7 @@ def org_name(cur, org_id: str) -> str:
 def _order(row) -> Order:
     return Order(
         order_id=row["order_id"], organization_id=row["organization_id"], client_id=row["client_id"],
-        unit_id=row["unit_id"], channel=row["channel"],
+        unit_id=row["unit_id"], channel=row["channel"], shipment_id=row.get("shipment_id"),
         lines=[OrderLine(**line) for line in row["lines"]],
     )
 
@@ -92,14 +92,14 @@ def get_order(cur, order_id: str) -> Order | None:
 def upsert_order(cur, order: Order, source: str = "demo") -> None:
     cur.execute(
         """
-        insert into orders (organization_id, order_id, client_id, unit_id, channel, lines, source)
-        values (%s, %s, %s, %s, %s, %s, %s)
+        insert into orders (organization_id, order_id, client_id, unit_id, channel, shipment_id, lines, source)
+        values (%s, %s, %s, %s, %s, %s, %s, %s)
         on conflict (organization_id, order_id) do update
         set client_id = excluded.client_id, unit_id = excluded.unit_id, channel = excluded.channel,
-            lines = excluded.lines, source = excluded.source
+            shipment_id = excluded.shipment_id, lines = excluded.lines, source = excluded.source
         """,
         (order.organization_id, order.order_id, order.client_id, order.unit_id, order.channel,
-         json.dumps([line.model_dump() for line in order.lines]), source),
+         order.shipment_id, json.dumps([line.model_dump() for line in order.lines]), source),
     )
 
 
@@ -243,3 +243,32 @@ def counts_by_decision(cur) -> dict[str, int]:
         """
     )
     return {r["decision"]: r["n"] for r in cur.fetchall()}
+
+
+def image_sizes(cur, record_id: str) -> dict[str, int]:
+    """Bytes of each stored photo of a record, by image id (for the contract record)."""
+    cur.execute("select image_id::text as id, octet_length(content) as n from images where record_id = %s",
+                (record_id,))
+    return {row["id"]: row["n"] for row in cur.fetchall()}
+
+
+def records_page(cur, since: datetime | None, after: tuple[datetime, str] | None, limit: int) -> list[str]:
+    """Record ids oldest first by (captured_at, record_id), from `since` on and strictly after
+    the `after` position. Keyset paging: a record saved meanwhile is never skipped or repeated."""
+    cur.execute(
+        """
+        select record_id from records
+        where (%(s)s::timestamptz is null or captured_at >= %(s)s)
+          and (%(at)s::timestamptz is null or (captured_at, record_id) > (%(at)s, %(id)s))
+        order by captured_at, record_id
+        limit %(limit)s
+        """,
+        {"s": since, "at": after[0] if after else None, "id": after[1] if after else None, "limit": limit},
+    )
+    return [row["record_id"] for row in cur.fetchall()]
+
+
+def legacy_record_ids(cur) -> list[str]:
+    """Records saved before record ids became UUIDs (their ids start with PCK-)."""
+    cur.execute("select record_id from records where record_id like 'PCK-%'")
+    return [row["record_id"] for row in cur.fetchall()]

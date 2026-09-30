@@ -1,0 +1,368 @@
+{
+  "record_id": "e45f2680-6aff-552d-8765-1c937eb5bde1",
+  "schema_version": "1.1",
+  "organization_id": "4fd5348c-b08f-5b41-be77-7596b6a80fc6",
+  "client_id": null,
+  "agent": "pack",
+  "subject": {
+    "type": "order",
+    "asin": null,
+    "sku": null,
+    "order_id": "EVAL-T02",
+    "po_line_id": null,
+    "shipment_id": null,
+    "quantity_expected": 7,
+    "quantity_observed": null
+  },
+  "captured_at": "2026-09-30T14:50:11Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "key": "f52acf7d-c8cc-43eb-b7b0-096a51d44c94",
+      "sha256": "ed2c2d3bf05bdef79a0d565105161079ebcc52c5b4a739116e981b5b51e92807",
+      "bytes": 20261,
+      "taken_at": "2026-09-30T14:50:11Z"
+    }
+  ],
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "pass",
+      "confidence": 1.0,
+      "detail": {
+        "summary": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+        "source_checks": [
+          {
+            "check_key": "image_quality",
+            "verdict": "PASS",
+            "confidence": 1.0,
+            "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+            "model_version": "local-quality-gate/1",
+            "latency_ms": null,
+            "evidence": {}
+          }
+        ],
+        "images": [
+          {
+            "key": "f52acf7d-c8cc-43eb-b7b0-096a51d44c94",
+            "role": "top_down",
+            "original_sha256": "114d3ff3836baecb056cf2e602edb43e6d51dd1ce26be10e0a436b688f09d258",
+            "mime": "image/jpeg",
+            "width": 395,
+            "height": 269,
+            "quality": {
+              "gate": "PASS",
+              "reasons": [],
+              "width": 395,
+              "height": 269,
+              "blur_var": 63.3,
+              "mean_luma": 116.9,
+              "clipped_pct": 0.0,
+              "dark_pct": 0.0
+            }
+          }
+        ]
+      },
+      "model_version": "local-quality-gate/1",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "photo_reuse",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "Not checked: no earlier photos were looked up.",
+        "source_checks": []
+      },
+      "model_version": "local-quality-gate/1",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "Items may be stacked or hidden. Safety netting covers the view of the box interior.",
+        "source_checks": [
+          {
+            "check_key": "scene_coverage",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.7,
+            "detail": "Items may be stacked or hidden. Safety netting covers the view of the box interior.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {}
+          }
+        ],
+        "scene": {
+          "box_interior_fully_visible": true,
+          "items_may_be_hidden": true,
+          "visibility_confidence": 0.7,
+          "notes": "Safety netting covers the view of the box interior."
+        }
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080
+    },
+    {
+      "check_key": "all_items_present",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "2 ordered product(s) looked for.",
+        "source_checks": [
+          {
+            "check_key": "line_present:B00H9HJSFU",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : found (#1).",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {
+              "object_ids": [
+                "o1"
+              ]
+            }
+          },
+          {
+            "check_key": "line_present:B005FEGYCO",
+            "verdict": "UNCERTAIN",
+            "confidence": null,
+            "detail": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {
+              "possible_object_ids": []
+            }
+          }
+        ],
+        "lines": [
+          {
+            "sku": "B00H9HJSFU",
+            "check": "line_present",
+            "verdict": "pass",
+            "text": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : found (#1)."
+          },
+          {
+            "sku": "B005FEGYCO",
+            "check": "line_present",
+            "verdict": "uncertain",
+            "text": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden."
+          }
+        ],
+        "missing": []
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080
+    },
+    {
+      "check_key": "quantities_correct",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "2 ordered product(s) counted.",
+        "source_checks": [
+          {
+            "check_key": "line_quantity:B00H9HJSFU",
+            "verdict": "UNCERTAIN",
+            "confidence": 0.9,
+            "detail": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {
+              "object_ids": [
+                "o1"
+              ],
+              "possible_object_ids": []
+            }
+          },
+          {
+            "check_key": "line_quantity:B005FEGYCO",
+            "verdict": "UNCERTAIN",
+            "confidence": null,
+            "detail": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {
+              "object_ids": [],
+              "possible_object_ids": []
+            }
+          }
+        ],
+        "expected_vs_observed": [
+          {
+            "sku": "B00H9HJSFU",
+            "title": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast ",
+            "ordered": 6,
+            "found": 1,
+            "unclear": 0,
+            "present": "PASS",
+            "quantity": "UNCERTAIN"
+          },
+          {
+            "sku": "B005FEGYCO",
+            "title": "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights",
+            "ordered": 1,
+            "found": 0,
+            "unclear": 0,
+            "present": "UNCERTAIN",
+            "quantity": "UNCERTAIN"
+          }
+        ],
+        "over_quantity": []
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080
+    },
+    {
+      "check_key": "no_extra_items",
+      "verdict": "pass",
+      "confidence": 0.7,
+      "detail": {
+        "summary": "Wrong products (a look-alike instead of the ordered one) and products outside the order.",
+        "source_checks": [
+          {
+            "check_key": "wrong_item",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "No product from outside the order was found.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {}
+          },
+          {
+            "check_key": "extra_item",
+            "verdict": "PASS",
+            "confidence": 0.7,
+            "detail": "Nothing outside the order is in the box.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 7080,
+            "evidence": {}
+          }
+        ],
+        "wrong": [],
+        "extra": []
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080
+    },
+    {
+      "check_key": "order_matches_manifest",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "decision": "UNCERTAIN",
+        "reasons": [
+          "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
+          "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+          "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden.",
+          "Items may be stacked or hidden. Safety netting covers the view of the box interior."
+        ],
+        "fix_instructions": [
+          "Take a photo that shows the whole inside of the box, with stacked items spread out.",
+          "Count ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast  by hand: there should be 6.",
+          "Count LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights by hand: there should be 1."
+        ],
+        "decided_by": "rules over the model's object list (the model never sees the order)",
+        "subject": {
+          "type": "outbound_box",
+          "unit_id": null,
+          "channel": null,
+          "expected_lines": [
+            {
+              "sku": "B00H9HJSFU",
+              "qty": 6
+            },
+            {
+              "sku": "B005FEGYCO",
+              "qty": 1
+            }
+          ]
+        },
+        "asins": {
+          "B00H9HJSFU": "B00H9HJSFU",
+          "B005FEGYCO": "B005FEGYCO"
+        },
+        "detected_items": [
+          {
+            "object_id": "o1",
+            "photo": 1,
+            "box_2d": [
+              217,
+              156,
+              838,
+              881
+            ],
+            "description": "Robertson fluorescent eballast",
+            "classification": "CANDIDATE",
+            "sku": "B00H9HJSFU",
+            "confidence": 0.9,
+            "alternative_skus": [],
+            "deciding_feature": "metal rectangular ballast shape and label visible through netting",
+            "partially_hidden": true,
+            "title": "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast "
+          }
+        ],
+        "unclear": [],
+        "non_product_items": [],
+        "uncertainty": {
+          "known": [
+            "No product from outside the order was found.",
+            "Nothing outside the order is in the box.",
+            "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : found (#1).",
+            "1 photo(s) passed the blur, exposure, glare and resolution checks."
+          ],
+          "unknown": [
+            "ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast : 1 clearly counted, some units may be stacked or hidden; 6 ordered.",
+            "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+            "LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights: not seen, but items may be hidden.",
+            "Items may be stacked or hidden. Safety netting covers the view of the box interior."
+          ],
+          "missing_evidence": [
+            "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+            "A count of ROBERTSON 3P20132 Fluorescent eBallast for 2 F40T12 Linear Lamps, Preheat- Rapid Start, 120Vac, 50-60Hz, Normal Ballast  with every unit visible.",
+            "Whether LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights is in the box.",
+            "A count of LE Adjustable Focus Mini CREE LED Flashlight Torch, Super Bright, Batteries Included, Zoomable LED Flashlights with every unit visible."
+          ],
+          "next_action": "Don't seal yet. Take a photo that shows the whole inside of the box, with stacked items spread out. Then record Seal or Stop and fix."
+        },
+        "agent": {
+          "name": "pack-manager",
+          "version": "0.1.0",
+          "prompt_version": "pack-v3",
+          "model_version": "gemini-3.5-flash-lite"
+        },
+        "usage": {
+          "input_tokens": 2059,
+          "output_tokens": 303,
+          "thinking_tokens": 0,
+          "total_tokens": 2362
+        },
+        "internal_record": {
+          "record_id": "PCK-5EF21D5C6D25",
+          "schema_version": "cube.evidence.v1",
+          "content_hash": "sha256:2ee48d92c872a52cf7e6debd4f32ddc41c6e4afe3a6a28b91da34484350c4396"
+        }
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7080
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "operator",
+    "decided_at": "2026-09-30T14:52:11Z"
+  },
+  "overrides": [
+    {
+      "check_key": "order_matches_manifest",
+      "from_verdict": "uncertain",
+      "to_verdict": "fail",
+      "reason": "hidden_item_verified (Checked hidden or stacked items by hand): Checked under the netting: Order also asks for B005FEGYCO, which isn't in the bin.",
+      "by": "op_alpha",
+      "at": "2026-09-30T14:52:11Z"
+    }
+  ],
+  "status": "complete",
+  "content_hash": "5cd33a4af11cca1336b18298070e7c74f8cd78596ab331e1e8e56635c98f459e"
+}

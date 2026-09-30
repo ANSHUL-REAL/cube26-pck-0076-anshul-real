@@ -26,11 +26,13 @@ from fastapi.templating import Jinja2Templates
 from starlette.concurrency import run_in_threadpool
 from starlette.datastructures import Headers
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from itsdangerous import BadSignature, URLSafeSerializer
 from starlette.middleware.sessions import SessionMiddleware
 
 from pack_manager import __version__
 from pack_manager.catalogue import load_org_catalogue, reference_images
 from pack_manager.config import get_settings
+from pack_manager.contract import as_uuid, to_contract
 from pack_manager.evidence import apply_override, verify, verify_history
 from pack_manager.export import CSV_COLUMNS, record_row
 from pack_manager.models import OVERRIDE_REASONS, Catalogue, Decision, EvidenceRecord
@@ -94,8 +96,9 @@ class SameOriginPosts:
         await self.app(scope, receive, send)
 
 
+SECRET = session_secret(settings.session_secret)
 app = FastAPI(title="Pack Manager", version=__version__)
-app.add_middleware(SessionMiddleware, secret_key=session_secret(settings.session_secret), same_site="lax",
+app.add_middleware(SessionMiddleware, secret_key=SECRET, same_site="lax",
                    max_age=12 * 3600, https_only=settings.secure_cookies)
 app.add_middleware(SameOriginPosts)
 app.mount("/static", StaticFiles(directory=BASE / "static"), name="static")
@@ -222,7 +225,8 @@ def not_found(request: Request, what: str = "That page", status_code: int = 404)
 
 
 def _is_api(request: Request) -> bool:
-    return request.url.path == "/api" or request.url.path.startswith("/api/")
+    path = request.url.path
+    return path in ("/api", "/v1") or path.startswith(("/api/", "/v1/"))
 
 
 def error_page(request: Request, status_code: int, title: str, message: str, user: dict | None = None) -> Response:
@@ -566,8 +570,34 @@ HISTORY_CHECK = {
 }
 
 
-def _record_page(request: Request, user: dict, record: EvidenceRecord, status_code: int = 200, **extra):
+# Share links: a signed (organisation, record) pair. Whoever has the link can view that one record,
+# read-only, without signing in (Evidence Contract 1.1, section 4). Nothing else can be reached
+# with it, and the organisation comes from the signature, never from the request.
+_share = URLSafeSerializer(SECRET, salt="pack-manager.record-link")
+
+
+def share_path(org: str, record_id: str) -> str:
+    return "/r/" + _share.dumps([org, record_id])
+
+
+def _from_share(token: str) -> tuple[str, str] | None:
+    try:
+        org, record_id = _share.loads(token)
+    except (BadSignature, ValueError, TypeError):
+        return None
+    return (org, record_id) if isinstance(org, str) and isinstance(record_id, str) else None
+
+
+def _record_page(request: Request, user: dict, record: EvidenceRecord, status_code: int = 200,
+                 public: bool = False, **extra):
     catalogue, _ = org_catalogue(user["org"])
+    share = share_path(user["org"], record.record_id)
+    links = {
+        "share": share, "share_abs": str(request.base_url).rstrip("/") + share,
+        "images": f"{share}/images/" if public else "/images/",
+        "download": f"{share}/record.json" if public else f"/api/records/{url_part(record.record_id)}?download=1",
+        "contract": f"{share}/contract.json" if public else f"/v1/records/{url_part(as_uuid(record.record_id))}",
+    }
     agent_decision = record.overrides[0].original_decision if record.overrides else record.outcome.decision
     tally = {"PASS": 0, "FAIL": 0, "UNCERTAIN": 0}
     for c in record.checks:
@@ -577,12 +607,16 @@ def _record_page(request: Request, user: dict, record: EvidenceRecord, status_co
         later = [row for row in store.list_records(cur, order_id=record.subject.get("order_id"), limit=20)
                  if row["captured_at"] >= record.captured_at and row["record_id"] != record.record_id]
         retry = store.find_retry(cur, record.record_id)
+        org_name = user.get("org_name") or store.org_name(cur, user["org"])
+    if public:
+        later, extra["can_retry"] = [], False
     return page(
         request, "record.html", status_code=status_code, r=record, hash_ok=verify(record),
+        public=public, links=links, org_name=org_name,
         history_check=HISTORY_CHECK[verify_history(record)] if record.overrides else None,
         states=_object_states(record), agent_decision=agent_decision, reasons=OVERRIDE_REASONS,
-        catalogue=catalogue, obs=record.observations or {}, tally=tally, thumbs=_thumbs(catalogue),
-        later=later, retry=retry, can_retry=agent_decision == Decision.PENDING and not retry, **extra,
+        catalogue=catalogue, obs=record.observations or {}, tally=tally, thumbs=set() if public else _thumbs(catalogue),
+        later=later, retry=retry, **{"can_retry": agent_decision == Decision.PENDING and not retry, **extra},
     )
 
 
@@ -786,6 +820,261 @@ def api_record(request: Request, record_id: str, download: bool = False):
         return Response(record.model_dump_json(indent=2), media_type="application/json",
                         headers={"Content-Disposition": f'attachment; filename="{record.record_id}.json"'})
     return {**record.model_dump(mode="json"), "_hash_verified": verify(record)}
+
+
+# ------------------------------------------------------------------ share links (no sign-in)
+
+
+def _shared(token: str):
+    found = _from_share(token)
+    if not found:
+        return None
+    org, record_id = found
+    with db().org(org) as cur:
+        record = store.get_record(cur, record_id)
+    return (org, record) if record else None
+
+
+@app.get("/r/{token}", response_class=HTMLResponse)
+def shared_record(request: Request, token: str):
+    """The read-only record page a customer or another pod can be sent. No sign-in."""
+    shared = _shared(token)
+    if not shared:
+        return not_found(request, "That record")
+    org, record = shared
+    return _record_page(request, {"org": org}, record, public=True)
+
+
+@app.get("/r/{token}/images/{image_id}")
+def shared_image(token: str, image_id: str):
+    """A photo of the shared record, and only of that record."""
+    shared = _shared(token)
+    if not shared or image_id not in {ref.image_id for ref in shared[1].images}:
+        return Response(status_code=404)
+    with db().org(shared[0]) as cur:
+        found = store.get_image(cur, image_id)
+    if not found:
+        return Response(status_code=404)
+    return Response(found[1], media_type=found[0], headers={"Cache-Control": "private, max-age=86400"})
+
+
+@app.get("/r/{token}/record.json")
+def shared_record_json(token: str):
+    shared = _shared(token)
+    if not shared:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    record = shared[1]
+    return Response(record.model_dump_json(indent=2), media_type="application/json",
+                    headers={"Content-Disposition": f'attachment; filename="{record.record_id}.json"'})
+
+
+@app.get("/r/{token}/contract.json")
+def shared_contract_json(token: str):
+    shared = _shared(token)
+    if not shared:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    org, record = shared
+    return _contract_record(org, record)
+
+
+# ------------------------------------------------------------------ Evidence Contract 1.1 (/v1)
+#
+# The four endpoints of the organisers' contract, section 3. Every one is scoped to the caller's
+# organisation (X-Access-Code header, or a signed-in session); no parameter names an organisation.
+
+
+def _contract_record(org: str, record: EvidenceRecord) -> dict:
+    catalogue, _ = org_catalogue(org)
+    with db().org(org) as cur:
+        sizes = store.image_sizes(cur, record.record_id)
+    return to_contract(record, image_bytes=sizes, catalogue=catalogue)
+
+
+def _find_record(cur, record_id: str) -> EvidenceRecord | None:
+    """By contract id. Records saved before ids became UUIDs are found by the UUID made from
+    their old id."""
+    record = store.get_record(cur, record_id)
+    if record is None:
+        for old in store.legacy_record_ids(cur):
+            if as_uuid(old) == record_id:
+                return store.get_record(cur, old)
+    return record
+
+
+def _unauthorised() -> JSONResponse:
+    return JSONResponse({"error": "unauthorised: send your access code in the X-Access-Code header"},
+                        status_code=401)
+
+
+@app.get("/v1/records/{record_id}")
+def v1_record(request: Request, record_id: str):
+    user = _api_user(request)
+    if not user:
+        return _unauthorised()
+    try:
+        record_id = str(uuid.UUID(record_id))
+    except ValueError:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    with db().org(user["org"]) as cur:
+        record = _find_record(cur, record_id)
+    if not record:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    return _contract_record(user["org"], record)
+
+
+def _cursor(record: EvidenceRecord) -> str:
+    raw = json.dumps([record.captured_at.isoformat(), record.record_id]).encode("utf-8")
+    return base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+
+
+def _after(cursor: str) -> tuple[datetime, str]:
+    raw = base64.urlsafe_b64decode(cursor + "=" * (-len(cursor) % 4))
+    at, record_id = json.loads(raw)
+    return datetime.fromisoformat(at), str(record_id)
+
+
+@app.get("/v1/records")
+def v1_records(request: Request, since: datetime | None = None, agent: str | None = None,
+               cursor: str | None = None, limit: int = 100):
+    """What Recovery reads. Oldest first by captured_at; `since` filters on captured_at.
+    Pass `next_cursor` back as `cursor` for the next page; it is null on the last page."""
+    user = _api_user(request)
+    if not user:
+        return _unauthorised()
+    if agent and agent != "pack":  # this service only writes Pack records
+        return {"records": [], "next_cursor": None}
+    try:
+        after = _after(cursor) if cursor else None
+    except (ValueError, TypeError):
+        return JSONResponse({"error": "cursor isn't one this API returned"}, status_code=400)
+    limit = max(1, min(limit, 200))
+    with db().org(user["org"]) as cur:
+        ids = store.records_page(cur, since, after, limit + 1)
+        records = [store.get_record(cur, rid) for rid in ids[:limit]]
+    records = [r for r in records if r]
+    more = len(ids) > limit
+    return {"records": [_contract_record(user["org"], r) for r in records],
+            "next_cursor": _cursor(records[-1]) if more and records else None}
+
+
+# Captures in progress: the order, and the photos uploaded so far. Held in memory for a short
+# time, like the photos kept for "use anyway".
+_CAPTURES: dict[str, dict] = {}
+CAPTURE_TTL_S = 900
+CAPTURE_MAX = 50
+SHOTS = [
+    "The open box from directly above, with the whole inside in view.",
+    "Closer, at a slight angle, so stacked or hidden items show.",
+    "Anything the first two didn't show: labels, a variant, a count.",
+]
+
+
+def _capture(capture_id: str) -> dict | None:
+    now = time.time()
+    for key in [k for k, v in _CAPTURES.items() if now - v["at"] > CAPTURE_TTL_S]:
+        _CAPTURES.pop(key, None)
+    return _CAPTURES.get(capture_id)
+
+
+@app.post("/v1/captures")
+async def v1_capture_start(request: Request):
+    """Start a capture for an order: {"order_id": "...", "shots": 2}. Returns one upload URL
+    per shot. PUT each photo's bytes to its URL (retrying is safe), then call .../complete."""
+    user = _api_user(request)
+    if not user:
+        return _unauthorised()
+    try:
+        body = await request.json()
+        order_id = str(body.get("order_id") or "").strip()
+        shots = int(body.get("shots", 2))
+    except (ValueError, TypeError, AttributeError):
+        return JSONResponse({"error": 'send JSON like {"order_id": "ORD-1", "shots": 2}'}, status_code=400)
+    order = await run_in_threadpool(_get_order, user["org"], order_id) if order_id else None
+    if not order:
+        return JSONResponse({"error": "order not found"}, status_code=404)
+    shots = max(1, min(shots, settings.max_box_photos, len(SHOTS)))
+    _capture("")  # drops expired captures
+    while len(_CAPTURES) >= CAPTURE_MAX:
+        _CAPTURES.pop(next(iter(_CAPTURES)))
+    capture_id, token = str(uuid.uuid4()), secrets.token_urlsafe(24)
+    _CAPTURES[capture_id] = {"org": user["org"], "operator": user["operator"], "order_id": order.order_id,
+                             "token": token, "photos": [None] * shots, "at": time.time(), "result": None}
+    base = str(request.base_url).rstrip("/")
+    return {
+        "capture_id": capture_id,
+        "upload_urls": [f"{base}/v1/captures/{capture_id}/photos/{n}?token={token}" for n in range(1, shots + 1)],
+        "upload_method": "PUT",
+        "shots": SHOTS[:shots],
+        "expires_in_s": CAPTURE_TTL_S,
+    }
+
+
+async def _read_body_capped(request: Request, limit: int) -> bytes | None:
+    data = bytearray()
+    async for chunk in request.stream():
+        data.extend(chunk)
+        if len(data) > limit:
+            return None
+    return bytes(data)
+
+
+@app.put("/v1/captures/{capture_id}/photos/{n}")
+async def v1_capture_upload(request: Request, capture_id: str, n: int, token: str = ""):
+    """An upload URL. The token in it is the permission: it works for this one photo slot of this
+    one capture, for 15 minutes. Uploading the same slot again replaces the photo."""
+    held = _capture(capture_id)
+    if not held or not secrets.compare_digest(token, held["token"]) or not 1 <= n <= len(held["photos"]):
+        return JSONResponse({"error": "not found or expired"}, status_code=404)
+    if held["result"]:
+        return JSONResponse({"error": "this capture is already complete"}, status_code=409)
+    data = await _read_body_capped(request, MAX_PHOTO_BYTES)
+    if data is None:
+        return JSONResponse({"error": f"photo larger than {MAX_PHOTO_BYTES // 2**20} MB"}, status_code=413)
+    if not data:
+        return JSONResponse({"error": "empty photo"}, status_code=400)
+    held["photos"][n - 1] = data
+    return {"ok": True, "bytes": len(data)}
+
+
+@app.post("/v1/captures/{capture_id}/complete")
+async def v1_capture_complete(request: Request, capture_id: str):
+    """Runs the check and saves the record. Fails open: if the model errors or times out, the
+    record is still saved, with status "pending". Calling it again returns the same record."""
+    user = _api_user(request)
+    if not user:
+        return _unauthorised()
+    held = _capture(capture_id)
+    if not held or held["org"] != user["org"]:
+        return JSONResponse({"error": "not found or expired"}, status_code=404)
+    if held["result"]:
+        return held["result"]
+    uploads = [data for data in held["photos"] if data]
+    if not uploads:
+        return JSONResponse({"error": "no photos were uploaded"}, status_code=400)
+    order = await run_in_threadpool(_get_order, user["org"], held["order_id"])
+    if not order:
+        return JSONResponse({"error": "order not found"}, status_code=404)
+    try:
+        prepared = await run_in_threadpool(
+            prepare_photos,
+            [Photo(data, "top_down" if i == 0 else f"extra_{i}") for i, data in enumerate(uploads)], settings)
+    except (ImageDecodeError, ValueError) as exc:  # the message is written for the packer
+        return JSONResponse({"error": str(exc) or PHOTO_UNREADABLE}, status_code=422)
+    except Exception as exc:
+        log.warning("Couldn't prepare an uploaded photo: %s: %s", type(exc).__name__, exc)
+        return JSONResponse({"error": PHOTO_UNREADABLE}, status_code=422)
+    # A photo that fails the quality gate is kept, and the record says the photos can't settle it
+    # (never SEAL): the API has no one to ask for a retake, and the line mustn't wait.
+    who = {"org": user["org"], "operator": held["operator"]}
+    try:
+        record = await run_in_threadpool(_check_box, who, order, prepared, True)
+    except ValueError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=422)
+    held["result"] = {"record_id": as_uuid(record.record_id),
+                      "status": "pending" if record.status.value == "pending" else "complete",
+                      "decision": record.outcome.decision.value,
+                      "record_url": str(request.base_url).rstrip("/") + share_path(user["org"], record.record_id)}
+    return held["result"]
 
 
 # ------------------------------------------------------------------ eval results (public)

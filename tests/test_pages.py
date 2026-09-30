@@ -120,11 +120,23 @@ class FakeStore:
         found = self.images.get(image_id)
         return (found[1], found[2]) if found and found[0] == cur else None
 
+    def image_sizes(self, cur, record_id):
+        return {iid: len(v[2]) for iid, v in self.images.items() if v[0] == cur and v[4] == record_id}
+
+    def records_page(self, cur, since, after, limit):
+        keys = sorted((r.captured_at, r.record_id) for r in self.records.values()
+                      if r.organization_id == cur and (since is None or r.captured_at >= since))
+        return [rid for at, rid in keys if after is None or (at, rid) > after][:limit]
+
+    def legacy_record_ids(self, cur):
+        return [r.record_id for r in self.records.values() if r.organization_id == cur and r.record_id.startswith("PCK-")]
+
 
 # Every app.store function the web app calls; the fixture swaps each for the FakeStore's.
 STORE_FUNCTIONS = ["resolve_code", "org_name", "list_orders", "order_counts", "get_order", "list_records",
                    "counts_by_decision", "save_record", "update_record", "get_record", "get_image",
-                   "find_image_uses", "find_retry", "count_ai_checks_since", "upsert_order"]
+                   "find_image_uses", "find_retry", "count_ai_checks_since", "upsert_order",
+                   "image_sizes", "records_page", "legacy_record_ids"]
 
 
 class FakeDb:

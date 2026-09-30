@@ -1,5 +1,5 @@
 {
-  "record_id": "PCK-9B02D36871C0",
+  "record_id": "cc500670-7f35-4f67-8bc8-b0335353781a",
   "schema_version": "cube.evidence.v1",
   "organization_id": "org_demo_alpha",
   "client_id": "client_seller_01",
@@ -13,6 +13,7 @@
     "unit_id": "UNIT-0021",
     "order_id": "ORD-DUMMY-50021",
     "channel": "shopify",
+    "shipment_id": null,
     "expected_lines": [
       {
         "sku": "SKU-PUZZLE-500",
@@ -24,7 +25,7 @@
   "operator_label": "op_alpha",
   "images": [
     {
-      "image_id": "e9ee2d94-d2ef-45d6-9e8e-2384b99d8920",
+      "image_id": "d8bfbb5f-8625-4d7f-ab58-aec2c2d2892b",
       "role": "top_down",
       "sha256": "7cc59b94d3d4456e289fa4d436d965d084d44f30b6bcda4863592a027713f21b",
       "original_sha256": "44ba4b6faf31e13339da72ff08c906d264df042cf4fc41a9c4c399d76bb77d67",
@@ -80,5 +81,5 @@
   },
   "overrides": [],
   "status": "pending",
-  "content_hash": "sha256:0cf11217a31b0afb45bc9341c9f525451580274f96c2d13991486b62efef8665"
+  "content_hash": "sha256:f27ba49ad96f3982f9a2ee5c7bf7f2dcb52dfaf9303588d06ac05bd5c836e98d"
 }

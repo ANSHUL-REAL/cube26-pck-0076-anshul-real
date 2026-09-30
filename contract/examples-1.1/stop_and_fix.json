@@ -1,0 +1,458 @@
+{
+  "record_id": "06661dac-5044-5d43-9f95-71b05b2a99de",
+  "schema_version": "1.1",
+  "organization_id": "4fd5348c-b08f-5b41-be77-7596b6a80fc6",
+  "client_id": null,
+  "agent": "pack",
+  "subject": {
+    "type": "order",
+    "asin": null,
+    "sku": null,
+    "order_id": "EVAL-T05",
+    "po_line_id": null,
+    "shipment_id": null,
+    "quantity_expected": 5,
+    "quantity_observed": 2
+  },
+  "captured_at": "2026-09-30T14:50:50Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "key": "1086996c-fedd-44fa-abbf-332c586d31aa",
+      "sha256": "8628c3965c7e0507bf045a18ca10511b050f1ca0ed64c472f741101e85d1c0d3",
+      "bytes": 46518,
+      "taken_at": "2026-09-30T14:50:50Z"
+    }
+  ],
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "pass",
+      "confidence": 1.0,
+      "detail": {
+        "summary": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+        "source_checks": [
+          {
+            "check_key": "image_quality",
+            "verdict": "PASS",
+            "confidence": 1.0,
+            "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+            "model_version": "local-quality-gate/1",
+            "latency_ms": null,
+            "evidence": {}
+          }
+        ],
+        "images": [
+          {
+            "key": "1086996c-fedd-44fa-abbf-332c586d31aa",
+            "role": "top_down",
+            "original_sha256": "52036154a05d1b1223554c4ceb7be23d0e8470c4531ae62168db24527627dc01",
+            "mime": "image/jpeg",
+            "width": 565,
+            "height": 505,
+            "quality": {
+              "gate": "PASS",
+              "reasons": [],
+              "width": 565,
+              "height": 505,
+              "blur_var": 28.7,
+              "mean_luma": 99.8,
+              "clipped_pct": 0.0,
+              "dark_pct": 0.0
+            }
+          }
+        ]
+      },
+      "model_version": "local-quality-gate/1",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "photo_reuse",
+      "verdict": "uncertain",
+      "confidence": null,
+      "detail": {
+        "summary": "Not checked: no earlier photos were looked up.",
+        "source_checks": []
+      },
+      "model_version": "local-quality-gate/1",
+      "latency_ms": 0
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "pass",
+      "confidence": 0.9,
+      "detail": {
+        "summary": "The whole inside of the box is visible and nothing appears hidden.",
+        "source_checks": [
+          {
+            "check_key": "scene_coverage",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "The whole inside of the box is visible and nothing appears hidden.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {}
+          }
+        ],
+        "scene": {
+          "box_interior_fully_visible": true,
+          "items_may_be_hidden": false,
+          "visibility_confidence": 0.9,
+          "notes": "Stretchy straps cross the box interior but items are clearly visible underneath them."
+        }
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 21855
+    },
+    {
+      "check_key": "all_items_present",
+      "verdict": "fail",
+      "confidence": 0.9,
+      "detail": {
+        "summary": "4 ordered product(s) looked for.",
+        "source_checks": [
+          {
+            "check_key": "line_present:B00CWEB7VI",
+            "verdict": "PASS",
+            "confidence": 0.95,
+            "detail": "Everyone Body Lotion, Unscented, 32 Ounce: found (#1).",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {
+              "object_ids": [
+                "o1"
+              ]
+            }
+          },
+          {
+            "check_key": "line_present:B00NDIFKQU",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: not in the box, and the whole box is visible.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {}
+          },
+          {
+            "check_key": "line_present:B0183JF0FE",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches: found (#2).",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {
+              "object_ids": [
+                "o2"
+              ]
+            }
+          },
+          {
+            "check_key": "line_present:B018EAZ94E",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: not in the box, and the whole box is visible.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {}
+          }
+        ],
+        "lines": [
+          {
+            "sku": "B00CWEB7VI",
+            "check": "line_present",
+            "verdict": "pass",
+            "text": "Everyone Body Lotion, Unscented, 32 Ounce: found (#1)."
+          },
+          {
+            "sku": "B00NDIFKQU",
+            "check": "line_present",
+            "verdict": "fail",
+            "text": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: not in the box, and the whole box is visible."
+          },
+          {
+            "sku": "B0183JF0FE",
+            "check": "line_present",
+            "verdict": "pass",
+            "text": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches: found (#2)."
+          },
+          {
+            "sku": "B018EAZ94E",
+            "check": "line_present",
+            "verdict": "fail",
+            "text": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: not in the box, and the whole box is visible."
+          }
+        ],
+        "missing": [
+          {
+            "sku": "B00NDIFKQU",
+            "title": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42",
+            "units": 1
+          },
+          {
+            "sku": "B0183JF0FE",
+            "title": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches",
+            "units": 1
+          },
+          {
+            "sku": "B018EAZ94E",
+            "title": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown",
+            "units": 1
+          }
+        ]
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 21855
+    },
+    {
+      "check_key": "quantities_correct",
+      "verdict": "fail",
+      "confidence": 0.9,
+      "detail": {
+        "summary": "4 ordered product(s) counted.",
+        "source_checks": [
+          {
+            "check_key": "line_quantity:B00CWEB7VI",
+            "verdict": "PASS",
+            "confidence": 0.95,
+            "detail": "Everyone Body Lotion, Unscented, 32 Ounce: 1 of 1.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {
+              "object_ids": [
+                "o1"
+              ]
+            }
+          },
+          {
+            "check_key": "line_quantity:B00NDIFKQU",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: 0 in the box, 1 ordered.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {
+              "object_ids": [],
+              "possible_object_ids": []
+            }
+          },
+          {
+            "check_key": "line_quantity:B0183JF0FE",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches: 1 in the box, 2 ordered.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {
+              "object_ids": [
+                "o2"
+              ],
+              "possible_object_ids": []
+            }
+          },
+          {
+            "check_key": "line_quantity:B018EAZ94E",
+            "verdict": "FAIL",
+            "confidence": 0.9,
+            "detail": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: 0 in the box, 1 ordered.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {
+              "object_ids": [],
+              "possible_object_ids": []
+            }
+          }
+        ],
+        "expected_vs_observed": [
+          {
+            "sku": "B00CWEB7VI",
+            "title": "Everyone Body Lotion, Unscented, 32 Ounce",
+            "ordered": 1,
+            "found": 1,
+            "unclear": 0,
+            "present": "PASS",
+            "quantity": "PASS"
+          },
+          {
+            "sku": "B00NDIFKQU",
+            "title": "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42",
+            "ordered": 1,
+            "found": 0,
+            "unclear": 0,
+            "present": "FAIL",
+            "quantity": "FAIL"
+          },
+          {
+            "sku": "B0183JF0FE",
+            "title": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches",
+            "ordered": 2,
+            "found": 1,
+            "unclear": 0,
+            "present": "PASS",
+            "quantity": "FAIL"
+          },
+          {
+            "sku": "B018EAZ94E",
+            "title": "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown",
+            "ordered": 1,
+            "found": 0,
+            "unclear": 0,
+            "present": "FAIL",
+            "quantity": "FAIL"
+          }
+        ],
+        "over_quantity": []
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 21855
+    },
+    {
+      "check_key": "no_extra_items",
+      "verdict": "pass",
+      "confidence": 0.9,
+      "detail": {
+        "summary": "Wrong products (a look-alike instead of the ordered one) and products outside the order.",
+        "source_checks": [
+          {
+            "check_key": "wrong_item",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "No product from outside the order was found.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {}
+          },
+          {
+            "check_key": "extra_item",
+            "verdict": "PASS",
+            "confidence": 0.9,
+            "detail": "Nothing outside the order is in the box.",
+            "model_version": "gemini-3.5-flash-lite",
+            "latency_ms": 21855,
+            "evidence": {}
+          }
+        ],
+        "wrong": [],
+        "extra": []
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 21855
+    },
+    {
+      "check_key": "order_matches_manifest",
+      "verdict": "fail",
+      "confidence": null,
+      "detail": {
+        "decision": "STOP_AND_FIX",
+        "reasons": [
+          "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: 0 in the box, 1 ordered.",
+          "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches: 1 in the box, 2 ordered.",
+          "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: 0 in the box, 1 ordered.",
+          "Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42: not in the box, and the whole box is visible.",
+          "StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown: not in the box, and the whole box is visible."
+        ],
+        "fix_instructions": [
+          "Add 1 × Giro Empire SLX Shoe - Men's Annodized Glowing Red/Black 42.",
+          "Add 1 × FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches.",
+          "Add 1 × StilGut Cover, Genuine Leather Back Case for Apple iPad Pro & Smart Keyboard, Cognac Brown."
+        ],
+        "decided_by": "rules over the model's object list (the model never sees the order)",
+        "subject": {
+          "type": "outbound_box",
+          "unit_id": null,
+          "channel": null,
+          "expected_lines": [
+            {
+              "sku": "B00CWEB7VI",
+              "qty": 1
+            },
+            {
+              "sku": "B00NDIFKQU",
+              "qty": 1
+            },
+            {
+              "sku": "B0183JF0FE",
+              "qty": 2
+            },
+            {
+              "sku": "B018EAZ94E",
+              "qty": 1
+            }
+          ]
+        },
+        "asins": {
+          "B00CWEB7VI": "B00CWEB7VI",
+          "B00NDIFKQU": "B00NDIFKQU",
+          "B0183JF0FE": "B0183JF0FE",
+          "B018EAZ94E": "B018EAZ94E"
+        },
+        "detected_items": [
+          {
+            "object_id": "o1",
+            "photo": 1,
+            "box_2d": [
+              334,
+              62,
+              996,
+              337
+            ],
+            "description": "large white pump bottle of body lotion",
+            "classification": "CANDIDATE",
+            "sku": "B00CWEB7VI",
+            "confidence": 0.95,
+            "alternative_skus": [],
+            "deciding_feature": "shape and bottle style matching unscented 32 oz body lotion",
+            "partially_hidden": false,
+            "title": "Everyone Body Lotion, Unscented, 32 Ounce"
+          },
+          {
+            "object_id": "o2",
+            "photo": 1,
+            "box_2d": [
+              183,
+              345,
+              937,
+              853
+            ],
+            "description": "red folded fabric tablecloth in plastic packaging",
+            "classification": "CANDIDATE",
+            "sku": "B0183JF0FE",
+            "confidence": 0.9,
+            "alternative_skus": [],
+            "deciding_feature": "folded rectangular fabric in red color visible through clear packaging",
+            "partially_hidden": true,
+            "title": "FantasyDeco Rectangular Polyester Fabric Tablecloth, Red, 60x126-inches"
+          }
+        ],
+        "unclear": [],
+        "non_product_items": [],
+        "agent": {
+          "name": "pack-manager",
+          "version": "0.1.0",
+          "prompt_version": "pack-v3",
+          "model_version": "gemini-3.5-flash-lite"
+        },
+        "usage": {
+          "input_tokens": 2095,
+          "output_tokens": 493,
+          "thinking_tokens": 0,
+          "total_tokens": 2588
+        },
+        "internal_record": {
+          "record_id": "PCK-D436BFBCDE4C",
+          "schema_version": "cube.evidence.v1",
+          "content_hash": "sha256:e1b0cf743457f11a36638eff0eef2b287b557934875c3450c04898c78419ff71"
+        }
+      },
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 21855
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T14:51:12Z"
+  },
+  "overrides": [],
+  "status": "complete",
+  "content_hash": "523241e9289f9214ecd3c78ad9eb09b070ccfb76046e7bfe4b15fca2bc2abdcc"
+}

@@ -27,6 +27,9 @@ create table if not exists orders (
     created_at      timestamptz not null default now(),
     primary key (organization_id, order_id)
 );
+-- Evidence Contract 1.1: subject.shipment_id. Added after the first deploy, so it's added here
+-- rather than in the create table above.
+alter table orders add column if not exists shipment_id text;
 
 create table if not exists records (
     record_id       text primary key,

@@ -224,3 +224,33 @@ def test_records_are_append_only(database, alpha_record):
             rewrite(change)
     with database.org(ALPHA) as cur:
         assert store.get_record(cur, alpha_record.record_id) == decided  # nothing was changed
+
+
+def test_contract_endpoints_and_share_links_stay_in_their_company(database, alpha_record):
+    """Evidence Contract 1.1, section 5: a second organisation sees zero rows and can't fetch an
+    image it doesn't own, through the /v1 API too. A share link opens one record and its photos."""
+    from fastapi.testclient import TestClient
+
+    from app import store
+    from app.main import app, share_path
+
+    with database.org(BRAVO) as cur:
+        assert alpha_record.record_id not in store.records_page(cur, None, None, 1000)
+        assert store.image_sizes(cur, alpha_record.record_id) == {}
+    with database.org(ALPHA) as cur:
+        assert alpha_record.record_id in store.records_page(cur, None, None, 1000)
+        assert list(store.image_sizes(cur, alpha_record.record_id).values())[0] > 0
+
+    client = TestClient(app)
+    rid, image = alpha_record.record_id, alpha_record.images[0].image_id
+    assert client.get(f"/v1/records/{rid}", headers={"X-Access-Code": "bravo-demo"}).status_code == 404
+    listed = client.get("/v1/records?limit=200", headers={"X-Access-Code": "bravo-demo"}).json()["records"]
+    assert rid not in {r["record_id"] for r in listed}
+    assert client.get(f"/v1/records/{rid}", headers={"X-Access-Code": "alpha-demo"}).json()["record_id"] == rid
+
+    link = share_path(ALPHA, rid)
+    assert client.get(link).status_code == 200  # no sign-in
+    assert client.get(f"{link}/images/{image}").status_code == 200
+    # The same record id signed as another company's opens nothing.
+    assert client.get(share_path(BRAVO, rid)).status_code == 404
+    assert client.get(f"{share_path(BRAVO, rid)}/images/{image}").status_code == 404

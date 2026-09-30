@@ -1,6 +1,7 @@
 """Import orders from a CSV file (the format of the organisers' sample, or a store export).
 
-Columns: order_id and order_lines are required; channel, unit_id and client_id are optional.
+Columns: order_id and order_lines are required; channel, unit_id, client_id and shipment_id are
+optional.
 order_lines is "SKU:qty;SKU:qty". Any organisation column in the file is ignored: orders
 always belong to the organisation that imports them.
 """
@@ -64,7 +65,7 @@ def parse_orders_csv(text: str, organization_id: str, catalogue: Catalogue) -> I
             order = Order(
                 order_id=order_id, organization_id=organization_id, lines=lines,
                 channel=row.get("channel") or None, unit_id=row.get("unit_id") or None,
-                client_id=row.get("client_id") or None,
+                client_id=row.get("client_id") or None, shipment_id=row.get("shipment_id") or None,
             )
         except ValueError:
             result.problems.append(f'Row {n}: order_lines must look like "SKU-A:2;SKU-B:1", with ";" between lines.')
