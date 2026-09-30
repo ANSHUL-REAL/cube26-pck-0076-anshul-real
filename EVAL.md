@@ -62,7 +62,7 @@ No kill condition tripped. **Rules alone:** 0 errors, and the same 2 boxes sent 
 - **The false STOP (T20):** three stacked baskets. The model saw two and took one for the large look-alike, while saying the box was fully visible.
 - **Sent to a person (T15, T18):** a dark photo and a blurry one. The local photo check caught both, and a photo that fails it can never lead to SEAL.
 
-**Why this set is easier than real photos, and so can't stand in for them:** generated scenes are clean and well lit, the products are drawn to match their generated reference photos, and images that didn't show their plan were regenerated, which favours clear pictures. The dev run (18 of 20 right) was only a check that the pipeline reads the set.
+**Why this set is easier than real photos, and so can't stand in for them:** generated scenes are clean and well lit, the products are drawn to match their generated reference photos, and images that didn't show their plan were regenerated, which favours clear pictures. The dev run (18 of 20 right) was only a check that the pipeline reads the set. The repository holds each box as the exact JPEG the model was sent (22 MB; each file's hash is in its records). The 165 MB of generated PNG originals are kept outside it, with their hashes in the freeze file.
 
 ## What changed from the plan, and why
 

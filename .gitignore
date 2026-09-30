@@ -13,3 +13,7 @@ eval/results/**/raw/
 # generated pages with embedded photos (large); rebuild them from the scripts
 eval/import_check_*.html
 eval/label_sheet_*.html
+# AI-generated originals (165 MB PNG + 51 MB references): kept locally, out of the repository.
+# eval/synthetic/boxes holds the exact JPEGs the model was sent; their hashes are in the records.
+eval/synthetic/originals/
+eval/synthetic/reference_originals/

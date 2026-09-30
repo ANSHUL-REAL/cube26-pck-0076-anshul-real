@@ -392,3 +392,23 @@ def test_cli_output_switches_to_utf8(monkeypatch):
     print("honey jar labelled 'शहद'")
     out.flush()
     assert "शहद" in out.buffer.getvalue().decode("utf-8")
+
+
+def test_committed_synthetic_photos_are_the_exact_bytes_the_model_saw():
+    """The AI-generated set is committed as the JPEGs sent to the model (the PNG originals are
+    too large). Each one must match the photo hash in its evidence records."""
+    import hashlib
+    import json
+
+    from conftest import ROOT
+
+    base = ROOT / "eval" / "synthetic"
+    checked = 0
+    for run in ("synth-dev-v1", "synth-test-v1"):
+        for path in sorted((base / "results" / run / "records").glob("*.json")):
+            record = json.loads(path.read_text(encoding="utf-8"))
+            photos = sorted((base / "boxes" / path.stem).glob("*.jpg"))
+            assert [hashlib.sha256(p.read_bytes()).hexdigest() for p in photos] == \
+                [img["sha256"] for img in record["images"]], path.name
+            checked += 1
+    assert checked == 70
