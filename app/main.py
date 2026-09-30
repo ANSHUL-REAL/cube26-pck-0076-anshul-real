@@ -342,6 +342,8 @@ ORDERS_SHOWN = 200  # rows on one tab of the orders page; the tab counts cover e
 
 @app.get("/", response_class=HTMLResponse)
 def orders(request: Request, q: str | None = None, view: str = "todo"):
+    if not request.session.get("user"):
+        return home(request)
     user = current_user(request)
     view = view if view in ("todo", "done", "all") else "todo"
     q = (q or "").strip()[:100]
@@ -1246,6 +1248,12 @@ def _metrics(run: str, where: Path = EVAL_RESULTS) -> dict | None:
         return None
 
 
+def home(request: Request) -> HTMLResponse:
+    """The public front page, for anyone not signed in."""
+    return page(request, "home.html", site_nav=True, front_page=True, demo_orgs=DEMO_ORGS, repo_url=REPO_URL,
+                held=_metrics(RESULTS_RUN), synth=_metrics(SYNTH_RUN, SYNTH_RESULTS))
+
+
 @app.get("/results", response_class=HTMLResponse)
 def results_page(request: Request):
     """The held-out eval as measured. Public: the same numbers are in the repository."""
@@ -1253,7 +1261,7 @@ def results_page(request: Request):
     if not held:
         return not_found(request, "The eval results")
     return page(request, "results.html", m=held, oracle=_metrics(ORACLE_RUN), repo_url=REPO_URL,
-                synth=_metrics(SYNTH_RUN, SYNTH_RESULTS))
+                synth=_metrics(SYNTH_RUN, SYNTH_RESULTS), site_nav=True)
 
 
 @app.get("/healthz")

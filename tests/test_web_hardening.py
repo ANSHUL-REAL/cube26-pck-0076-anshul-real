@@ -328,7 +328,8 @@ def test_sign_out_is_a_post_form(client):
     _login(client)
     assert '<form method="post" action="/logout"' in client.get("/").text
     assert client.post("/logout", follow_redirects=False).headers["location"] == "/login"
-    assert client.get("/", follow_redirects=False).status_code == 303  # signed out
+    assert client.get("/records", follow_redirects=False).status_code == 303  # signed out
+    assert "Sign out" not in client.get("/").text  # the front page, not the orders
 
 
 # ------------------------------------------------------------------ retried records
@@ -443,8 +444,9 @@ def test_cookie_signed_with_the_default_secret_is_not_a_sign_in(client):
     add_order(client.fake, ("CAP-BLU", 1), order_id="BRAVO-ORDER", org="org_demo_bravo")
     payload = base64.b64encode(json.dumps({"user": {"org": "org_demo_bravo", "org_name": "x", "operator": "x"}}).encode())
     client.cookies.set("session", TimestampSigner("change-me").sign(payload).decode())
-    resp = client.get("/?view=all", follow_redirects=False)
+    resp = client.get("/records", follow_redirects=False)
     assert resp.status_code == 303 and resp.headers["location"] == "/login"
+    assert "BRAVO-ORDER" not in client.get("/?view=all").text  # the public front page, not bravo's orders
 
 
 # ------------------------------------------------------------------ connection pool (app/db.py)

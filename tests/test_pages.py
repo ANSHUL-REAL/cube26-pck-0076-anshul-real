@@ -187,7 +187,9 @@ def add_order(fake, *lines, order_id="ORD-1", org="org_demo_alpha"):
 
 
 def test_login_required_and_login_flow(client):
-    assert client.get("/", follow_redirects=False).status_code == 303
+    front = client.get("/", follow_redirects=False)  # signed out: the public front page
+    assert front.status_code == 200 and "Try it with a demo company" in front.text and "Sign out" not in front.text
+    assert client.get("/records", follow_redirects=False).status_code == 303
     assert client.post("/login", data={"code": "wrong"}).status_code == 401
     assert client.post("/login", data={"code": "alpha-demo"}).status_code == 200
 

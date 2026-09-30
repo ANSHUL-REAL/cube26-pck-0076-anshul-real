@@ -8,8 +8,6 @@
 {% macro n(text) %}{{ text.split(" (")[0] }}{% endmacro %}
 {% macro rest(text) %}{{ text.split(" (", 1)[1].rstrip(")") if " (" in text else "" }}{% endmacro %}
 
-{% if not user %}<a class="back" href="/login">{{ icon("arrow-left", 16) }}Sign in</a>{% endif %}
-
 <div class="page-head">
   <div>
     <h1>How it did on {{ m.boxes_scored }} unseen boxes</h1>

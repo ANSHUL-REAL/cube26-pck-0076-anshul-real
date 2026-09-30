@@ -29,8 +29,23 @@
       </div>
     </div>
   </header>
+{% elif site_nav %}
+  <header class="topbar site-top">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/"><span class="logo">{{ icon("package", 17) }}</span><span>Pack Manager</span></a>
+      <nav>
+        <a href="/#how">How it works</a>
+        <a href="/results" class="{{ 'on' if request.url.path.startswith('/results') }}">Results</a>
+        <a href="/#proof">Records</a>
+      </nav>
+      <div class="who">
+        <a class="btn sm secondary" href="/login">Sign in</a>
+        <a class="btn sm site-demo" href="/#demo">Try the demo</a>
+      </div>
+    </div>
+  </header>
 {% endif %}
-<main class="wrap">
+<main class="wrap{{ ' site' if front_page }}">
   {% block content %}{% endblock %}
 </main>
 {% if user %}

@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Pack Manager · check every box before it's sealed{% endblock %}
+{% block content %}
+{% macro figure(m, key) -%}
+{%- for r in (m.against_targets if m else []) if r.measure.startswith(key) %}{{ r.result.split(" (")[0] }}{% endfor -%}
+{%- endmacro %}
+
+<section class="hero">
+  <div class="hero-copy">
+    <p class="kicker">Pack verification for sellers and 3PLs</p>
+    <h1>Check every box before it's sealed.</h1>
+    <p class="lead">The packer photographs the open box. Pack Manager compares it with the order, says <b>seal</b>, <b>stop and fix</b> or <b>check by hand</b>, and keeps the photo and the answer as the record of what was sent.</p>
+    <div class="hero-cta">
+      <a class="btn lg" href="#demo">Try the demo {{ icon("arrow-right", 16) }}</a>
+      <a class="btn lg secondary" href="/results">See how it did</a>
+    </div>
+    <p class="hero-note">{{ icon("camera", 15) }}A phone and a browser. No scanner, no camera station, nothing to install.</p>
+  </div>
+
+  <figure class="preview" aria-label="Example result">
+    <div class="pv-top">
+      <span class="mono">ORD-DUMMY-50023</span>
+      <span class="pv-chan">shopify</span>
+      <span class="pv-tag">Example</span>
+    </div>
+    <div class="pv-verdict">
+      <span class="pv-icon">{{ icon("octagon-x", 20) }}</span>
+      <div>
+        <b>Stop and fix</b>
+        <span>Cotton Bath Towel: 1 ordered, none found. Add it, then check again.</span>
+      </div>
+    </div>
+    <ul class="pv-checks">
+      <li><span>All items present</span><span class="v fail">Fail</span></li>
+      <li><span>Quantities correct</span><span class="v fail">Fail</span></li>
+      <li><span>No extra items</span><span class="v pass">Pass</span></li>
+      <li><span>Photo is clear</span><span class="v pass">Pass</span></li>
+      <li><span>Photo not reused</span><span class="v pass">Pass</span></li>
+    </ul>
+    <div class="pv-foot">
+      <span>{{ icon("hash", 14) }}<span class="mono">sha256 9c41…e07a</span></span>
+      <span>{{ icon("user", 14) }}op_alpha · 14:02</span>
+    </div>
+  </figure>
+</section>
+
+<section class="catches" aria-label="What it catches">
+  <div><span>{{ icon("minus", 16) }}</span><b>Missing item</b></div>
+  <div><span>{{ icon("layers", 16) }}</span><b>Wrong count</b></div>
+  <div><span>{{ icon("tag", 16) }}</span><b>Wrong variant</b></div>
+  <div><span>{{ icon("x", 16) }}</span><b>Extra item</b></div>
+  <div><span>{{ icon("image", 16) }}</span><b>Reused photo</b></div>
+  <div><span>{{ icon("sun", 16) }}</span><b>Unclear photo</b></div>
+</section>
+
+<section class="band" id="how">
+  <div class="band-head">
+    <p class="kicker">How it works</p>
+    <h2 class="display">The AI looks. Fixed rules decide.</h2>
+    <p class="muted">The model is never shown the order, so it can't simply agree with it. It lists what it sees; plain rules compare that list with the order, one check at a time. Every answer can be explained, and a person can always overrule it.</p>
+  </div>
+  <ol class="how">
+    <li>
+      <span class="how-n">1</span>
+      <h3>Pick the order</h3>
+      <p>From the day's list, imported as a simple CSV: order ID and lines like <span class="mono">SKU-A:2</span>.</p>
+    </li>
+    <li>
+      <span class="how-n">2</span>
+      <h3>Photograph the open box</h3>
+      <p>A guide on screen says what each shot should show. Blurry or dark photos are turned back at once, before any AI call.</p>
+    </li>
+    <li>
+      <span class="how-n">3</span>
+      <h3>Follow the answer</h3>
+      <p>In a few seconds: what's wrong, and what to change. If the AI doesn't answer, the box waits for a person. It is never sealed by default.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="band">
+  <div class="band-head">
+    <p class="kicker">Three answers</p>
+    <h2 class="display">"Not sure" is an answer too.</h2>
+  </div>
+  <div class="answers">
+    <div class="answer seal">
+      <span class="a-icon">{{ icon("circle-check", 20) }}</span>
+      <h3>Seal</h3>
+      <p>Everything ordered is there, in the right amounts, and nothing else.</p>
+    </div>
+    <div class="answer stop">
+      <span class="a-icon">{{ icon("octagon-x", 20) }}</span>
+      <h3>Stop and fix</h3>
+      <p>Something is missing, short, the wrong variant or extra. It says which item.</p>
+    </div>
+    <div class="answer unsure">
+      <span class="a-icon">{{ icon("circle-help", 20) }}</span>
+      <h3>Check by hand</h3>
+      <p>The photo can't settle it, such as stacked items or a hidden label. A person looks before sealing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="results">
+  <div class="band-head">
+    <p class="kicker">Measured, not claimed</p>
+    <h2 class="display">Tested once, on boxes it had never seen.</h2>
+    <p class="muted">Everything was frozen before the run, and nothing was tuned on these boxes. The two photo sets are reported separately.</p>
+  </div>
+  <div class="evals">
+    <div class="eval card">
+      <div class="eval-head"><h3>Real warehouse photos</h3><span class="muted small">Amazon Bin Image Dataset, 50 boxes</span></div>
+      <dl class="eval-nums">
+        <div><dt>Wrong, sealed</dt><dd>{{ figure(held, "False SEAL") }}</dd></div>
+        <div><dt>Good, stopped</dt><dd>{{ figure(held, "False STOP") }}</dd></div>
+        <div><dt>To a person</dt><dd>{{ figure(held, "UNCERTAIN") }}</dd></div>
+      </dl>
+      {% if held and held.kill_conditions_tripped %}
+      <p class="eval-note">A limit we set in advance was crossed: too many good boxes were stopped. On cluttered bin photos like these, it should keep the record and let a person decide, not block sealing.</p>
+      {% endif %}
+    </div>
+    <div class="eval card">
+      <div class="eval-head"><h3>AI-generated packing boxes</h3><span class="muted small">Disclosed synthetic set, 50 boxes</span></div>
+      <dl class="eval-nums">
+        <div><dt>Wrong, sealed</dt><dd>{{ figure(synth, "False SEAL") }}</dd></div>
+        <div><dt>Good, stopped</dt><dd>{{ figure(synth, "False STOP") }}</dd></div>
+        <div><dt>To a person</dt><dd>{{ figure(synth, "UNCERTAIN") }}</dd></div>
+      </dl>
+      <p class="eval-note">Clean, bench-like photos. Useful, but made by an image model, so they don't replace real ones.</p>
+    </div>
+  </div>
+  <p class="eval-more">On the organisers' sample, the rules stopped all 4 wrong boxes. The person in the data sealed 2 of them. <a href="/results">Every box, box by box</a></p>
+</section>
+
+<section class="band" id="proof">
+  <div class="band-head">
+    <p class="kicker">Proof that travels</p>
+    <h2 class="display">Every box leaves a record.</h2>
+    <p class="muted">When a buyer says "the box was empty", the seller has more than their word.</p>
+  </div>
+  <div class="proof">
+    <div><span>{{ icon("file-text", 18) }}</span><h3>A record for every box</h3><p>The photos with their hashes, every check and its verdict, the decision and why. Overrides are added with a reason; the AI's first answer is kept.</p></div>
+    <div><span>{{ icon("eye", 18) }}</span><h3>A link for the customer</h3><p>Each record has a read-only share link that opens without signing in, for a buyer or a marketplace claim.</p></div>
+    <div><span>{{ icon("braces", 18) }}</span><h3>Ready for Returns and Recovery</h3><p>Records follow the organisers' Evidence Contract 1.1 at <span class="mono">/v1</span>, with a verdict per product for claims.</p></div>
+    <div><span>{{ icon("shield-check", 18) }}</span><h3>Companies kept apart</h3><p>The database itself keeps each company's orders, records and photos private, with row-level security. It's tested against real Postgres.</p></div>
+  </div>
+</section>
+
+<section class="cta-band" id="demo">
+  <div>
+    <h2 class="display">Try it with a demo company.</h2>
+    <p class="muted">Sample orders are loaded. Pick one, photograph any box, and see the record it makes.</p>
+  </div>
+  <div class="cta-side">
+    <div class="demo-list">
+      {% for d in demo_orgs %}
+      <form method="post" action="/login" data-busy>
+        <input type="hidden" name="code" value="{{ d.code }}">
+        <button type="submit" class="demo-org">
+          <span class="demo-mark" aria-hidden="true">{{ d.name[:1] }}</span>
+          <span class="demo-text"><b>{{ d.name }}</b><span>Code <span class="mono">{{ d.code }}</span></span></span>
+          <span class="demo-go" aria-hidden="true">Open</span>
+        </button>
+      </form>
+      {% endfor %}
+    </div>
+    <p class="small muted">Have a code from your team lead? <a href="/login">Sign in</a>.</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <span class="brand">{{ icon("package", 15) }}Pack Manager</span>
+  <span>CUBE Buildathon 2026 · Track 03 · Built by Anshul Nautiyal</span>
+  <nav><a href="/results">Results</a><a href="{{ repo_url }}">Source</a><a href="/login">Sign in</a></nav>
+</footer>
+{% endblock %}
