@@ -1,0 +1,258 @@
+{
+  "record_id": "6915de66-ecaa-4d31-90f7-f7756ae6b2ed",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T46",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:20:15Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e725ff2a-a1ed-4e63-ae84-5a89ebfef79f",
+      "role": "top_down",
+      "sha256": "b35c1f19b0acb53ecbfb36fd0e62dc7988ee690b956814e20a8417dcff265576",
+      "original_sha256": "c6fc45e48b04e5b761113beaa2188805923ac09938f93c6e98339752e8f903de",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 278.9,
+        "mean_luma": 128.0,
+        "clipped_pct": 0.04,
+        "dark_pct": 0.84
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          344,
+          175,
+          627,
+          502
+        ],
+        "description": "sage green ceramic mug",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "sage green glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          361,
+          538,
+          650,
+          876
+        ],
+        "description": "sage green ceramic mug",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 0.95,
+        "alternative_skus": [],
+        "deciding_feature": "sage green glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          232,
+          133,
+          726,
+          492
+        ],
+        "description": "brown packing paper and bubble wrap filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "paper and bubble wrap packing material",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          245,
+          508,
+          730,
+          867
+        ],
+        "description": "brown packing paper and bubble wrap filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "paper and bubble wrap packing material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "units": 1
+      }
+    ],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "brown packing paper and bubble wrap filler"
+      },
+      {
+        "object_id": "o4",
+        "description": "brown packing paper and bubble wrap filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "The box interior is fully visible with two green mugs and packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "MUG-SET2",
+      "MUG-BLUE",
+      "MUG-GREEN"
+    ],
+    "usage": {
+      "input_tokens": 10854,
+      "output_tokens": 667,
+      "thinking_tokens": 0,
+      "total_tokens": 11521
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6951,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Stoneware coffee mug: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6951,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Stoneware coffee mug: 2 in the box, 1 ordered (1 too many).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6951,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6951,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6951,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:20:21Z",
+    "reasons": [
+      "Stoneware coffee mug: 2 in the box, 1 ordered (1 too many)."
+    ],
+    "fix_instructions": [
+      "Remove 1 × Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:f3c52b1161153dee773f194227b8ee1480a5f4971e6c757be62415b4c37231eb"
+}

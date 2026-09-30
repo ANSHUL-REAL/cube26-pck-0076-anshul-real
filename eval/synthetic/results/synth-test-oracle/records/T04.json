@@ -1,0 +1,253 @@
+{
+  "record_id": "b3c35f03-b250-4b6b-bcce-c7d4c41d97ff",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T04",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      },
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:21:09Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "c00f5020-a8ec-48a9-b450-213a27659a6e",
+      "role": "top_down",
+      "sha256": "20273160d8181d3f9de2e6c663e87a3a6839166d7812580b8a21411c6b119294",
+      "original_sha256": "8f88fd439277b6ce1070b49e1e4f3f47d49d863f32b77ff768e54ce7eba7d9f1",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 287.1,
+        "mean_luma": 132.6,
+        "clipped_pct": 0.03,
+        "dark_pct": 2.63
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "CABLE-USB",
+        "classification": "CANDIDATE",
+        "sku": "CABLE-USB",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "USB charging cable"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "SOAP-HERBAL",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-SET2",
+        "classification": "CANDIDATE",
+        "sku": "MUG-SET2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Two-mug gift box"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "MUG-SET2",
+        "title": "Two-mug gift box",
+        "object_id": "o3"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "CABLE-USB",
+      "SOAP-HERBAL",
+      "SOAP-CITRUS",
+      "BOTTLE-STEEL"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Two-mug gift box (#3).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:21:09Z",
+    "reasons": [
+      "Not in the order: Two-mug gift box (#3)."
+    ],
+    "fix_instructions": [
+      "Remove Two-mug gift box (#3); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7795a3f61252e9c4157ef66b6574a75ead1b12101cc1ec4bf1643c6ac547b202"
+}

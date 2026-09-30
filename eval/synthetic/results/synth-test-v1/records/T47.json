@@ -1,0 +1,236 @@
+{
+  "record_id": "89b20a87-4f10-47d6-bd28-ba4d57521c8f",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T47",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-SMALL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:20:24Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "50c8f400-69e3-4ada-a65b-6bb2d03776ce",
+      "role": "top_down",
+      "sha256": "e34b06d2ba115e9104a08dc2c50d814ece9896b02ff1832baa9ad76927642a34",
+      "original_sha256": "ab84d24006afa30e79220aaedf75b89db683ffeecd9b799e331bfd346ccef80d",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 326.9,
+        "mean_luma": 144.6,
+        "clipped_pct": 0.05,
+        "dark_pct": 0.86
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Not in the order: bottle of citrus dish soap with pump (#1).",
+        "1 photo(s) passed the blur, exposure, glare and resolution checks."
+      ],
+      "unknown": [
+        "Rectangular woven storage basket: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+        "Rectangular woven storage basket: not seen, but items may be hidden.",
+        "Items may be stacked or hidden. The box contains a bottle of dish soap resting on crumpled packing paper. Packing paper surrounds the bottle and could potentially hide smaller items underneath."
+      ],
+      "missing_evidence": [
+        "A view of stacked or covered items: spread them out, or add a photo from an angle.",
+        "Whether Rectangular woven storage basket is in the box showing Light oat paper-weave basket with short sides and two oval handholds; smaller than large basket.",
+        "A count of Rectangular woven storage basket with every unit visible."
+      ],
+      "next_action": "Fix the problems listed, then check the unclear items by hand before sealing."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-SMALL",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "UNCERTAIN",
+        "quantity": "UNCERTAIN"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          272,
+          338,
+          755,
+          655
+        ],
+        "description": "bottle of citrus dish soap with pump",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "labeled citrus dish soap bottle not matching any candidate",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          244,
+          171,
+          856,
+          815
+        ],
+        "description": "crumpled brown packing paper filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper used as packaging filler",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "bottle of citrus dish soap with pump",
+        "object_id": "o1"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "crumpled brown packing paper filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": true,
+      "visibility_confidence": 0.85,
+      "notes": "The box contains a bottle of dish soap resting on crumpled packing paper. Packing paper surrounds the bottle and could potentially hide smaller items underneath."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BIN-SMALL",
+      "MUG-BLUE",
+      "BIN-LARGE",
+      "BRUSH-WOOD"
+    ],
+    "usage": {
+      "input_tokens": 10840,
+      "output_tokens": 367,
+      "thinking_tokens": 0,
+      "total_tokens": 11207
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "UNCERTAIN",
+      "confidence": 0.85,
+      "detail": "Items may be stacked or hidden. The box contains a bottle of dish soap resting on crumpled packing paper. Packing paper surrounds the bottle and could potentially hide smaller items underneath.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7105,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-SMALL",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Rectangular woven storage basket: not seen, but items may be hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7105,
+      "evidence": {
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-SMALL",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Rectangular woven storage basket: 0 clearly counted, some units may be stacked or hidden; 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7105,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.85,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7105,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: bottle of citrus dish soap with pump (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7105,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:20:31Z",
+    "reasons": [
+      "Not in the order: bottle of citrus dish soap with pump (#1)."
+    ],
+    "fix_instructions": [
+      "Remove bottle of citrus dish soap with pump (#1); it is not in the order.",
+      "Also check: Take a photo that shows the whole inside of the box, with stacked items spread out.",
+      "Also check: Count Rectangular woven storage basket by hand: there should be 1."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:f62f482073f22be1f352cf7018855b4b9bb6aa7457728fb2b5450ae86f8cc4e9"
+}

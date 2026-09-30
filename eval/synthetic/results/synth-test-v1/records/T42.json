@@ -1,0 +1,313 @@
+{
+  "record_id": "113766c9-21b7-42fc-9a67-59eeaff056ff",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T42",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      },
+      {
+        "sku": "BIN-SMALL",
+        "qty": 1
+      },
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:19:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d97de064-a5f9-4e17-a165-511f358fca6b",
+      "role": "top_down",
+      "sha256": "e3007ce76176d9d14e774afaf3362f769c7febe81c652fc5a58b3e635a7b31da",
+      "original_sha256": "0f7339e66fa3e81274d177af36dd84227a743020ea0774db4449dce363d15fca",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 332.3,
+        "mean_luma": 125.0,
+        "clipped_pct": 0.27,
+        "dark_pct": 2.2
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "BIN-SMALL",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          251,
+          177,
+          792,
+          608
+        ],
+        "description": "rectangular woven storage basket with handholds",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.7,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "shorter sides compared to large basket variant",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          273,
+          629,
+          765,
+          800
+        ],
+        "description": "tall stainless steel water bottle",
+        "classification": "CANDIDATE",
+        "sku": "BOTTLE-STEEL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brushed stainless steel cylindrical body and simple cap",
+        "partially_hidden": false,
+        "title": "Reusable water bottle"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          201,
+          350,
+          805,
+          852
+        ],
+        "description": "brown packing paper filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown craft paper used as void fill",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "brown packing paper filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is fully visible, containing a small woven basket, a stainless steel water bottle, and some packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-GREEN",
+      "BIN-SMALL",
+      "BOTTLE-STEEL",
+      "BIN-LARGE",
+      "MUG-SET2",
+      "SOAP-HERBAL",
+      "MUG-BLUE"
+    ],
+    "usage": {
+      "input_tokens": 17612,
+      "output_tokens": 621,
+      "thinking_tokens": 0,
+      "total_tokens": 18233
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "Rectangular woven storage basket: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.7,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7141,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:19:46Z",
+    "reasons": [
+      "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "Stoneware coffee mug: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ec3d5971d3323ba06c3e90a0587aa2ed38ff35008db630cda6ce9344a449224f"
+}

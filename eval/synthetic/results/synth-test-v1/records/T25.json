@@ -1,0 +1,234 @@
+{
+  "record_id": "0e6d450a-3ea9-45b5-bcec-b599c5896dd9",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T25",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-BLUE",
+        "qty": 4
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:17:00Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "cb38394e-f17e-4c4a-8767-cfe662591dde",
+      "role": "top_down",
+      "sha256": "cbbe5acfde8b55105e236a7d77a2efe9dd8126aa145ab8f904bccba92d3c8923",
+      "original_sha256": "ceb7f49cf4e1185c3464e313b9cf520441edffec1699b4c3c4ca3dca3545cdbd",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 209.3,
+        "mean_luma": 117.6,
+        "clipped_pct": 0.02,
+        "dark_pct": 5.51
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 4,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          346,
+          163,
+          690,
+          477
+        ],
+        "description": "deep blue ceramic mug on left",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          477,
+          458,
+          772,
+          804
+        ],
+        "description": "deep blue ceramic mug at bottom right",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          196,
+          477,
+          528,
+          851
+        ],
+        "description": "deep blue ceramic mug at top right",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is fully visible and contains three distinct blue mugs with no obstruction."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "MUG-GREEN",
+      "MUG-BLUE",
+      "BIN-SMALL"
+    ],
+    "usage": {
+      "input_tokens": 10842,
+      "output_tokens": 551,
+      "thinking_tokens": 0,
+      "total_tokens": 11393
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8596,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#1, #2, #3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8596,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 3 in the box, 4 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8596,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8596,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8596,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:17:09Z",
+    "reasons": [
+      "Stoneware coffee mug: 3 in the box, 4 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:437aa5514fc39fe43db9448f2fbfcc719090bdc071d796f8416b5b12fc543b85"
+}

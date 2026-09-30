@@ -1,0 +1,266 @@
+{
+  "record_id": "e1715e5a-ec40-4585-86d2-6d4251eeebab",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T15",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      },
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:15:24Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "fe37bbdc-dbe9-452d-98a9-820c9354a375",
+      "role": "top_down",
+      "sha256": "71e2a950257a1915c95f8ce4575226b0d200bc4291dba4f1731c6b932c0c5016",
+      "original_sha256": "e64c894f74725d6915d2b4c302c12dd52b3946cc231672bda3c354e7b9e859fd",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "FAIL",
+        "reasons": [
+          "Photo is too dark. Add light or move closer to a window."
+        ],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 60.4,
+        "mean_luma": 40.4,
+        "clipped_pct": 0.0,
+        "dark_pct": 23.54
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Morrow & Pine dish soap: 1 of 1.",
+        "USB charging cable: 1 of 1.",
+        "Morrow & Pine dish soap: found (#1).",
+        "USB charging cable: found (#2).",
+        "The whole inside of the box is visible and nothing appears hidden."
+      ],
+      "unknown": [
+        "Photo 1: Photo is too dark. Add light or move closer to a window. The operator chose to continue."
+      ],
+      "missing_evidence": [
+        "A sharp, well-lit photo. Photo is too dark. Add light or move closer to a window."
+      ],
+      "next_action": "Retake the photo with the whole box in the frame and items spread out, then check again."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          238,
+          235,
+          760,
+          513
+        ],
+        "description": "bottle of herbal dish soap",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "SOAP-CITRUS"
+        ],
+        "deciding_feature": "pale green label with leaf illustration and herbal text",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          413,
+          553,
+          686,
+          775
+        ],
+        "description": "coiled white USB charging cable",
+        "classification": "CANDIDATE",
+        "sku": "CABLE-USB",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "coiled white cable with USB-A and USB-C plugs",
+        "partially_hidden": false,
+        "title": "USB charging cable"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is fully visible with no obstruction or clutter."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "CABLE-USB",
+      "SOAP-CITRUS",
+      "BRUSH-WOOD",
+      "SOAP-HERBAL"
+    ],
+    "usage": {
+      "input_tokens": 13125,
+      "output_tokens": 488,
+      "thinking_tokens": 0,
+      "total_tokens": 13613
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Photo 1: Photo is too dark. Add light or move closer to a window. The operator chose to continue.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7081,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:15:31Z",
+    "reasons": [
+      "Photo 1: Photo is too dark. Add light or move closer to a window. The operator chose to continue."
+    ],
+    "fix_instructions": [
+      "Retake the photo. Photo is too dark. Add light or move closer to a window."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:a969bd6f87853989a2e4be9c99e28e1ef7524461fecdcfb294412945fa37708a"
+}

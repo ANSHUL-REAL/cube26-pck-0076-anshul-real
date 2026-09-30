@@ -1,0 +1,223 @@
+{
+  "record_id": "d3d95192-4a3b-4625-b53b-9b9036991d52",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T12",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-BLUE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:14:57Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "21328f4d-dec0-4c52-85a4-b9d0be2b0897",
+      "role": "top_down",
+      "sha256": "2fa13bcbb083d3c33d972d5152e455d4cd26c9dcc34669605719e5ae5030028d",
+      "original_sha256": "7259bd5841f41d23b7d4dd109b95076fc32d8ac9fe4e9ae4b9a1b66e79e858f6",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 233.1,
+        "mean_luma": 124.6,
+        "clipped_pct": 0.02,
+        "dark_pct": 1.31
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          366,
+          319,
+          712,
+          712
+        ],
+        "description": "sage green glazed ceramic mug",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "sage green exterior glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          297,
+          192,
+          785,
+          785
+        ],
+        "description": "brown crumpled packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper packaging filler",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "MUG-BLUE",
+        "expected_title": "Stoneware coffee mug",
+        "found_sku": "MUG-GREEN",
+        "found_title": "Stoneware coffee mug",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "brown crumpled packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "the box interior is clearly seen with a single green mug and packing paper filling the bottom"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BOTTLE-STEEL",
+      "SOAP-HERBAL",
+      "MUG-BLUE",
+      "MUG-GREEN"
+    ],
+    "usage": {
+      "input_tokens": 10865,
+      "output_tokens": 409,
+      "thinking_tokens": 0,
+      "total_tokens": 11274
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7033,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7033,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7033,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7033,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "MUG-BLUE",
+            "found_sku": "MUG-GREEN",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7033,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:15:04Z",
+    "reasons": [
+      "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "Stoneware coffee mug: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Stoneware coffee mug (#1) with Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:201742c34a236d9c071139b71ae6a9f4d0d00e6fea4080349a4e2312366d6ad3"
+}

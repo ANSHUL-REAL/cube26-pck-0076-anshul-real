@@ -1,0 +1,16 @@
+{
+  "split": "test",
+  "reveal_order": false,
+  "dataset": "Synthetic boxes (AI-generated images, not photographs)",
+  "perceiver": "model",
+  "model": "gemini-3.5-flash-lite",
+  "match_threshold": 0.7,
+  "visibility_threshold": 0.7,
+  "started_at": "2026-09-30T16:13:12+00:00",
+  "frozen": {
+    "file": "eval/synthetic/frozen-test.json",
+    "frozen_at": "2026-09-30T16:12:51+00:00",
+    "matches": true,
+    "changed_since": []
+  }
+}

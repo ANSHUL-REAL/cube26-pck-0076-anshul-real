@@ -1,0 +1,207 @@
+{
+  "record_id": "f96b12ce-4abc-4acd-8416-edb72b9dac53",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T06",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:14:03Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0500971e-2860-4241-9648-90dd97748592",
+      "role": "top_down",
+      "sha256": "bdfa14d6dcb0a065364c3f81eb9e5486cb9398e41739557376eb418fd0790b29",
+      "original_sha256": "f6ffa7a2b82b90b44c8230d88fbc5179963635a731887f4e7604afdeba2c0e78",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 167.8,
+        "mean_luma": 130.6,
+        "clipped_pct": 0.33,
+        "dark_pct": 1.62
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          164,
+          401,
+          825,
+          595
+        ],
+        "description": "reusable stainless steel water bottle",
+        "classification": "CANDIDATE",
+        "sku": "BOTTLE-STEEL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "tall narrow cylindrical brushed stainless steel bottle with plain screw cap",
+        "partially_hidden": false,
+        "title": "Reusable water bottle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          155,
+          233,
+          853,
+          755
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper used as void fill",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "the box contains one stainless steel bottle surrounded by crumpled brown paper"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-HERBAL",
+      "BOTTLE-STEEL",
+      "MUG-SET2"
+    ],
+    "usage": {
+      "input_tokens": 8631,
+      "output_tokens": 413,
+      "thinking_tokens": 0,
+      "total_tokens": 9044
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10923,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10923,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10923,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10923,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 10923,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:14:14Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:9c11504a2a986cea174aa0380a85c60b2c9318ec8fa9eaed16adbee212a25e57"
+}

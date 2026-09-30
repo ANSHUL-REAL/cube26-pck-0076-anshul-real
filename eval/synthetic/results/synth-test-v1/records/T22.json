@@ -1,0 +1,228 @@
+{
+  "record_id": "548951cb-124d-4de5-86bd-23fa1da00a01",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T22",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BRUSH-WOOD",
+        "qty": 1
+      },
+      {
+        "sku": "TOWEL-GRAY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:16:33Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "3fc32515-0a9c-406a-9eaa-ef8538ea2d1d",
+      "role": "top_down",
+      "sha256": "cb1d242c8e5a49603b3ce77b58b4e6b8e56517ff0ceed770a12f91231759edc2",
+      "original_sha256": "5cf77b5a303ce7defa01cc20c20b8efe6d3d3d29a7cf5cfbbeae1af93af082da",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 739.4,
+        "mean_luma": 119.7,
+        "clipped_pct": 0.0,
+        "dark_pct": 8.44
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "TOWEL-GRAY",
+        "title": "Cotton hand towel",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          298,
+          194,
+          752,
+          810
+        ],
+        "description": "folded charcoal gray cotton hand towel",
+        "classification": "CANDIDATE",
+        "sku": "TOWEL-GRAY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "distinctive charcoal gray looped terry texture with chevron border",
+        "partially_hidden": false,
+        "title": "Cotton hand towel"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is completely visible with no fillers or hidden items obstructing the single towel inside."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "BIN-LARGE",
+      "BIN-SMALL",
+      "BRUSH-WOOD"
+    ],
+    "usage": {
+      "input_tokens": 10838,
+      "output_tokens": 301,
+      "thinking_tokens": 0,
+      "total_tokens": 11139
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BRUSH-WOOD",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:BRUSH-WOOD",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6938,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:16:40Z",
+    "reasons": [
+      "Wooden dish brush: 0 in the box, 1 ordered.",
+      "Wooden dish brush: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Wooden dish brush."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ab5a8ea6d80bf4793ad6b566ee74ec52b441685fa1704620783f95ece1bd5769"
+}

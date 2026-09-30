@@ -1,0 +1,271 @@
+{
+  "record_id": "3164c1d3-8ec0-4ee8-956d-f8e38de34d3c",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T13",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      },
+      {
+        "sku": "BIN-LARGE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:15:06Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "273dcadb-2521-45f6-a12a-659f636a3450",
+      "role": "top_down",
+      "sha256": "facb4154d23afca6cfda6a35ff3a8c0f252189923fd42bc95ba07d3c1a711e4a",
+      "original_sha256": "4b4604fd6c31452f510ad5aee2b036e579f136bdb722fd8b499f36008db4d39c",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 406.3,
+        "mean_luma": 143.8,
+        "clipped_pct": 0.17,
+        "dark_pct": 1.56
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BIN-LARGE",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          317,
+          157,
+          755,
+          380
+        ],
+        "description": "Morrow & Pine herbal dish soap bottle",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "SOAP-CITRUS"
+        ],
+        "deciding_feature": "pale green label with leaf illustration and herbal text",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          182,
+          403,
+          804,
+          891
+        ],
+        "description": "large rectangular woven storage basket",
+        "classification": "CANDIDATE",
+        "sku": "BIN-LARGE",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "BIN-SMALL"
+        ],
+        "deciding_feature": "tall sides with oval handholds indicating large size",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          168,
+          127,
+          831,
+          848
+        ],
+        "description": "brown paper packaging filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "crumpled brown paper packing material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "brown paper packaging filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is completely visible with no hidden items."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-CITRUS",
+      "MUG-GREEN",
+      "CANDLE-CREAM",
+      "SOAP-HERBAL",
+      "BIN-SMALL",
+      "BIN-LARGE"
+    ],
+    "usage": {
+      "input_tokens": 15374,
+      "output_tokens": 614,
+      "thinking_tokens": 0,
+      "total_tokens": 15988
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7200,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:15:13Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:6249d0a47a55832bd7894a4b23d8d2802a8d7f8b4f03ddfc77cc2229ecc49a57"
+}

@@ -1,0 +1,268 @@
+{
+  "record_id": "e2968771-44e5-4c34-8ccf-dcaad532880c",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T04",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      },
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:13:43Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "67428864-4932-4d7d-b074-35ce7a3a6d54",
+      "role": "top_down",
+      "sha256": "20273160d8181d3f9de2e6c663e87a3a6839166d7812580b8a21411c6b119294",
+      "original_sha256": "8f88fd439277b6ce1070b49e1e4f3f47d49d863f32b77ff768e54ce7eba7d9f1",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 287.1,
+        "mean_luma": 132.6,
+        "clipped_pct": 0.03,
+        "dark_pct": 2.63
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          272,
+          281,
+          502,
+          461
+        ],
+        "description": "white coiled USB-A to USB-C cable",
+        "classification": "CANDIDATE",
+        "sku": "CABLE-USB",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "coiled white cable with USB-A and USB-C plugs",
+        "partially_hidden": false,
+        "title": "USB charging cable"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          107,
+          477,
+          547,
+          722
+        ],
+        "description": "bottle of herbal dish soap",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "SOAP-CITRUS"
+        ],
+        "deciding_feature": "pale green label with leaf illustration and herbal text",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          502,
+          166,
+          866,
+          831
+        ],
+        "description": "cardboard insert holding two white mugs",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "cardboard packaging insert for mugs",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "cardboard insert holding two white mugs"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is completely open and clearly visible without any hidden items."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "CABLE-USB",
+      "SOAP-HERBAL",
+      "SOAP-CITRUS",
+      "BOTTLE-STEEL"
+    ],
+    "usage": {
+      "input_tokens": 13128,
+      "output_tokens": 617,
+      "thinking_tokens": 0,
+      "total_tokens": 13745
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7005,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:13:50Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:0a20c1ccd7cfd8eb51ad515502d8994a3e6b66d9f0fb59d24ff97885d34ded90"
+}

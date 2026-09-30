@@ -1,0 +1,273 @@
+{
+  "record_id": "3fe1d427-8e89-4fbf-9f35-778f4709e65b",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T11",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-LARGE",
+        "qty": 1
+      },
+      {
+        "sku": "CANDLE-CREAM",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:21:10Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "279f6b4d-3c79-4917-8d71-8a8296c123de",
+      "role": "top_down",
+      "sha256": "b0970da10501ec47ecd4c0ac175e99aac4d29814c4d34362956f6b5ba0ee82bb",
+      "original_sha256": "5388722f99f49ab3ca9e947e43e1d88808f033392477bbc1bc3a364d8891b188",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 381.4,
+        "mean_luma": 131.7,
+        "clipped_pct": 0.13,
+        "dark_pct": 0.84
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-LARGE",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "BIN-LARGE",
+        "classification": "CANDIDATE",
+        "sku": "BIN-LARGE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-GREEN",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BIN-SMALL",
+      "BOTTLE-STEEL",
+      "MUG-BLUE",
+      "CANDLE-CREAM",
+      "BIN-LARGE",
+      "BRUSH-WOOD",
+      "MUG-GREEN"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:CANDLE-CREAM",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:CANDLE-CREAM",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:21:10Z",
+    "reasons": [
+      "Unscented jar candle: 0 in the box, 1 ordered.",
+      "Unscented jar candle: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Unscented jar candle."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:9340d3673830fa057f64e5f73fbe84e45b6e095de842c0e998fb213bdba2d518"
+}

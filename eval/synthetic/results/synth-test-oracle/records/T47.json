@@ -1,0 +1,190 @@
+{
+  "record_id": "c5bc1f3e-4e15-4970-96f5-873d6c0547ff",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T47",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-SMALL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:21:15Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "359ef269-7cb6-4f47-84f1-38402158f839",
+      "role": "top_down",
+      "sha256": "e34b06d2ba115e9104a08dc2c50d814ece9896b02ff1832baa9ad76927642a34",
+      "original_sha256": "ab84d24006afa30e79220aaedf75b89db683ffeecd9b799e331bfd346ccef80d",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 326.9,
+        "mean_luma": 144.6,
+        "clipped_pct": 0.05,
+        "dark_pct": 0.86
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-SMALL",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "SOAP-CITRUS",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-CITRUS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "BIN-SMALL",
+        "expected_title": "Rectangular woven storage basket",
+        "found_sku": "SOAP-CITRUS",
+        "found_title": "Morrow & Pine dish soap",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BIN-SMALL",
+      "MUG-BLUE",
+      "BIN-LARGE",
+      "BRUSH-WOOD"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-SMALL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:BIN-SMALL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Rectangular woven storage basket, found Morrow & Pine dish soap (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "BIN-SMALL",
+            "found_sku": "SOAP-CITRUS",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:21:15Z",
+    "reasons": [
+      "Expected Rectangular woven storage basket, found Morrow & Pine dish soap (#1).",
+      "Rectangular woven storage basket: 0 in the box, 1 ordered.",
+      "Rectangular woven storage basket: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Morrow & Pine dish soap (#1) with Rectangular woven storage basket."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a6c4ce82ea0d8171ff0f1c8320ed5700fc0045d8be85375f0ad793b7c1c65c07"
+}

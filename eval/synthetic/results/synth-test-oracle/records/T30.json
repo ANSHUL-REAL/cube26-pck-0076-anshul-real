@@ -1,0 +1,244 @@
+{
+  "record_id": "b0c84bb2-6e40-47b2-a883-95525954258f",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T30",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-BLUE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:21:13Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "3e2cf5ba-26e4-4fa9-8b95-5eaa59f3a84b",
+      "role": "top_down",
+      "sha256": "1da487d71648440826ce92581dd2c556078fa76630eec358b8ea56408f1b8fa7",
+      "original_sha256": "c8c091e19e21afd002d25e6fad8c52d4ee8d3ac50757534131af6b058541bb61",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 352.3,
+        "mean_luma": 123.6,
+        "clipped_pct": 0.04,
+        "dark_pct": 2.53
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "SOAP-CITRUS",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-CITRUS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-BLUE",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "SOAP-HERBAL",
+        "expected_title": "Morrow & Pine dish soap",
+        "found_sku": "SOAP-CITRUS",
+        "found_title": "Morrow & Pine dish soap",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-CITRUS",
+      "MUG-BLUE",
+      "BOTTLE-STEEL",
+      "MUG-GREEN",
+      "MUG-SET2",
+      "SOAP-HERBAL"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Morrow & Pine dish soap, found Morrow & Pine dish soap (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "SOAP-HERBAL",
+            "found_sku": "SOAP-CITRUS",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:21:13Z",
+    "reasons": [
+      "Expected Morrow & Pine dish soap, found Morrow & Pine dish soap (#1).",
+      "Morrow & Pine dish soap: 0 in the box, 1 ordered.",
+      "Morrow & Pine dish soap: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Morrow & Pine dish soap (#1) with Morrow & Pine dish soap."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ef683a4ba5145e21dc6652a4da0e7896fbdbabddc803849dee4e8b7b697e518c"
+}

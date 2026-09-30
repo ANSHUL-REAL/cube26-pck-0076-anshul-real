@@ -1,0 +1,187 @@
+{
+  "record_id": "4436d588-7fac-40ab-931d-65d43c56fca6",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T23",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-SMALL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:16:42Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "66638659-3824-4ee7-b385-328a81e8f1e4",
+      "role": "top_down",
+      "sha256": "fd7488da72112c9e9c9274ea29767e4748384aff76c1a8e9dc73e73b2628d955",
+      "original_sha256": "65e4c2d23170482f31e9e2197df00aeb67f06a8a082dda69908e69a7e603002b",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 386.5,
+        "mean_luma": 139.1,
+        "clipped_pct": 0.07,
+        "dark_pct": 2.18
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-SMALL",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          289,
+          203,
+          784,
+          814
+        ],
+        "description": "Rectangular woven storage basket with small sides",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.9,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "shorter sides compared to the large basket",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is completely visible and contains a single small woven basket with no packing material or hidden items."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BIN-LARGE",
+      "CANDLE-CREAM",
+      "BIN-SMALL",
+      "BRUSH-WOOD"
+    ],
+    "usage": {
+      "input_tokens": 10846,
+      "output_tokens": 300,
+      "thinking_tokens": 0,
+      "total_tokens": 11146
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6488,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Rectangular woven storage basket: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6488,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6488,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6488,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6488,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:16:49Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:80f5c05d7f8ed16428952dfbacf61abb9ee951c772b1296af92fa0b3119fcf8f"
+}

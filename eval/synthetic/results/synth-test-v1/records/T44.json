@@ -1,0 +1,237 @@
+{
+  "record_id": "995046da-7942-49c2-b8bf-cf77361448c0",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T44",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "CANDLE-CREAM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:19:56Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "7aa4f575-8267-4018-8363-ee347693df4c",
+      "role": "top_down",
+      "sha256": "eb0061425b2873afe9f2e65ba5cdd3803b8e473c8f8fca1a2c85e71520dbbb64",
+      "original_sha256": "bf4444053669f55f68533b4360511132412933dcb7c7c4067b3253639f0d98f5",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 346.7,
+        "mean_luma": 123.8,
+        "clipped_pct": 0.03,
+        "dark_pct": 2.68
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          363,
+          243,
+          627,
+          470
+        ],
+        "description": "small clear glass jar candle with cream paper band",
+        "classification": "CANDIDATE",
+        "sku": "CANDLE-CREAM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "clear glass jar with cream band and ivory wax",
+        "partially_hidden": false,
+        "title": "Unscented jar candle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          369,
+          496,
+          696,
+          818
+        ],
+        "description": "deep blue ceramic mug with cream interior",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          261,
+          161,
+          785,
+          831
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown craft paper used as void fill",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is fully visible, containing one candle, one blue mug, and packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CANDLE-CREAM",
+      "SOAP-CITRUS",
+      "MUG-BLUE"
+    ],
+    "usage": {
+      "input_tokens": 8617,
+      "output_tokens": 608,
+      "thinking_tokens": 0,
+      "total_tokens": 9225
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7305,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7305,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7305,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7305,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Stoneware coffee mug (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7305,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:20:04Z",
+    "reasons": [
+      "Not in the order: Stoneware coffee mug (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Stoneware coffee mug (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:cbc501028f031a2fc265f7e6b04c18147b3c56fe4b9073577a34299ebafaf620"
+}

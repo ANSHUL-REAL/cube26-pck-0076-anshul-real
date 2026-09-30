@@ -1,0 +1,290 @@
+{
+  "record_id": "7a06c46b-c67f-4c2e-a98a-53904b160c0b",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T49",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-LARGE",
+        "qty": 1
+      },
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:20:42Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "3e410bbc-be57-47eb-90ea-dbb59c872b81",
+      "role": "top_down",
+      "sha256": "9420c630bd531faa1f66529512971093f87449335588325c2f248211701a048f",
+      "original_sha256": "aaabe70970a7929067184b20bc8313004e856e49f767b6f06b8a3a6c8e93aea7",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 427.3,
+        "mean_luma": 146.9,
+        "clipped_pct": 0.12,
+        "dark_pct": 1.22
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-LARGE",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          181,
+          94,
+          866,
+          704
+        ],
+        "description": "rectangular woven storage basket with handles",
+        "classification": "CANDIDATE",
+        "sku": "BIN-LARGE",
+        "confidence": 0.8,
+        "alternative_skus": [
+          "BIN-SMALL"
+        ],
+        "deciding_feature": "basket proportions appear taller relative to width",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          322,
+          696,
+          778,
+          856
+        ],
+        "description": "stainless steel water bottle",
+        "classification": "CANDIDATE",
+        "sku": "BOTTLE-STEEL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "tall cylindrical brushed stainless steel bottle",
+        "partially_hidden": false,
+        "title": "Reusable water bottle"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          467,
+          107,
+          794,
+          663
+        ],
+        "description": "bubble wrap packaging",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "clear plastic bubble wrap sheet",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          191,
+          672,
+          858,
+          880
+        ],
+        "description": "brown packing paper filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "crumpled brown kraft paper",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "bubble wrap packaging"
+      },
+      {
+        "object_id": "o4",
+        "description": "brown packing paper filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "all box contents are clearly visible from above"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BOTTLE-STEEL",
+      "BIN-SMALL",
+      "MUG-BLUE",
+      "TOWEL-GRAY",
+      "BIN-LARGE"
+    ],
+    "usage": {
+      "input_tokens": 13090,
+      "output_tokens": 716,
+      "thinking_tokens": 0,
+      "total_tokens": 13806
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Rectangular woven storage basket: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.8,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7421,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:20:49Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:5cb5da551affb56355b99555bedf3b2ec2e9ab18231be476cb69181ea6ae5231"
+}

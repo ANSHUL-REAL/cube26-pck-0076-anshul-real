@@ -1,0 +1,275 @@
+{
+  "record_id": "ae6ad75d-157b-4f48-bdaa-6971643f02ba",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T27",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-SMALL",
+        "qty": 5
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:17:22Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e5a321fb-4b44-4272-a908-ed65b2c60826",
+      "role": "top_down",
+      "sha256": "d4dc86296d22d31822ca45d560fe49682b683fa4494067c32b1a54bb2cc55629",
+      "original_sha256": "33492769c26cb46a2115d1c7c7af3d2d6dc622d1be1a33ae6733f519b042d9d4",
+      "mime": "image/jpeg",
+      "width": 1448,
+      "height": 1086,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1448,
+        "height": 1086,
+        "blur_var": 507.4,
+        "mean_luma": 137.5,
+        "clipped_pct": 0.03,
+        "dark_pct": 0.43
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-SMALL",
+        "title": "Rectangular woven storage basket",
+        "ordered": 5,
+        "found": 5,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          318,
+          122,
+          678,
+          299
+        ],
+        "description": "small rectangular woven storage basket",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.9,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "short sides with oval handholds",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          310,
+          282,
+          670,
+          436
+        ],
+        "description": "small rectangular woven storage basket",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.9,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "short sides with oval handholds",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          304,
+          431,
+          663,
+          582
+        ],
+        "description": "small rectangular woven storage basket",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.9,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "short sides with oval handholds",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          296,
+          565,
+          655,
+          739
+        ],
+        "description": "small rectangular woven storage basket",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.9,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "short sides with oval handholds",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": [
+          286,
+          702,
+          648,
+          900
+        ],
+        "description": "small rectangular woven storage basket",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 0.9,
+        "alternative_skus": [
+          "BIN-LARGE"
+        ],
+        "deciding_feature": "short sides with oval handholds",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "Five small baskets neatly placed in a row inside the shipping box"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CABLE-USB",
+      "BIN-LARGE",
+      "SOAP-HERBAL",
+      "BIN-SMALL"
+    ],
+    "usage": {
+      "input_tokens": 10843,
+      "output_tokens": 819,
+      "thinking_tokens": 0,
+      "total_tokens": 11662
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8288,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Rectangular woven storage basket: found (#1, #2, #3, #4, #5).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8288,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Rectangular woven storage basket: 5 of 5.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8288,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8288,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.9,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8288,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:17:30Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:c69c0209a4ae42b6d7c999b293e0f2a54b8e4b4c3a5bd51acdbe9b717b8e3aa9"
+}

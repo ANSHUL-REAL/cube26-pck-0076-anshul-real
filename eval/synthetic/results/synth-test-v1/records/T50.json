@@ -1,0 +1,313 @@
+{
+  "record_id": "6ed5693e-3668-4266-bb9c-9baf4d6a5048",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T50",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      },
+      {
+        "sku": "BIN-LARGE",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:20:51Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "12948587-cb61-42f7-903b-a1da30b4ce0e",
+      "role": "top_down",
+      "sha256": "7a6f97370d11b29d42ce61d7b4a9121e5050847df64177434a845d5cb90ecbc9",
+      "original_sha256": "56db9d4ac00478f23fd935efe05edbd9b09f9f74ce85f8de7ebb57987882daaf",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 250.1,
+        "mean_luma": 123.5,
+        "clipped_pct": 0.35,
+        "dark_pct": 1.49
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BIN-LARGE",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          198,
+          260,
+          786,
+          434
+        ],
+        "description": "reusable stainless steel water bottle",
+        "classification": "CANDIDATE",
+        "sku": "BOTTLE-STEEL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "matte stainless steel cylindrical body with screw cap",
+        "partially_hidden": false,
+        "title": "Reusable water bottle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          403,
+          470,
+          672,
+          777
+        ],
+        "description": "sage green stoneware coffee mug",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "MUG-BLUE"
+        ],
+        "deciding_feature": "sage green glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          211,
+          219,
+          783,
+          783
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper filler material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [
+      {
+        "sku": "BIN-LARGE",
+        "title": "Rectangular woven storage basket",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "the box contains one steel water bottle, one sage green mug, and packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CABLE-USB",
+      "MUG-GREEN",
+      "MUG-BLUE",
+      "BIN-LARGE",
+      "SOAP-HERBAL",
+      "BIN-SMALL",
+      "BOTTLE-STEEL"
+    ],
+    "usage": {
+      "input_tokens": 17608,
+      "output_tokens": 601,
+      "thinking_tokens": 0,
+      "total_tokens": 18209
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BIN-LARGE",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Rectangular woven storage basket: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:BIN-LARGE",
+      "verdict": "FAIL",
+      "confidence": 0.95,
+      "detail": "Rectangular woven storage basket: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 4685,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:20:56Z",
+    "reasons": [
+      "Rectangular woven storage basket: 0 in the box, 1 ordered.",
+      "Rectangular woven storage basket: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × Rectangular woven storage basket."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:3faf1e7af7e19b56df990c3c5e30219f7af62b189e7802bfc552e902d331d580"
+}

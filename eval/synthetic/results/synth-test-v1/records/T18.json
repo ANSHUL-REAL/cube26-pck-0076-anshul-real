@@ -1,0 +1,289 @@
+{
+  "record_id": "d4abb8e8-dfc2-4d64-8454-08903b099f90",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T18",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-BLUE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:15:57Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "19375bd0-11a0-4eaa-8821-50125d4b4eaa",
+      "role": "top_down",
+      "sha256": "20e0f11bd6edb57b4999fe644c038c7946f4bdcb1a82731c2f679123099e2160",
+      "original_sha256": "b4486f63f6c645338f3815266e9758dd146f90807117da361417008fcc0db936",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "FAIL",
+        "reasons": [
+          "Photo looks blurry. Hold the phone steady and tap to focus."
+        ],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 22.0,
+        "mean_luma": 119.3,
+        "clipped_pct": 0.27,
+        "dark_pct": 2.74
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Reusable water bottle: 1 of 1.",
+        "Stoneware coffee mug: 1 of 1.",
+        "Reusable water bottle: found (#1).",
+        "Stoneware coffee mug: found (#2).",
+        "The whole inside of the box is visible and nothing appears hidden."
+      ],
+      "unknown": [
+        "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue."
+      ],
+      "missing_evidence": [
+        "A sharp, well-lit photo. Photo looks blurry. Hold the phone steady and tap to focus."
+      ],
+      "next_action": "Retake the photo with the whole box in the frame and items spread out, then check again."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          211,
+          260,
+          771,
+          508
+        ],
+        "description": "reusable stainless steel water bottle",
+        "classification": "CANDIDATE",
+        "sku": "BOTTLE-STEEL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "matte stainless steel cylindrical body and simple metal cap",
+        "partially_hidden": false,
+        "title": "Reusable water bottle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          403,
+          480,
+          663,
+          786
+        ],
+        "description": "deep blue stoneware coffee mug",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [
+          "MUG-GREEN"
+        ],
+        "deciding_feature": "deep blue glossy glaze with a cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          232,
+          219,
+          789,
+          789
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper filler material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "All items are clearly visible sitting on the packing paper inside the box."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BIN-SMALL",
+      "MUG-BLUE",
+      "BOTTLE-STEEL",
+      "SOAP-HERBAL",
+      "MUG-GREEN"
+    ],
+    "usage": {
+      "input_tokens": 13110,
+      "output_tokens": 596,
+      "thinking_tokens": 0,
+      "total_tokens": 13706
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6562,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:16:04Z",
+    "reasons": [
+      "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue."
+    ],
+    "fix_instructions": [
+      "Retake the photo. Photo looks blurry. Hold the phone steady and tap to focus."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:a0b7bcbcc9a910b05052676af925b393aca56b9fa2b3fc2969d595e6cc8b1c94"
+}

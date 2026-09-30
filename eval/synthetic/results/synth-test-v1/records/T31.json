@@ -1,0 +1,214 @@
+{
+  "record_id": "bba5cb76-cc91-4d86-9140-67329615a1f8",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T31",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:17:59Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "5a1af3ca-a3c3-4ce9-94f2-4eeae37fde69",
+      "role": "top_down",
+      "sha256": "bdd175f477aa10a68843ab5dda739ee098003aba5e2e07184d8a0659d2734aee",
+      "original_sha256": "e7663e196c3c967247b06168850080d4c19e597c45f81355a35a81db9273827d",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 314.3,
+        "mean_luma": 137.7,
+        "clipped_pct": 0.03,
+        "dark_pct": 0.62
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          335,
+          263,
+          654,
+          558
+        ],
+        "description": "white USB charging cable",
+        "classification": "CANDIDATE",
+        "sku": "CABLE-USB",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "coiled white USB cable with USB-A and USB-C plugs",
+        "partially_hidden": false,
+        "title": "USB charging cable"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          380,
+          513,
+          750,
+          788
+        ],
+        "description": "wooden dish brush",
+        "classification": "CANDIDATE",
+        "sku": "BRUSH-WOOD",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "wooden handle with natural bristles",
+        "partially_hidden": false,
+        "title": "Wooden dish brush"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is completely clear, with no filler or overlapping items."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CABLE-USB",
+      "BRUSH-WOOD",
+      "BOTTLE-STEEL"
+    ],
+    "usage": {
+      "input_tokens": 8607,
+      "output_tokens": 465,
+      "thinking_tokens": 0,
+      "total_tokens": 9072
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6796,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6796,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6796,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6796,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Wooden dish brush (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6796,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:18:06Z",
+    "reasons": [
+      "Not in the order: Wooden dish brush (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Wooden dish brush (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:0d4f33f9253c9e6729c3549fd4baf4c2d95233ebfc4376c192fdbfef02f3a5fd"
+}

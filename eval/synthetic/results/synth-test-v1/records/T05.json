@@ -1,0 +1,294 @@
+{
+  "record_id": "ea6bbc9b-5b49-4d7f-b709-e4e4d28b5caf",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-T05",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      },
+      {
+        "sku": "TOWEL-GRAY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:13:52Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "50751f28-7fa2-48c6-af6d-84984dd55073",
+      "role": "top_down",
+      "sha256": "d32590f2f4c84c042b4eab917b92f1344774b19bffde1ec30329c18573944c46",
+      "original_sha256": "0b724886648da0c8752b71f67fe3308387d41fe38b8954cc4e9c2bee32ec1b67",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 885.4,
+        "mean_luma": 132.7,
+        "clipped_pct": 0.02,
+        "dark_pct": 3.09
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 2,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "TOWEL-GRAY",
+        "title": "Cotton hand towel",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          250,
+          107,
+          762,
+          365
+        ],
+        "description": "Morrow & Pine herbal dish soap bottle",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "pale green label with herbal text and small leaf illustration",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          248,
+          367,
+          762,
+          610
+        ],
+        "description": "Morrow & Pine herbal dish soap bottle",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "pale green label with herbal text and small leaf illustration",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          230,
+          603,
+          799,
+          926
+        ],
+        "description": "folded charcoal gray cotton hand towel",
+        "classification": "CANDIDATE",
+        "sku": "TOWEL-GRAY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "charcoal gray color and looped terry texture",
+        "partially_hidden": false,
+        "title": "Cotton hand towel"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          237,
+          91,
+          801,
+          632
+        ],
+        "description": "brown crumpled packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper filler material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "units": 1
+      }
+    ],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o4",
+        "description": "brown crumpled packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "All items in the box are clearly visible and unobstructed."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-HERBAL",
+      "BIN-SMALL",
+      "SOAP-CITRUS",
+      "TOWEL-GRAY",
+      "CABLE-USB"
+    ],
+    "usage": {
+      "input_tokens": 13128,
+      "output_tokens": 758,
+      "thinking_tokens": 0,
+      "total_tokens": 13886
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#1, #2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 2 in the box, 1 ordered (1 too many).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: found (#3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8738,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:14:01Z",
+    "reasons": [
+      "Morrow & Pine dish soap: 2 in the box, 1 ordered (1 too many)."
+    ],
+    "fix_instructions": [
+      "Remove 1 × Morrow & Pine dish soap."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:3e0a493e6568cbbc2153e02cd7d39bd529e6e82de47d68ebd93b1ef320057d79"
+}
