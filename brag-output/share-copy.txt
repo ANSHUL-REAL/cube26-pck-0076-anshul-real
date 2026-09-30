@@ -1,0 +1,1 @@
+One photo of the open box, and Pack Manager says Seal, Stop and fix, or Check by hand, then keeps the photo as proof of what shipped. The AI only looks; fixed rules decide, and "not sure" is an answer too. Try the demo, no install: https://pack-manager-lzht.onrender.com

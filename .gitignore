@@ -17,3 +17,6 @@ eval/label_sheet_*.html
 # eval/synthetic/boxes holds the exact JPEGs the model was sent; their hashes are in the records.
 eval/synthetic/originals/
 eval/synthetic/reference_originals/
+
+# /brag launch video: intermediate frames and scripts
+brag-output/work/
