@@ -1018,6 +1018,12 @@ main.site { padding: 0; }
 .fp-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
 
 .fp-shot { position: relative; margin: 0; }
+.fp-agent {
+  display: inline-flex; align-items: center; gap: 8px; margin: 0 0 10px 2px; padding: 6px 12px;
+  font: 800 14px/1 var(--fp-font); color: #17131a; background: #7fd6a4; border: 2px solid #17131a; border-radius: 99px;
+}
+.fp-agent-dot { width: 8px; height: 8px; border-radius: 50%; background: #17131a; animation: agent-blink 1.6s ease-in-out infinite; }
+@keyframes agent-blink { 50% { opacity: .25; } }
 .fp-shot-card {
   background: var(--fp-card); border: 3px solid var(--fp-line); border-radius: 18px; padding: 10px;
   box-shadow: 10px 10px 0 var(--fp-shadow); transform: rotate(1.5deg);

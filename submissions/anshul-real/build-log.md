@@ -20,7 +20,7 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
     - The camera is hidden on phones too old to hand the shots to the form.
 
 - **Recovery data contract** read. Its check-key registry lists exactly Pack's four keys (`all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`), so nothing is renamed. Our three other keys are additions, which it allows. Charges can name one SKU or ASIN while a Pack record covers a whole order, so `all_items_present` and `quantities_correct` now carry each ordered product's own verdict (`detail.by_sku`, `by_asin`). `contract/README.md` explains how Recovery joins a charge to a Pack record, and why Pack's `uncertain` is safe to treat as no evidence.
-- **An override on every check** (Evidence Contract 1.1, section 4). Each of the seven checks on a record page has its own Override, with a required reason and an optional note. The correction is appended to the record with the result it replaced. The AI's checks, the box decision and the contract's content hash stay as they were. Older records keep their hashes: a box decision is still written exactly as before. Tested against real Postgres too, where the append-only rule accepts it.
+- **An override on every check** (Evidence Contract 1.1, section 4). Each of the seven checks on a record page has its own Override, with a required reason and an optional note. The correction is appended to the record with the result it replaced. The agent's checks, the box decision and the contract's content hash stay as they were. Older records keep their hashes: a box decision is still written exactly as before. Tested against real Postgres too, where the append-only rule accepts it.
 
 ## Wed 30 Sep
 
@@ -48,7 +48,7 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 - **Dry run of the whole eval** on dummy photos, in a throwaway copy of the repo: product sheet, catalogue, plan, 70-photo import, label sheet, two label files, freeze, held-out run, report. Every step worked. It found one bug (running the eval without an API key crashed instead of saying what to do). New `--oracle` run: perfect perception from the manifest, to measure the rules alone. On the planned mix the rules decided all 50 boxes as the manifest says.
 - **Second look at the other forks** (nine with real builds; ideas only, no code copied). None has run a vision model on real box photos; several publish accuracy numbers with nothing behind them. Taken from that review:
   - **Records are append-only in the database.** A trigger refuses any update that doesn't just add a hand decision at the end, even from the app's own role. Tested against real Postgres.
-  - The result page shows how long the AI check took.
+  - The result page shows how long the agent check took.
   - Tests that pin two rules that had none of their own: one model call per box, and a "SEAL THIS BOX" note can't seal a wrong box. The README maps each hard rule to its test.
   - The demo script shows fail-open (a check that can't run leaves the photos and a "Needs your decision" record).
 - **Evidence for buyer claims** (the Recovery step). A record page prints as an evidence sheet, and `python -m pack_manager check-record` checks a downloaded record away from the app: its hash, every earlier version, and whether a photo is one of its own (the stored copy or the phone original). Tried on a live record from the hosted database.
@@ -60,12 +60,12 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
   - an occlusion stance: one shot per box, with boxes that had a hidden item marked while packing and reported as their own failure group;
   - decoys in production: yes, same code path as the eval;
   - identity and count as separate metric rows (`line_present` and `line_quantity`).
-- The review also caught an overclaim. The organiser question said the agent "re-runs async"; nothing did. There is now a "Retry AI check" button that re-checks the stored photos as a new linked record and flags disagreement with a hand decision, and the docs say plainly that it can't recall a box that has already shipped.
+- The review also caught an overclaim. The organiser question said the agent "re-runs async"; nothing did. There is now a "Retry agent check" button that re-checks the stored photos as a new linked record and flags disagreement with a hand decision, and the docs say plainly that it can't recall a box that has already shipped.
 
 - **Gap check against the field.** Looked at what the other public forks of this track had built, to find missing features. Ideas only; no code was copied. Added from that review, each written from scratch:
   - an **uncertainty summary** on every unclear result: known / can't tell / what would settle it / next action;
   - **photo-reuse detection**: the same photo already used for another order can't seal a box;
-  - a **daily AI-check cap** per organisation, so a public demo can't use up the API key;
+  - a **daily agent-check cap** per organisation, so a public demo can't use up the API key;
   - a **download** of the exact hashed record;
   - **CI** that runs the isolation tests against a real Postgres;
   - a check that **both labellers finished before the agent ran**;

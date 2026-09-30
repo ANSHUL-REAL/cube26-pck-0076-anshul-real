@@ -117,7 +117,7 @@ DECISION_BLURB = {
     "SEAL": "Everything in the order is in the box, and nothing else.",
     "STOP_AND_FIX": "Something is missing, wrong or extra. Fix it before sealing.",
     "UNCERTAIN": "The photos can't settle it. Check the box by hand before sealing.",
-    "PENDING": "The AI check didn't finish. The photos are saved; check by hand.",
+    "PENDING": "The agent's check didn't finish. The photos are saved; check by hand.",
 }
 VERDICT_ICON = {"PASS": "check", "FAIL": "x", "UNCERTAIN": "circle-help", "NOT_CHECKED": "minus"}
 
@@ -170,11 +170,11 @@ class _NoModel:
 
 
 class _OverLimit:
-    """Used once an organisation reaches its daily number of AI checks."""
+    """Used once an organisation reaches its daily number of agent checks."""
 
     def perceive(self, *args, **kwargs):
         raise PerceptionError(
-            f"This company has used today's {settings.daily_checks_per_org} AI checks. Check this box by hand.")
+            f"This company has used today's {settings.daily_checks_per_org} agent checks. Check this box by hand.")
 
 
 def perceiver_for(org_id: str):
@@ -686,7 +686,7 @@ def _load_for_retry(org: str, record_id: str):
 
 
 def _rerun(user: dict, record: EvidenceRecord, stored: list[bytes], earlier: list[dict]) -> str:
-    """Runs the AI check again and saves the new record. Returns its id, or the id of a re-check
+    """Runs the agent check again and saves the new record. Returns its id, or the id of a re-check
     someone else saved in the meantime: a record is only ever checked again once."""
     catalogue, root = org_catalogue(user["org"])
     new, prepared = rerun_box(
@@ -704,7 +704,7 @@ def _rerun(user: dict, record: EvidenceRecord, stored: list[bytes], earlier: lis
 
 @app.post("/records/{record_id}/retry")
 async def record_retry(request: Request, record_id: str):
-    """Run the AI check again on a box the model didn't answer for. Creates a new, linked record."""
+    """Run the agent check again on a box the model didn't answer for. Creates a new, linked record."""
     user = current_user(request)
     loaded = await run_in_threadpool(_load_for_retry, user["org"], record_id)
     if loaded is None:
@@ -723,7 +723,7 @@ async def record_retry(request: Request, record_id: str):
         log.warning("Retry of %s refused: %s", record_id, exc)
         return await run_in_threadpool(
             _record_page, request, user, record, status_code=409,
-            error="The AI check can't run again: the saved photos don't match this record. "
+            error="The agent's check can't run again: the saved photos don't match this record. "
                   "Check the box by hand and record your decision.")
     return RedirectResponse(f"/records/{url_part(new_id)}", status_code=303)
 
@@ -754,7 +754,7 @@ def record_decision(
                             reload=error == CONFLICT, form_note=note, form_reason=reason_code)
 
     if retry:
-        return again("The AI checked this box again. Record your decision on the newer record.", 409)
+        return again("The agent checked this box again. Record your decision on the newer record.", 409)
     if decision not in ("SEAL", "STOP_AND_FIX"):
         return again("Choose Seal the box or Stop and fix to record your decision.", 400)
     if reason_code not in OVERRIDE_REASONS:
@@ -802,7 +802,7 @@ def record_check_override(
                             reload=error == CONFLICT, open_check=check_key)
 
     if retry:
-        return again("The AI checked this box again. Make any change on the newer record.", 409)
+        return again("The agent checked this box again. Make any change on the newer record.", 409)
     if check_key not in CHECK_LABELS or check_key == "order_matches_manifest":
         return again("Choose a check to change.", 400)
     if to_verdict not in ("pass", "fail", "uncertain"):

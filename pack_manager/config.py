@@ -43,7 +43,7 @@ class Settings(BaseSettings):
     max_clipped_pct: float = 8.0
     max_dark_pct: float = 40.0
     max_box_photos: int = 3
-    # Web app: at most this many AI checks per organisation per UTC day (0 = no limit).
+    # Web app: at most this many agent checks per organisation per UTC day (0 = no limit).
     # Protects a shared or free-tier API key; boxes over the limit fail open to pending.
     daily_checks_per_org: int = 60
     send_max_side_px: int = 1600

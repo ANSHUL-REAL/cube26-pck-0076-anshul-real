@@ -36,7 +36,7 @@ def _order(row) -> Order:
 
 
 # Which orders each tab of the orders page shows, by the decision on the order's latest record.
-# A record that still needs a person (the AI didn't answer, or it couldn't be sure) keeps the
+# A record that still needs a person (the agent didn't answer, or it couldn't be sure) keeps the
 # order in "To check"; only a settled result (sealed, or stopped to fix) counts as checked.
 ORDER_VIEWS = {
     "todo": "(r.decision is null or r.decision in ('PENDING', 'UNCERTAIN'))",
@@ -145,7 +145,7 @@ def get_record(cur, record_id: str) -> EvidenceRecord | None:
     return EvidenceRecord.model_validate(row["record"]) if row else None
 
 
-# A pending record whose photos were sent to the AI again: the newer record is the one to act on.
+# A pending record whose photos were sent to the agent again: the newer record is the one to act on.
 _RETRIED = """(records.decision = 'PENDING' and exists (
     select 1 from records r2 where r2.record->'observations'->>'retry_of' = records.record_id))"""
 
@@ -181,7 +181,7 @@ def list_records(cur, decision: str | None = None, order_id: str | None = None,
 
 
 def find_retry(cur, record_id: str, lock: bool = False) -> str | None:
-    """The record made by running the AI check again on this one's photos, if there is one.
+    """The record made by running the agent check again on this one's photos, if there is one.
     With lock, the original record's row is locked first, so two retries can't both be saved."""
     if lock:
         cur.execute("select 1 from records where record_id = %s for update", (record_id,))

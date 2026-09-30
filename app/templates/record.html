@@ -33,7 +33,7 @@
       <span>Checked {{ r.captured_at | when }}</span>
       <span>by {{ r.operator_label }}</span>
       {% set ms = r.checks[-1].latency_ms if r.checks else none %}
-      {% if ms and decision != "PENDING" %}<span>AI check {{ "%.1f" | format(ms / 1000) }} s</span>{% endif %}
+      {% if ms and decision != "PENDING" %}<span>Agent check {{ "%.1f" | format(ms / 1000) }} s</span>{% endif %}
       <span class="hide-sm">{{ r.record_id }}</span>
     </p>
   </div>
@@ -49,19 +49,19 @@
 {% endif %}
 {% if retry %}
 <div class="callout info" style="margin-bottom:14px">
-  The AI checked these photos again in {% if pub %}record {{ retry }}{% else %}<a href="/records/{{ retry | urlpart }}">{{ retry }}</a>{% endif %}. Record any decision on that newer record.
+  The agent checked these photos again in {% if pub %}record {{ retry }}{% else %}<a href="/records/{{ retry | urlpart }}">{{ retry }}</a>{% endif %}. Record any decision on that newer record.
 </div>
 {% endif %}
 {% if obs.get("retry_of") %}
 <div class="callout info" style="margin-bottom:14px">
-  This is a second AI check of the photos from {% if pub %}record {{ obs.retry_of }}{% else %}<a href="/records/{{ obs.retry_of }}">{{ obs.retry_of }}</a>{% endif %}, taken {{ obs.photos_taken_at | when }}. {{ obs.retried_by }} ran it again because the AI didn't answer the first time.
+  This is a second agent check of the photos from {% if pub %}record {{ obs.retry_of }}{% else %}<a href="/records/{{ obs.retry_of }}">{{ obs.retry_of }}</a>{% endif %}, taken {{ obs.photos_taken_at | when }}. {{ obs.retried_by }} ran it again because the agent didn't answer the first time.
 </div>
 {% endif %}
 {% set dis = obs.get("disagreement") %}
 {% if dis %}
 <div class="callout warn" style="margin-bottom:14px">
-  <strong>The AI disagrees with the decision made by hand.</strong>
-  {{ dis.human_operator }} chose <strong>{{ DECISION_UI[dis.human_decision][0] }}</strong> on {{ dis.human_decided_at | when }}; the AI now says <strong>{{ DECISION_UI[dis.agent_decision][0] }}</strong>.
+  <strong>The agent disagrees with the decision made by hand.</strong>
+  {{ dis.human_operator }} chose <strong>{{ DECISION_UI[dis.human_decision][0] }}</strong> on {{ dis.human_decided_at | when }}; the agent now says <strong>{{ DECISION_UI[dis.agent_decision][0] }}</strong>.
   If the box has already shipped, this can't stop it. Check the order again, or contact the customer.
 </div>
 {% endif %}
@@ -75,7 +75,7 @@
   {% elif decision == "SEAL" %}
     <p>Every ordered item is in the box in the right quantity, and nothing else is.</p>
   {% elif decision == "PENDING" %}
-    <p>The AI check didn't finish.{% if retry %} The same photos were checked again in a newer record.{% elif pub %} The photos are saved, and a person decides.{% else %} The photos are saved, so check the box by hand and record your decision below.{% endif %}</p>
+    <p>The agent's check didn't finish.{% if retry %} The same photos were checked again in a newer record.{% elif pub %} The photos are saved, and a person decides.{% else %} The photos are saved, so check the box by hand and record your decision below.{% endif %}</p>
     {% if r.outcome.reasons | length > 1 %}<p class="small muted" style="margin-top:6px">{{ r.outcome.reasons[1] }}</p>{% endif %}
   {% elif r.outcome.reasons %}
     <p>{{ r.outcome.reasons[0] }}</p>
@@ -83,7 +83,7 @@
 
   {% if can_retry %}
     <form class="retry" method="post" action="/records/{{ r.record_id }}/retry" data-busy data-upload>
-      <button class="btn secondary sm" type="submit">Retry AI check</button>
+      <button class="btn secondary sm" type="submit">Retry agent check</button>
       <span class="muted small">Uses the same photos and makes a new record. This one stays as it is.</span>
       <div class="busy"><span class="spinner"></span><span data-busy-text>Checking the box again…</span></div>
       <p class="keep-going" data-keep-going hidden>Taking a while? <a href="/">Keep packing</a>. The new result will be on this order.</p>
@@ -153,7 +153,7 @@
             {% endfor %}
           </ul>
         {% elif decision == "PENDING" %}
-          <p class="muted small" style="margin-top:12px">No items were marked because the AI check didn't run.</p>
+          <p class="muted small" style="margin-top:12px">No items were marked because the agent check didn't run.</p>
         {% endif %}
       </div>
     </section>
@@ -176,7 +176,7 @@
           <div class="cc-row">
             <div class="cc-name">
               <div class="nm">{{ c.label }}</div>
-              {% if c.by %}<div class="muted small">Changed by {{ c.by.operator_label }} · the AI said {{ verdict_word[c.agent] }}</div>{% endif %}
+              {% if c.by %}<div class="muted small">Changed by {{ c.by.operator_label }} · the agent said {{ verdict_word[c.agent] }}</div>{% endif %}
             </div>
             <span class="v {{ {'pass': 'PASS', 'fail': 'FAIL', 'uncertain': 'UNCERTAIN'}[c.now] }}"><span class="dot"></span>{{ verdict_word[c.now] | capitalize }}</span>
           </div>
@@ -213,7 +213,7 @@
         </li>
         {% endfor %}
       </ul>
-      <div class="card-foot">Changing a check keeps the AI's result on the record and doesn't change the box decision.</div>
+      <div class="card-foot">Changing a check keeps the agent's result on the record and doesn't change the box decision.</div>
     </section>
 
     <details class="fold" data-print-open>
@@ -300,7 +300,7 @@
       <div class="card-body">
         <ol class="events">
           <li><b>Photos taken</b> by {{ r.operator_label }}<span>{{ (obs.photos_taken_at or r.captured_at) | when }}</span></li>
-          <li><b>{{ "AI re-check" if obs.get("retry_of") else "AI check" }}: {{ DECISION_UI[agent_decision.value][0] }}</b>{% if decision != "PENDING" or r.overrides %} · {{ tally.PASS }} of {{ r.checks | length }} checks passed{% endif %}<span>{{ r.captured_at | when }}</span></li>
+          <li><b>{{ "Agent re-check" if obs.get("retry_of") else "Agent check" }}: {{ DECISION_UI[agent_decision.value][0] }}</b>{% if decision != "PENDING" or r.overrides %} · {{ tally.PASS }} of {{ r.checks | length }} checks passed{% endif %}<span>{{ r.captured_at | when }}</span></li>
           {% for o in r.overrides %}
           {% if o.check_key %}
           <li><b>{{ o.operator_label }} changed {{ contract_checks | selectattr("key", "equalto", o.check_key) | map(attribute="label") | first | lower }}: {{ verdict_word[o.from_verdict] }} to {{ verdict_word[o.to_verdict] }}</b> · {{ reasons.get(o.reason_code, o.reason_code) }}{% if o.note %}: {{ o.note }}{% endif %}<span>{{ o.at | when }}</span></li>

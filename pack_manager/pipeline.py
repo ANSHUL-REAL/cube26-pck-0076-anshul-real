@@ -186,7 +186,7 @@ def rerun_box(
     catalogue_root: Path | None = None,
     earlier_uses: list[dict] | None = None,
 ) -> tuple[EvidenceRecord, list[PreparedImage]]:
-    """Run the AI check again on a saved box, as a new record linked to the old one.
+    """Run the agent check again on a saved box, as a new record linked to the old one.
 
     Used when the model didn't answer the first time. The old record is never changed.
     The check runs against the order as it was when the photos were taken, and the photos
@@ -216,7 +216,7 @@ def rerun_box(
         force_quality=any(ref.quality.gate == "FAIL" for ref in record.images),
         earlier_uses=earlier_uses, extra_observations=link,
     )
-    # If a person already decided the old box and the AI now disagrees, say so on the record.
+    # If a person already decided the old box and the agent now disagrees, say so on the record.
     if record.box_overrides and new.outcome.decision != Decision.PENDING:
         human = record.box_overrides[-1]
         if human.new_decision != new.outcome.decision:

@@ -18,7 +18,7 @@
     <div class="fp-hero-copy">
       <p class="wordmark" aria-label="Pack Manager"><span>pack</span>manager</p>
       <h1>Check every box before it's sealed.</h1>
-      <p class="fp-lead">One phone photo of the open box. The AI looks, fixed rules decide, and the photo is kept as proof of what was sent.</p>
+      <p class="fp-lead">Snap the open box. Our pack agent looks inside, checks every item against the order with fixed rules, and keeps the photo as proof of what was sent.</p>
       <div class="fp-cta">
         <a class="chunky orange" href="#demo">Try the demo</a>
         <a class="chunky plain" href="/results">See the results</a>
@@ -27,6 +27,7 @@
 
     <figure class="fp-shot">
       <div class="fp-shot-card">
+        <div class="fp-agent"><span class="fp-agent-dot"></span>Pack agent · box checked</div>
         <div class="shot-photo">
           <img src="/static/hero-box.jpg" alt="An open shipping box with a bottle of citrus dish soap and a jar candle on brown packing paper" width="880" height="880">
           <span class="scan" aria-hidden="true"></span>
@@ -43,7 +44,7 @@
         <text x="50" y="60" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="900" font-size="24" fill="#fff">STOP</text>
       </svg>
       <div class="sticker s-count" aria-hidden="true"><b>1</b><span>photo</span></div>
-      <figcaption>The model's real answer on box T17 of the held-out test. The photo is AI-generated; the boxes and verdict are the model's own output.</figcaption>
+      <figcaption>Our agent's real answer on box T17 of the held-out test. The photo is AI-generated; the boxes and the verdict are the agent's own output.</figcaption>
     </figure>
   </div>
 </section>
@@ -80,12 +81,12 @@
       </svg>
       <div>
         <h2 class="fp-h2">Mis-ships are cheap to cause and expensive to fix.</h2>
-        <p>A wrong item, a short count or an extra product means a refund, a reship and an unhappy buyer. Big warehouses buy camera stations for this. Pack Manager does it with the phone the packer already has, for sellers and 3PLs who pack their own orders.</p>
+        <p>A wrong item, a short count or an extra product means a refund, a reship and an unhappy buyer. Big warehouses buy camera stations for this. Pack Manager puts an agent on every packing bench instead, using the phone the packer already has, for sellers and 3PLs who pack their own orders.</p>
         <p>And when a buyer says "the box was empty", the seller has a timestamped photo of what went in.</p>
       </div>
     </div>
 
-    <h2 class="fp-h2 center" id="how">How it works</h2>
+    <h2 class="fp-h2 center" id="how">How the agent works</h2>
     <ol class="fp-cards">
       <li>
         <div class="panel">
@@ -108,7 +109,7 @@
         </div>
         <span class="step">02</span>
         <h3>Photograph the box</h3>
-        <p>A guide on screen says what each shot should show. Blurry or dark photos are turned back at once, before any AI call.</p>
+        <p>A guide on screen says what each shot should show. Blurry or dark photos are turned back at once, before the agent is called.</p>
       </li>
       <li>
         <div class="panel">
@@ -117,12 +118,12 @@
             <path d="M84 56 l11 11 l22 -24" fill="none" stroke="#17131a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <span class="step">03</span>
-        <h3>Follow the answer</h3>
-        <p>In a few seconds: what's wrong and what to change. If the AI doesn't answer, the box waits for a person. Never sealed by default.</p>
+        <h3>The agent answers</h3>
+        <p>In a few seconds: what's wrong and what to change. If the agent doesn't answer, the box waits for a person. Never sealed by default.</p>
       </li>
     </ol>
 
-    <h2 class="fp-h2 center">Three answers. "Not sure" is one of them.</h2>
+    <h2 class="fp-h2 center">The agent gives three answers. "Not sure" is one of them.</h2>
     <div class="fp-answers">
       <div class="ans seal"><b>Seal</b><p>Everything ordered is there, in the right amounts, and nothing else.</p><span>Tape it and ship</span></div>
       <div class="ans stop"><b>Stop and fix</b><p>Something is missing, short, the wrong variant or extra. It names the item.</p><span>Fix it, check again</span></div>
@@ -135,7 +136,7 @@
   {{ wave("to-cream") }}
   <div class="wrap">
     <h2 class="fp-h2 center">Measured, not claimed.</h2>
-    <p class="fp-sub center">Tested once on 50 boxes it had never seen, with everything frozen before the run. The two photo sets are reported separately.</p>
+    <p class="fp-sub center">The agent was tested once on 50 boxes it had never seen, with everything frozen before the run. The two photo sets are reported separately.</p>
     <div class="fp-evals">
       <div class="ev">
         <div class="ev-head"><h3>Real warehouse photos</h3><span>Amazon Bin Image Dataset · 50 boxes</span></div>
@@ -162,7 +163,7 @@
 
     <h2 class="fp-h2 center" id="proof">Every box leaves a record.</h2>
     <div class="fp-proof">
-      <div><h3>A record per box</h3><p>Photos with their hashes, every check and verdict, the decision and why. Overrides need a reason; the AI's first answer is kept.</p></div>
+      <div><h3>A record per box</h3><p>Photos with their hashes, every check and verdict, the decision and why. Overrides need a reason; the agent's first answer is kept.</p></div>
       <div><h3>A link for the buyer</h3><p>Each record has a read-only share link that opens without signing in, for a buyer or a marketplace claim.</p></div>
       <div><h3>Ready for Returns and Recovery</h3><p>Records follow the organisers' Evidence Contract 1.1 at <span class="mono">/v1</span>, with a verdict per product.</p></div>
       <div><h3>Companies kept apart</h3><p>The database keeps each company's orders, records and photos private with row-level security, tested on real Postgres.</p></div>

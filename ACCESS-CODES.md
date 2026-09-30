@@ -34,7 +34,7 @@ See [contract/README.md](contract/README.md) for the endpoints.
 
 ## Limits
 
-- Each demo company can run **60 AI checks a day**, shared by all its codes, to protect the free model key. After that, photos and records are still saved, and a person decides.
+- Each demo company can run **60 agent checks a day**, shared by all its codes, to protect the free model key. After that, photos and records are still saved, and a person decides.
 - A code identifies a station or role, not a verified person, and codes don't expire.
 
 ## How codes are stored and added

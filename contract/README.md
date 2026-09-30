@@ -75,7 +75,7 @@ Met:
 - "Take guided photos" opens the rear camera (`getUserMedia`, HTTPS only), with a frame on screen and what each of up to three shots should show.
 - Photos are sent with progress and retried when the connection drops.
 - A failed model call still saves the photos and a `pending` record.
-- Every check has an Override on the record page: pick a reason, then the result you found. A reason is required, and the AI's result stays on the record.
+- Every check has an Override on the record page: pick a reason, then the result you found. A reason is required, and the agent's result stays on the record.
 - The record link needs no sign-in.
 - Once the photos are sent, a "Keep packing" link shows within 2 seconds.
 
@@ -110,7 +110,7 @@ The examples come from the real pipeline (quality gate → decision rules → ha
 | `captured_at` | UTC time the photos were taken (server time) |
 | `operator_label` | Who packed / checked the box |
 | `images[]` | `image_id` (UUIDv4), `role`, `sha256` of the stored image, `original_sha256` of the upload, size, and the local `quality` gate result |
-| `observations` | What was found: `uncertainty` (below), `expected_vs_observed[]`, `detected_items[]` (with `box_2d` on the photo), `missing[]`, `wrong[]`, `extra[]`, `over_quantity[]`, `unclear[]`, `non_product_items[]`, `scene`, token `usage`, `cost_usd`. On a retried check: `retry_of` (the record whose AI check didn't run), `retried_by`, `photos_taken_at`, and `disagreement` when the AI's new decision differs from a hand decision on the old record |
+| `observations` | What was found: `uncertainty` (below), `expected_vs_observed[]`, `detected_items[]` (with `box_2d` on the photo), `missing[]`, `wrong[]`, `extra[]`, `over_quantity[]`, `unclear[]`, `non_product_items[]`, `scene`, token `usage`, `cost_usd`. On a retried check: `retry_of` (the record whose agent check didn't run), `retried_by`, `photos_taken_at`, and `disagreement` when the agent's new decision differs from a hand decision on the old record |
 | `checks[]` | `check_key`, `verdict` (PASS / FAIL / UNCERTAIN / NOT_CHECKED), `confidence`, `detail`, `model_version`, `latency_ms`, `evidence`. All model-based checks share one `model_version` and `latency_ms` because they come from **one** model call |
 | `outcome` | `decision` (SEAL / STOP_AND_FIX / UNCERTAIN / PENDING), `decided_by` (`agent` or `operator:<label>`), `decided_at`, `reasons[]`, `fix_instructions[]` |
 | `overrides[]` | Each human decision: `original_decision`, `new_decision`, `reason_code`, `note`, `operator_label`, `at`, `prior_content_hash`, plus `prior_outcome` and `prior_status` (what it replaced). Appended, never replaced. With those, every earlier version of the record can be rebuilt and checked against its `prior_content_hash` (`pack_manager.evidence.verify_history`) |

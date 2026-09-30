@@ -344,9 +344,9 @@ def test_a_retried_pending_record_leaves_the_queue(client, sharp_photo, monkeypa
     new = client.post(f"/records/{rid}/retry", follow_redirects=False).headers["location"].rsplit("/", 1)[1]
 
     old_page = client.get(f"/records/{rid}").text
-    assert "Retry AI check" not in old_page and "Record your decision" not in old_page
+    assert "Retry agent check" not in old_page and "Record your decision" not in old_page
     assert "Disagree with this result?" not in old_page
-    assert f'href="/records/{new}"' in old_page and "The AI checked these photos again" in old_page
+    assert f'href="/records/{new}"' in old_page and "The agent checked these photos again" in old_page
     assert rid not in client.get("/records?decision=PENDING").text
     assert client.fake.counts_by_decision("org_demo_alpha").get("PENDING", 0) == 0
     assert "Checked again" in client.get("/records").text  # still listed, with its own label
@@ -401,7 +401,7 @@ def test_daily_limit_counts_only_boxes_the_model_answered(client, sharp_photo, m
     add_order(client.fake, ("CAP-BLU", 1))
     _login(client)
     upload = {"photos": ("box.jpg", sharp_photo, "image/jpeg")}
-    for _ in range(2):  # no model: two pending boxes, no AI checks used
+    for _ in range(2):  # no model: two pending boxes, no agent checks used
         client.post("/orders/ORD-1/verify", files=upload)
     monkeypatch.setattr(main, "perceiver", lambda: OraclePerceiver({"CAP-BLU": 1}))
     url = client.post("/orders/ORD-1/verify", files=upload, follow_redirects=False).headers["location"]

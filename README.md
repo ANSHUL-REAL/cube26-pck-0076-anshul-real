@@ -41,7 +41,7 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 | **SEAL** | Every line present, right quantities, nothing wrong or extra | Green "Seal the box" |
 | **STOP_AND_FIX** | Something is missing, wrong or extra | Red "Stop and fix", plus exact fixes: "Replace Red Cap (#3) with Blue Cap", "Add 1 × Blue Towel", "Remove USB-C Cable (#4)" |
 | **UNCERTAIN** | The photos can't support a reliable answer (stacked items, a look-alike whose label isn't visible, part of the box cut off) | Amber "Check by hand", plus exactly what to check |
-| PENDING | The model didn't answer (timeout, quota) | Grey "Needs your decision"; photos and record are kept. "Retry AI check" runs it again later as a new, linked record |
+| PENDING | The model didn't answer (timeout, quota) | Grey "Needs your decision"; photos and record are kept. "Retry agent check" runs it again later as a new, linked record |
 
 5. Every box gets an **evidence record**: the order, photos (with hashes), what was found, every check with its verdict and confidence, the decision and why, and a content hash. The operator can disagree; the override is appended with a reason code, and the agent's original answer is kept.
 6. Returns and Recovery read records in the organisers' **Evidence Contract 1.1** shape at `/v1`, limited to their own organisation. Each check (`all_items_present`, `quantities_correct`, `no_extra_items`, `order_matches_manifest`, and more) carries a verdict per ordered product, and a person can override any check with a required reason. A record's share link opens it read-only for a customer, with no sign-in.
@@ -63,7 +63,7 @@ Packers sign in with a short access code, not an email and password or a Google 
 - **No personal data.** No emails, passwords or names are collected, so there is nothing to leak or reset.
 - **One login for people and programs.** Returns and Recovery send the same code in an `X-Access-Code` header to read `/v1`.
 
-The demo codes are public on purpose, so judges can get in with one click: `alpha-demo` and `bravo-demo` on the sign-in page, plus per-station, team-lead and judge codes in [ACCESS-CODES.md](ACCESS-CODES.md). Each demo company is capped at 60 AI checks a day to protect the shared model key.
+The demo codes are public on purpose, so judges can get in with one click: `alpha-demo` and `bravo-demo` on the sign-in page, plus per-station, team-lead and judge codes in [ACCESS-CODES.md](ACCESS-CODES.md). Each demo company is capped at 60 agent checks a day to protect the shared model key.
 
 **What codes don't do:** they identify a station or role, not a verified person, and they don't expire. Next steps: a team-lead page to issue and revoke codes, then company single sign-on (Google Workspace or Microsoft, via OIDC) for team leads. Packers would keep codes, because sign-on doesn't suit a shared bench device.
 

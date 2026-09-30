@@ -10,10 +10,10 @@ We keep the three outcomes apart in the record, as you suggested. We also keep t
 
 ## 2. Fail-open and the pending rate
 
-We adopted your framing: when the model fails, the packer seals on their own judgment, exactly as they would with no agent. Nothing waits on the AI.
+We adopted your framing: when the model fails, the packer seals on their own judgment, exactly as they would with no agent. Nothing waits on the agent.
 
 - **PENDING rate target: ≤ 2% of boxes, kill above 5%.**
-- **About the "async re-run" in my question:** it didn't exist when I asked. There is now a "Retry AI check" button on any box whose check didn't run. It re-checks the exact stored photos (hashes verified) against the order as it was, and saves a new record linked to the old one. If a person already decided and the AI disagrees, the new record says so.
+- **About the "async re-run" in my question:** it didn't exist when I asked. There is now a "Retry agent check" button on any box whose check didn't run. It re-checks the exact stored photos (hashes verified) against the order as it was, and saves a new record linked to the old one. If a person already decided and the agent disagrees, the new record says so.
 - **What it buys:** it doesn't recall a box that has already shipped. Its value is a real catch where boxes wait before dispatch, plus a measure of how often hand decisions and the agent disagree. The PR/FAQ now says this. It's a button, not a background job.
 
 ## 3. Occlusion

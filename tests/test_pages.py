@@ -293,11 +293,11 @@ def test_daily_limit_fails_open_to_pending(client, sharp_photo, monkeypatch):
     add_order(client.fake, ("CAP-BLU", 1))
     client.post("/login", data={"code": "alpha-demo"})
     upload = {"photos": ("box.jpg", sharp_photo, "image/jpeg")}
-    client.post("/orders/ORD-1/verify", files=upload)  # the model answers: one AI check used
+    client.post("/orders/ORD-1/verify", files=upload)  # the model answers: one agent check used
     url = client.post("/orders/ORD-1/verify", files=upload, follow_redirects=False).headers["location"]
     rec = client.fake.records[url.rsplit("/", 1)[1]]
     assert rec.outcome.decision == Decision.PENDING
-    assert "1 AI checks. Check this box by hand." in client.get(url).text
+    assert "1 agent checks. Check this box by hand." in client.get(url).text
 
 
 def upload_csv(client, rows):
@@ -365,7 +365,7 @@ def test_retry_ai_check_makes_a_linked_record(client, sharp_photo, monkeypatch):
     import app.main as main
 
     rid = _pending_box(client, sharp_photo)
-    assert "Retry AI check" in client.get(f"/records/{rid}").text
+    assert "Retry agent check" in client.get(f"/records/{rid}").text
     before = client.fake.records[rid]
 
     monkeypatch.setattr(main, "perceiver_for", lambda org: OraclePerceiver({"CAP-RED": 1}))
@@ -375,7 +375,7 @@ def test_retry_ai_check_makes_a_linked_record(client, sharp_photo, monkeypatch):
     assert new.observations["retry_of"] == rid and "disagreement" not in new.observations
     assert [i.sha256 for i in new.images] == [i.sha256 for i in before.images]  # the same photos
     assert client.fake.records[rid] == before  # the original record is untouched
-    assert "second AI check" in client.get(url).text
+    assert "second agent check" in client.get(url).text
     assert "Checked again" in client.get(f"/records/{rid}").text
 
 
@@ -388,7 +388,7 @@ def test_retry_flags_disagreement_with_the_hand_decision(client, sharp_photo, mo
     url = client.post(f"/records/{rid}/retry", follow_redirects=False).headers["location"]
     new = client.fake.records[url.rsplit("/", 1)[1]]
     assert new.observations["disagreement"]["human_decision"] == "SEAL"
-    assert "The AI disagrees with the decision made by hand" in client.get(url).text
+    assert "The agent disagrees with the decision made by hand" in client.get(url).text
 
 
 def test_retry_only_for_boxes_the_ai_did_not_answer(client, sharp_photo, catalogue, settings):
@@ -397,7 +397,7 @@ def test_retry_only_for_boxes_the_ai_did_not_answer(client, sharp_photo, catalog
     record = verify_box(order, prepared, catalogue, OraclePerceiver({"CAP-BLU": 1}), settings, operator_label="op_alpha")
     client.fake.save_record(None, record, prepared)
     client.post("/login", data={"code": "alpha-demo"})
-    assert "Retry AI check" not in client.get(f"/records/{record.record_id}").text
+    assert "Retry agent check" not in client.get(f"/records/{record.record_id}").text
     count = len(client.fake.records)
     client.post(f"/records/{record.record_id}/retry")
     assert len(client.fake.records) == count

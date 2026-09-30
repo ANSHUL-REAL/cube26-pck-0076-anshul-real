@@ -20,7 +20,7 @@
 </div>
 
 <div class="summary results-summary">
-  {% for key, label, tone in [("False SEAL", "wrong boxes sealed", "stop"), ("False STOP", "good boxes stopped", "unsure"), ("UNCERTAIN", "sent to a person", "unsure"), ("PENDING", "AI didn't answer", "")] %}
+  {% for key, label, tone in [("False SEAL", "wrong boxes sealed", "stop"), ("False STOP", "good boxes stopped", "unsure"), ("UNCERTAIN", "sent to a person", "unsure"), ("PENDING", "agent didn't answer", "")] %}
   {% set r = rows.get(key) %}
   {% if r %}
   <div class="cell {{ tone }}">
