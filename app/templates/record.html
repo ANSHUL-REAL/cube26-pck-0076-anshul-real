@@ -81,10 +81,11 @@
   {% endif %}
 
   {% if can_retry %}
-    <form class="retry" method="post" action="/records/{{ r.record_id }}/retry" data-busy>
+    <form class="retry" method="post" action="/records/{{ r.record_id }}/retry" data-busy data-upload>
       <button class="btn secondary sm" type="submit">Retry AI check</button>
       <span class="muted small">Uses the same photos and makes a new record. This one stays as it is.</span>
-      <div class="busy"><span class="spinner"></span>Checking the box again…</div>
+      <div class="busy"><span class="spinner"></span><span data-busy-text>Checking the box again…</span></div>
+      <p class="keep-going" data-keep-going hidden>Taking a while? <a href="/">Keep packing</a>. The new result will be on this order.</p>
     </form>
   {% endif %}
 

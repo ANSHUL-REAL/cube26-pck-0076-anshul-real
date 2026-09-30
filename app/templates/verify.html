@@ -37,16 +37,18 @@
         <ul>{% for r in rejected if not r.ok %}{% for reason in r.reasons %}<li>Photo {{ r.n }}: {{ reason }}</li>{% endfor %}{% endfor %}</ul>
       </div>
       <div class="previews">{% for r in rejected %}<img src="{{ r.src }}" alt="Photo {{ r.n }}">{% endfor %}</div>
-      <form method="post" action="/orders/{{ order.order_id | urlpart }}/verify" data-busy style="margin:14px 0 22px">
+      <form method="post" action="/orders/{{ order.order_id | urlpart }}/verify" data-busy data-upload style="margin:14px 0 22px">
         <input type="hidden" name="stash" value="{{ stash }}">
         <button class="btn secondary full" type="submit">Use these photos anyway</button>
         <p class="muted small" style="margin-top:8px">A photo that failed these checks can't lead to "Seal". The result will ask you to check by hand.</p>
-        <div class="busy"><span class="spinner"></span>Checking the box…</div>
+        <div class="busy"><span class="spinner"></span><span data-busy-text>Checking the box…</span></div>
+        <p class="keep-going" data-keep-going hidden>Taking a while? <a href="/">Keep packing</a>. The photos are saved, and the result will be on this order.</p>
       </form>
       <h3 style="margin-bottom:12px">Or take a better photo</h3>
     {% endif %}
 
-    <form method="post" action="/orders/{{ order.order_id | urlpart }}/verify" enctype="multipart/form-data" data-busy>
+    <form method="post" action="/orders/{{ order.order_id | urlpart }}/verify" enctype="multipart/form-data" data-busy data-upload>
+      <button class="btn full lg camera-open" type="button" data-camera-open hidden>{{ icon("camera", 18) }}Take guided photos</button>
       <label class="dropzone" data-drop>
         <strong data-count>Take or choose a photo</strong>
         <span class="muted small">Up to {{ max_photos }} photos of the same box</span>
@@ -56,7 +58,8 @@
       </label>
       <div class="previews" id="previews"></div>
       <button class="btn full lg" type="submit" style="margin-top:16px">Check this box</button>
-      <div class="busy"><span class="spinner"></span>Checking the box. This usually takes a few seconds.</div>
+      <div class="busy"><span class="spinner"></span><span data-busy-text>Checking the box. This usually takes a few seconds.</span></div>
+      <p class="keep-going" data-keep-going hidden>Taking a while? <a href="/">Keep packing</a>. The photos are saved, and the result will be on this order.</p>
       <ul class="tips">
         <li>Hold the phone above the box so the whole inside is in the frame.</li>
         <li>Use good light. Tilt a little if shiny wrapping reflects.</li>
@@ -64,6 +67,25 @@
       </ul>
     </form>
   </section>
+
+  <div class="camera" data-camera hidden role="dialog" aria-modal="true" aria-label="Guided photos">
+    <div class="camera-top">
+      <span class="camera-count" data-camera-count></span>
+      <button class="camera-x" type="button" data-camera-cancel aria-label="Close the camera">{{ icon("x", 20) }}</button>
+    </div>
+    <div class="camera-stage">
+      <video data-camera-video playsinline muted></video>
+      <div class="camera-frame" aria-hidden="true"></div>
+    </div>
+    <p class="camera-guide" data-camera-guide></p>
+    <div class="camera-shots" data-camera-shots></div>
+    <div class="camera-actions">
+      <button class="btn secondary" type="button" data-camera-done disabled>Use these</button>
+      <button class="camera-shutter" type="button" data-camera-shoot aria-label="Take photo"></button>
+      <span class="camera-spacer"></span>
+    </div>
+    <script type="application/json" data-camera-plan>{{ shots | tojson }}</script>
+  </div>
 
   <section class="card area-items">
     <div class="card-head">

@@ -414,7 +414,7 @@ def _verify_page(request, user, order, **extra):
         lines.append({"sku": line.sku, "qty": line.qty, "title": catalogue.title(line.sku),
                       "attributes": item.attributes if item else {}, "thumb": has_ref})
     return page(request, "verify.html", order=order, lines=lines, history=history,
-                max_photos=settings.max_box_photos, **extra)
+                max_photos=settings.max_box_photos, shots=SHOTS[:settings.max_box_photos], **extra)
 
 
 # Order ids come from imports and can contain "/", so the order routes take the rest of the path.
