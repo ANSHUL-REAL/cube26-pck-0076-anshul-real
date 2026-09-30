@@ -1,0 +1,238 @@
+{
+  "record_id": "1764dbd1-aa28-4336-a6d8-4a9dcfc36b29",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D15",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-GREEN",
+        "qty": 2
+      },
+      {
+        "sku": "SOAP-CITRUS",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:39Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "66761235-2c37-4bbe-b857-ed341892222c",
+      "role": "top_down",
+      "sha256": "e8a1a4f46fabdd33e9f052719d491e14b42f231468896b26b36b0fab96fabc4a",
+      "original_sha256": "069a1fa6f2c40de6c96895765214228804a8cc98ee23fde6f315ec1257f57c90",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 352.2,
+        "mean_luma": 138.9,
+        "clipped_pct": 0.02,
+        "dark_pct": 1.28
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 2,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "SOAP-CITRUS",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-GREEN",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "SOAP-CITRUS",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-CITRUS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BOTTLE-STEEL",
+      "SOAP-CITRUS",
+      "SOAP-HERBAL",
+      "MUG-BLUE",
+      "MUG-GREEN",
+      "BIN-LARGE"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 in the box, 2 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:SOAP-CITRUS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-CITRUS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:39Z",
+    "reasons": [
+      "Stoneware coffee mug: 1 in the box, 2 ordered."
+    ],
+    "fix_instructions": [
+      "Add 1 × Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ff0bad07f10f9dce1a3879347b0d40efe295f8d32da31ae836acc88b465113aa"
+}

@@ -1,0 +1,13 @@
+sku,title,attributes,sellable_unit,distinguishing_features,confusable_with,on_hand
+MUG-BLUE,Stoneware coffee mug,colour=deep blue; size=standard,one blue glazed ceramic mug,Deep blue glossy glaze with a cream interior and a rounded handle; same shape as green mug,MUG-GREEN,5
+MUG-GREEN,Stoneware coffee mug,colour=sage green; size=standard,one sage green glazed ceramic mug,Sage green glossy glaze with a cream interior and a rounded handle; same shape as blue mug,,5
+BIN-SMALL,Rectangular woven storage basket,size=small; colour=natural oat,one small woven basket,Light oat paper-weave basket with short sides and two oval handholds; smaller than large basket,BIN-LARGE,5
+BIN-LARGE,Rectangular woven storage basket,size=large; colour=natural oat,one large woven basket,Light oat paper-weave basket with tall sides and two oval handholds; larger than small basket,,2
+SOAP-CITRUS,Morrow & Pine dish soap,variant=citrus; volume=500 ml,one 500 ml dish soap bottle,Clear amber liquid in a squat clear bottle with a white pump; pale yellow label with a small orange illustration; Morrow & Pine label,SOAP-HERBAL,2
+SOAP-HERBAL,Morrow & Pine dish soap,variant=herbal; volume=500 ml,one 500 ml dish soap bottle,Clear amber liquid in a squat clear bottle with a white pump; pale green label with a small leaf illustration; Morrow & Pine label,,2
+CABLE-USB,USB charging cable,colour=white; length=1 m,one coiled white USB-A to USB-C cable,Small neatly coiled white cable with one rectangular USB-A plug and one small oval USB-C plug,,2
+MUG-SET2,Two-mug gift box,contents=2 white mugs; package=kraft box,one kraft box containing two white ceramic mugs,A single compact kraft cardboard box with a clear window showing exactly two white mugs; counts as ONE sellable unit,,1
+TOWEL-GRAY,Cotton hand towel,colour=charcoal gray; size=hand towel,one folded charcoal gray cotton hand towel,One folded small rectangular charcoal gray towel with visible looped terry texture,,1
+CANDLE-CREAM,Unscented jar candle,colour=cream; vessel=clear glass,one small clear glass jar candle,A short cylindrical clear glass jar filled with ivory wax and a single centered wick; plain cream paper band,,1
+BRUSH-WOOD,Wooden dish brush,material=beech wood; bristle=natural,one wooden dish brush,Short oval beechwood handle with a small dense round tuft of natural tan bristles,,1
+BOTTLE-STEEL,Reusable water bottle,colour=matte stainless steel; capacity=600 ml,one stainless steel water bottle,Tall narrow cylindrical brushed stainless steel bottle with a plain screw cap and no logo,,1

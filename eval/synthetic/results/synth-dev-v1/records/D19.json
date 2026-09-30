@@ -1,0 +1,266 @@
+{
+  "record_id": "0604798d-579e-4f93-a631-91e52aeb440a",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D19",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "CANDLE-CREAM",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-BLUE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:12:13Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "c1d44101-fbde-4903-b8d0-3bca4e733e38",
+      "role": "top_down",
+      "sha256": "826943faccd0abd22ad7c4306dc806646a8d1e7a8f71980c4bbdb33e770b46dc",
+      "original_sha256": "6a5f2fcaf3128dc6045450a2593fcac5822463f4a64c14b0722bb74edd492ce1",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 307.7,
+        "mean_luma": 134.6,
+        "clipped_pct": 0.03,
+        "dark_pct": 2.27
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          344,
+          206,
+          646,
+          453
+        ],
+        "description": "small clear glass jar candle with cream label",
+        "classification": "CANDIDATE",
+        "sku": "CANDLE-CREAM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "glass jar with ivory wax and paper band",
+        "partially_hidden": false,
+        "title": "Unscented jar candle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          345,
+          498,
+          685,
+          847
+        ],
+        "description": "deep blue ceramic mug with cream interior",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glaze with handle and cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          256,
+          147,
+          729,
+          856
+        ],
+        "description": "crumpled brown packing paper filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper used as dunnage",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box interior is clearly visible with one candle and one blue mug cushioned by packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CANDLE-CREAM",
+      "MUG-BLUE",
+      "TOWEL-GRAY",
+      "MUG-GREEN",
+      "BOTTLE-STEEL"
+    ],
+    "usage": {
+      "input_tokens": 13093,
+      "output_tokens": 607,
+      "thinking_tokens": 0,
+      "total_tokens": 13700
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9049,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:12:22Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:f970e9a2bf490e31a5db34da16b1af21e8d729029e648259ad479cba677583ef"
+}

@@ -1,0 +1,248 @@
+{
+  "record_id": "11e83eca-1c67-4246-b433-67151fa501db",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D04",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-SET2",
+        "qty": 1
+      },
+      {
+        "sku": "BRUSH-WOOD",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "ee6495ae-50c0-4d1b-91e0-6063a0398b1e",
+      "role": "top_down",
+      "sha256": "d947c317b7f8f2f1ba47672ac07b826a63195c861bd8ede9960afcc73e43d42e",
+      "original_sha256": "4208509933ee004b5ad9abe9fbf4be912d4f895419d5a1717dd2e0a9e39f2d28",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "FAIL",
+        "reasons": [
+          "Photo looks blurry. Hold the phone steady and tap to focus."
+        ],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 59.5,
+        "mean_luma": 125.4,
+        "clipped_pct": 0.05,
+        "dark_pct": 1.39
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Two-mug gift box: 1 of 1.",
+        "Wooden dish brush: 1 of 1.",
+        "Two-mug gift box: found (#1).",
+        "Wooden dish brush: found (#2).",
+        "The whole inside of the box is visible and nothing appears hidden."
+      ],
+      "unknown": [
+        "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue."
+      ],
+      "missing_evidence": [
+        "A sharp, well-lit photo. Photo looks blurry. Hold the phone steady and tap to focus."
+      ],
+      "next_action": "Retake the photo with the whole box in the frame and items spread out, then check again."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-SET2",
+        "title": "Two-mug gift box",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-SET2",
+        "classification": "CANDIDATE",
+        "sku": "MUG-SET2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Two-mug gift box"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "BRUSH-WOOD",
+        "classification": "CANDIDATE",
+        "sku": "BRUSH-WOOD",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Wooden dish brush"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-SET2",
+      "BRUSH-WOOD",
+      "TOWEL-GRAY",
+      "MUG-BLUE"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:38Z",
+    "reasons": [
+      "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue."
+    ],
+    "fix_instructions": [
+      "Retake the photo. Photo looks blurry. Hold the phone steady and tap to focus."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:c2fb24bcb9e8c867a8f0a61201cc477ad040422029d402ee5f0e987ac34d56ba"
+}

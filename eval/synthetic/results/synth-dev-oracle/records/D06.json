@@ -1,0 +1,272 @@
+{
+  "record_id": "7a4d46de-0391-426c-b6c9-d4dd8d85fef0",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D06",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      },
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-BLUE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "bf234af5-f0c8-4b2d-94a9-86717a7f504b",
+      "role": "top_down",
+      "sha256": "fcdc7a81cf3a41f191d3caa0e05b70d419b2690000a650e3cd462febac324381",
+      "original_sha256": "d33fe09eb9493d2587132f134205ed9a3644f14c6afa6eca82d6d0fc18a46736",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 183.4,
+        "mean_luma": 121.3,
+        "clipped_pct": 0.61,
+        "dark_pct": 4.4
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "BOTTLE-STEEL",
+        "classification": "CANDIDATE",
+        "sku": "BOTTLE-STEEL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Reusable water bottle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-BLUE",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "units": 1
+      }
+    ],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-CITRUS",
+      "BOTTLE-STEEL",
+      "CABLE-USB",
+      "MUG-SET2",
+      "MUG-GREEN",
+      "MUG-BLUE"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "USB charging cable: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:38Z",
+    "reasons": [
+      "USB charging cable: 0 in the box, 1 ordered.",
+      "USB charging cable: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Add 1 × USB charging cable."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:cd37a7895ba5831534acd77834d34dfccd4f3b16b44689edd66f44a39858c5e1"
+}

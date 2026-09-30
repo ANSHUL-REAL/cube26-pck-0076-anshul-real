@@ -1,0 +1,368 @@
+{
+  "record_id": "9e0b9977-2197-418b-8323-66500099b59f",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D17",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "SOAP-HERBAL",
+        "qty": 1
+      },
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      },
+      {
+        "sku": "BRUSH-WOOD",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:11:53Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "bb4fbed5-7521-41d0-b605-bdcaa3e36add",
+      "role": "top_down",
+      "sha256": "87b07499f937c618c99ca84560b8c83f7c133388b431395902909db400bad89b",
+      "original_sha256": "955ea45f894b657e58d7072909c0affd469ddce7886bbb54919696646e09b9c5",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 398.5,
+        "mean_luma": 140.4,
+        "clipped_pct": 0.02,
+        "dark_pct": 1.12
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "SOAP-HERBAL",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          201,
+          191,
+          786,
+          491
+        ],
+        "description": "Morrow & Pine herbal dish soap bottle",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-HERBAL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Green label with herbal and leaf illustration",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          521,
+          548,
+          823,
+          785
+        ],
+        "description": "Wooden dish brush",
+        "classification": "CANDIDATE",
+        "sku": "BRUSH-WOOD",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Wooden handle with natural tan bristles",
+        "partially_hidden": false,
+        "title": "Wooden dish brush"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          224,
+          539,
+          479,
+          815
+        ],
+        "description": "Coiled white USB cable",
+        "classification": "CANDIDATE",
+        "sku": "CABLE-USB",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "White coiled USB-A to USB-C cable",
+        "partially_hidden": false,
+        "title": "USB charging cable"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          160,
+          146,
+          850,
+          518
+        ],
+        "description": "Brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Crumpled brown paper filler",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o5",
+        "photo": 1,
+        "box_2d": [
+          168,
+          490,
+          546,
+          864
+        ],
+        "description": "Bubble wrap sheet",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Clear plastic bubble wrap",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o6",
+        "photo": 1,
+        "box_2d": [
+          477,
+          499,
+          850,
+          867
+        ],
+        "description": "Brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Crumpled brown paper filler",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o4",
+        "description": "Brown packing paper"
+      },
+      {
+        "object_id": "o5",
+        "description": "Bubble wrap sheet"
+      },
+      {
+        "object_id": "o6",
+        "description": "Brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "All items are clearly visible inside the open box resting on paper or bubble wrap."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-HERBAL",
+      "BRUSH-WOOD",
+      "SOAP-CITRUS",
+      "MUG-SET2",
+      "MUG-GREEN",
+      "CABLE-USB"
+    ],
+    "usage": {
+      "input_tokens": 15385,
+      "output_tokens": 1052,
+      "thinking_tokens": 0,
+      "total_tokens": 16437
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-HERBAL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: found (#3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {
+        "object_ids": [
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 8055,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:12:01Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:9d1fb5583463dcf66bcedf5e8b9814a49f2e98f43d3c6851a7c1afa4209e29f0"
+}

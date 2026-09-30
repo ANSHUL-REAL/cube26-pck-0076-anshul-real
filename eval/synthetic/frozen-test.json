@@ -1,0 +1,247 @@
+{
+  "split": "test",
+  "frozen_at": "2026-09-30T16:12:51+00:00",
+  "config": {
+    "prompt_version": "pack-v3",
+    "gemini_model": "gemini-3.5-flash-lite",
+    "gemini_timeout_s": 25.0,
+    "gemini_max_retries": 3,
+    "gemini_thinking_budget": null,
+    "cost_per_1m_input_usd": null,
+    "cost_per_1m_output_usd": null,
+    "catalogue_dir": "catalogue",
+    "max_candidates": 8,
+    "decoys_per_box": 2,
+    "ref_images_per_sku": 2,
+    "match_threshold": 0.7,
+    "visibility_threshold": 0.7,
+    "min_side_px": 480,
+    "blur_min_var": 60.0,
+    "luma_min": 45.0,
+    "luma_max": 215.0,
+    "max_clipped_pct": 8.0,
+    "max_dark_pct": 40.0,
+    "max_box_photos": 3,
+    "send_max_side_px": 1600,
+    "ref_max_side_px": 512
+  },
+  "code_sha256": {
+    "pack_manager/__init__.py": "fcb339d6ad8597c514a56b3e8c7bfaaf7f95d5f9a6d1e1a1506ac8adcc25ac85",
+    "pack_manager/__main__.py": "3d9e099a89b2f449a7db429b95fbea5dd0927b8313c5a4ba0dc2248f6674ddd9",
+    "pack_manager/catalogue.py": "f271ce60627b36fb8bdbe03ee1d1129a61420839c0041d88f376269055b5bec2",
+    "pack_manager/config.py": "70c073f2732c4af8d590d58cb0442daa034c0c51a5f70b51f7a8b476bdd14100",
+    "pack_manager/contract.py": "7e6379bfe6f3667ec5e0c6e13df73d6ccce24abc35ad89fa894191548868f2a1",
+    "pack_manager/decision.py": "bcdcb82201b115d146c19d287159af7f91e1d4aec89dfb81630912f8686e4c21",
+    "pack_manager/evidence.py": "fbaf8c6f94b3cfaad8d987026c7c4b4efa43b62d11642a2778de2ec768eecc7c",
+    "pack_manager/export.py": "d0e34607d3f13b9cd2ef5ea6b910638b2b9738dae803f47295b031a416d9f1a0",
+    "pack_manager/models.py": "7d4a532a53757fd835d19325017f6e3eed322f3560a3196c741384dc6290b03f",
+    "pack_manager/orders.py": "f6bbb5381c4d53d962f1ef60a38a2734e06626e48ef71480af123329a7208efa",
+    "pack_manager/pipeline.py": "8ef32239256beeaae1e4e195666193d6402d6d61c9e6a7cee9fa62ab5e5ac76d",
+    "pack_manager/quality.py": "99b0e27e40f8188de2d09efa24035f45d9a3ad1ec8445deadac9992e405857bb",
+    "pack_manager/sample.py": "c168d17694c1040c57597967ebded78c3354c2f3f1d4fa38191614a5184e1cc4",
+    "pack_manager/vision/__init__.py": "d6919e0d60b856206cc00f3e220e0418f20a0497e0e6d7af2e5d38118a888ac2",
+    "pack_manager/vision/base.py": "76e855b2855cf4b6bb40fa94315a92ff2933db150bb1267a3e306d9849d1dd8a",
+    "pack_manager/vision/gemini.py": "bf00209c0aaeb950f232bd1660a7788eef0f0c1647d1e03a747c3db72b37cf1e",
+    "pack_manager/vision/oracle.py": "a2c46bf5219a82a82ef5205cff864e300a58c131fd6e2c2ffdecf97982b4a0f6",
+    "pack_manager/vision/prompt.py": "19fc7269492261b3e9d0641e99d0caa244d8970afc5dc561429d0970407f945f",
+    "eval/common.py": "07737cf3dee1464ba11934b4eeaaf8f40a7249ab2c3f7b8146807b7a74a64eb6",
+    "eval/run_eval.py": "d51b1f07489ec4c5f71b6a038d786ad5bf403ea58273f7eafae454eb2572b574",
+    "eval/dataset.json": "54ecc2d8cd16bc22994a60bb1957c165d10be4c3f02fb3d54641a170d2aed1bd"
+  },
+  "boxes": 50,
+  "manifest_rows_sha256": "a263ca23d21aaaed94ec18614c1cb462b5c8fde6debda8a3fd22588d2eb08880",
+  "photos_sha256": {
+    "T01": [
+      "d75ffdc1fd0830e49579c77f8106501241dad3f389a84d962650a797fb2b8553"
+    ],
+    "T02": [
+      "855ff11fb45c3a812469122670dca78a5e69cb95564adfc397138a7ab58a3963"
+    ],
+    "T03": [
+      "1f4238eb073e1473c73bfc05b587e25ed548a4774c2f84e6f29dc1ba2ee957e9"
+    ],
+    "T04": [
+      "8f88fd439277b6ce1070b49e1e4f3f47d49d863f32b77ff768e54ce7eba7d9f1"
+    ],
+    "T05": [
+      "0b724886648da0c8752b71f67fe3308387d41fe38b8954cc4e9c2bee32ec1b67"
+    ],
+    "T06": [
+      "f6ffa7a2b82b90b44c8230d88fbc5179963635a731887f4e7604afdeba2c0e78"
+    ],
+    "T07": [
+      "e02801ea4a721ef44be9f1ae89e10376b966b5b6b7b3e0b68321203024ea2a72"
+    ],
+    "T08": [
+      "81dbc7ace4be07922b0f20200ea95580223b0ff521dd00bb70d7fa41d5f68bd5"
+    ],
+    "T09": [
+      "2d0afbf1ddf419f27185c856a75a189589df1e5db1cfd83c312c00e327550179"
+    ],
+    "T10": [
+      "451e9d9de1b1617a9a1b5f2e6a11a79ccff5721d6dfc91169bf1a43871dcc440"
+    ],
+    "T11": [
+      "5388722f99f49ab3ca9e947e43e1d88808f033392477bbc1bc3a364d8891b188"
+    ],
+    "T12": [
+      "7259bd5841f41d23b7d4dd109b95076fc32d8ac9fe4e9ae4b9a1b66e79e858f6"
+    ],
+    "T13": [
+      "4b4604fd6c31452f510ad5aee2b036e579f136bdb722fd8b499f36008db4d39c"
+    ],
+    "T14": [
+      "d955fbc55a1a57692d4a9f93c2be509b3d78c02915b50dddfd3159bce32f98be"
+    ],
+    "T15": [
+      "e64c894f74725d6915d2b4c302c12dd52b3946cc231672bda3c354e7b9e859fd"
+    ],
+    "T16": [
+      "e686598a446ccb69666605a58f67240173530d891969741b0cef59ad9f742ec5"
+    ],
+    "T17": [
+      "05f89c3422a3ddbf36f2bf264900d79b15cff2505153886e99e258b2193f3296"
+    ],
+    "T18": [
+      "b4486f63f6c645338f3815266e9758dd146f90807117da361417008fcc0db936"
+    ],
+    "T19": [
+      "16b6d67768f663ae31583ea195c3a9428a7e9e92dfe51f6179e0481e1150526b"
+    ],
+    "T20": [
+      "a5744e7d968784f0bd1c217d3f2cb8b1e86f297a70e8c7edd358db57fccb60e6"
+    ],
+    "T21": [
+      "1a4ce5057344999bc0a562efff3c61d7fdb3bbefa1246a4397616284509705a1"
+    ],
+    "T22": [
+      "5cf77b5a303ce7defa01cc20c20b8efe6d3d3d29a7cf5cfbbeae1af93af082da"
+    ],
+    "T23": [
+      "65e4c2d23170482f31e9e2197df00aeb67f06a8a082dda69908e69a7e603002b"
+    ],
+    "T24": [
+      "276567160d777b5cf4ae5c47e000380da26db581e52907b0edbb077e159dda2b"
+    ],
+    "T25": [
+      "ceb7f49cf4e1185c3464e313b9cf520441edffec1699b4c3c4ca3dca3545cdbd"
+    ],
+    "T26": [
+      "d57f977b80b90c5004e484478d63deed750c300a0c8e5e3c4c230bdd72d824f8"
+    ],
+    "T27": [
+      "33492769c26cb46a2115d1c7c7af3d2d6dc622d1be1a33ae6733f519b042d9d4"
+    ],
+    "T28": [
+      "844e5e65496ea31eeb0fdbc596d7456931b6f3889aa2d22d5d81a6e2b5f924f2"
+    ],
+    "T29": [
+      "c53a70f1b8b67d89f8160d5c098c403d1285b86758072d4c85085dfd7263be27"
+    ],
+    "T30": [
+      "c8c091e19e21afd002d25e6fad8c52d4ee8d3ac50757534131af6b058541bb61"
+    ],
+    "T31": [
+      "e7663e196c3c967247b06168850080d4c19e597c45f81355a35a81db9273827d"
+    ],
+    "T32": [
+      "8ae5508d76137242f8a29ec47d251c69b91e6de5f419c52da3764dde8f1d850e"
+    ],
+    "T33": [
+      "2a7811df09634a0d1a7b699b1daa3517606092448d1aa9e375dde8bf00d148e1"
+    ],
+    "T34": [
+      "c82f06b2a7aa3516762ff71e2226cce4c39c97dec1d688c8777021885abe0d3d"
+    ],
+    "T35": [
+      "e6a1f42b55e3a3b93652b0f3f4c37f05233e3b779c3fc734c1c847a7c5de772f"
+    ],
+    "T36": [
+      "63a3d3f14aa287bec732dee2ef9d46db2f7e08b97328fdc65cf61eb1cd5aa5a9"
+    ],
+    "T37": [
+      "1654f2a30bed7eb41457e1669600520ac2143c210ceaeb5204771a9a46fb4863"
+    ],
+    "T38": [
+      "6f1b8f7397236494c067a3f4c78a697b599aa620738d02914fe35c06a861e45b"
+    ],
+    "T39": [
+      "ef510aaa2760a286324a7b33326d4831c0e721620f3d0c98941e2199f840234e"
+    ],
+    "T40": [
+      "6b61ad8e40bfed7be62496910fb0237cf6e621b4e813c0f80c57f87bbb2ddeba"
+    ],
+    "T41": [
+      "e7eb02fed8defdbd4340a58cf84b9476f1e5a54d4600ca479b11e7017eb13444"
+    ],
+    "T42": [
+      "0f7339e66fa3e81274d177af36dd84227a743020ea0774db4449dce363d15fca"
+    ],
+    "T43": [
+      "ca864a13fb2f7eb79bdd16c811e6a3544cc833104cd67fe9cae9fbe29f9e78c6"
+    ],
+    "T44": [
+      "bf4444053669f55f68533b4360511132412933dcb7c7c4067b3253639f0d98f5"
+    ],
+    "T45": [
+      "7d7aadc1882ca5ff968ddbe0ff385c6a17a40f01a11905226cab1bd089fcf58d"
+    ],
+    "T46": [
+      "c6fc45e48b04e5b761113beaa2188805923ac09938f93c6e98339752e8f903de"
+    ],
+    "T47": [
+      "ab84d24006afa30e79220aaedf75b89db683ffeecd9b799e331bfd346ccef80d"
+    ],
+    "T48": [
+      "17ceba93e006fbb3aef8662f6cdd84c6c3f31989344da6c6bb453a7b4efa92f9"
+    ],
+    "T49": [
+      "aaabe70970a7929067184b20bc8313004e856e49f767b6f06b8a3a6c8e93aea7"
+    ],
+    "T50": [
+      "56db9d4ac00478f23fd935efe05edbd9b09f9f74ce85f8de7ebb57987882daaf"
+    ]
+  },
+  "catalogue_files_sha256": {
+    "org_synth_demo/catalogue.json": "0004aedb39e46ab22762ddc9ec116f73600fb511283878f5950e8e968a1e8ff5",
+    "org_synth_demo/images/BIN-LARGE/1.jpg": "3b31ef045c417cb12757500a513a15b4b778bddd8f351b70971bc4bb7e12e1e3",
+    "org_synth_demo/images/BIN-LARGE/2.jpg": "35eeca79cee534a6e326cc600ab378919da5c44f77d30a1410e1c48278b1cedd",
+    "org_synth_demo/images/BIN-LARGE/3.jpg": "089a0819d1c781fedfa90bb9fcd5130e6d7f555b74120a460fe356ad9f0a6cd9",
+    "org_synth_demo/images/BIN-SMALL/1.jpg": "8bb59d89a0672e46061854e4f22622cf695e4fe7c6c41605479066b6073ad51c",
+    "org_synth_demo/images/BIN-SMALL/2.jpg": "b5b4c801e497c9bad9d7eb13afd2372e405a4b395f18143e4ae73f8d319733d2",
+    "org_synth_demo/images/BIN-SMALL/3.jpg": "e17c13fe6bb2f85fefdb11a007823b30c4f451d053ec1dbdfb9640c9ac8191c6",
+    "org_synth_demo/images/BOTTLE-STEEL/1.jpg": "2536aeafc4e146cb8244d0cae3c35f426eec8471e54ab09bc18cef7b50e1b9c9",
+    "org_synth_demo/images/BOTTLE-STEEL/2.jpg": "b4b9db6a4134db930bd24bc67cae47667b0d24411199f634f7c2a9d7c58e3420",
+    "org_synth_demo/images/BOTTLE-STEEL/3.jpg": "5882abdefc0db0b9ef7d979ff6ba82f9d9f0ec23e1b17c1d8f3fa26fceedaa24",
+    "org_synth_demo/images/BRUSH-WOOD/1.jpg": "22cdead8a1d39666903fce9f58b2785082e8b2070934730bb3ee023b9ef36e28",
+    "org_synth_demo/images/BRUSH-WOOD/2.jpg": "cde90837fccc979e98c53c874d0356fb4723d20feb37ec6c4f36d17208947a13",
+    "org_synth_demo/images/BRUSH-WOOD/3.jpg": "90595525ef34aa0a21b8a9d57ca3d9584d7a7ee7181b3ea3f6ab7bbc79a4dd97",
+    "org_synth_demo/images/CABLE-USB/1.jpg": "4374aa601d2ba38711d06b4188420340a1132656b74339b6f8b1bd8079d047cd",
+    "org_synth_demo/images/CABLE-USB/2.jpg": "88f2ffbbdafd7ad9129b15b14fe648c6312e104f4009a242d04fa147265eadac",
+    "org_synth_demo/images/CABLE-USB/3.jpg": "6bbf14ae2670f989b3e78cc7d06306190099cc16210fe2e2b720dd67549be529",
+    "org_synth_demo/images/CANDLE-CREAM/1.jpg": "0a3b7e54e4a08024362a443085af8a904e594a2d62e86c40ad66f61348972584",
+    "org_synth_demo/images/CANDLE-CREAM/2.jpg": "bf17b3dcbaec0298af8eb8f804db1cdde45396e192a7b7568bbdda75f73c1657",
+    "org_synth_demo/images/CANDLE-CREAM/3.jpg": "03fe164b15ccb58ad20d11fa214f3430534f750087c20c50fc2547ad3ffa93b4",
+    "org_synth_demo/images/MUG-BLUE/1.jpg": "35fc2f48faee3be894669b883e5c4cbdbb237c0a7f1d5c927b5c2f7016584145",
+    "org_synth_demo/images/MUG-BLUE/2.jpg": "b7a05a6e9d2e54eb082dce767e50060baa7c17e91766d19fa66fcafe64b27b9a",
+    "org_synth_demo/images/MUG-BLUE/3.jpg": "dc22e4e5162ce05cfd4b9592dbd59c03fee5381ec53f5b3f4e1de8428ba05357",
+    "org_synth_demo/images/MUG-GREEN/1.jpg": "d5b083b3ea00325ed9afc2dd967449bc0b1eea46ad262bede911bdf0f0f3247e",
+    "org_synth_demo/images/MUG-GREEN/2.jpg": "8ee55317c7f0734b7a7560fc8b06e2afc70949c84025cf475ce5d4915c1f101b",
+    "org_synth_demo/images/MUG-GREEN/3.jpg": "11ab5a9c66f3c0474f40b526ff1f37dcdcb6f6c8234f4abdab46a6c5dc1a733b",
+    "org_synth_demo/images/MUG-SET2/1.jpg": "052d220e60bccbcdd9e89c1bb01a51cb3888a628cd87c3f32fdaa4da616cf7d0",
+    "org_synth_demo/images/MUG-SET2/2.jpg": "1932826548bae5e0685270384432106449f119199dbc08b854b19d2149046d3a",
+    "org_synth_demo/images/MUG-SET2/3.jpg": "0cf92a85697c97c119123d669e1f5198193a3f3a607b414533ab23c3317a3e9d",
+    "org_synth_demo/images/SOAP-CITRUS/1.jpg": "2f32b588da6be2e9ae50efd81e3a1d8f059dd4f8c024bf621e9fa0c601cdedd5",
+    "org_synth_demo/images/SOAP-CITRUS/2.jpg": "fb77a5717ba48f987bec0a3dca50de8d2e02bed5d9694004242d5d957ef90a6e",
+    "org_synth_demo/images/SOAP-CITRUS/3.jpg": "5832a7c859d72216a16bd35f284035c033c45365937365ffe9eeea35c441e54c",
+    "org_synth_demo/images/SOAP-HERBAL/1.jpg": "30a22616d970899145cfe9ecb58fcf7d31ba2eeaf9beee3df5c07b4e238f3af6",
+    "org_synth_demo/images/SOAP-HERBAL/2.jpg": "f3bbac0bdecf75e409ab0b58bd9da4b57eac8c915cb6af0564eb49849049667a",
+    "org_synth_demo/images/SOAP-HERBAL/3.jpg": "9b7a1ce8a62ed75c2d2a8fe54d0b4ac658bda4ec12fa58056f8b4662325745ea",
+    "org_synth_demo/images/TOWEL-GRAY/1.jpg": "5a3482098c53cf72fd6092382ee024c51f6e7d3483aaf9c6cecd52893e59b84e",
+    "org_synth_demo/images/TOWEL-GRAY/2.jpg": "ebaee03f69a2a9640771a88f145b66ec2f5ec116fd19c3a344fec5ec11c22858",
+    "org_synth_demo/images/TOWEL-GRAY/3.jpg": "2e61856f2eb9373c642f4532d867d46391ec6f0737c4d6833e5e6bc1943d0766",
+    "org_synth_demo/products.csv": "58292b20bd053a33f1382122bb72ca91a5aed3a7b1c920233c33f6caa6cd8f77",
+    "sample/catalogue.json": "7227acb571d4607011ad42b7e008542b1d087ca778d1be28648586c2c331dcbd"
+  },
+  "labels_sha256": {}
+}

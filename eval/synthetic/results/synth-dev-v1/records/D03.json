@@ -1,0 +1,237 @@
+{
+  "record_id": "866bfbeb-eca6-47bf-b4f0-8264cc17a543",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D03",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-SET2",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:09:17Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "eebcb6af-97a1-43c5-a805-f1828a205770",
+      "role": "top_down",
+      "sha256": "4b4c7d27c74abd77823e13a2171b20b394b4a9a9b60c863cdf2ff08f0d59fced",
+      "original_sha256": "205399005572ead32620fae2668def1f2331732b93a2a737cbee2d5fa9ce63d4",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 238.2,
+        "mean_luma": 139.1,
+        "clipped_pct": 0.02,
+        "dark_pct": 1.91
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-SET2",
+        "title": "Two-mug gift box",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          187,
+          187,
+          549,
+          831
+        ],
+        "description": "two white ceramic mugs in kraft box",
+        "classification": "CANDIDATE",
+        "sku": "MUG-SET2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "kraft cardboard box with a clear window showing exactly two white ceramic mugs",
+        "partially_hidden": false,
+        "title": "Two-mug gift box"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          533,
+          447,
+          820,
+          780
+        ],
+        "description": "green ceramic mug",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "single green ceramic mug not matching any candidate product",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          207,
+          147,
+          843,
+          902
+        ],
+        "description": "brown crumpled packing paper filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper used as dunnage/filler",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": null,
+        "title": "green ceramic mug",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "brown crumpled packing paper filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 0.95,
+      "notes": "Box interior is fully visible from above, containing one two-mug set and an loose green mug resting on packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-SET2",
+      "SOAP-CITRUS",
+      "SOAP-HERBAL"
+    ],
+    "usage": {
+      "input_tokens": 8640,
+      "output_tokens": 565,
+      "thinking_tokens": 0,
+      "total_tokens": 9205
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6332,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6332,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6332,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 0.95,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6332,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: green ceramic mug (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6332,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:09:24Z",
+    "reasons": [
+      "Not in the order: green ceramic mug (#2)."
+    ],
+    "fix_instructions": [
+      "Remove green ceramic mug (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:5787fa82d77d5505245c9fce238a52d7cf8f307bf35e44b97024400f01d40005"
+}

@@ -1,0 +1,189 @@
+{
+  "record_id": "3e45d9a3-1e66-4d40-9a71-86bc77969203",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D07",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "323907fd-24b2-4e65-9ce5-f02fea9e6bf2",
+      "role": "top_down",
+      "sha256": "50702950d5e30dca33a16207e89f7d5fda17d9b0402a3ae96ca7c4af9b646b06",
+      "original_sha256": "69c1b1cece3c3d41a26a1e63acd529307a9321b007ec684e98b92dfe166e7cd3",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 295.7,
+        "mean_luma": 141.0,
+        "clipped_pct": 0.08,
+        "dark_pct": 2.18
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-GREEN",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "BOTTLE-STEEL",
+        "expected_title": "Reusable water bottle",
+        "found_sku": "MUG-GREEN",
+        "found_title": "Stoneware coffee mug",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BOTTLE-STEEL",
+      "SOAP-CITRUS",
+      "BIN-SMALL"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Reusable water bottle, found Stoneware coffee mug (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "BOTTLE-STEEL",
+            "found_sku": "MUG-GREEN",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:38Z",
+    "reasons": [
+      "Expected Reusable water bottle, found Stoneware coffee mug (#1).",
+      "Reusable water bottle: 0 in the box, 1 ordered.",
+      "Reusable water bottle: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Stoneware coffee mug (#1) with Reusable water bottle."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:51b14137784ad1b339d00f578bf30b910f8df93f112ad408cd840e279ef9dcbc"
+}

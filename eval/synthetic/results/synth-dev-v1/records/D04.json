@@ -1,0 +1,286 @@
+{
+  "record_id": "9ecfae60-7204-44e0-a7f5-c22fbf7f9aa1",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D04",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-SET2",
+        "qty": 1
+      },
+      {
+        "sku": "BRUSH-WOOD",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:09:26Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d475dc97-8d0d-4fbc-88b8-529cf5ecad8c",
+      "role": "top_down",
+      "sha256": "d947c317b7f8f2f1ba47672ac07b826a63195c861bd8ede9960afcc73e43d42e",
+      "original_sha256": "4208509933ee004b5ad9abe9fbf4be912d4f895419d5a1717dd2e0a9e39f2d28",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "FAIL",
+        "reasons": [
+          "Photo looks blurry. Hold the phone steady and tap to focus."
+        ],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 59.5,
+        "mean_luma": 125.4,
+        "clipped_pct": 0.05,
+        "dark_pct": 1.39
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": {
+      "known": [
+        "No product from outside the order was found.",
+        "Nothing outside the order is in the box.",
+        "Two-mug gift box: 1 of 1.",
+        "Wooden dish brush: 1 of 1.",
+        "Two-mug gift box: found (#1).",
+        "Wooden dish brush: found (#2).",
+        "The whole inside of the box is visible and nothing appears hidden."
+      ],
+      "unknown": [
+        "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue."
+      ],
+      "missing_evidence": [
+        "A sharp, well-lit photo. Photo looks blurry. Hold the phone steady and tap to focus."
+      ],
+      "next_action": "Retake the photo with the whole box in the frame and items spread out, then check again."
+    },
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-SET2",
+        "title": "Two-mug gift box",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          196,
+          172,
+          617,
+          847
+        ],
+        "description": "two white mugs in a kraft box",
+        "classification": "CANDIDATE",
+        "sku": "MUG-SET2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "compact kraft box with clear window showing two white mugs",
+        "partially_hidden": false,
+        "title": "Two-mug gift box"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          551,
+          461,
+          755,
+          737
+        ],
+        "description": "wooden dish brush with natural bristles",
+        "classification": "CANDIDATE",
+        "sku": "BRUSH-WOOD",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "short oval beechwood handle with dense round tuft of natural tan bristles",
+        "partially_hidden": false,
+        "title": "Wooden dish brush"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          153,
+          137,
+          839,
+          930
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper used as void fill",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The entire interior of the box is visible, showing two distinct products and packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-SET2",
+      "BRUSH-WOOD",
+      "TOWEL-GRAY",
+      "MUG-BLUE"
+    ],
+    "usage": {
+      "input_tokens": 10850,
+      "output_tokens": 613,
+      "thinking_tokens": 0,
+      "total_tokens": 11463
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "UNCERTAIN",
+      "confidence": null,
+      "detail": "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7546,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "UNCERTAIN",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:09:33Z",
+    "reasons": [
+      "Photo 1: Photo looks blurry. Hold the phone steady and tap to focus. The operator chose to continue."
+    ],
+    "fix_instructions": [
+      "Retake the photo. Photo looks blurry. Hold the phone steady and tap to focus."
+    ]
+  },
+  "overrides": [],
+  "status": "pending_review",
+  "content_hash": "sha256:08a0e91d1bfb80c39422410a6f86d2cf79d4e61a54ef288c2d8fb375b06a6f3d"
+}

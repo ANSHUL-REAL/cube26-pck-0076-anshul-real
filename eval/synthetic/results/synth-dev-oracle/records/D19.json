@@ -1,0 +1,228 @@
+{
+  "record_id": "cf1538d6-2446-40a8-8d2a-412ec6ca6bd2",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D19",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "CANDLE-CREAM",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-BLUE",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:40Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "b672580e-bf58-40fa-8fb4-297db308f299",
+      "role": "top_down",
+      "sha256": "826943faccd0abd22ad7c4306dc806646a8d1e7a8f71980c4bbdb33e770b46dc",
+      "original_sha256": "6a5f2fcaf3128dc6045450a2593fcac5822463f4a64c14b0722bb74edd492ce1",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 307.7,
+        "mean_luma": 134.6,
+        "clipped_pct": 0.03,
+        "dark_pct": 2.27
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "CANDLE-CREAM",
+        "classification": "CANDIDATE",
+        "sku": "CANDLE-CREAM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Unscented jar candle"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-BLUE",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CANDLE-CREAM",
+      "MUG-BLUE",
+      "TOWEL-GRAY",
+      "MUG-GREEN",
+      "BOTTLE-STEEL"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:40Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:01e0346b29b198a9779779ae06bc9816f1b55877ce043188ff8fbe8fe969facb"
+}

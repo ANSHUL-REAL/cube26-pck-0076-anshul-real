@@ -1,0 +1,244 @@
+{
+  "record_id": "f83c7249-96c5-4e1b-bc82-9bb7a6f508c9",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D07",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:09:53Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e35fe542-e61d-4225-8190-01ed0b027c02",
+      "role": "top_down",
+      "sha256": "50702950d5e30dca33a16207e89f7d5fda17d9b0402a3ae96ca7c4af9b646b06",
+      "original_sha256": "69c1b1cece3c3d41a26a1e63acd529307a9321b007ec684e98b92dfe166e7cd3",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 295.7,
+        "mean_luma": 141.0,
+        "clipped_pct": 0.08,
+        "dark_pct": 2.18
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BOTTLE-STEEL",
+        "title": "Reusable water bottle",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          339,
+          232,
+          638,
+          580
+        ],
+        "description": "sage green ceramic mug",
+        "classification": "UNKNOWN_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "ceramic mug not matching any candidate SKU",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          428,
+          529,
+          728,
+          885
+        ],
+        "description": "white paper note with handwritten text",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "handwritten note",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          268,
+          137,
+          750,
+          895
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown packing paper filler",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "BOTTLE-STEEL",
+        "expected_title": "Reusable water bottle",
+        "found_sku": null,
+        "found_title": "sage green ceramic mug",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o2",
+        "description": "white paper note with handwritten text"
+      },
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The box contains a mug, a note, and packing paper."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BOTTLE-STEEL",
+      "SOAP-CITRUS",
+      "BIN-SMALL"
+    ],
+    "usage": {
+      "input_tokens": 8619,
+      "output_tokens": 469,
+      "thinking_tokens": 0,
+      "total_tokens": 9088
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9097,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BOTTLE-STEEL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9097,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:BOTTLE-STEEL",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Reusable water bottle: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9097,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Reusable water bottle, found sage green ceramic mug (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9097,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "BOTTLE-STEEL",
+            "found_sku": null,
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9097,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:10:02Z",
+    "reasons": [
+      "Expected Reusable water bottle, found sage green ceramic mug (#1).",
+      "Reusable water bottle: 0 in the box, 1 ordered.",
+      "Reusable water bottle: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace sage green ceramic mug (#1) with Reusable water bottle."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:21de0e37d5138b1c3883b7a86940e0307f79edc4b62d717223235c57022a804a"
+}

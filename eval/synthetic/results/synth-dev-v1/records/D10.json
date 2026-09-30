@@ -1,0 +1,288 @@
+{
+  "record_id": "bb9d0d20-08e6-4996-8dc0-675a747a4014",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D10",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "SOAP-CITRUS",
+        "qty": 1
+      },
+      {
+        "sku": "CABLE-USB",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:10:29Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "2d199d19-8a07-4881-8fd3-c9f6c5be4265",
+      "role": "top_down",
+      "sha256": "f1993f0c3ed26fff3b761dc354d35e0f926faa417c951ec62c80f9efabc08cfa",
+      "original_sha256": "072491cea536aa9aa229b44fd936c83108ccc345b428f0a8c365eee5ae480ca2",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 414.0,
+        "mean_luma": 133.4,
+        "clipped_pct": 0.05,
+        "dark_pct": 1.7
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "SOAP-CITRUS",
+        "title": "Morrow & Pine dish soap",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "CABLE-USB",
+        "title": "USB charging cable",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          146,
+          149,
+          761,
+          489
+        ],
+        "description": "Morrow & Pine citrus dish soap 500ml",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-CITRUS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Pale yellow label with orange and citrus illustration, reading Citrus Dish Soap",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          238,
+          473,
+          504,
+          824
+        ],
+        "description": "white coiled USB-A to USB-C charging cable",
+        "classification": "CANDIDATE",
+        "sku": "CABLE-USB",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Coiled white USB charging cable with USB-A and USB-C plugs",
+        "partially_hidden": false,
+        "title": "USB charging cable"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          169,
+          97,
+          850,
+          878
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Brown paper used as box filler",
+        "partially_hidden": false,
+        "title": null
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          515,
+          497,
+          833,
+          873
+        ],
+        "description": "handwritten packing slip",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Paper note detailing contents of the box",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      },
+      {
+        "object_id": "o4",
+        "description": "handwritten packing slip"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "The interior of the box is completely open and visible from above with no hidden items."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "CABLE-USB",
+      "SOAP-CITRUS",
+      "TOWEL-GRAY",
+      "SOAP-HERBAL",
+      "CANDLE-CREAM"
+    ],
+    "usage": {
+      "input_tokens": 13134,
+      "output_tokens": 752,
+      "thinking_tokens": 0,
+      "total_tokens": 13886
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:SOAP-CITRUS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:SOAP-CITRUS",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Morrow & Pine dish soap: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CABLE-USB",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "USB charging cable: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 9505,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:10:38Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:c11ad5a4ca5fca436b239cd6b093e9feccb1679f429ddc6a63093233e08232a0"
+}

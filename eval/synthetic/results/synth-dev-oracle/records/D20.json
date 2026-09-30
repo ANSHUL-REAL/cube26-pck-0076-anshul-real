@@ -1,0 +1,199 @@
+{
+  "record_id": "7d4e010c-db2d-4d37-96c5-7f8936dbfc1d",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D20",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "TOWEL-GRAY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:40Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "191ae6b0-1382-46fb-9106-fd527fd35770",
+      "role": "top_down",
+      "sha256": "17fd7b4e629e083b863ce73d70f9f671274a7d0ca8b8ffa89a660ba52c3b2884",
+      "original_sha256": "dd4c4b816b43f0c7461982633eeba49a73238c6dd8a14e848fe44debc8ca4ad9",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 773.2,
+        "mean_luma": 116.3,
+        "clipped_pct": 0.02,
+        "dark_pct": 6.62
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "TOWEL-GRAY",
+        "title": "Cotton hand towel",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "TOWEL-GRAY",
+        "classification": "CANDIDATE",
+        "sku": "TOWEL-GRAY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Cotton hand towel"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "SOAP-CITRUS",
+        "classification": "CANDIDATE",
+        "sku": "SOAP-CITRUS",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Morrow & Pine dish soap"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "SOAP-CITRUS",
+        "title": "Morrow & Pine dish soap",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-BLUE",
+      "TOWEL-GRAY",
+      "SOAP-CITRUS"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Morrow & Pine dish soap (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:40Z",
+    "reasons": [
+      "Not in the order: Morrow & Pine dish soap (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Morrow & Pine dish soap (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:0851b4d204be77eb5efe6377d526f38f951f9397f5fab18c3217a39a52570eed"
+}

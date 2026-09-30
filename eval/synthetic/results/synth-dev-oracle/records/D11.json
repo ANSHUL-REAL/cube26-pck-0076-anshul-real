@@ -1,0 +1,244 @@
+{
+  "record_id": "f2ad244a-4bff-4072-86a4-807d0e70a050",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D11",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      },
+      {
+        "sku": "BIN-SMALL",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:39Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0f14916e-5bfc-4322-b32e-c28860233533",
+      "role": "top_down",
+      "sha256": "bd73b084081774f69ee3a0c342c9e11ab0da1eb7b2047fcb82751b8febad502e",
+      "original_sha256": "8fdd049252e775c44e3ac33089931781f09ca1701548f4292ff38822d5506029",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 321.2,
+        "mean_luma": 138.3,
+        "clipped_pct": 0.09,
+        "dark_pct": 2.08
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "BIN-SMALL",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-BLUE",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "BIN-SMALL",
+        "classification": "CANDIDATE",
+        "sku": "BIN-SMALL",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "MUG-GREEN",
+        "expected_title": "Stoneware coffee mug",
+        "found_sku": "MUG-BLUE",
+        "found_title": "Stoneware coffee mug",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BIN-LARGE",
+      "MUG-BLUE",
+      "MUG-GREEN",
+      "BIN-SMALL",
+      "SOAP-CITRUS",
+      "MUG-SET2"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: not in the box, and the whole box is visible.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-SMALL",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "MUG-GREEN",
+            "found_sku": "MUG-BLUE",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:39Z",
+    "reasons": [
+      "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "Stoneware coffee mug: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Stoneware coffee mug (#1) with Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:cfb2dd9b150b468297ab740a39d8ba90fe312cc4ff4ff222c0259bb939e6d54c"
+}

@@ -1,0 +1,228 @@
+{
+  "record_id": "d368c74e-251c-45f9-ad49-e5bdf9db028b",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D01",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BIN-LARGE",
+        "qty": 1
+      },
+      {
+        "sku": "CANDLE-CREAM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:37Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "0c63513d-0466-4608-bcd5-acdd828e4185",
+      "role": "top_down",
+      "sha256": "255aac78bf02920d8bc397b327d2581c9db3dd440665bf722fbd33dcd3e2b007",
+      "original_sha256": "92c0762e62392eca8b3753e4b19b8f8f102d47ec60cb9e3ebd8187591b42e80a",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 167.6,
+        "mean_luma": 78.0,
+        "clipped_pct": 0.0,
+        "dark_pct": 2.84
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BIN-LARGE",
+        "title": "Rectangular woven storage basket",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "BIN-LARGE",
+        "classification": "CANDIDATE",
+        "sku": "BIN-LARGE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Rectangular woven storage basket"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "CANDLE-CREAM",
+        "classification": "CANDIDATE",
+        "sku": "CANDLE-CREAM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Unscented jar candle"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "BRUSH-WOOD",
+      "BIN-LARGE",
+      "CANDLE-CREAM",
+      "BIN-SMALL",
+      "MUG-GREEN"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BIN-LARGE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Rectangular woven storage basket: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: found (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:37Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:7dd6930d111e0c002f6fbcc93d78f75353e4b0911de90a7d9196a7194913880e"
+}

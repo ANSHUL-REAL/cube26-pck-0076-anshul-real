@@ -1,0 +1,248 @@
+{
+  "record_id": "a07ab2bd-b696-4f22-86e1-726ccdfb9589",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D02",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-BLUE",
+        "qty": 3
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:09:07Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "542561a3-8d6c-4be9-8cdb-71e5d4a4d411",
+      "role": "top_down",
+      "sha256": "8f6bdd6a17fa470166a34ca073a3cfbcd58f0b1eb41ba740ca71dd9bcd07470a",
+      "original_sha256": "a17cb1cef2e84098ab91877b82e82c4f49bc2676e8c0e1d9702348d46c35bd0a",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 206.9,
+        "mean_luma": 122.3,
+        "clipped_pct": 0.05,
+        "dark_pct": 5.85
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-BLUE",
+        "title": "Stoneware coffee mug",
+        "ordered": 3,
+        "found": 3,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          205,
+          215,
+          541,
+          593
+        ],
+        "description": "deep blue stoneware coffee mug standing upright",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          513,
+          185,
+          783,
+          517
+        ],
+        "description": "deep blue stoneware coffee mug lying horizontally",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          406,
+          508,
+          734,
+          838
+        ],
+        "description": "deep blue stoneware coffee mug angled on its side",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o4",
+        "photo": 1,
+        "box_2d": [
+          201,
+          153,
+          788,
+          843
+        ],
+        "description": "brown crumpled packing paper filler",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "textured brown paper material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o4",
+        "description": "brown crumpled packing paper filler"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "the box contains three blue mugs nestled in packing paper and all items are clearly visible"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "SOAP-CITRUS",
+      "MUG-GREEN",
+      "BOTTLE-STEEL",
+      "MUG-BLUE"
+    ],
+    "usage": {
+      "input_tokens": 10865,
+      "output_tokens": 705,
+      "thinking_tokens": 0,
+      "total_tokens": 11570
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7877,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: found (#1, #2, #3).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7877,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-BLUE",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 3 of 3.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7877,
+      "evidence": {
+        "object_ids": [
+          "o1",
+          "o2",
+          "o3"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7877,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 7877,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:09:15Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:a570566001657a05733e5cd5df556286ce13370b527f80933ad8e93c436a7167"
+}

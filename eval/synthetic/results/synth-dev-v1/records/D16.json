@@ -1,0 +1,265 @@
+{
+  "record_id": "d20e0387-5c25-443e-b601-f545d665b93d",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D16",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "BRUSH-WOOD",
+        "qty": 1
+      },
+      {
+        "sku": "MUG-SET2",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:11:45Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "e51e1e02-da62-4205-9688-79ef7e7dc026",
+      "role": "top_down",
+      "sha256": "52d0416460213187209dbab6b66f2a260032de9c3eb4716713bfe759e7747f20",
+      "original_sha256": "beaae9a72d1789a06f2f70cd9c7b04a7e295243551bd0bfe6ab789675b57f546",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 269.2,
+        "mean_luma": 119.3,
+        "clipped_pct": 0.03,
+        "dark_pct": 1.99
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "BRUSH-WOOD",
+        "title": "Wooden dish brush",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      },
+      {
+        "sku": "MUG-SET2",
+        "title": "Two-mug gift box",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          202,
+          161,
+          611,
+          834
+        ],
+        "description": "kraft cardboard box containing two white ceramic mugs",
+        "classification": "CANDIDATE",
+        "sku": "MUG-SET2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Kraft box with clear window displaying two white mugs",
+        "partially_hidden": false,
+        "title": "Two-mug gift box"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          576,
+          333,
+          805,
+          632
+        ],
+        "description": "wooden dish brush with natural bristles",
+        "classification": "CANDIDATE",
+        "sku": "BRUSH-WOOD",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Short wooden handle with dense round natural bristles",
+        "partially_hidden": false,
+        "title": "Wooden dish brush"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          181,
+          138,
+          843,
+          878
+        ],
+        "description": "crumpled brown packing paper filling the box",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "Brown packing paper used as box filler",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper filling the box"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "All items inside the open box are clearly visible without obstruction."
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "TOWEL-GRAY",
+      "BIN-SMALL",
+      "BRUSH-WOOD",
+      "MUG-SET2"
+    ],
+    "usage": {
+      "input_tokens": 10846,
+      "output_tokens": 625,
+      "thinking_tokens": 0,
+      "total_tokens": 11471
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:BRUSH-WOOD",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Wooden dish brush: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_present:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: found (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5712,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "SEAL",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:11:51Z",
+    "reasons": [
+      "Every ordered item is in the box in the right quantity, and nothing else is."
+    ],
+    "fix_instructions": []
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:ccd06dfa6ef1a87cebc674724bc47394e3f7bf3ff8b9cb066f19b04731465ba7"
+}

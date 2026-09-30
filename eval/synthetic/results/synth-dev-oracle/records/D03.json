@@ -1,0 +1,199 @@
+{
+  "record_id": "471a0ff9-8029-492d-a0af-b365cb664213",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "none",
+    "model_version": "oracle/1"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D03",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-SET2",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:08:38Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "850206fc-2347-47e8-b369-b307d2622a1a",
+      "role": "top_down",
+      "sha256": "4b4c7d27c74abd77823e13a2171b20b394b4a9a9b60c863cdf2ff08f0d59fced",
+      "original_sha256": "205399005572ead32620fae2668def1f2331732b93a2a737cbee2d5fa9ce63d4",
+      "mime": "image/jpeg",
+      "width": 1312,
+      "height": 1199,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1312,
+        "height": 1199,
+        "blur_var": 238.2,
+        "mean_luma": 139.1,
+        "clipped_pct": 0.02,
+        "dark_pct": 1.91
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-SET2",
+        "title": "Two-mug gift box",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-SET2",
+        "classification": "CANDIDATE",
+        "sku": "MUG-SET2",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Two-mug gift box"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": null,
+        "description": "MUG-GREEN",
+        "classification": "CANDIDATE",
+        "sku": "MUG-GREEN",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      }
+    ],
+    "missing": [],
+    "wrong": [],
+    "extra": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "object_id": "o2"
+      }
+    ],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": ""
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-SET2",
+      "SOAP-CITRUS",
+      "SOAP-HERBAL"
+    ],
+    "usage": {},
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: found (#1).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:MUG-SET2",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Two-mug gift box: 1 of 1.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o1"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "No product from outside the order was found.",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {}
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Not in the order: Stoneware coffee mug (#2).",
+      "model_version": "oracle/1",
+      "latency_ms": 0,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:08:38Z",
+    "reasons": [
+      "Not in the order: Stoneware coffee mug (#2)."
+    ],
+    "fix_instructions": [
+      "Remove Stoneware coffee mug (#2); it is not in the order."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:1022aa37c4093c3c78262867e9c27bd967f47af7ce4fc8f30bcc4f74a7128841"
+}

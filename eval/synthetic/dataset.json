@@ -1,0 +1,8 @@
+{
+  "name": "Synthetic boxes (AI-generated images, not photographs)",
+  "source": "generated for this project; see eval/synthetic/README.md for the model, date and prompts",
+  "org": "org_synth_demo",
+  "human_labels": false,
+  "ground_truth": "eval/synthetic/manifest.csv, planned by eval/plan_boxes.py before any image was generated; each image was checked by eye against its row and regenerated or dropped when it didn't match",
+  "note": "Every product, reference photo and box photo in this set is AI-generated. It tests the agent on scenarios planned in advance, at no packing cost; it does not show how the agent does on real photographs. Results are reported separately from every real-photo set and are never blended with them."
+}

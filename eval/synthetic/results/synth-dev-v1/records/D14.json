@@ -1,0 +1,281 @@
+{
+  "record_id": "a0267f25-bbdb-4d7f-946a-4ff948923c26",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D14",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      },
+      {
+        "sku": "CANDLE-CREAM",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:11:27Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "566c113d-c8f3-46f2-990f-32f74faf2956",
+      "role": "top_down",
+      "sha256": "e5f13889727e7ea2a59668f95eb3f525e277220f3e6ff4341c8b63aa349dcaaa",
+      "original_sha256": "4b4f53ecac586ab50340fbd6e1d0ca3b720acfdd76d75defb0ed5756f39c39f3",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 287.0,
+        "mean_luma": 121.9,
+        "clipped_pct": 0.02,
+        "dark_pct": 3.03
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "CANDLE-CREAM",
+        "title": "Unscented jar candle",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          330,
+          163,
+          684,
+          571
+        ],
+        "description": "blue ceramic mug with cream interior",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          383,
+          582,
+          691,
+          822
+        ],
+        "description": "unscented jar candle in clear glass",
+        "classification": "CANDIDATE",
+        "sku": "CANDLE-CREAM",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "short cylindrical clear glass jar with ivory wax and plain cream paper band",
+        "partially_hidden": false,
+        "title": "Unscented jar candle"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          206,
+          124,
+          746,
+          882
+        ],
+        "description": "brown crumpled packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "filler material used for cushioning",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "MUG-GREEN",
+        "expected_title": "Stoneware coffee mug",
+        "found_sku": "MUG-BLUE",
+        "found_title": "Stoneware coffee mug",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "brown crumpled packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "all box contents are fully visible and clearly identifiable"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-BLUE",
+      "CANDLE-CREAM",
+      "BIN-SMALL",
+      "MUG-GREEN",
+      "SOAP-HERBAL"
+    ],
+    "usage": {
+      "input_tokens": 13112,
+      "output_tokens": 594,
+      "thinking_tokens": 0,
+      "total_tokens": 13706
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:CANDLE-CREAM",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Unscented jar candle: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "MUG-GREEN",
+            "found_sku": "MUG-BLUE",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 6311,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:11:34Z",
+    "reasons": [
+      "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "Stoneware coffee mug: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Stoneware coffee mug (#1) with Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:55d24c72ae8ada9adba651b7359a54a0fa19c0a7bea63a2d7ee453bd489c42ec"
+}

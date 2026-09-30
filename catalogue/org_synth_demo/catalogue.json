@@ -1,0 +1,246 @@
+{
+  "organization_id": "org_synth_demo",
+  "allowed_inserts": [
+    "packing slip",
+    "invoice",
+    "return form",
+    "thank-you card",
+    "promotional flyer or insert",
+    "air pillows",
+    "bubble wrap",
+    "crumpled or shredded paper",
+    "tissue paper",
+    "foam or cardboard divider",
+    "desiccant sachet"
+  ],
+  "items": [
+    {
+      "sku": "MUG-BLUE",
+      "title": "Stoneware coffee mug",
+      "attributes": {
+        "colour": "deep blue",
+        "size": "standard"
+      },
+      "sellable_unit": "one blue glazed ceramic mug",
+      "distinguishing_features": "Deep blue glossy glaze with a cream interior and a rounded handle; same shape as green mug",
+      "confusable_with": [
+        "MUG-GREEN"
+      ],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/MUG-BLUE/1.jpg",
+        "images/MUG-BLUE/2.jpg",
+        "images/MUG-BLUE/3.jpg"
+      ]
+    },
+    {
+      "sku": "MUG-GREEN",
+      "title": "Stoneware coffee mug",
+      "attributes": {
+        "colour": "sage green",
+        "size": "standard"
+      },
+      "sellable_unit": "one sage green glazed ceramic mug",
+      "distinguishing_features": "Sage green glossy glaze with a cream interior and a rounded handle; same shape as blue mug",
+      "confusable_with": [
+        "MUG-BLUE"
+      ],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/MUG-GREEN/1.jpg",
+        "images/MUG-GREEN/2.jpg",
+        "images/MUG-GREEN/3.jpg"
+      ]
+    },
+    {
+      "sku": "BIN-SMALL",
+      "title": "Rectangular woven storage basket",
+      "attributes": {
+        "size": "small",
+        "colour": "natural oat"
+      },
+      "sellable_unit": "one small woven basket",
+      "distinguishing_features": "Light oat paper-weave basket with short sides and two oval handholds; smaller than large basket",
+      "confusable_with": [
+        "BIN-LARGE"
+      ],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/BIN-SMALL/1.jpg",
+        "images/BIN-SMALL/2.jpg",
+        "images/BIN-SMALL/3.jpg"
+      ]
+    },
+    {
+      "sku": "BIN-LARGE",
+      "title": "Rectangular woven storage basket",
+      "attributes": {
+        "size": "large",
+        "colour": "natural oat"
+      },
+      "sellable_unit": "one large woven basket",
+      "distinguishing_features": "Light oat paper-weave basket with tall sides and two oval handholds; larger than small basket",
+      "confusable_with": [
+        "BIN-SMALL"
+      ],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/BIN-LARGE/1.jpg",
+        "images/BIN-LARGE/2.jpg",
+        "images/BIN-LARGE/3.jpg"
+      ]
+    },
+    {
+      "sku": "SOAP-CITRUS",
+      "title": "Morrow & Pine dish soap",
+      "attributes": {
+        "variant": "citrus",
+        "volume": "500 ml"
+      },
+      "sellable_unit": "one 500 ml dish soap bottle",
+      "distinguishing_features": "Clear amber liquid in a squat clear bottle with a white pump; pale yellow label with a small orange illustration; Morrow & Pine label",
+      "confusable_with": [
+        "SOAP-HERBAL"
+      ],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/SOAP-CITRUS/1.jpg",
+        "images/SOAP-CITRUS/2.jpg",
+        "images/SOAP-CITRUS/3.jpg"
+      ]
+    },
+    {
+      "sku": "SOAP-HERBAL",
+      "title": "Morrow & Pine dish soap",
+      "attributes": {
+        "variant": "herbal",
+        "volume": "500 ml"
+      },
+      "sellable_unit": "one 500 ml dish soap bottle",
+      "distinguishing_features": "Clear amber liquid in a squat clear bottle with a white pump; pale green label with a small leaf illustration; Morrow & Pine label",
+      "confusable_with": [
+        "SOAP-CITRUS"
+      ],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/SOAP-HERBAL/1.jpg",
+        "images/SOAP-HERBAL/2.jpg",
+        "images/SOAP-HERBAL/3.jpg"
+      ]
+    },
+    {
+      "sku": "CABLE-USB",
+      "title": "USB charging cable",
+      "attributes": {
+        "colour": "white",
+        "length": "1 m"
+      },
+      "sellable_unit": "one coiled white USB-A to USB-C cable",
+      "distinguishing_features": "Small neatly coiled white cable with one rectangular USB-A plug and one small oval USB-C plug",
+      "confusable_with": [],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/CABLE-USB/1.jpg",
+        "images/CABLE-USB/2.jpg",
+        "images/CABLE-USB/3.jpg"
+      ]
+    },
+    {
+      "sku": "MUG-SET2",
+      "title": "Two-mug gift box",
+      "attributes": {
+        "contents": "2 white mugs",
+        "package": "kraft box"
+      },
+      "sellable_unit": "one kraft box containing two white ceramic mugs",
+      "distinguishing_features": "A single compact kraft cardboard box with a clear window showing exactly two white mugs; counts as ONE sellable unit",
+      "confusable_with": [],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/MUG-SET2/1.jpg",
+        "images/MUG-SET2/2.jpg",
+        "images/MUG-SET2/3.jpg"
+      ]
+    },
+    {
+      "sku": "TOWEL-GRAY",
+      "title": "Cotton hand towel",
+      "attributes": {
+        "colour": "charcoal gray",
+        "size": "hand towel"
+      },
+      "sellable_unit": "one folded charcoal gray cotton hand towel",
+      "distinguishing_features": "One folded small rectangular charcoal gray towel with visible looped terry texture",
+      "confusable_with": [],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/TOWEL-GRAY/1.jpg",
+        "images/TOWEL-GRAY/2.jpg",
+        "images/TOWEL-GRAY/3.jpg"
+      ]
+    },
+    {
+      "sku": "CANDLE-CREAM",
+      "title": "Unscented jar candle",
+      "attributes": {
+        "colour": "cream",
+        "vessel": "clear glass"
+      },
+      "sellable_unit": "one small clear glass jar candle",
+      "distinguishing_features": "A short cylindrical clear glass jar filled with ivory wax and a single centered wick; plain cream paper band",
+      "confusable_with": [],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/CANDLE-CREAM/1.jpg",
+        "images/CANDLE-CREAM/2.jpg",
+        "images/CANDLE-CREAM/3.jpg"
+      ]
+    },
+    {
+      "sku": "BRUSH-WOOD",
+      "title": "Wooden dish brush",
+      "attributes": {
+        "material": "beech wood",
+        "bristle": "natural"
+      },
+      "sellable_unit": "one wooden dish brush",
+      "distinguishing_features": "Short oval beechwood handle with a small dense round tuft of natural tan bristles",
+      "confusable_with": [],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/BRUSH-WOOD/1.jpg",
+        "images/BRUSH-WOOD/2.jpg",
+        "images/BRUSH-WOOD/3.jpg"
+      ]
+    },
+    {
+      "sku": "BOTTLE-STEEL",
+      "title": "Reusable water bottle",
+      "attributes": {
+        "colour": "matte stainless steel",
+        "capacity": "600 ml"
+      },
+      "sellable_unit": "one stainless steel water bottle",
+      "distinguishing_features": "Tall narrow cylindrical brushed stainless steel bottle with a plain screw cap and no logo",
+      "confusable_with": [],
+      "component_lookalikes": [],
+      "components": [],
+      "reference_images": [
+        "images/BOTTLE-STEEL/1.jpg",
+        "images/BOTTLE-STEEL/2.jpg",
+        "images/BOTTLE-STEEL/3.jpg"
+      ]
+    }
+  ]
+}

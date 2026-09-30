@@ -1,0 +1,281 @@
+{
+  "record_id": "8a223d53-bc05-485a-b23e-e35f33090fc3",
+  "schema_version": "cube.evidence.v1",
+  "organization_id": "org_synth_demo",
+  "client_id": null,
+  "agent": {
+    "name": "pack-manager",
+    "version": "0.1.0",
+    "prompt_version": "pack-v3",
+    "model_version": "gemini-3.5-flash-lite"
+  },
+  "subject": {
+    "type": "outbound_box",
+    "unit_id": null,
+    "order_id": "EVAL-D05",
+    "channel": null,
+    "shipment_id": null,
+    "expected_lines": [
+      {
+        "sku": "MUG-GREEN",
+        "qty": 1
+      },
+      {
+        "sku": "TOWEL-GRAY",
+        "qty": 1
+      }
+    ]
+  },
+  "captured_at": "2026-09-30T16:09:35Z",
+  "operator_label": "eval",
+  "images": [
+    {
+      "image_id": "d25170d6-9dd3-46e6-85e9-73bd763481d7",
+      "role": "top_down",
+      "sha256": "bc3a709fc24daf9c88a84c91ef5b158454f0060dc01d6c75f7a29f9809e761b1",
+      "original_sha256": "c7976cace675801cca6f9e9ecb121bff5c2241a2a60b6ac694f35c29bd671f48",
+      "mime": "image/jpeg",
+      "width": 1254,
+      "height": 1254,
+      "quality": {
+        "gate": "PASS",
+        "reasons": [],
+        "width": 1254,
+        "height": 1254,
+        "blur_var": 728.6,
+        "mean_luma": 133.7,
+        "clipped_pct": 0.01,
+        "dark_pct": 5.85
+      }
+    }
+  ],
+  "observations": {
+    "uncertainty": null,
+    "expected_vs_observed": [
+      {
+        "sku": "MUG-GREEN",
+        "title": "Stoneware coffee mug",
+        "ordered": 1,
+        "found": 0,
+        "unclear": 0,
+        "present": "FAIL",
+        "quantity": "FAIL"
+      },
+      {
+        "sku": "TOWEL-GRAY",
+        "title": "Cotton hand towel",
+        "ordered": 1,
+        "found": 1,
+        "unclear": 0,
+        "present": "PASS",
+        "quantity": "PASS"
+      }
+    ],
+    "detected_items": [
+      {
+        "object_id": "o1",
+        "photo": 1,
+        "box_2d": [
+          357,
+          155,
+          660,
+          503
+        ],
+        "description": "deep blue ceramic coffee mug",
+        "classification": "CANDIDATE",
+        "sku": "MUG-BLUE",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "deep blue glossy glaze with cream interior",
+        "partially_hidden": false,
+        "title": "Stoneware coffee mug"
+      },
+      {
+        "object_id": "o2",
+        "photo": 1,
+        "box_2d": [
+          256,
+          497,
+          755,
+          896
+        ],
+        "description": "charcoal gray cotton hand towel",
+        "classification": "CANDIDATE",
+        "sku": "TOWEL-GRAY",
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "charcoal gray looped terry texture",
+        "partially_hidden": false,
+        "title": "Cotton hand towel"
+      },
+      {
+        "object_id": "o3",
+        "photo": 1,
+        "box_2d": [
+          222,
+          118,
+          760,
+          513
+        ],
+        "description": "crumpled brown packing paper",
+        "classification": "NON_PRODUCT",
+        "sku": null,
+        "confidence": 1.0,
+        "alternative_skus": [],
+        "deciding_feature": "brown paper filler material",
+        "partially_hidden": false,
+        "title": null
+      }
+    ],
+    "missing": [],
+    "wrong": [
+      {
+        "expected_sku": "MUG-GREEN",
+        "expected_title": "Stoneware coffee mug",
+        "found_sku": "MUG-BLUE",
+        "found_title": "Stoneware coffee mug",
+        "object_id": "o1"
+      }
+    ],
+    "extra": [],
+    "over_quantity": [],
+    "unclear": [],
+    "non_product_items": [
+      {
+        "object_id": "o3",
+        "description": "crumpled brown packing paper"
+      }
+    ],
+    "scene": {
+      "box_interior_fully_visible": true,
+      "items_may_be_hidden": false,
+      "visibility_confidence": 1.0,
+      "notes": "all box contents are fully visible and clearly identifiable"
+    },
+    "image_issues": [],
+    "candidates_shown": [
+      "MUG-GREEN",
+      "MUG-BLUE",
+      "CABLE-USB",
+      "SOAP-HERBAL",
+      "TOWEL-GRAY"
+    ],
+    "usage": {
+      "input_tokens": 13112,
+      "output_tokens": 578,
+      "thinking_tokens": 0,
+      "total_tokens": 13690
+    },
+    "cost_usd": null,
+    "cached_response": false
+  },
+  "checks": [
+    {
+      "check_key": "image_quality",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "1 photo(s) passed the blur, exposure, glare and resolution checks.",
+      "model_version": "local-quality-gate/1",
+      "latency_ms": null,
+      "evidence": {}
+    },
+    {
+      "check_key": "scene_coverage",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "The whole inside of the box is visible and nothing appears hidden.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_present:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: not in the box, and the whole box is visible.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {}
+    },
+    {
+      "check_key": "line_quantity:MUG-GREEN",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {
+        "object_ids": [],
+        "possible_object_ids": []
+      }
+    },
+    {
+      "check_key": "line_present:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: found (#2).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "line_quantity:TOWEL-GRAY",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Cotton hand towel: 1 of 1.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {
+        "object_ids": [
+          "o2"
+        ]
+      }
+    },
+    {
+      "check_key": "wrong_item",
+      "verdict": "FAIL",
+      "confidence": 1.0,
+      "detail": "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {
+        "pairs": [
+          {
+            "expected_sku": "MUG-GREEN",
+            "found_sku": "MUG-BLUE",
+            "object_id": "o1"
+          }
+        ]
+      }
+    },
+    {
+      "check_key": "extra_item",
+      "verdict": "PASS",
+      "confidence": 1.0,
+      "detail": "Nothing outside the order is in the box.",
+      "model_version": "gemini-3.5-flash-lite",
+      "latency_ms": 5409,
+      "evidence": {}
+    }
+  ],
+  "outcome": {
+    "decision": "STOP_AND_FIX",
+    "decided_by": "agent",
+    "decided_at": "2026-09-30T16:09:41Z",
+    "reasons": [
+      "Expected Stoneware coffee mug, found Stoneware coffee mug (#1).",
+      "Stoneware coffee mug: 0 in the box, 1 ordered.",
+      "Stoneware coffee mug: not in the box, and the whole box is visible."
+    ],
+    "fix_instructions": [
+      "Replace Stoneware coffee mug (#1) with Stoneware coffee mug."
+    ]
+  },
+  "overrides": [],
+  "status": "final",
+  "content_hash": "sha256:002454239e8cef1637a235d8f2f11ba8994364958a984d53dc73340e8359e3b2"
+}
