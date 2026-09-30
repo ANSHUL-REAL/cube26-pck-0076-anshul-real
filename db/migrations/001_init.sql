@@ -101,3 +101,38 @@ set search_path = public, pg_temp
 as $$
     select organization_id, operator_label from access_codes where code_hash = p_code_hash
 $$;
+
+-- Evidence only grows (overrides are data). An update may add hand decisions at the end and
+-- change the outcome, status and hash with them. Everything the agent saved, and every earlier
+-- decision, must stay exactly as it was. The database enforces this for every role, the app's
+-- included, so a bug or a stolen app password can't quietly rewrite a record's history.
+create or replace function records_append_only() returns trigger
+language plpgsql
+set search_path = public, pg_temp
+as $$
+declare
+    old_n int := coalesce(jsonb_array_length(old.record->'overrides'), 0);
+    new_n int := coalesce(jsonb_array_length(new.record->'overrides'), 0);
+    mutable text[] := array['outcome', 'status', 'overrides', 'content_hash'];
+begin
+    if new.record_id <> old.record_id or new.organization_id <> old.organization_id
+       or new.captured_at <> old.captured_at then
+        raise exception 'records are append-only: % keeps its id, organisation and time', old.record_id;
+    end if;
+    if (new.record - mutable) is distinct from (old.record - mutable) then
+        raise exception 'records are append-only: the agent''s part of % can''t change', old.record_id;
+    end if;
+    if new_n <= old_n then
+        raise exception 'records are append-only: a change to % must add a decision', old.record_id;
+    end if;
+    for i in 0 .. old_n - 1 loop
+        if (new.record->'overrides'->i) is distinct from (old.record->'overrides'->i) then
+            raise exception 'records are append-only: earlier decisions on % can''t change', old.record_id;
+        end if;
+    end loop;
+    return new;
+end $$;
+
+drop trigger if exists records_append_only on records;
+create trigger records_append_only before update on records
+    for each row execute function records_append_only();

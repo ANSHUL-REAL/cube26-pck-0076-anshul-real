@@ -88,3 +88,21 @@ def test_override_keeps_the_original_decision(sharp_photo, catalogue, settings):
     assert ov.original_decision == Decision.UNCERTAIN and ov.prior_content_hash == record.content_hash
     assert after.checks == record.checks
     assert verify(after) and after.content_hash == compute_hash(after) != record.content_hash
+
+
+class CountingPerceiver(OraclePerceiver):
+    calls = 0
+
+    def perceive(self, *args, **kwargs):
+        self.calls += 1
+        return super().perceive(*args, **kwargs)
+
+
+def test_one_model_call_per_box_carries_every_check(sharp_photo, catalogue, settings):
+    prepared = prepare_photos([Photo(sharp_photo), Photo(sharp_photo)], settings)
+    perceiver = CountingPerceiver({"CAP-BLU": 1, "TSHIRT-BLK": 2, "MUG-SET2": 1})
+    order = make_order(("CAP-BLU", 1), ("TSHIRT-BLK", 2), ("MUG-SET2", 1))
+    record = verify_box(order, prepared, catalogue, perceiver, settings, operator_label="op")
+    assert perceiver.calls == 1  # three lines, two photos, one call (engineering rule 2)
+    from_model = [c for c in record.checks if c.model_version == "oracle/1"]
+    assert {c.check_key.split(":")[0] for c in from_model} >= {"line_present", "line_quantity", "wrong_item", "extra_item"}

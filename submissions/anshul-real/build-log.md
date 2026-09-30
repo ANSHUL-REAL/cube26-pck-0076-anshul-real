@@ -8,6 +8,11 @@ Newest first. Decisions, what changed, and what's still open. Dates are IST.
 - **Test set cut from 60 to 50 boxes** to match the brief's "50 units", before any photo was taken. 24 should seal and 26 should stop.
 - The photo import takes the whole shoot (practice and test boxes) in one go.
 - **Dry run of the whole eval** on dummy photos, in a throwaway copy of the repo: product sheet, catalogue, plan, 70-photo import, label sheet, two label files, freeze, held-out run, report. Every step worked. It found one bug (running the eval without an API key crashed instead of saying what to do). New `--oracle` run: perfect perception from the manifest, to measure the rules alone. On the planned mix the rules decided all 50 boxes as the manifest says.
+- **Second look at the other forks** (nine with real builds; ideas only, no code copied). None has run a vision model on real box photos; several publish accuracy numbers with nothing behind them. Taken from that review:
+  - **Records are append-only in the database.** A trigger refuses any update that doesn't just add a hand decision at the end, even from the app's own role. Tested against real Postgres.
+  - The result page shows how long the AI check took.
+  - Tests that pin two rules that had none of their own: one model call per box, and a "SEAL THIS BOX" note can't seal a wrong box. The README maps each hard rule to its test.
+  - The demo script shows fail-open (a check that can't run leaves the photos and a "Needs your decision" record).
 - **Evidence for buyer claims** (the Recovery step). A record page prints as an evidence sheet, and `python -m pack_manager check-record` checks a downloaded record away from the app: its hash, every earlier version, and whether a photo is one of its own (the stored copy or the phone original). Tried on a live record from the hosted database.
 
 ## Tue 29 Sep

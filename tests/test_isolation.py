@@ -186,3 +186,41 @@ def test_http_bravo_gets_404_for_alpha_record_and_photo(database, alpha_record):
     client.post("/login", data={"code": "alpha-demo"})
     assert client.get(f"/records/{alpha_record.record_id}").status_code == 200
     assert client.get(f"/images/{alpha_record.images[0].image_id}").status_code == 200
+
+
+def test_records_are_append_only(database, alpha_record):
+    """The database itself keeps evidence append-only: a hand decision can be added, but the
+    agent's part of a record and earlier decisions can't be rewritten, even by the app role."""
+    import json
+
+    from app import store
+    from pack_manager.evidence import apply_override
+    from pack_manager.models import Decision
+
+    with database.org(ALPHA) as cur:
+        current = store.get_record(cur, alpha_record.record_id)
+        decided = apply_override(current, Decision.STOP_AND_FIX, "other", "op_alpha", note="append-only test")
+        assert store.update_record(cur, decided, prior_hash=current.content_hash)
+
+    def rewrite(change):
+        data = json.loads(decided.model_dump_json())
+        change(data)
+        with database.org(ALPHA) as cur:
+            cur.execute("update records set record = %s where record_id = %s",
+                        (json.dumps(data), decided.record_id))
+
+    def drop_a_check(d):
+        d["checks"] = d["checks"][:-1]
+
+    def reword_the_decision(d):
+        d["overrides"][0]["note"] = "edited later"
+        d["overrides"].append(d["overrides"][0])
+
+    def undo_the_decision(d):
+        d["overrides"] = []
+
+    for change in (drop_a_check, reword_the_decision, undo_the_decision):
+        with pytest.raises(psycopg2.Error, match="append-only"):
+            rewrite(change)
+    with database.org(ALPHA) as cur:
+        assert store.get_record(cur, alpha_record.record_id) == decided  # nothing was changed

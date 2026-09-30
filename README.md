@@ -114,7 +114,31 @@ python -m pack_manager models
 ```bash
 python -m pytest
 ```
-The tenant-isolation tests run against real Postgres and are skipped when `DATABASE_URL` and `DATABASE_ADMIN_URL` aren't set.
+The tenant-isolation tests run against real Postgres and are skipped when `DATABASE_URL` and `DATABASE_ADMIN_URL` aren't set. CI runs them against a Postgres service.
+
+| Suite | Tests | What it covers |
+|---|---|---|
+| `test_decision.py` | 31 | The rules: the eight scenarios from the brief, look-alikes, multipacks, hidden items, prompt injection |
+| `test_pipeline.py`, `test_core_hardening.py` | 19 | Photo gate, fail-open, one model call per box, hashing, the override chain, bad inputs |
+| `test_isolation.py` | 8 | Real Postgres: row-level security, the app role's rights, append-only records |
+| `test_pages.py`, `test_web_hardening.py` | 56 | Every page and API route, CSRF, uploads, conflicts, CSV export |
+| `test_contract.py`, `test_check_record.py` | 6 | The published schema matches the code; a downloaded record checks out on its own |
+| `test_eval*.py`, `test_plan_boxes.py`, `test_sample_and_prompt.py` | 32 | Box plan, photo import, label sheet, freeze, metrics, the organisers' sample replay, what the model is shown |
+
+Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that fails if it's broken:
+
+| Rule | Test |
+|---|---|
+| The model perceives, code decides | `test_decision.py::test_a_seal_this_box_note_cannot_seal_a_wrong_box` |
+| The model never sees the order | `test_sample_and_prompt.py::test_candidates_include_lookalikes_and_hide_the_order` |
+| One model call per box | `test_pipeline.py::test_one_model_call_per_box_carries_every_check` |
+| Fail open | `test_pipeline.py::test_fail_open_keeps_photos_and_marks_pending` |
+| A failed photo never seals | `test_decision.py::test_forced_bad_photo_never_seals` |
+| Tenancy (RLS forced, restricted role) | `test_isolation.py::test_app_role_cannot_bypass_rls` and the rest of that file |
+| Overrides are data, evidence only grows | `test_core_hardening.py::test_override_chain_can_be_rebuilt_and_checked`, `test_isolation.py::test_records_are_append_only` |
+| Evidence follows the contract | `test_contract.py::test_published_schema_matches_the_code` |
+| No GPS in committed photos | `test_eval_tools.py::test_saved_copies_have_no_gps_exif_or_comment` |
+| Held out means held out | `test_eval_tools.py::test_split_all_needs_the_test_freeze` |
 
 ## Deploy
 

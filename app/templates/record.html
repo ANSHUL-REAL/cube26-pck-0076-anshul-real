@@ -25,6 +25,8 @@
     <p class="facts">
       <span>Checked {{ r.captured_at | when }}</span>
       <span>by {{ r.operator_label }}</span>
+      {% set ms = r.checks[-1].latency_ms if r.checks else none %}
+      {% if ms and decision != "PENDING" %}<span>AI check {{ "%.1f" | format(ms / 1000) }} s</span>{% endif %}
       <span class="hide-sm">{{ r.record_id }}</span>
     </p>
   </div>
