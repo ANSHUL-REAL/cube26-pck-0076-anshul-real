@@ -1,0 +1,209 @@
+{
+  "split": "test",
+  "frozen_at": "2026-09-30T14:49:44+00:00",
+  "config": {
+    "prompt_version": "pack-v3",
+    "gemini_model": "gemini-3.5-flash-lite",
+    "gemini_timeout_s": 25.0,
+    "gemini_max_retries": 3,
+    "gemini_thinking_budget": null,
+    "cost_per_1m_input_usd": null,
+    "cost_per_1m_output_usd": null,
+    "catalogue_dir": "catalogue",
+    "max_candidates": 8,
+    "decoys_per_box": 2,
+    "ref_images_per_sku": 2,
+    "match_threshold": 0.7,
+    "visibility_threshold": 0.7,
+    "min_side_px": 200,
+    "blur_min_var": 3.0,
+    "luma_min": 45.0,
+    "luma_max": 215.0,
+    "max_clipped_pct": 8.0,
+    "max_dark_pct": 40.0,
+    "max_box_photos": 3,
+    "send_max_side_px": 1600,
+    "ref_max_side_px": 512
+  },
+  "code_sha256": {
+    "pack_manager/__init__.py": "fcb339d6ad8597c514a56b3e8c7bfaaf7f95d5f9a6d1e1a1506ac8adcc25ac85",
+    "pack_manager/__main__.py": "3d9e099a89b2f449a7db429b95fbea5dd0927b8313c5a4ba0dc2248f6674ddd9",
+    "pack_manager/catalogue.py": "f271ce60627b36fb8bdbe03ee1d1129a61420839c0041d88f376269055b5bec2",
+    "pack_manager/config.py": "70c073f2732c4af8d590d58cb0442daa034c0c51a5f70b51f7a8b476bdd14100",
+    "pack_manager/decision.py": "bcdcb82201b115d146c19d287159af7f91e1d4aec89dfb81630912f8686e4c21",
+    "pack_manager/evidence.py": "400af83752e30a74683a9a2070c4698bf113d3b8bf38ed40dd2880a3e67b2e1a",
+    "pack_manager/export.py": "d0e34607d3f13b9cd2ef5ea6b910638b2b9738dae803f47295b031a416d9f1a0",
+    "pack_manager/models.py": "3f56e0f16da03a11f3cd1a2107f54ce2e6f4a71295d323d75a8cccd546b48136",
+    "pack_manager/orders.py": "bed64da380f865ac7e99da0e3dc604ed29e2a66ae718144f284bfd76a07f84db",
+    "pack_manager/pipeline.py": "e91a3e370f9a55b27bbed0631dd689b647caad42d69c59a9e62d5434925a1355",
+    "pack_manager/quality.py": "99b0e27e40f8188de2d09efa24035f45d9a3ad1ec8445deadac9992e405857bb",
+    "pack_manager/sample.py": "c168d17694c1040c57597967ebded78c3354c2f3f1d4fa38191614a5184e1cc4",
+    "pack_manager/vision/__init__.py": "d6919e0d60b856206cc00f3e220e0418f20a0497e0e6d7af2e5d38118a888ac2",
+    "pack_manager/vision/base.py": "76e855b2855cf4b6bb40fa94315a92ff2933db150bb1267a3e306d9849d1dd8a",
+    "pack_manager/vision/gemini.py": "bf00209c0aaeb950f232bd1660a7788eef0f0c1647d1e03a747c3db72b37cf1e",
+    "pack_manager/vision/oracle.py": "a2c46bf5219a82a82ef5205cff864e300a58c131fd6e2c2ffdecf97982b4a0f6",
+    "pack_manager/vision/prompt.py": "19fc7269492261b3e9d0641e99d0caa244d8970afc5dc561429d0970407f945f",
+    "eval/common.py": "07737cf3dee1464ba11934b4eeaaf8f40a7249ab2c3f7b8146807b7a74a64eb6",
+    "eval/run_eval.py": "d51b1f07489ec4c5f71b6a038d786ad5bf403ea58273f7eafae454eb2572b574",
+    "eval/dataset.json": "7a033f58ef46402d5dea1bd23a9ba6985f246db2ffb4daede2935d49b652bda0"
+  },
+  "boxes": 50,
+  "manifest_rows_sha256": "c5b6089b4ed9fa302bd5ba1a3de2dd80e716e2a57255a6e458689540f7eb4cd6",
+  "photos_sha256": {
+    "T01": [
+      "3035e33e65b351f0027b6f1d342aaf10f3932aa25518ed547bd1b9ab2bf8e779"
+    ],
+    "T02": [
+      "114d3ff3836baecb056cf2e602edb43e6d51dd1ce26be10e0a436b688f09d258"
+    ],
+    "T03": [
+      "ef01adbff91bc0edcad9982da8991a7b9e34e492a6f3290fc584c8455d753d8f"
+    ],
+    "T04": [
+      "6a40cee4ba80c292f6d3c13ceef37772062caef06653349a8ae0e7dcbb083c68"
+    ],
+    "T05": [
+      "52036154a05d1b1223554c4ceb7be23d0e8470c4531ae62168db24527627dc01"
+    ],
+    "T06": [
+      "a45cf504c955527161bb14038f20fb32d994a7554f93ca1ca1b2db3dd0280136"
+    ],
+    "T07": [
+      "34d49c43e71a72635ac4754ddd330c5e72e3a0fc4d147557b1ea86cb73a7cc4b"
+    ],
+    "T08": [
+      "e5263832bf53145007e652d14f167ac7c0c2b3510b6f3ae43129e3256cb973da"
+    ],
+    "T09": [
+      "cd7055d9440d31b34c42300db43db250eb494977dd6b215f98eb3269b5a70683"
+    ],
+    "T10": [
+      "96ff78e541feae18f946ec06e8681c54836e311f72e5a18d38b4b2a7d4cdc36b"
+    ],
+    "T11": [
+      "12f9febb6d96a00f9732cd6b65056308fba50398c4d10f7ef485b06eff5f2292"
+    ],
+    "T12": [
+      "46b4533b29806104869cad70e8960d1f354deef7334229b4d738671d76a85e07"
+    ],
+    "T13": [
+      "9cf4b8a3e73bb55905b8c06ffe86adbdcdf42261363ee0f749e1218048dc1eff"
+    ],
+    "T14": [
+      "06e8b5d879b8460accfb7555088393a58113643822a0e20dcf4be9227dd4dffb"
+    ],
+    "T15": [
+      "9fbc8ed4c4100b9ba080ef892562999adfe94f5847152f74fbe05f0bcfd8c985"
+    ],
+    "T16": [
+      "ee9f5d51f4d1279c8729a0d714aa8763beb4ab935c6637b836e9d912da532780"
+    ],
+    "T17": [
+      "8af044a87544b0421d9bac5ef5eccc4bf39f721d09065acc843e5811a5e2834a"
+    ],
+    "T18": [
+      "32a3ea9100c19bdbe89976d294ab98bd11e889f698f5742693a55b97ebfb5284"
+    ],
+    "T19": [
+      "8194fe03d283bc63e6f289ba72eee8313a1cd022bf1890f6095b0dcd6ebc16c3"
+    ],
+    "T20": [
+      "99c18bb08c76ad45bc18366ad476e6230dc8ef9966d21ee49b29de3c9b0c9eef"
+    ],
+    "T21": [
+      "42e62b3e2bf32728209078188c290e72145b3973e1a0a479e039349a8854218e"
+    ],
+    "T22": [
+      "bb6a4cb253318d8d67d1a03d053692044c544ad8779d458367ca5bfe3e3f1fbe"
+    ],
+    "T23": [
+      "87f39751c2efd99ad8ad6e19ab041463c73ecfe9c115ba60543e1c01c1ee0ae2"
+    ],
+    "T24": [
+      "238b2a7be38ffdb9e725dbce6dfe70af88d90e0d7870be82f16b65196692bbad"
+    ],
+    "T25": [
+      "5f06311ea0df1ee6899ecad79e7d6204056a7f35d20cf6c30db663545d3cd645"
+    ],
+    "T26": [
+      "dcdd0d8935c4cadc80488b61c3a8c68cb367baa4c64dd95055f22aa1f528fea9"
+    ],
+    "T27": [
+      "c5dbe9fb983e732fdc226d15cedd1708634cd6d1f480cd3b60b25a94d1eb4c3c"
+    ],
+    "T28": [
+      "ba97ef585898b3b479bcf90a1e99b7db9cd473ca3ce4ac46cdd117562c3891d4"
+    ],
+    "T29": [
+      "8d8259d0872592528c7f3c2d4b706a98dd4a1ae43531e779e8f3b577323ab186"
+    ],
+    "T30": [
+      "c2d6ff5334a98cb4cb173f77caba44e71794315e56c5936828f0a464e67f334c"
+    ],
+    "T31": [
+      "ab6adf7310e3203c2c1488315c76872d93a77a333cfced6debaf0c82ec34df2b"
+    ],
+    "T32": [
+      "7be9b3d703bc3734d10ec5c25bac5cb320a0f21e3e2875759804c614762b522d"
+    ],
+    "T33": [
+      "11bb938bf8d715ecf8424f903e7c270a10b14d11b003b24b01979909223ddd00"
+    ],
+    "T34": [
+      "f9f123bd94478688f9a7e0ff78e340608d10bd8631f2728c5182e44ebba54950"
+    ],
+    "T35": [
+      "7c2c4cf1512429aa5150d3d8acd25d4b4a912fa93ccdf390e966aadb960619e3"
+    ],
+    "T36": [
+      "fe0170d013cc4754d5fa223a65daf188c19488f694f4f4046df913552e962b07"
+    ],
+    "T37": [
+      "72e7d9a136f70098ffc4a1850f3db37a334ae6694fe894c997b377796c1ce185"
+    ],
+    "T38": [
+      "31ca78438cfcb82665a27720cc573db89d849c6cd4fd16de979a1d561bc185c2"
+    ],
+    "T39": [
+      "a58280266e466ff1af726c30a78ec4f1298dc18d34e235ce148e0a3d2d0c3c53"
+    ],
+    "T40": [
+      "1a071866c2d4561ee7199d4a3ebb07686edc76ce58bd9b3ab718b26bb83e01fe"
+    ],
+    "T41": [
+      "e4ec765f6e97f08a3ae8a7c5b68370bea5152b00027653d000f3133c1eb28f9a"
+    ],
+    "T42": [
+      "ed05db151a56a38e86776f5a1eaa93b3347c59d4202a59fc929f73c87f62bc5d"
+    ],
+    "T43": [
+      "c6e83c139f86db6b9a492477ea616bcc0bea74454df0ca5dfe84da93e7d03c76"
+    ],
+    "T44": [
+      "94e2cc33bdb61cb90f82c77259fdd26a2f289c1775552fd4f7862459467c76bf"
+    ],
+    "T45": [
+      "578b8b0ab560e1b57ee3290960c3c8fe74f7d626bc1bc6dcdaf78b019f8345fc"
+    ],
+    "T46": [
+      "af3fb35dc3ee5eb8e6469d34eb8e46457f3ef28668b6dff4a4d58d3f2f4cacd4"
+    ],
+    "T47": [
+      "eeb3a0b4d4ce8cbd99029368da16e4d011a15aa6644bbeae6f54677a7abfcf24"
+    ],
+    "T48": [
+      "d995e0208091fb1e6996c9f29bf8da65607af5480645bbee226e69afc665a27d"
+    ],
+    "T49": [
+      "9c9f6ddb0de2c844b51dfcc43d0622a2ea31caaa9e73864f1af39158a684f656"
+    ],
+    "T50": [
+      "a671e0c3378349adfecb47b5c8de32adb2e3a072cc328b25e702057f87fd54c9"
+    ]
+  },
+  "catalogue_files_sha256": {
+    "org_bench_abid/catalogue.json": "419e1de23b74ca5570c9276546c745e0d094a4862d132a30bdddb6eda86eed27",
+    "sample/catalogue.json": "7227acb571d4607011ad42b7e008542b1d087ca778d1be28648586c2c331dcbd"
+  },
+  "labels_sha256": {}
+}
