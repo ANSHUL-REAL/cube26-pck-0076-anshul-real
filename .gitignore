@@ -18,5 +18,3 @@ eval/label_sheet_*.html
 eval/synthetic/originals/
 eval/synthetic/reference_originals/
 
-# /brag launch video: intermediate frames and scripts
-brag-output/work/
