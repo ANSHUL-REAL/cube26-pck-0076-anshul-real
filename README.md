@@ -4,6 +4,11 @@
 
 **Tested on real photos:** one frozen, held-out run on 50 real warehouse photos from the public Amazon Bin Image Dataset, misses included. A separate AI-generated set is reported on its own, never blended in.
 
+**Check our numbers yourself (no API key, under a minute):**
+- `python eval/metrics.py --run abid-test-v1` re-scores the saved held-out run and prints the table below (2/26, 12/24, 18/50). Use `--run abid-test-oracle` for the rules alone.
+- Every box's photo hash, what the model saw, each check and the verdict are in [`eval/results/abid-test-v1/records/`](eval/results/abid-test-v1/records/). The settings and photo hashes were frozen in [`eval/frozen-test.json`](eval/frozen-test.json), committed before the run.
+- `pytest` runs the 181 tests, including the rules and the company-isolation tests.
+
 CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiyal ([@ANSHUL-REAL](https://github.com/ANSHUL-REAL))
 
 | | |
