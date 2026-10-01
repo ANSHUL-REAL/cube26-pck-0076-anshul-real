@@ -207,4 +207,4 @@ Each hard rule in [CLAUDE.md](submissions/anshul-real/CLAUDE.md) has a test that
 - **Evaluated on warehouse bin photos from a public dataset,** not on a packing bench and not on our own capture. No human labellers; ground truth is Amazon's record. Bench conditions (one open box, phone camera) are likely easier, but that's untested.
 - **Gemini free tier:** rate limits apply, and Google may use free-tier prompts to improve its products, so only public dataset photos and AI-generated images were sent during the build. Production would use a paid tier.
 - The content hash shows whether a record still matches what was hashed. Whoever can change a record can recompute its hash, so it is **not** tamper-evident, immutable, append-only or anchored.
-- No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts (see [Sign-in](#sign-in-why-access-codes-not-accounts)).
+- No live Shopify or Amazon connection, no barcode scanning, no carton weight. Access is by per-operator codes, not full user accounts  (see [Sign-in](#sign-in-why-access-codes-not-accounts)).
