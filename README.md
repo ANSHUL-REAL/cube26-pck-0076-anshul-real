@@ -24,7 +24,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 
 ---
 
-## The problem
+## Problem understanding
 
 A picker puts an order into a box and tapes it. If the wrong item, the wrong quantity or an extra item goes in, the result is a mis-ship: a refund, a return, a reshipment, customer-service time and often a bad review. Nobody checks, because checking every box by hand costs more than the mis-ships do.
 
@@ -36,7 +36,7 @@ A picker puts an order into a box and tapes it. If the wrong item, the wrong qua
 
 **The reframing that makes it feasible:** this isn't open-ended product recognition. We know what *should* be in the box, so it's **checking against a known order** (closed set), plus **spotting anything that doesn't belong** (open set). No per-product model training is needed: the model gets reference photos of the ordered products and their look-alikes, and compares.
 
-## What it does
+## Solution overview
 
 1. The day's orders are imported from a CSV (`order_id`, `order_lines` like `SKU-A:2;SKU-B:1`, optional `shipment_id`). The operator signs in, picks the order and takes 1–3 guided photos of the open box with the phone camera (a frame on screen says what each shot should show), or chooses photos.
 2. A local photo check rejects blurry, dark or glare-heavy photos immediately ("Retake: photo looks blurry"), before any model call.
@@ -92,7 +92,20 @@ One held-out run on **50 real warehouse bin photos** from the public Amazon Bin 
 
 **Kill condition:** if the held-out false-SEAL rate is above 5% while UNCERTAIN is 25% or lower, the agent isn't fit to gate sealing. It should then run only as an evidence recorder (photo + record, no verdict).
 
-## Run it locally
+## Usage
+
+**On the live site** (https://pack-manager-lzht.onrender.com, nothing to install):
+1. Tap **Try the demo** and pick a demo company (or sign in with a code from [ACCESS-CODES.md](ACCESS-CODES.md)).
+2. **Orders** lists today's orders still to check. Open one to see what should be in the box.
+3. Tap **Take guided photos** (or choose up to 3 photos of the open box), then **Check this box**.
+4. Read the answer: **Seal the box**, **Stop and fix** (with exactly what to swap, add or remove), or **Check by hand** (with what to check). The photo shows numbered boxes on what the agent found.
+5. Disagree? Use **Override** on any check, with a reason. The agent's original answer is kept.
+6. **Records** lists every checked box, and each record has a read-only share link. **Results** shows the held-out eval.
+7. Other systems read the same records as JSON: `curl -H "X-Access-Code: alpha-demo" https://pack-manager-lzht.onrender.com/v1/records`.
+
+**From the command line:** `python -m pack_manager replay-sample` replays the organisers' sample CSV through the rules, and `python eval/metrics.py --run abid-test-v1` re-scores the held-out run.
+
+## Setup: run it locally
 
 Needs Python 3.12+ and Postgres 16 (Docker or any hosted Postgres).
 

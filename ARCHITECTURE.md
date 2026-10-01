@@ -4,6 +4,10 @@ Pack Manager checks an open box before it is sealed. It takes the order and 1–
 
 The one idea the rest follows from: **the vision model perceives, deterministic code decides.** The model never sees the order quantities and never outputs a verdict. It lists what is in the box. Python compares that list with the order, check by check.
 
+## System architecture and data flow
+
+One box flows top to bottom: order and photos in, a decision and an evidence record out, read by the operator's web app and by other teams through the API.
+
 ```
  order (lines: SKU × qty)          catalogue (per org): descriptions, look-alikes,
         │                           reference photos, allowed inserts
@@ -24,7 +28,7 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
  web app (operator)  ·  JSON read API (Returns / Recovery)  ·  CLI + eval runner
 ```
 
-## Code map
+## Components (code map)
 
 | Path | Responsibility |
 |---|---|
@@ -43,7 +47,7 @@ The one idea the rest follows from: **the vision model perceives, deterministic 
 | `eval/` | Eval runner, metrics, label sheet for human labellers |
 | `contract/` | JSON Schema and example records for the other tracks |
 
-## The model call
+## Model / agent usage: one model call per box
 
 - **One call per box** (engineering rule 2). All checks come from a single structured response, so every model-based check in a record carries the same `model_version` and `latency_ms`.
 - **Input:** up to 3 box photos (long side ≤ 1600 px), then for each candidate its SKU, title, attributes, what one sellable unit looks like, the distinguishing detail, and up to 2 reference photos (≤ 512 px). The allowed inserts are listed so packaging isn't reported as a product.
@@ -117,7 +121,7 @@ If the model errors, times out or runs out of quota, `verify_box` still saves th
 
 If a photo fails the quality gate, the operator is told why ("too dark", "blurry") and can retake it. They can also press "Use these photos anyway", in which case `image_quality` is UNCERTAIN, so the box can't be SEALed by the agent alone.
 
-## Design decisions
+## Important engineering decisions
 
 | # | Decision | Why | Cost |
 |---|---|---|---|
