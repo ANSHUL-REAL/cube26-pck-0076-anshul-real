@@ -4,40 +4,42 @@ Follows the organisers' Round 2 post guide (track, problem, how it works, engine
 
 ---
 
-Would you tape this box shut? 📦
+4 boxes in the organisers' sample data had the wrong items inside.
+The packer sealed 2 of them. My agent's decision rules stopped all 4. 📦
 
-For CUBE Buildathon Round 2, Track 03 (Pack Manager), I built Pack Manager: a pack agent that checks an open shipping box against its order before it's sealed, from one phone photo, and keeps the proof.
+That's the job I took on for CUBE Buildathon Round 2, Track 03 (Pack Manager): check every box before the tape goes on, and keep proof of what was sent.
 
-🔹 The problem
-Small sellers ship the wrong item more often than they think: the blue cap instead of the red one, one towel short, a stray candle in the box. Nobody checks, and when a buyer says "wrong item", there's no proof either way.
+Meet Pack Manager 👇
 
-🔹 What it does
-The packer snaps the open box. The agent gives one of three answers:
-✅ Seal the box: everything ordered is there, nothing else is.
-🛑 Stop and fix: exactly what to swap, add or remove, marked on the photo.
+📸 Snap the open box with any phone. Our pack agent gives one of three answers:
+✅ Seal it: everything ordered is there, nothing else.
+🛑 Stop and fix: "Replace Red Cap (#3) with Blue Cap", marked on the photo.
 ✋ Check by hand: when the photo can't settle it, it says what it can't see instead of guessing.
-Every box leaves a record (photo, each check and why, who did what) that Returns and Recovery can read later.
 
-🔹 How it works
-Photo → quality and reuse checks → the agent lists every item it sees, without ever being shown the order → fixed rules compare that list with the order → verdict + evidence record. The agent can't "see" 2 because the order says 2.
+Every box leaves a record: the photo, each check and why, who did what. So when a buyer says "wrong item", the seller has proof, and the Returns and Recovery teams can read it.
 
-🔹 Engineering
-FastAPI + Postgres with row-level security, so companies can't see each other's data (tested in CI). Gemini 3.5 Flash-Lite for vision, deterministic rules for the decision, a versioned evidence contract with a /v1 API for other teams, 181 tests, deployed on Render.
+🧠 The design choice I'm proudest of
+The agent is never shown the order. It only lists what's in the box, and fixed rules compare that list with the order.
+It can't "see" 2 just because the order says 2, and every verdict can be explained check by check.
 
-🔹 Key learning
-I set a kill condition before testing. It tripped. Every error came from what the model saw, not from the rules: it called cluttered, strapped bins "fully visible" and missed items. So on photos like these, the honest design is "keep the record, let a person decide", not "block sealing". I published every miss.
+⚙️ Under the hood
+Gemini 3.5 Flash-Lite (one vision call per box) · FastAPI · Postgres with row-level security, so companies never see each other's data · a versioned evidence API other teams can read · 181 tests · live on Render
 
-🔹 Outcome
-One frozen run on 50 real warehouse photos (public Amazon Bin Image Dataset) it had never seen:
+📊 The honest part
+I tested it once, frozen in advance, on 50 real warehouse photos it had never seen (public Amazon Bin Image Dataset):
 • Wrong boxes let through: 2 of 26
-• Good boxes stopped: 12 of 24
+• Good boxes stopped: 12 of 24 ← not good enough yet
 • Sent to a person: 18 of 50
-• Rules alone, with perfect perception: 0 errors
-Anyone can re-check these numbers from the repo in under a minute, no API key needed.
+• The rules alone, given perfect perception: 0 errors
 
-🎥 Demo: https://drive.google.com/file/d/1XUA13bPx-OnsVwq6Aykgf4V1BOyiOFsN/view?usp=sharing
-💻 GitHub: https://github.com/ANSHUL-REAL/cube26-pck-0076-anshul-real
-🌐 Live (one-click demo, no install): https://pack-manager-lzht.onrender.com
+A limit I set before the test was crossed. Every error came from what the model saw, not from the rules: on cluttered, strapped bins it said "fully visible" and missed items.
+So on photos like these it shouldn't block sealing. It should keep the record and let a person decide. Every miss is published, and anyone can re-check the numbers from the repo in a minute, no API key needed.
+
+My biggest learning: a number you can reproduce beats a number that looks good.
+
+🎥 73-second walkthrough on a phone (attached): https://drive.google.com/file/d/1XUA13bPx-OnsVwq6Aykgf4V1BOyiOFsN/view?usp=sharing
+🌐 Try it, one-click demo, no install: https://pack-manager-lzht.onrender.com
+💻 Code, eval and write-up: https://github.com/ANSHUL-REAL/cube26-pck-0076-anshul-real
 
 Thank you @CodeQuesters and @Sydon.AI for a brief that asked for proof, not just a demo. 🙌
 
