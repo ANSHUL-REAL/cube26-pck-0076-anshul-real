@@ -9,7 +9,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 | | |
 |---|---|
 | Live demo | **https://pack-manager-lzht.onrender.com**: two one-click demo companies are on the sign-in page; more codes (per station, team lead, judge) in [ACCESS-CODES.md](ACCESS-CODES.md). Held-out results at [/results](https://pack-manager-lzht.onrender.com/results). Free plan: the first request after an idle spell takes about 30 s |
-| Demo video | Walkthrough on a phone (73 s), recorded on the live site: sign in to the demo, pick an order, photograph the box, one real agent check (Stop and fix), the record, dark mode, Results. Google Drive link: _to be added_ |
+| Demo video | **[Walkthrough on a phone (73 s)](https://drive.google.com/file/d/1XUA13bPx-OnsVwq6Aykgf4V1BOyiOFsN/view?usp=sharing)**, recorded on the live site: sign in to the demo, pick an order, photograph the box, one real agent check (Stop and fix), the record, dark mode, Results. The wait for the agent is sped up 6× and says so on screen. Also a **[22 s launch video](https://drive.google.com/file/d/1n7FDk7PvG0FFWLT_tsoRyF9kLILPuy2l/view?usp=sharing)**. |
 | Eval | [EVAL.md](EVAL.md): one frozen, held-out run of the real vision model on 50 real warehouse photos (public dataset). False SEAL 2/26, false STOP 12/24: a kill condition set in advance tripped, and we report it. Rules alone: 0 errors. A separate, disclosed set of 50 AI-generated boxes: false SEAL 1/26, false STOP 1/24. Also on the app's public `/results` page |
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Record format for other tracks | [contract/](contract/README.md): the organisers' Evidence Contract 1.1, served at `/v1` |
