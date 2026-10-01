@@ -7,7 +7,7 @@ CUBE Buildathon · Round 2 · Track 03 (Pack Manager) · built by Anshul Nautiya
 | | |
 |---|---|
 | Live demo | **https://pack-manager-lzht.onrender.com**: two one-click demo companies are on the sign-in page; more codes (per station, team lead, judge) in [ACCESS-CODES.md](ACCESS-CODES.md). Held-out results at [/results](https://pack-manager-lzht.onrender.com/results). Free plan: the first request after an idle spell takes about 30 s |
-| Demo video | **Launch video (22 s):** [brag-output/brag.mp4](brag-output/brag.mp4), made with the [/brag](https://github.com/latent-spaces/brag) skill from the real app and the eval numbers. Walkthrough on a phone: _added after recording_ |
+| Demo video | **Launch video (22 s):** [brag-output/brag.mp4](brag-output/brag.mp4), made with the [/brag](https://github.com/latent-spaces/brag) skill from the real app and the eval numbers. **Walkthrough (73 s):** [brag-output/walkthrough.mp4](brag-output/walkthrough.mp4), recorded on the live site at phone size: sign in to the demo, pick an order, photograph the box, one real agent check (Stop and fix), the record, dark mode, Results. The 18.6 s wait for the agent is sped up 6× and says so on screen. |
 | Eval | [EVAL.md](EVAL.md): one frozen, held-out run of the real vision model on 50 real warehouse photos (public dataset). False SEAL 2/26, false STOP 12/24: a kill condition set in advance tripped, and we report it. Rules alone: 0 errors. A separate, disclosed set of 50 AI-generated boxes: false SEAL 1/26, false STOP 1/24. Also on the app's public `/results` page |
 | How it works | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Record format for other tracks | [contract/](contract/README.md): the organisers' Evidence Contract 1.1, served at `/v1` |
