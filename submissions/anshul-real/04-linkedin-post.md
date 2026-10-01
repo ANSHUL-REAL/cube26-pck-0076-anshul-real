@@ -22,10 +22,12 @@ The agent is never told what's supposed to be in the box. It just lists what it 
 Why? Tell anyone "there should be 2 in there" and they're more likely to "see" 2. Keeping the two steps apart keeps the check honest, and every answer can be explained step by step.
 
 📊 How well does it work? Honestly: not perfect yet.
-I tested it once on 50 real warehouse photos it had never seen (from a public Amazon dataset):
+A lot of AI projects are only tested on clean, made-up pictures. I tested on real photos: 50 real warehouse photos it had never seen, from a public Amazon dataset.
 • Wrong boxes it would have let through: 2 of 26
 • Correct boxes it stopped by mistake: 12 of 24
 • Boxes it handed to a person to check: 18 of 50
+
+I also tested it on 50 AI-generated box photos, kept separate. There it did far better (1 of 26 and 1 of 24), which is exactly why I don't count them: real life is messier.
 
 That middle number is too high. Every mistake came from reading messy, cluttered photos, not from the rules. So today the right use is: keep a photo record of every box and let a person make the final call, rather than block packing. I published every miss, and anyone can re-check the numbers themselves.
 

@@ -2,7 +2,7 @@
 
 **Check an open box against its order before it is sealed, from a phone photo, and keep the proof.**
 
-**Tested on real photos:** one frozen, held-out run on 50 real warehouse photos from the public Amazon Bin Image Dataset, misses included. A separate AI-generated set is reported on its own, never blended in.
+**Tested on real photos, not just AI-generated ones:** one frozen, held-out run on 50 real warehouse photos from the public Amazon Bin Image Dataset, misses included. A second set of 50 AI-generated boxes is reported on its own, never blended in, because clean generated images flatter the model.
 
 **Check our numbers yourself (no API key, under a minute):**
 - `python eval/metrics.py --run abid-test-v1` re-scores the saved held-out run and prints the table below (2/26, 12/24, 18/50). Use `--run abid-test-oracle` for the rules alone.
@@ -74,7 +74,7 @@ The demo codes are public on purpose, so judges can get in with one click: `alph
 
 **What codes don't do:** they identify a station or role, not a verified person, and they don't expire. Next steps: a team-lead page to issue and revoke codes, then company single sign-on (Google Workspace or Microsoft, via OIDC) for team leads. Packers would keep codes, because sign-on doesn't suit a shared bench device.
 
-## Results
+## Results: tested on real photos
 
 One held-out run on **50 real warehouse bin photos** from the public Amazon Bin Image Dataset. We had no products or labellers for a home shoot; see [EVAL.md](EVAL.md) for why, and what that changes. Ground truth is Amazon's record of each bin; the orders were written before any run.
 
